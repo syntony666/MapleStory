@@ -43,7 +43,7 @@ namespace game_framework {
 		x = X_POS;
 		y = Y_POS;
 		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
-		const int INITIAL_VELOCITY = 300;
+		const int INITIAL_VELOCITY = 20;
 		const int FLOOR = 570;
 		rising = false;
 		floor = FLOOR;
@@ -62,13 +62,17 @@ namespace game_framework {
 	{
 		const int STEP_SIZE = 8;		//移動速度
 		animation.OnMove();
-		if (isMovingLeft)
+		if (isMovingLeft && y <= floor)
 			x -= STEP_SIZE;
-		if (isMovingRight)
+		if (isMovingRight && y <= floor)
 			x += STEP_SIZE;
-		if (isMovingUp && y == floor) {
-			velocity = initial_velocity;
+		if (isMovingUp  && y == floor) {
 			rising = true;
+			velocity = initial_velocity;
+		}
+		//if (isMovingDown)
+
+		if (rising) {			// 上升狀態
 			if (velocity > 0) {
 				y -= velocity;	// 當速度 > 0時，y軸上升(移動velocity個點，velocity的單位為 點/次)
 				velocity--;		// 受重力影響，下次的上升速度降低
@@ -87,8 +91,6 @@ namespace game_framework {
 				y = floor;  // 當y座標低於地板，更正為地板上
 			}
 		}
-		//if (isMovingDown)
-			//修正為趴下動畫
 	}
 
 	void CEraser::SetMovingDown(bool flag)
