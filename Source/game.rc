@@ -96,9 +96,11 @@ IDB_HELP                BITMAP                  "..\\res\\help.bmp"
 
 IDB_LOADING             BITMAP                  "..\\res\\loading.bmp"
 
-IDB_FROG                BITMAP                  "Z:\\ooplab_2020_MapleStory\\RES\\bitmap5.bmp"
+IDB_FROG                BITMAP                  "..\\res\\bitmap5.bmp"
 
-IDB_BACKGROUND          BITMAP                  "Z:\\ooplab_2020_MapleStory\\RES\\180446.bmp"
+IDB_BACKGROUND          BITMAP                  "..\\res\\180446.bmp"
+
+IDB_LOGO                BITMAP                  "..\\res\\bitmap3.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////
