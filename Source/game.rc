@@ -96,11 +96,13 @@ IDB_HELP                BITMAP                  "..\\res\\help.bmp"
 
 IDB_LOADING             BITMAP                  "..\\res\\loading.bmp"
 
-IDB_FROG                BITMAP                  "..\\res\\bitmap5.bmp"
+IDB_FROG                BITMAP                  "..\\res\\frog_stand.bmp"
 
 IDB_BACKGROUND          BITMAP                  "..\\res\\180446.bmp"
 
 IDB_LOGO                BITMAP                  "..\\res\\bitmap3.bmp"
+
+IDB_FROG_DOWN           BITMAP                  "..\\res\\bitmap5.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////
