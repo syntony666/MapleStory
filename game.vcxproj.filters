@@ -192,5 +192,11 @@
     <Image Include="res\frog_stand.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="res\frog_down.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\bmp00001.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

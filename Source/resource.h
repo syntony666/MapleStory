@@ -31,11 +31,11 @@
 #define IDB_HELP                        155
 #define IDB_BITMAP2                     156
 #define IDB_LOADING                     156
-#define IDB_FROG                        163
 #define IDB_BACKGROUND                  164
 #define IDB_LOGO                        166
-#define IDB_BITMAP3                     167
-#define IDB_FROG_DOWN                   167
+#define IDB_FROG_STAND                  168
+#define IDB_BITMAP3                     170
+#define IDB_FROG_DOWN                   170
 #define IDC_README                      1001
 #define ID_FILE_PAUSE                   32771
 #define ID_TOGGLE_FULLSCREEN            32772
@@ -48,7 +48,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        168
+#define _APS_NEXT_RESOURCE_VALUE        171
 #define _APS_NEXT_COMMAND_VALUE         32776
 #define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           101
