@@ -43,7 +43,7 @@ namespace game_framework {
 		x = X_POS;
 		y = Y_POS;
 		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
-		const int INITIAL_VELOCITY = 20;
+		const int INITIAL_VELOCITY = 300;
 		const int FLOOR = 570;
 		rising = false;
 		floor = FLOOR;
@@ -66,7 +66,7 @@ namespace game_framework {
 			x -= STEP_SIZE;
 		if (isMovingRight)
 			x += STEP_SIZE;
-		if (isMovingUp) {
+		if (isMovingUp && y == floor) {
 			velocity = initial_velocity;
 			rising = true;
 			if (velocity > 0) {
@@ -79,13 +79,12 @@ namespace game_framework {
 			}
 		}
 		else {				// 下降狀態
-			if (y < floor - 1) {  // 當y座標還沒碰到地板
+			if (y < floor) {  // 當y座標還沒碰到地板
 				y += velocity;	// y軸下降(移動velocity個點，velocity的單位為 點/次)
 				velocity++;		// 受重力影響，下次的下降速度增加
 			}
 			else {
-				y = floor - 1;  // 當y座標低於地板，更正為地板上
-				rising = true;	// 探底反彈，下次改為上升
+				y = floor;  // 當y座標低於地板，更正為地板上
 			}
 		}
 		//if (isMovingDown)
