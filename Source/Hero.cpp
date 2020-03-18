@@ -63,15 +63,25 @@ namespace game_framework {
 	{
 		const int STEP_SIZE = 8;		//移動速度
 		animation.OnMove();
+<<<<<<< HEAD:Source/Hero.cpp
 		if (isMovingLeft&&x>=100) {
 			x -= STEP_SIZE;
 		}
 
 		if (isMovingRight&&x<=1166)
+=======
+		if (isMovingLeft && y <= floor)
+			x -= STEP_SIZE;
+		if (isMovingRight && y <= floor)
+>>>>>>> b88fde4df8bdd3fcf67d4c85e71fa7625341571d:Source/CEraser.cpp
 			x += STEP_SIZE;
-		if (isMovingUp) {
-			velocity = initial_velocity;
+		if (isMovingUp  && y == floor) {
 			rising = true;
+			velocity = initial_velocity;
+		}
+		//if (isMovingDown)
+
+		if (rising) {			// 上升狀態
 			if (velocity > 0) {
 				y -= velocity;	// 當速度 > 0時，y軸上升(移動velocity個點，velocity的單位為 點/次)
 				velocity--;		// 受重力影響，下次的上升速度降低
@@ -82,17 +92,14 @@ namespace game_framework {
 			}
 		}
 		else {				// 下降狀態
-			if (y < floor - 1) {  // 當y座標還沒碰到地板
+			if (y < floor) {  // 當y座標還沒碰到地板
 				y += velocity;	// y軸下降(移動velocity個點，velocity的單位為 點/次)
 				velocity++;		// 受重力影響，下次的下降速度增加
 			}
 			else {
-				y = floor - 1;  // 當y座標低於地板，更正為地板上
-				rising = true;	// 探底反彈，下次改為上升
+				y = floor;  // 當y座標低於地板，更正為地板上
 			}
 		}
-		//if (isMovingDown)
-			//修正為趴下動畫
 	}
 
 	void Hero::SetMovingDown(bool flag)
