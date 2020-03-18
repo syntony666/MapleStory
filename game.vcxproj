@@ -258,9 +258,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\audio.cpp" />
-    <ClCompile Include="Source\CBall.cpp" />
-    <ClCompile Include="Source\CBouncingBall.cpp" />
-    <ClCompile Include="Source\CEraser.cpp" />
+    <ClCompile Include="Source\Hero.cpp" />
     <ClCompile Include="Source\game.cpp">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -304,9 +302,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\audio.h" />
-    <ClInclude Include="Source\CBall.h" />
-    <ClInclude Include="Source\CBouncingBall.h" />
-    <ClInclude Include="Source\CEraser.h" />
+    <ClInclude Include="Source\hero.h" />
     <ClInclude Include="Source\game.h" />
     <ClInclude Include="Source\gameDoc.h" />
     <ClInclude Include="Source\gameView.h" />
@@ -325,7 +321,8 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="C:\Users\Tony\Desktop\ooplab2020s\RES\bitmap5.bmp" />
-    <Image Include="RES\180446.bmp" />
+    <Image Include="res\6\bg1.bmp" />
+    <Image Include="RES\bg1.bmp" />
     <Image Include="res\bitmap3.bmp" />
     <Image Include="res\bitmap4.bmp" />
     <Image Include="res\bitmap5.bmp" />
