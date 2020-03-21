@@ -63,17 +63,11 @@ namespace game_framework {
 	{
 		const int STEP_SIZE = 8;		//²¾°Ê³t«×
 		animation.OnMove();
-<<<<<<< HEAD:Source/Hero.cpp
 		if (isMovingLeft&&x>=100) {
 			x -= STEP_SIZE;
 		}
 
 		if (isMovingRight&&x<=1166)
-=======
-		if (isMovingLeft && y <= floor)
-			x -= STEP_SIZE;
-		if (isMovingRight && y <= floor)
->>>>>>> b88fde4df8bdd3fcf67d4c85e71fa7625341571d:Source/CEraser.cpp
 			x += STEP_SIZE;
 		if (isMovingUp  && y == floor) {
 			rising = true;

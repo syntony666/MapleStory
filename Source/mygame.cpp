@@ -222,8 +222,12 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_DOWN  = 0x28; // keyboard下箭頭
 	if (nChar == KEY_LEFT) {
 		eraser.SetMovingLeft(true);
-		if (eraser.GetX1() >= 100) {
+		if (eraser.GetX1() <= 100) {
 			gamemap.SetMovingRight(true);
+		}
+		else {
+
+			gamemap.SetMovingLeft(false);
 		}
 
 	}
@@ -231,6 +235,10 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 		eraser.SetMovingRight(true);
 		if (eraser.GetX1() >= 1166) {
 			gamemap.SetMovingLeft(true);
+		}
+		else {
+
+			gamemap.SetMovingLeft(false);
 		}
 	}
 	if (nChar == KEY_UP)
@@ -247,8 +255,10 @@ void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_DOWN  = 0x28; // keyboard下箭頭
 	if (nChar == KEY_LEFT)
 		eraser.SetMovingLeft(false);
+		gamemap.SetMovingRight(false);
 	if (nChar == KEY_RIGHT)
 		eraser.SetMovingRight(false);
+		gamemap.SetMovingLeft(false);
 	if (nChar == KEY_UP)
 		eraser.SetMovingUp(false);
 	if (nChar == KEY_DOWN)
@@ -293,8 +303,8 @@ void CGameStateRun::OnShow()
 }
 
 Map::Map()
-	:X(), Y(), zoom(2) {
-
+	:X(0), Y(0), zoom(2) {
+	isMovingLeft = isMovingRight = false;
 }
 void Map::LoadBitmap(int bitmap) {
 	map1.LoadBitmap(bitmap);
@@ -307,13 +317,12 @@ void Map::SetMovingLeft(bool flag) {
 }
 void Map::OnMove() {
 	const int STEP_SIZE = 8;
-	if (isMovingLeft) {
-		X -= STEP_SIZE;
-	}
-	if (isMovingRight) {
-		X += STEP_SIZE;
-	}
-
+		if (X >= -1036 && isMovingLeft) {
+			X -= STEP_SIZE;
+		}
+		if (X < 0&& isMovingRight) {
+			X += STEP_SIZE;
+		}
 }
 void Map::OnShow() {
 	map1.SetTopLeft(X, Y);
