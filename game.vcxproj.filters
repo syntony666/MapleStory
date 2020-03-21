@@ -155,6 +155,9 @@
     <ClInclude Include="Source\hero.h">
       <Filter>MyGame</Filter>
     </ClInclude>
+    <ClInclude Include="Source\map.h">
+      <Filter>MyGame</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Source\game.rc">

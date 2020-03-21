@@ -301,31 +301,4 @@ void CGameStateRun::OnShow()
 	gamemap.OnShow();			// 貼上背景圖
 	eraser.OnShow();					// 貼上擦子
 }
-
-Map::Map()
-	:X(0), Y(0), zoom(2) {
-	isMovingLeft = isMovingRight = false;
-}
-void Map::LoadBitmap(int bitmap) {
-	map1.LoadBitmap(bitmap);
-}
-void Map::SetMovingRight(bool flag) {
-	isMovingRight = flag;
-}
-void Map::SetMovingLeft(bool flag) {
-	isMovingLeft = flag;
-}
-void Map::OnMove() {
-	const int STEP_SIZE = 8;
-		if (X >= -1036 && isMovingLeft) {
-			X -= STEP_SIZE;
-		}
-		if (X < 0&& isMovingRight) {
-			X += STEP_SIZE;
-		}
-}
-void Map::OnShow() {
-	map1.SetTopLeft(X, Y);
-	map1.ShowBitmap(zoom);
-}
 }

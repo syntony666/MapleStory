@@ -12,6 +12,7 @@
  */
 
 #include "hero.h"
+#include "map.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -22,23 +23,6 @@ namespace game_framework {
 		AUDIO_DING,				// 0
 		AUDIO_LAKE,				// 1
 		AUDIO_NTUT				// 2
-	};
-
-	class Map
-	{
-	public:
-		Map();
-		void LoadBitmap(int bitmap);
-		void OnShow();
-		void SetMovingLeft(bool flag);	// 設定是否正在往左移動
-		void SetMovingRight(bool flag); // 設定是否正在往右移動
-		void OnMove();
-
-	protected:
-		CMovingBitmap map1;
-		int X, Y, zoom;
-		bool isMovingRight;
-		bool isMovingLeft;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
