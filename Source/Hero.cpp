@@ -4,39 +4,39 @@
 #include <ddraw.h>
 #include "audio.h"
 #include "gamelib.h"
-#include "CEraser.h"
+#include "Hero.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
-	// CEraser: Eraser class
+	// Hero: Eraser class
 	/////////////////////////////////////////////////////////////////////////////
 
-	CEraser::CEraser()
+	Hero::Hero()
 	{
 		Initialize();
 	}
 
-	int CEraser::GetX1()
+	int Hero::GetX1()
 	{
 		return x;
 	}
 
-	int CEraser::GetY1()
+	int Hero::GetY1()
 	{
 		return y;
 	}
 
-	int CEraser::GetX2()
+	int Hero::GetX2()
 	{
-		return x + animation.Width();
+		return x + stand.Width();
 	}
 
-	int CEraser::GetY2()
+	int Hero::GetY2()
 	{
-		return y + animation.Height();
+		return y + stand.Height();
 	}
 
-	void CEraser::Initialize()
+	void Hero::Initialize()
 	{
 		const int X_POS = 100;
 		const int Y_POS = 570;
@@ -50,30 +50,33 @@ namespace game_framework {
 		initial_velocity = INITIAL_VELOCITY;
 	}
 
-	void CEraser::LoadBitmap()
+	void Hero::LoadBitmap()
 	{
-		animation.AddBitmap(IDB_FROG_STAND, RGB(255, 255, 255));
-		down.LoadBitmap(IDB_FROG_DOWN, RGB(255, 255, 255));
-		// animation.AddBitmap(IDB_ERASER2, RGB(255, 255, 255));
-		// animation.AddBitmap(IDB_ERASER3, RGB(255, 255, 255));
-		// animation.AddBitmap(IDB_ERASER2, RGB(255, 255, 255));
+		stand.AddBitmap(IDB_FROG_STAND, RGB(255, 255, 255));
+		down.AddBitmap(IDB_FROG_DOWN, RGB(255, 255, 255));
 	}
 
-	void CEraser::OnMove()
+	void Hero::OnMove()
 	{
-		const int STEP_SIZE = 8;		//移動速度
-		animation.OnMove();
-		if (isMovingLeft && y <= floor)
+		stand.OnMove();
+		int STEP_SIZE;
+
+		if (isMovingDown && y >= floor) { //移動速度、趴下靜止
+			STEP_SIZE = 0;
+		}
+		else {
+			STEP_SIZE = 8;
+		}
+
+		if (isMovingLeft && x >= 100 ) 
 			x -= STEP_SIZE;
-		if (isMovingRight && y <= floor)
+
+		if (isMovingRight && x <= 1166 )
 			x += STEP_SIZE;
+
 		if (isMovingUp  && y == floor) {
 			rising = true;
 			velocity = initial_velocity;
-		}
-		if (isMovingDown) {
-			down.SetTopLeft(x, y);
-			down.ShowBitmap();
 		}
 
 		if (rising) {			// 上升狀態
@@ -97,34 +100,40 @@ namespace game_framework {
 		}
 	}
 
-	void CEraser::SetMovingDown(bool flag)
+	void Hero::SetMovingDown(bool flag)
 	{
 		isMovingDown = flag;
 	}
 
-	void CEraser::SetMovingLeft(bool flag)
+	void Hero::SetMovingLeft(bool flag)
 	{
 		isMovingLeft = flag;
 	}
 
-	void CEraser::SetMovingRight(bool flag)
+	void Hero::SetMovingRight(bool flag)
 	{
 		isMovingRight = flag;
 	}
 
-	void CEraser::SetMovingUp(bool flag)
+	void Hero::SetMovingUp(bool flag)
 	{
 		isMovingUp = flag;
 	}
 
-	void CEraser::SetXY(int nx, int ny)
+	void Hero::SetXY(int nx, int ny)
 	{
 		x = nx; y = ny;
 	}
 
-	void CEraser::OnShow()
+	void Hero::OnShow()
 	{
-		animation.SetTopLeft(x, y);
-		animation.OnShow();
+		stand.SetTopLeft(x, y);
+		if (isMovingDown) {
+			down.SetTopLeft(stand.Left(), stand.Top() + 78);
+			down.OnShow();
+		}
+		else {
+			stand.OnShow();
+		}
 	}
 }

@@ -96,7 +96,7 @@ IDB_HELP                BITMAP                  "..\\res\\help.bmp"
 
 IDB_LOADING             BITMAP                  "..\\res\\loading.bmp"
 
-IDB_BACKGROUND          BITMAP                  "..\\res\\180446.bmp"
+IDB_BACKGROUND          BITMAP                  "..\\res\\bg1.bmp"
 
 IDB_LOGO                BITMAP                  "..\\res\\bitmap3.bmp"
 
