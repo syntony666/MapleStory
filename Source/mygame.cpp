@@ -226,20 +226,11 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 		if (character.GetX1() <= 100) {
 			gamemap.SetMovingRight(true);
 		}
-		else {
-
-			gamemap.SetMovingLeft(false);
-		}
-
 	}
 	if (nChar == KEY_RIGHT) {
 		character.SetMovingRight(true);
 		if (character.GetX1() >= 1166) {
 			gamemap.SetMovingLeft(true);
-		}
-		else {
-
-			gamemap.SetMovingLeft(false);
 		}
 	}
 	if (nChar == KEY_UP)

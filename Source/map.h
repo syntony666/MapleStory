@@ -21,10 +21,10 @@ namespace game_framework {
 		} // 設定是否正在往右移動
 		void OnMove() {
 			const int STEP_SIZE = 8;
-			if (X >= -1036 && isMovingLeft) {
+			if (X >= -1036 && isMovingRight) {
 				X -= STEP_SIZE;
 			}
-			if (X < 0 && isMovingRight) {
+			if (X < 0 && isMovingLeft) {
 				X += STEP_SIZE;
 			}
 		}
