@@ -53,6 +53,7 @@ namespace game_framework {
 	void CEraser::LoadBitmap()
 	{
 		animation.AddBitmap(IDB_FROG_STAND, RGB(255, 255, 255));
+		down.LoadBitmap(IDB_FROG_DOWN, RGB(255, 255, 255));
 		// animation.AddBitmap(IDB_ERASER2, RGB(255, 255, 255));
 		// animation.AddBitmap(IDB_ERASER3, RGB(255, 255, 255));
 		// animation.AddBitmap(IDB_ERASER2, RGB(255, 255, 255));
@@ -70,7 +71,10 @@ namespace game_framework {
 			rising = true;
 			velocity = initial_velocity;
 		}
-		//if (isMovingDown)
+		if (isMovingDown) {
+			down.SetTopLeft(x, y);
+			down.ShowBitmap();
+		}
 
 		if (rising) {			// ¤W¤Éª¬ºA
 			if (velocity > 0) {
