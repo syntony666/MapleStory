@@ -52,7 +52,7 @@ namespace game_framework {
 
 	void Hero::LoadBitmap()
 	{
-		int frog[] = { IDB_FROG_STAND_LEFT,IDB_FROG_GO_LEFT3, IDB_FROG_GO_LEFT};
+		int frog[] = {IDB_FROG_STAND_LEFT,IDB_FROG_GO_LEFT3, IDB_FROG_GO_LEFT};
 		for(int i = 0; i<3;i++)
 			goLeft.AddBitmap(frog[i], RGB(255, 255, 255));
 		stand.AddBitmap(IDB_FROG_STAND_LEFT, RGB(255, 255, 255));
@@ -135,7 +135,11 @@ namespace game_framework {
 			down.SetTopLeft(stand.Left(), stand.Top() + 78);
 			down.OnShow();
 		}
-		else {
+		else if (isMovingLeft) {
+			goLeft.SetTopLeft(stand.Left(), stand.Top());
+			goLeft.OnShow();
+			goLeft.OnMove();
+		} else {
 			stand.OnShow();
 		}
 	}
