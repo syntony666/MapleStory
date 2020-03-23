@@ -62,37 +62,7 @@ END
 // Bitmap
 //
 
-IDB_BALL                BITMAP                  "..\\res\\ball.bmp"
-
-IDB_CORNER              BITMAP                  "..\\res\\corner.bmp"
-
-IDB_0                   BITMAP                  "..\\res\\bmp0.bmp"
-
-IDB_1                   BITMAP                  "..\\res\\bmp1.bmp"
-
-IDB_2                   BITMAP                  "..\\res\\bmp2.bmp"
-
-IDB_3                   BITMAP                  "..\\res\\bmp3.bmp"
-
-IDB_4                   BITMAP                  "..\\res\\bmp4.bmp"
-
-IDB_5                   BITMAP                  "..\\res\\bmp5.bmp"
-
-IDB_6                   BITMAP                  "..\\res\\bmp6.bmp"
-
-IDB_7                   BITMAP                  "..\\res\\bmp7.bmp"
-
-IDB_8                   BITMAP                  "..\\res\\bmp8.bmp"
-
-IDB_9                   BITMAP                  "..\\res\\bmp9.bmp"
-
-IDB_MINUS               BITMAP                  "..\\res\\bmp10.bmp"
-
-IDB_CENTER              BITMAP                  "..\\res\\center.bmp"
-
 IDB_CONTINUE            BITMAP                  "..\\res\\continue.bmp"
-
-IDB_HELP                BITMAP                  "..\\res\\help.bmp"
 
 IDB_LOADING             BITMAP                  "..\\res\\loading.bmp"
 
@@ -108,11 +78,11 @@ IDB_FROG_GO_RIGHT       BITMAP                  "..\\res\\frog_go_right.bmp"
 
 IDB_FROG_GO_LEFT        BITMAP                  "..\\res\\frog_go_left.bmp"
 
-IDB_FROG_STAND_LEFT     BITMAP                  "..\\res\\frog_stand_left.bmp"
-
 IDB_FROG_GO_LEFT2       BITMAP                  "..\\res\\frog_go_left2.bmp"
 
-IDB_FROG_GO_LEFT3       BITMAP                  "..\\res\\frog_go_left3.bmp"
+IDB_FROG_STAND_LEFT     BITMAP                  "..\\res\\frog_stand_left.bmp"
+
+IDB_FROG_GO_LEFT1       BITMAP                  "..\\res\\frog_go_left1.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////
