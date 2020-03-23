@@ -3,6 +3,7 @@ namespace game_framework {
 	{
 	public:
 		Map();
+		void Initialize();
 		void LoadBitmap(int bitmap);
 		void OnShow();
 		void SetMovingLeft(bool flag);
@@ -11,9 +12,8 @@ namespace game_framework {
 
 	protected:
 		CMovingBitmap map1;
-		int X, Y, zoom;
-		bool isMovingRight;
-		bool isMovingLeft;
+		int x, y, zoom;
+		bool isMovingRight, isMovingLeft;
 	};
 
 }

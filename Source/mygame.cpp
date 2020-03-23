@@ -163,12 +163,10 @@ void CGameStateOver::OnShow()
 CGameStateRun::CGameStateRun(CGame *g)
 : CGameState(g)
 {
-	//ball = new CBall [NUMBALLS];
 }
 
 CGameStateRun::~CGameStateRun()
 {
-	//delete [] ball;
 }
 
 void CGameStateRun::OnBeginState()
@@ -182,6 +180,7 @@ void CGameStateRun::OnBeginState()
 	const int BACKGROUND_X = 0;
 	const int ANIMATION_SPEED = 15;
 	character.Initialize();
+	gamemap.Initialize();
 }
 
 void CGameStateRun::OnMove()							// 移動遊戲元素
@@ -257,40 +256,34 @@ void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 		character.SetMovingDown(false);
 }
 
-void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
+/*
+		處理滑鼠的動作
+*/
+
+void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)
 {
-	//character.SetMovingLeft(true);
 }
 
-void CGameStateRun::OnLButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
+void CGameStateRun::OnLButtonUp(UINT nFlags, CPoint point)
 {
-	//character.SetMovingLeft(false);
 }
 
-void CGameStateRun::OnMouseMove(UINT nFlags, CPoint point)	// 處理滑鼠的動作
+void CGameStateRun::OnMouseMove(UINT nFlags, CPoint point)
 {
 	// 沒事。如果需要處理滑鼠移動的話，寫code在這裡
 }
 
-void CGameStateRun::OnRButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
+void CGameStateRun::OnRButtonDown(UINT nFlags, CPoint point)
 {
-	//character.SetMovingRight(true);
 }
 
-void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
+void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)
 {
-	//character.SetMovingRight(false);
 }
 
 void CGameStateRun::OnShow()
 {
-	//
-	//  注意：Show裡面千萬不要移動任何物件的座標，移動座標的工作應由Move做才對，
-	//        否則當視窗重新繪圖時(OnDraw)，物件就會移動，看起來會很怪。換個術語
-	//        說，Move負責MVC中的Model，Show負責View，而View不應更動Model。
-	//
-	//
 	gamemap.OnShow();			// 貼上背景圖
-	character.OnShow();					// 貼上擦子
+	character.OnShow();			// 貼上人物
 }
 }
