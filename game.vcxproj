@@ -333,8 +333,11 @@
     <Image Include="res\bmp00001.bmp" />
     <Image Include="res\frog_down.bmp" />
     <Image Include="RES\frog_go_left.bmp" />
+    <Image Include="RES\frog_go_left2.bmp" />
+    <Image Include="RES\frog_go_left3.bmp" />
     <Image Include="RES\frog_go_right.bmp" />
     <Image Include="res\frog_stand.bmp" />
+    <Image Include="RES\frog_stand_left.bmp" />
     <Image Include="res\frog_stand_right.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

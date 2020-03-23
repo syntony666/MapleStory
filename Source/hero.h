@@ -25,6 +25,7 @@ namespace game_framework {
 	protected:
 		CAnimation stand;			// 站立
 		CAnimation down;			// 趴下
+		CAnimation goLeft;			// 向左走
 		int x, y;					// Hero左上角座標
 		bool isMovingDown;			// 是否正在往下移動
 		bool isMovingLeft;			// 是否正在往左移動

@@ -52,8 +52,10 @@ namespace game_framework {
 
 	void Hero::LoadBitmap()
 	{
-		stand.AddBitmap(IDB_FROG_STAND_RIGHT, RGB(255, 255, 255));
-		stand.AddBitmap(IDB_FROG_GO_RIGHT, RGB(255, 255, 255));
+		int frog[] = { IDB_FROG_STAND_LEFT,IDB_FROG_GO_LEFT3, IDB_FROG_GO_LEFT};
+		for(int i = 0; i<3;i++)
+			goLeft.AddBitmap(frog[i], RGB(255, 255, 255));
+		stand.AddBitmap(IDB_FROG_STAND_LEFT, RGB(255, 255, 255));
 		down.AddBitmap(IDB_FROG_DOWN, RGB(255, 255, 255));
 	}
 
