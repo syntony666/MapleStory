@@ -312,9 +312,15 @@
     <Image Include="RES\frog_go_left1.bmp" />
     <Image Include="RES\frog_go_left2.bmp" />
     <Image Include="RES\frog_go_right.bmp" />
+    <Image Include="RES\frog_go_right1.bmp" />
+    <Image Include="RES\frog_go_right2.bmp" />
     <Image Include="res\frog_stand.bmp" />
     <Image Include="RES\frog_stand_left.bmp" />
     <Image Include="res\frog_stand_right.bmp" />
+    <Image Include="Source\res\frog_go_left2.bmp" />
+    <Image Include="Source\res\frog_go_right.bmp" />
+    <Image Include="Source\res\frog_go_right1.bmp" />
+    <Image Include="Source\res\frog_go_right2.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

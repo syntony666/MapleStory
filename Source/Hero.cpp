@@ -52,10 +52,15 @@ namespace game_framework {
 
 	void Hero::LoadBitmap()
 	{
-		int frog[] = { IDB_FROG_GO_LEFT1,IDB_FROG_GO_LEFT2, IDB_FROG_GO_LEFT};
-		for(int i = 0; i<3;i++)
-			goLeft.AddBitmap(frog[i], RGB(255, 255, 255));
-		stand.AddBitmap(IDB_FROG_STAND_LEFT, RGB(255, 255, 255));
+		int frogLeft[] = { IDB_FROG_GO_LEFT1,IDB_FROG_GO_LEFT2, IDB_FROG_STAND_LEFT};
+		int frogRight[] = { IDB_FROG_GO_RIGHT1,IDB_FROG_GO_RIGHT2, IDB_FROG_STAND_RIGHT };
+		goRight = CAnimation(5);
+		goLeft = CAnimation(5);
+		for (int i = 0; i < 3; i++) {
+			goLeft.AddBitmap(frogLeft[i], RGB(255, 255, 255));
+			goRight.AddBitmap(frogRight[i], RGB(255, 255, 255));
+		}
+		stand.AddBitmap(IDB_FROG_STAND_RIGHT, RGB(255, 255, 255));
 		down.AddBitmap(IDB_FROG_DOWN, RGB(255, 255, 255));
 	}
 
@@ -135,6 +140,16 @@ namespace game_framework {
 			down.SetTopLeft(stand.Left(), stand.Top() + 78);
 			down.OnShow();
 		}
+		else if (isMovingLeft) {
+			goLeft.SetTopLeft(stand.Left(), stand.Top());
+			goLeft.OnShow();
+			goLeft.OnMove();
+		}
+		else if (isMovingRight) {
+			goRight.SetTopLeft(stand.Left(), stand.Top());
+			goRight.OnShow();
+			goRight.OnMove();
+		} 
 		else {
 			stand.OnShow();
 		}
