@@ -126,9 +126,12 @@
     <ClCompile Include="Source\map.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Source\monster.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
+=======
+>>>>>>> 19cc1e23c249f3562a1ef5c38d99106a1aee9144
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\audio.h">
