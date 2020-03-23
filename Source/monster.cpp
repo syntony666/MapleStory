@@ -4,39 +4,39 @@
 #include <ddraw.h>
 #include "audio.h"
 #include "gamelib.h"
-#include "Hero.h"
+#include "monster.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 	// Hero: Eraser class
 	/////////////////////////////////////////////////////////////////////////////
 
-	Hero::Hero()
+	Monster::Monster()
 	{
 		Initialize();
 	}
 
-	int Hero::GetX1()
+	int Monster::GetX1()
 	{
 		return x;
 	}
 
-	int Hero::GetY1()
+	int Monster::GetY1()
 	{
 		return y;
 	}
 
-	int Hero::GetX2()
+	int Monster::GetX2()
 	{
 		return x + stand.Width();
 	}
 
-	int Hero::GetY2()
+	int Monster::GetY2()
 	{
 		return y + stand.Height();
 	}
 
-	void Hero::Initialize()
+	void Monster::Initialize()
 	{
 		const int X_POS = 100;
 		const int Y_POS = 570;
@@ -50,13 +50,13 @@ namespace game_framework {
 		initial_velocity = INITIAL_VELOCITY;
 	}
 
-	void Hero::LoadBitmap()
+	void Monster::LoadBitmap()
 	{
 		stand.AddBitmap(IDB_FROG_STAND, RGB(255, 255, 255));
 		down.AddBitmap(IDB_FROG_DOWN, RGB(255, 255, 255));
 	}
 
-	void Hero::OnMove()
+	void Monster::OnMove()
 	{
 		stand.OnMove();
 		int STEP_SIZE;
@@ -68,10 +68,10 @@ namespace game_framework {
 			STEP_SIZE = 8;
 		}
 
-		if (isMovingLeft && x >= 100 ) 
+		if (isMovingLeft && x >= 100)
 			x -= STEP_SIZE;
 
-		if (isMovingRight && x <= 1166 )
+		if (isMovingRight && x <= 1166)
 			x += STEP_SIZE;
 
 		if (isMovingUp  && y == floor) {
@@ -81,7 +81,7 @@ namespace game_framework {
 
 		if (rising) {			// 上升狀態
 			if (velocity > 0) {
-				y -= velocity*2;	// 當速度 > 0時，y軸上升(移動velocity個點，velocity的單位為 點/次)
+				y -= velocity * 2;	// 當速度 > 0時，y軸上升(移動velocity個點，velocity的單位為 點/次)
 				velocity--;		// 受重力影響，下次的上升速度降低
 			}
 			else {
@@ -91,7 +91,7 @@ namespace game_framework {
 		}
 		else {				// 下降狀態
 			if (y < floor) {  // 當y座標還沒碰到地板
-				y += velocity*2;	// y軸下降(移動velocity個點，velocity的單位為 點/次)
+				y += velocity * 2;	// y軸下降(移動velocity個點，velocity的單位為 點/次)
 				velocity++;		// 受重力影響，下次的下降速度增加
 			}
 			else {
@@ -100,32 +100,32 @@ namespace game_framework {
 		}
 	}
 
-	void Hero::SetMovingDown(bool flag)
+	void Monster::SetMovingDown(bool flag)
 	{
 		isMovingDown = flag;
 	}
 
-	void Hero::SetMovingLeft(bool flag)
+	void Monster::SetMovingLeft(bool flag)
 	{
 		isMovingLeft = flag;
 	}
 
-	void Hero::SetMovingRight(bool flag)
+	void Monster::SetMovingRight(bool flag)
 	{
 		isMovingRight = flag;
 	}
 
-	void Hero::SetMovingUp(bool flag)
+	void Monster::SetMovingUp(bool flag)
 	{
 		isMovingUp = flag;
 	}
 
-	void Hero::SetXY(int nx, int ny)
+	void Monster::SetXY(int nx, int ny)
 	{
 		x = nx; y = ny;
 	}
 
-	void Hero::OnShow()
+	void Monster::OnShow()
 	{
 		stand.SetTopLeft(x, y);
 		if (isMovingDown) {
