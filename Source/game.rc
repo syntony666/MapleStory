@@ -100,9 +100,13 @@ IDB_BACKGROUND          BITMAP                  "..\\res\\bg1.bmp"
 
 IDB_LOGO                BITMAP                  "..\\res\\bitmap3.bmp"
 
-IDB_FROG_STAND          BITMAP                  "..\\res\\frog_stand.bmp"
+IDB_FROG_STAND_RIGHT    BITMAP                  "..\\res\\frog_stand_right.bmp"
 
 IDB_FROG_DOWN           BITMAP                  "..\\res\\frog_down.bmp"
+
+IDB_FROG_GO_RIGHT       BITMAP                  "..\\res\\frog_go_right.bmp"
+
+IDB_BITMAP5             BITMAP                  "Z:\\ooplab_2020_MapleStory\\RES\\frog_go_left.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////

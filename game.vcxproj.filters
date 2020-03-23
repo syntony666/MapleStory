@@ -195,5 +195,14 @@
     <Image Include="res\6\bg1.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="RES\frog_go_right.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\frog_stand_right.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\frog_go_left.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
