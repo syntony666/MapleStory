@@ -181,6 +181,7 @@ void CGameStateRun::OnBeginState()
 	const int ANIMATION_SPEED = 15;
 	character.Initialize();
 	gamemap.Initialize();
+	monster.Initialize();
 }
 
 void CGameStateRun::OnMove()							// 移動遊戲元素
@@ -188,6 +189,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	// 移動擦子
 	character.OnMove();
 	gamemap.OnMove();
+	monster.OnMove();
 }
 
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -200,6 +202,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	//
 	// 開始載入資料
 	//
+	monster.LoadBitmap();
 	character.LoadBitmap();
 	gamemap.LoadBitmap(IDB_BACKGROUND);					// 載入背景的圖形
 	//
@@ -284,6 +287,7 @@ void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)
 void CGameStateRun::OnShow()
 {
 	gamemap.OnShow();			// 貼上背景圖
+	monster.OnShow();
 	character.OnShow();			// 貼上人物
 }
 }
