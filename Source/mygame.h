@@ -68,7 +68,8 @@ namespace game_framework {
 	private:
 		CMovingBitmap	background;	// 背景圖
 		Hero			character;	// 角色
-		Map gamemap;
+		Map gamemap;				// 地圖
+		Monster monster;			// 怪物
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
