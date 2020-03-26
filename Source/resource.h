@@ -2,6 +2,10 @@
 // Microsoft Visual C++ 產生的 Include 檔案。
 // 由 game.rc 使用
 //
+#define IDD_ABOUTBOX                    100
+#define IDP_SOCKETS_INIT_FAILED         104
+#define IDR_MAINFRAME                   128
+#define IDR_GAMETYPE                    129
 #define IDB_LOADING                     156
 #define IDB_BACKGROUND                  164
 #define IDB_LOGO                        166
