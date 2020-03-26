@@ -84,6 +84,14 @@ IDB_FROG_STAND_LEFT     BITMAP                  "..\\res\\frog_stand_left.bmp"
 
 IDB_FROG_GO_LEFT1       BITMAP                  "..\\res\\frog_go_left1.bmp"
 
+IDB_FROG_GO_RIGHT1      BITMAP                  "..\\res\\frog_go_right1.bmp"
+
+IDB_FROG_GO_RIGHT2      BITMAP                  "..\\res\\frog_go_right2.bmp"
+
+IDB_FROG_JUMP_LEFT      BITMAP                  "..\\res\\frog_jump_left.bmp"
+
+IDB_FROG_JUMP_RIGHT     BITMAP                  "..\\res\\frog_jump_right.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

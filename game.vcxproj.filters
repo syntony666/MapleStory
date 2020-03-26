@@ -43,10 +43,10 @@
     <Image Include="RES\frog_go_left1.bmp" />
     <Image Include="RES\frog_go_right1.bmp" />
     <Image Include="RES\frog_go_right2.bmp" />
-    <Image Include="Source\res\frog_go_right1.bmp" />
-    <Image Include="Source\res\frog_go_right.bmp" />
-    <Image Include="Source\res\frog_go_left2.bmp" />
-    <Image Include="Source\res\frog_go_right2.bmp" />
+    <Image Include="RES\frog_jump_left.bmp" />
+    <Image Include="res\bitmap1.bmp" />
+    <Image Include="RES\frog_jump_right.bmp" />
+    <Image Include="..\res\frog_jump_left.bmp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="RES\continue.bmp" />
