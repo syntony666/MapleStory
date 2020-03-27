@@ -19,10 +19,12 @@ namespace game_framework {
 		void SetXY(int nx, int ny);		// 設定monster左上角座標
 
 	protected:
-		CAnimation monster;		// 站立
+		CAnimation monsterRight;		// 站立
+		CAnimation monsterLeft;
 		int x, y;				// Hero左上角座標
 		int STEP_SIZE;
 		int tempX, tempY;
 		int floor;				// 地板的Y座標
+		bool isMovingRight, isMovingLeft;
 	};
 }

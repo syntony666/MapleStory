@@ -24,6 +24,7 @@ namespace game_framework {
 
 	protected:
 		CAnimation stand;			// 站立
+		CAnimation standLeft;		// 站立面向左
 		CAnimation down;			// 趴下
 		CAnimation goLeft;			// 向左走
 		CAnimation goRight;			// 向右走

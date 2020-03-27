@@ -33,6 +33,7 @@ namespace game_framework {
 	}
 	void Map::OnMove() {
 		const int STEP_SIZE = 8;
+
 		if (x >= -1036 && isMovingRight) {	//若碰壁就動地圖直到地圖的邊緣
 			x -= STEP_SIZE;
 		}

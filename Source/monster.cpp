@@ -5,6 +5,7 @@
 #include "audio.h"
 #include "gamelib.h"
 #include "monster.h"
+#include "hero.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -28,12 +29,12 @@ namespace game_framework {
 
 	int Monster::GetX2()
 	{
-		return x + monster.Width();
+		return x + monsterRight.Width();
 	}
 
 	int Monster::GetY2()
 	{
-		return y + monster.Height();
+		return y + monsterRight.Height();
 	}
 
 	void Monster::Initialize()
@@ -42,8 +43,6 @@ namespace game_framework {
 		const int Y_POS = 570;
 		x = X_POS;
 		y = Y_POS;
-		tempX = x;
-		tempY = y;
 		STEP_SIZE = 3;
 		const int FLOOR = 570;
 		floor = FLOOR;
@@ -51,13 +50,24 @@ namespace game_framework {
 
 	void Monster::LoadBitmap()
 	{
-		monster.AddBitmap(IDB_FROG_STAND_RIGHT, RGB(255, 255, 255));
+		monsterRight.AddBitmap(IDB_FROG_STAND_RIGHT, RGB(255, 255, 255));
+		monsterLeft.AddBitmap(IDB_FROG_STAND_LEFT, RGB(255, 255, 255));
 	}
 
 	void Monster::OnMove()
 	{
-		x += STEP_SIZE;
-		monster.OnMove();
+		monsterRight.OnMove();
+		if (x >= 700) {	//若碰壁就動地圖直到地圖的邊緣
+			STEP_SIZE = -3;
+			x += STEP_SIZE;
+		}
+		if (x <= 400) {		//若碰壁就動地圖直到地圖的邊緣
+			STEP_SIZE = 3;
+			x += STEP_SIZE;
+		}
+		else {
+			x += STEP_SIZE;
+		}
 	}
 
 
@@ -68,7 +78,11 @@ namespace game_framework {
 
 	void Monster::OnShow()
 	{
-		monster.SetTopLeft(x, y);
-		monster.OnShow();
+		monsterRight.SetTopLeft(x, y);
+		monsterLeft.SetTopLeft(x, y);
+		if (STEP_SIZE >= 0) {
+			monsterRight.OnShow();
+		}
+		else monsterLeft.OnShow();
 	}
 }

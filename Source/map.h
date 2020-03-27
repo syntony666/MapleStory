@@ -12,7 +12,7 @@ namespace game_framework {
 
 	protected:
 		CMovingBitmap map1;
-		int x, y, zoom;
+		int x, y, zoom, tempX;
 		bool isMovingRight, isMovingLeft;
 	};
 
