@@ -63,6 +63,8 @@ namespace game_framework {
 		stand.AddBitmap(IDB_FROG_STAND_RIGHT, RGB(255, 255, 255));
 		standLeft.AddBitmap(IDB_FROG_GO_LEFT, RGB(255, 255, 255));
 		down.AddBitmap(IDB_FROG_DOWN, RGB(255, 255, 255));
+		jumpRight.AddBitmap(IDB_FROG_JUMP_RIGHT, RGB(255, 255, 255));
+		jumpLeft.AddBitmap(IDB_FROG_JUMP_LEFT, RGB(255, 255, 255));
 	}
 
 	void Hero::OnMove()
@@ -143,13 +145,26 @@ namespace game_framework {
 		}
 		else if (isMovingLeft) {
 			goLeft.SetTopLeft(stand.Left(), stand.Top());
-			goLeft.OnShow();
-			goLeft.OnMove();
+			if (y < floor) {
+				jumpLeft.SetTopLeft(stand.Left(), stand.Top());
+				jumpLeft.OnShow();
+				jumpLeft.OnMove();
+			}
+			else {
+				goLeft.OnShow();
+				goLeft.OnMove();
+			}
 		}
 		else if (isMovingRight) {
 			goRight.SetTopLeft(stand.Left(), stand.Top());
-			goRight.OnShow();
-			goRight.OnMove();
+			if (y < floor) {
+				jumpRight.SetTopLeft(stand.Left(), stand.Top());
+				jumpRight.OnShow();
+				jumpRight.OnMove();
+			}else{
+				goRight.OnShow();
+				goRight.OnMove();
+			}
 		} 
 		else {
 			stand.OnShow();

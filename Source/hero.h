@@ -28,6 +28,8 @@ namespace game_framework {
 		CAnimation down;			// 趴下
 		CAnimation goLeft;			// 向左走
 		CAnimation goRight;			// 向右走
+		CAnimation jumpRight;		// 向右跳
+		CAnimation jumpLeft;		// 向左跳
 		int x, y;					// Hero左上角座標
 		bool isMovingDown;			// 是否正在往下移動
 		bool isMovingLeft;			// 是否正在往左移動
