@@ -92,6 +92,10 @@ IDB_FROG_JUMP_LEFT      BITMAP                  "..\\res\\frog_jump_left.bmp"
 
 IDB_FROG_JUMP_RIGHT     BITMAP                  "..\\res\\frog_jump_right.bmp"
 
+IDB_MONSTER_STAND_LEFT  BITMAP                  "C:\\Users\\nelso\\Desktop\\School\\108_2_GameProject\\MapleStory\\RES\\monster_stand_left.bmp"
+
+IDB_MONSTER_STAND_RIGHT BITMAP                  "C:\\Users\\nelso\\Desktop\\School\\108_2_GameProject\\MapleStory\\RES\\monster_stand_right.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

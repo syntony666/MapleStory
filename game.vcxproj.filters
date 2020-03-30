@@ -47,6 +47,9 @@
     <Image Include="res\bitmap1.bmp" />
     <Image Include="RES\frog_jump_right.bmp" />
     <Image Include="..\res\frog_jump_left.bmp" />
+    <Image Include="res\bitmap2.bmp" />
+    <Image Include="RES\monster_stand_left.bmp" />
+    <Image Include="RES\monster_stand_right.bmp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="RES\continue.bmp" />

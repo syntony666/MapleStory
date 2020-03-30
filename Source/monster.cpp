@@ -50,8 +50,8 @@ namespace game_framework {
 
 	void Monster::LoadBitmap()
 	{
-		monsterRight.AddBitmap(IDB_FROG_STAND_RIGHT, RGB(255, 255, 255));
-		monsterLeft.AddBitmap(IDB_FROG_STAND_LEFT, RGB(255, 255, 255));
+		monsterRight.AddBitmap(IDB_MONSTER_STAND_RIGHT, RGB(255, 255, 255));
+		monsterLeft.AddBitmap(IDB_MONSTER_STAND_LEFT, RGB(255, 255, 255));
 	}
 
 	void Monster::OnMove()
