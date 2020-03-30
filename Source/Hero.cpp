@@ -36,6 +36,16 @@ namespace game_framework {
 		return y + stand.Height();
 	}
 
+	bool Hero::ifMovingLeft()
+	{
+		return isMovingLeft;
+	}
+
+	bool Hero::ifMovingRight()
+	{
+		return isMovingRight;
+	}
+
 	void Hero::Initialize()
 	{
 		const int X_POS = 100;
@@ -82,10 +92,10 @@ namespace game_framework {
 		if (isMovingLeft && x >= 100 ) 
 			x -= STEP_SIZE;
 
-		if (isMovingRight && x <= 1166 )
+		if (isMovingRight && x <= 1164 )
 			x += STEP_SIZE;
 
-		if (isMovingUp  && y == floor) {
+		if (isMovingUp && y == floor) {
 			rising = true;
 			velocity = initial_velocity;
 		}

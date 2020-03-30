@@ -21,6 +21,8 @@ namespace game_framework {
 		void SetMovingRight(bool flag); // 設定是否正在往右移動
 		void SetMovingUp(bool flag);	// 設定是否正在往上移動
 		void SetXY(int nx, int ny);		// 設定Hero左上角座標
+		bool ifMovingLeft();
+		bool ifMovingRight();
 
 	protected:
 		CAnimation stand;			// 站立

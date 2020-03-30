@@ -190,6 +190,19 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	character.OnMove();
 	gamemap.OnMove();
 	monster.OnMove();
+
+	if (character.GetX1() <= 100 && character.ifMovingLeft() == true) {
+		gamemap.SetMovingLeft(true);
+	}
+	else {
+		gamemap.SetMovingLeft(false);
+	}
+	if (character.GetX1() >= 1164 && character.ifMovingRight() == true) {
+		gamemap.SetMovingRight(true);
+	}
+	else {
+		gamemap.SetMovingRight(false);
+	}
 }
 
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -223,22 +236,21 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_UP    = 0x26; // keyboard上箭頭
 	const char KEY_RIGHT = 0x27; // keyboard右箭頭
 	const char KEY_DOWN  = 0x28; // keyboard下箭頭
+
 	if (nChar == KEY_LEFT) {
 		character.SetMovingLeft(true);
-		if (character.GetX1() <= 100) {
-			gamemap.SetMovingRight(true);
-		}
 	}
+	
 	if (nChar == KEY_RIGHT) {
 		character.SetMovingRight(true);
-		if (character.GetX1() >= 1166) {
-			gamemap.SetMovingLeft(true);
-		}
 	}
-	if (nChar == KEY_UP)
+
+	if (nChar == KEY_UP) {
 		character.SetMovingUp(true);
-	if (nChar == KEY_DOWN)
+	}
+	if (nChar == KEY_DOWN) {
 		character.SetMovingDown(true);
+	}
 }
 
 void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -249,10 +261,8 @@ void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_DOWN  = 0x28; // keyboard下箭頭
 	if (nChar == KEY_LEFT)
 		character.SetMovingLeft(false);
-		gamemap.SetMovingRight(false);
 	if (nChar == KEY_RIGHT)
 		character.SetMovingRight(false);
-		gamemap.SetMovingLeft(false);
 	if (nChar == KEY_UP)
 		character.SetMovingUp(false);
 	if (nChar == KEY_DOWN)
