@@ -193,15 +193,19 @@ void CGameStateRun::OnMove()							// ²¾°Ê¹CÀ¸¤¸¯À
 
 	if (character.GetX1() <= 100 && character.ifMovingLeft() == true) {
 		gamemap.SetMovingLeft(true);
+		monster.SetMovingLeft(true);
 	}
 	else {
 		gamemap.SetMovingLeft(false);
+		monster.SetMovingLeft(false);
 	}
 	if (character.GetX1() >= 1164 && character.ifMovingRight() == true) {
 		gamemap.SetMovingRight(true);
+		monster.SetMovingRight(true);
 	}
 	else {
 		gamemap.SetMovingRight(false);
+		monster.SetMovingRight(false);
 	}
 }
 

@@ -43,6 +43,8 @@ namespace game_framework {
 		const int Y_POS = 570;
 		x = X_POS;
 		y = Y_POS;
+		range_X = X_POS;
+		isMovingLeft = isMovingRight = false;
 		STEP_SIZE = 3;
 		const int FLOOR = 570;
 		floor = FLOOR;
@@ -57,19 +59,36 @@ namespace game_framework {
 	void Monster::OnMove()
 	{
 		monsterRight.OnMove();
-		if (x >= 700) {	//若碰壁就動地圖直到地圖的邊緣
+		if (range_X >= 700) {	//若碰壁就動地圖直到地圖的邊緣
 			STEP_SIZE = -3;
 			x += STEP_SIZE;
+			range_X += STEP_SIZE;
 		}
-		if (x <= 400) {		//若碰壁就動地圖直到地圖的邊緣
+		else if (range_X <= 400) {		//若碰壁就動地圖直到地圖的邊緣
 			STEP_SIZE = 3;
 			x += STEP_SIZE;
+			range_X += STEP_SIZE;
+		}
+		else if (isMovingRight) {
+			x += (STEP_SIZE - HERO_STEP);
+			range_X += STEP_SIZE;
+		}
+		else if (isMovingLeft) {
+			x += (STEP_SIZE + HERO_STEP);
+			range_X += STEP_SIZE;
 		}
 		else {
 			x += STEP_SIZE;
+			range_X += STEP_SIZE;
 		}
 	}
 
+	void Monster::SetMovingLeft(bool flag) {	// 設定是否正在往左移動
+		isMovingLeft = flag;
+	}
+	void Monster::SetMovingRight(bool flag) {	// 設定是否正在往右移動
+		isMovingRight = flag;
+	}
 
 	void Monster::SetXY(int nx, int ny)
 	{
