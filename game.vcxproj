@@ -285,6 +285,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\audio.h" />
+    <ClInclude Include="Source\character.h" />
     <ClInclude Include="Source\hero.h" />
     <ClInclude Include="Source\game.h" />
     <ClInclude Include="Source\gameDoc.h" />
@@ -292,6 +293,7 @@
     <ClInclude Include="Source\MainFrm.h" />
     <ClInclude Include="Source\map.h" />
     <ClInclude Include="Source\monster.h" />
+    <ClInclude Include="Source\position.h" />
     <ClInclude Include="Source\Resource.h" />
     <ClInclude Include="Source\StdAfx.h" />
     <ClInclude Include="Source\gamelib.h" />
