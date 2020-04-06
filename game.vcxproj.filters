@@ -1,65 +1,174 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Source\audio.cpp" />
-    <ClCompile Include="Source\Hero.cpp" />
-    <ClCompile Include="Source\game.cpp" />
-    <ClCompile Include="Source\gameDoc.cpp" />
-    <ClCompile Include="Source\gameView.cpp" />
-    <ClCompile Include="Source\MainFrm.cpp" />
-    <ClCompile Include="Source\map.cpp" />
-    <ClCompile Include="Source\monster.cpp" />
-    <ClCompile Include="Source\StdAfx.cpp" />
-    <ClCompile Include="Source\gamelib.cpp" />
-    <ClCompile Include="Source\mygame.cpp" />
+    <ClCompile Include="Source\audio.cpp">
+      <Filter>Sounds</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\mygame.cpp">
+      <Filter>MapleStory</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\monster.cpp">
+      <Filter>MapleStory</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\map.cpp">
+      <Filter>MapleStory</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Hero.cpp">
+      <Filter>MapleStory</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\game.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\gameDoc.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\gamelib.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\gameView.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MainFrm.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\StdAfx.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\audio.h" />
-    <ClInclude Include="Source\hero.h" />
-    <ClInclude Include="Source\game.h" />
-    <ClInclude Include="Source\gameDoc.h" />
-    <ClInclude Include="Source\gameView.h" />
-    <ClInclude Include="Source\MainFrm.h" />
-    <ClInclude Include="Source\map.h" />
-    <ClInclude Include="Source\monster.h" />
-    <ClInclude Include="Source\Resource.h" />
-    <ClInclude Include="Source\StdAfx.h" />
-    <ClInclude Include="Source\gamelib.h" />
-    <ClInclude Include="Source\mygame.h" />
-    <ClInclude Include="Source\position.h" />
-    <ClInclude Include="Source\character.h" />
+    <ClInclude Include="Source\audio.h">
+      <Filter>Sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\position.h">
+      <Filter>MapleStory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\mygame.h">
+      <Filter>MapleStory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\monster.h">
+      <Filter>MapleStory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\map.h">
+      <Filter>MapleStory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\hero.h">
+      <Filter>MapleStory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\character.h">
+      <Filter>MapleStory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\game.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\gameDoc.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\gamelib.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\gameView.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MainFrm.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resource.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StdAfx.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Source\game.rc" />
+    <Image Include="RES\bg1.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="res\frog_down.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\frog_go_left.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\frog_go_left1.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\frog_go_left2.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\frog_go_right.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\frog_go_right1.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\frog_jump_left.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\frog_go_right2.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="..\res\frog_jump_left.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\frog_jump_right.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="res\frog_stand.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\frog_stand_left.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="res\frog_stand_right.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\monster_stand_left.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\monster_stand_right.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="RES\bg1.bmp" />
-    <Image Include="res\bitmap3.bmp" />
-    <Image Include="res\frog_down.bmp" />
-    <Image Include="RES\frog_go_left.bmp" />
-    <Image Include="RES\frog_go_right.bmp" />
-    <Image Include="res\frog_stand.bmp" />
-    <Image Include="res\frog_stand_right.bmp" />
-    <Image Include="RES\frog_stand_left.bmp" />
-    <Image Include="RES\frog_go_left2.bmp" />
-    <Image Include="RES\frog_go_left1.bmp" />
-    <Image Include="RES\frog_go_right1.bmp" />
-    <Image Include="RES\frog_go_right2.bmp" />
-    <Image Include="RES\frog_jump_left.bmp" />
-    <Image Include="res\bitmap1.bmp" />
-    <Image Include="RES\frog_jump_right.bmp" />
-    <Image Include="..\res\frog_jump_left.bmp" />
-    <Image Include="res\bitmap2.bmp" />
-    <Image Include="RES\monster_stand_left.bmp" />
-    <Image Include="RES\monster_stand_right.bmp" />
+    <None Include="RES\continue.bmp">
+      <Filter>Resouces</Filter>
+    </None>
+    <None Include="res\game.ico">
+      <Filter>Resouces</Filter>
+    </None>
+    <None Include="RES\gamecurs.cur">
+      <Filter>Resouces</Filter>
+    </None>
+    <None Include="RES\loading.bmp">
+      <Filter>Resouces</Filter>
+    </None>
+    <None Include="res\Toolbar.bmp">
+      <Filter>Resouces</Filter>
+    </None>
+    <None Include="res\game.rc2">
+      <Filter>Systems</Filter>
+    </None>
+    <None Include="res\gameDoc.ico">
+      <Filter>Systems</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="RES\continue.bmp" />
-    <None Include="res\game.ico" />
-    <None Include="res\game.rc2" />
-    <None Include="RES\gamecurs.cur" />
-    <None Include="res\gameDoc.ico" />
-    <None Include="RES\loading.bmp" />
-    <None Include="res\Toolbar.bmp" />
+    <Filter Include="MapleStory">
+      <UniqueIdentifier>{5e4a679d-577d-4937-b941-782dce164794}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resouces">
+      <UniqueIdentifier>{2f59e943-3d93-4c3d-92dc-161730f599aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems">
+      <UniqueIdentifier>{f93cc429-ad7e-4e0d-8d37-0c1e89ccd46c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sounds">
+      <UniqueIdentifier>{291bc8af-c1dc-4a38-a2a4-c18e683de1e8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Source\game.rc">
+      <Filter>Systems</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
