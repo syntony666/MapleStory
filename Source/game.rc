@@ -68,7 +68,7 @@ IDB_LOADING             BITMAP                  "..\\res\\loading.bmp"
 
 IDB_BACKGROUND          BITMAP                  "..\\res\\bg1.bmp"
 
-IDB_LOGO                BITMAP                  "..\\res\\bitmap3.bmp"
+IDB_LOGO                BITMAP                  "..\\res\\logo.bmp"
 
 IDB_FROG_STAND_RIGHT    BITMAP                  "..\\res\\frog_stand_right.bmp"
 
