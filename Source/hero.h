@@ -18,13 +18,13 @@ namespace game_framework {
 		void LoadBitmap();				// 載入圖形
 		void OnMove();					// 移動Hero
 		void OnShow();					// 將Hero圖形貼到畫面
-		void SetMovingDown(bool flag);	// 設定是否正在往下移動
-		void SetMovingLeft(bool flag);	// 設定是否正在往左移動
-		void SetMovingRight(bool flag); // 設定是否正在往右移動
-		void SetMovingUp(bool flag);	// 設定是否正在往上移動
+		//void SetMovingDown(bool flag);	// 設定是否正在往下移動
+		//void SetMovingLeft(bool flag);	// 設定是否正在往左移動
+		//void SetMovingRight(bool flag); // 設定是否正在往右移動
+		//void SetMovingUp(bool flag);	// 設定是否正在往上移動
 		void SetXY(int nx, int ny);		// 設定Hero左上角座標
-		bool ifMovingLeft();
-		bool ifMovingRight();
+		//bool ifMovingLeft();
+		//bool ifMovingRight();
 
 	protected:
 		CAnimation stand;			// 站立
@@ -35,10 +35,10 @@ namespace game_framework {
 		CAnimation jumpRight;		// 向右跳
 		CAnimation jumpLeft;		// 向左跳
 		int x, y;					// Hero左上角座標
-		bool isMovingDown;			// 是否正在往下移動
-		bool isMovingLeft;			// 是否正在往左移動
-		bool isMovingRight;			// 是否正在往右移動
-		bool isMovingUp;			// 是否正在往上移動
+		//bool isMovingDown;			// 是否正在往下移動
+		//bool isMovingLeft;			// 是否正在往左移動
+		//bool isMovingRight;			// 是否正在往右移動
+		//bool isMovingUp;			// 是否正在往上移動
 		int floor;				// 地板的Y座標
 		bool rising;			// true表上升、false表下降
 		int initial_velocity;	// 初始速度

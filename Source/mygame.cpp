@@ -179,7 +179,7 @@ void CGameStateRun::OnBeginState()
 	const int HITS_LEFT_Y = 0;
 	const int BACKGROUND_X = 0;
 	const int ANIMATION_SPEED = 15;
-	character.Initialize();
+	character->Initialize();
 	gamemap.Initialize();
 	monster.Initialize();
 }
@@ -187,11 +187,11 @@ void CGameStateRun::OnBeginState()
 void CGameStateRun::OnMove()							// 移動遊戲元素
 {
 	// 移動擦子
-	character.OnMove();
+	character->OnMove();
 	gamemap.OnMove();
 	monster.OnMove();
-
-	if (character.GetX1() <= 100 && character.ifMovingLeft() == true) {
+	TRACE("----------------%d\n", character->getX());
+	if (character->getX() <= 100) {
 		gamemap.SetMovingLeft(true);
 		monster.SetMovingLeft(true);
 	}
@@ -199,7 +199,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		gamemap.SetMovingLeft(false);
 		monster.SetMovingLeft(false);
 	}
-	if (character.GetX1() >= 1164 && character.ifMovingRight() == true) {
+	if (character->getX() >= 1164) {
 		gamemap.SetMovingRight(true);
 		monster.SetMovingRight(true);
 	}
@@ -220,7 +220,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	// 開始載入資料
 	//
 	monster.LoadBitmap();
-	character.LoadBitmap();
+	character->LoadBitmap();
 	gamemap.LoadBitmap(IDB_BACKGROUND);					// 載入背景的圖形
 	//
 	// 完成部分Loading動作，提高進度
@@ -242,18 +242,18 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_DOWN  = 0x28; // keyboard下箭頭
 
 	if (nChar == KEY_LEFT) {
-		character.SetMovingLeft(true);
+		character->SetMovingLeft(true);
 	}
 	
 	if (nChar == KEY_RIGHT) {
-		character.SetMovingRight(true);
+		character->SetMovingRight(true);
 	}
 
 	if (nChar == KEY_UP) {
-		character.SetMovingUp(true);
+		character->SetMovingUp(true);
 	}
 	if (nChar == KEY_DOWN) {
-		character.SetMovingDown(true);
+		character->SetMovingDown(true);
 	}
 }
 
@@ -264,13 +264,13 @@ void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_RIGHT = 0x27; // keyboard右箭頭
 	const char KEY_DOWN  = 0x28; // keyboard下箭頭
 	if (nChar == KEY_LEFT)
-		character.SetMovingLeft(false);
+		character->SetMovingLeft(false);
 	if (nChar == KEY_RIGHT)
-		character.SetMovingRight(false);
+		character->SetMovingRight(false);
 	if (nChar == KEY_UP)
-		character.SetMovingUp(false);
+		character->SetMovingUp(false);
 	if (nChar == KEY_DOWN)
-		character.SetMovingDown(false);
+		character->SetMovingDown(false);
 }
 
 /*
@@ -302,6 +302,6 @@ void CGameStateRun::OnShow()
 {
 	gamemap.OnShow();			// 貼上背景圖
 	monster.OnShow();
-	character.OnShow();			// 貼上人物
+	character->OnShow();			// 貼上人物
 }
 }

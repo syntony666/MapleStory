@@ -23,10 +23,10 @@ namespace game_framework {
 		}
 		virtual void OnMove() = 0;	// 移動
 		virtual void OnShow() = 0;	// 顯示角色
-		virtual void SetMovingDown(bool flag) = 0;	// 設定是否正在往下移動
-		virtual void SetMovingLeft(bool flag) = 0;	// 設定是否正在往左移動
-		virtual void SetMovingRight(bool flag) = 0;	// 設定是否正在往右移動
-		virtual void SetMovingUp(bool flag) = 0;		// 設定是否正在往上移動
+		void SetMovingDown(bool flag) { isMovingDown = flag; };	// 設定是否正在往下移動
+		void SetMovingLeft(bool flag) { isMovingLeft = flag; };	// 設定是否正在往左移動
+		void SetMovingRight(bool flag) { isMovingRight = flag; };	// 設定是否正在往右移動
+		void SetMovingUp(bool flag) { isMovingUp = flag; };		// 設定是否正在往上移動
 		void SetXY(int nx, int ny) {		// 設定Hero左上角座標
 
 		}

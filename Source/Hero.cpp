@@ -18,40 +18,40 @@ namespace game_framework {
 
 	int Hero::GetX1()
 	{
-		return x;
+		return pos_x;
 	}
 
 	int Hero::GetY1()
 	{
-		return y;
+		return pos_y;
 	}
 
 	int Hero::GetX2()
 	{
-		return x + stand.Width();
+		return pos_rx + stand.Width();
 	}
 
 	int Hero::GetY2()
 	{
-		return y + stand.Height();
+		return pos_ry + stand.Height();
 	}
 
-	bool Hero::ifMovingLeft()
-	{
-		return isMovingLeft;
-	}
+	//bool Hero::ifMovingLeft()
+	//{
+	//	return isMovingLeft;
+	//}
 
-	bool Hero::ifMovingRight()
-	{
-		return isMovingRight;
-	}
+	//bool Hero::ifMovingRight()
+	//{
+	//	return isMovingRight;
+	//}
 
 	void Hero::Initialize()
 	{
 		const int X_POS = 100;
 		const int Y_POS = 570;
-		x = X_POS;
-		y = Y_POS;
+		pos_x = X_POS;
+		pos_y = Y_POS;
 		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
 		const int INITIAL_VELOCITY = 14;
 		const int FLOOR = 570;
@@ -82,14 +82,14 @@ namespace game_framework {
 		stand.OnMove();
 		int STEP_SIZE;
 
-		if (isMovingDown && y >= floor) { //移動速度、趴下靜止
+		if (isMovingDown && pos_y >= floor) { //移動速度、趴下靜止
 			STEP_SIZE = 0;
 		}
 		else {
 			STEP_SIZE = 8;
 		}
 
-		if (isMovingLeft && x >= 100 ) 
+		if (isMovingLeft && pos_x >= 100 ) 
 			x -= STEP_SIZE;
 
 		if (isMovingRight && x <= 1164 )
@@ -121,25 +121,25 @@ namespace game_framework {
 		}
 	}
 
-	void Hero::SetMovingDown(bool flag)
-	{
-		isMovingDown = flag;
-	}
+	//void Hero::SetMovingDown(bool flag)
+	//{
+	//	isMovingDown = flag;
+	//}
 
-	void Hero::SetMovingLeft(bool flag)
-	{
-		isMovingLeft = flag;
-	}
+	//void Hero::SetMovingLeft(bool flag)
+	//{
+	//	isMovingLeft = flag;
+	//}
 
-	void Hero::SetMovingRight(bool flag)
-	{
-		isMovingRight = flag;
-	}
+	//void Hero::SetMovingRight(bool flag)
+	//{
+	//	isMovingRight = flag;
+	//}
 
-	void Hero::SetMovingUp(bool flag)
-	{
-		isMovingUp = flag;
-	}
+	//void Hero::SetMovingUp(bool flag)
+	//{
+	//	isMovingUp = flag;
+	//}
 
 	void Hero::SetXY(int nx, int ny)
 	{
