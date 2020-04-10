@@ -50,8 +50,14 @@ void CGameStateInit::OnInit()
 	// 開始載入資料
 	//
 	logo.LoadBitmap(IDB_LOGO);
-	Sleep(0);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
+	start1.LoadBitmap(IDB_START1, RGB(255, 255, 255));
+	start2.LoadBitmap(IDB_START2, RGB(255, 255, 255));
+	exit1.LoadBitmap(IDB_EXIT1, RGB(255, 255, 255));
+	exit2.LoadBitmap(IDB_EXIT2, RGB(255, 255, 255));
 
+	menu = 1;
+	
+	ShowInitProgress(33);
 	//
 	// 此OnInit動作會接到CGameStaterRun::OnInit()，所以進度還沒到100%
 	//
@@ -61,19 +67,33 @@ void CGameStateInit::OnBeginState()
 {
 }
 
-void CGameStateInit::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
+void CGameStateInit::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
-	const char KEY_ESC = 27;
-	const char KEY_SPACE = ' ';
-	if (nChar == KEY_SPACE)
-		GotoGameState(GAME_STATE_RUN);						// 切換至GAME_STATE_RUN
-	else if (nChar == KEY_ESC)								// Demo 關閉遊戲的方法
-		PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE,0,0);	// 關閉遊戲
+	const char KEY_ENTER = 0x0D;	// Enter
+	const char KEY_UP = 0x26;		// keyboard上箭頭
+	const char KEY_DOWN = 0x28;		// keyboard下箭頭
+
+	if (nChar == KEY_ENTER && menu == 1) {	
+		GotoGameState(GAME_STATE_RUN);
+	}
+
+	if (nChar == KEY_ENTER && menu == 2) {
+		PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);
+	}
+
+	if (nChar == KEY_DOWN) {
+		menu = 2;
+	}
+
+	if (nChar == KEY_UP) {
+		menu = 1;
+	}
+	
 }
 
 void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point)
 {
-	GotoGameState(GAME_STATE_RUN);		// 切換至GAME_STATE_RUN
+	//GotoGameState(GAME_STATE_RUN);		// 切換至GAME_STATE_RUN
 }
 
 void CGameStateInit::OnShow()
@@ -81,11 +101,26 @@ void CGameStateInit::OnShow()
 	//
 	// 貼上logo
 	//
-	logo.SetTopLeft((SIZE_X - logo.Width())/2, SIZE_Y/8);
+	logo.SetTopLeft(0, 0);
 	logo.ShowBitmap();
+
+	if (menu == 1) {
+		start2.SetTopLeft(483, 380);
+		start2.ShowBitmap();
+		exit1.SetTopLeft(483, 520);
+		exit1.ShowBitmap();
+	}
+
+	if (menu == 2) {
+		start1.SetTopLeft(483, 380);
+		start1.ShowBitmap();
+		exit2.SetTopLeft(483, 520);
+		exit2.ShowBitmap();
+	}
 	//
 	// Demo螢幕字型的使用，不過開發時請盡量避免直接使用字型，改用CMovingBitmap比較好
 	//
+	/*
 	CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
 	CFont f,*fp;
 	f.CreatePointFont(300,"Times New Roman");	// 產生 font f; 160表示16 point的字
@@ -99,6 +134,7 @@ void CGameStateInit::OnShow()
 	pDC->TextOut(5,515,"按下 Alt-F4 離開遊戲");
 	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+	*/
 }								
 
 /////////////////////////////////////////////////////////////////////////////
@@ -132,7 +168,6 @@ void CGameStateOver::OnInit()
 	//
 	// 開始載入資料
 	//
-	Sleep(100);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
 	//
 	// 最終進度為100%
 	//
@@ -171,7 +206,7 @@ CGameStateRun::~CGameStateRun()
 
 void CGameStateRun::OnBeginState()
 {
-	const int BALL_GAP = 90;
+	/*const int BALL_GAP = 90;
 	const int BALL_XY_OFFSET = 45;
 	const int BALL_PER_ROW = 7;
 	const int HITS_LEFT = 10;
@@ -226,10 +261,10 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	// 完成部分Loading動作，提高進度
 	//
 	ShowInitProgress(50);
-	Sleep(300); // 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
 	//
 	// 繼續載入其他資料
 	//
+	ShowInitProgress(100);
 }
 
 int map_position[] = { 0, 0 };

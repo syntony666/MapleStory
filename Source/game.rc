@@ -96,6 +96,14 @@ IDB_MONSTER_STAND_LEFT  BITMAP                  "..\\res\\monster_stand_left.bmp
 
 IDB_MONSTER_STAND_RIGHT BITMAP                  "..\\res\\monster_stand_right.bmp"
 
+IDB_EXIT1               BITMAP                  "..\\res\\exit1.bmp"
+
+IDB_EXIT2               BITMAP                  "..\\res\\exit2.bmp"
+
+IDB_START1              BITMAP                  "..\\res\\start1.bmp"
+
+IDB_START2              BITMAP                  "..\\res\\start2.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
