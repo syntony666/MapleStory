@@ -1,3 +1,5 @@
+#ifndef CHARACTER_H
+
 #define CHARACTER_H
 
 namespace game_framework {
@@ -45,3 +47,4 @@ namespace game_framework {
 		bool isMovingUp;			// 是否正在往上移動
 	};
 }
+#endif

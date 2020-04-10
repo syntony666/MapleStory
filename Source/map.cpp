@@ -53,5 +53,10 @@ namespace game_framework {
 		map1.SetTopLeft(x, y);
 		map1.ShowBitmap(zoom);
 	}
-	
+	int Map::getX() {
+		return x;
+	}
+
+	bool Map::ifMovingLeft() { return isMovingLeft; }
+	bool Map::ifMovingRight() { return isMovingRight; }
 }

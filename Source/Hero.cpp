@@ -90,19 +90,19 @@ namespace game_framework {
 		}
 
 		if (isMovingLeft && pos_x >= 100 ) 
-			x -= STEP_SIZE;
+			pos_x -= STEP_SIZE;
 
-		if (isMovingRight && x <= 1164 )
-			x += STEP_SIZE;
+		if (isMovingRight && pos_x <= 1164 )
+			pos_x += STEP_SIZE;
 
-		if (isMovingUp && y == floor) {
+		if (isMovingUp && pos_y == floor) {
 			rising = true;
 			velocity = initial_velocity;
 		}
 
 		if (rising) {			// 上升狀態
 			if (velocity > 0) {
-				y -= velocity*2;	// 當速度 > 0時，y軸上升(移動velocity個點，velocity的單位為 點/次)
+				pos_y -= velocity*2;	// 當速度 > 0時，y軸上升(移動velocity個點，velocity的單位為 點/次)
 				velocity--;		// 受重力影響，下次的上升速度降低
 			}
 			else {
@@ -111,12 +111,12 @@ namespace game_framework {
 			}
 		}
 		else {				// 下降狀態
-			if (y < floor) {  // 當y座標還沒碰到地板
-				y += velocity*2;	// y軸下降(移動velocity個點，velocity的單位為 點/次)
+			if (pos_y < floor) {  // 當y座標還沒碰到地板
+				pos_y += velocity*2;	// y軸下降(移動velocity個點，velocity的單位為 點/次)
 				velocity++;		// 受重力影響，下次的下降速度增加
 			}
 			else {
-				y = floor;  // 當y座標低於地板，更正為地板上
+				pos_y = floor;  // 當y座標低於地板，更正為地板上
 			}
 		}
 	}
@@ -143,19 +143,19 @@ namespace game_framework {
 
 	void Hero::SetXY(int nx, int ny)
 	{
-		x = nx; y = ny;
+		pos_x = nx; pos_y = ny;
 	}
 
 	void Hero::OnShow()
 	{
-		stand.SetTopLeft(x, y);
+		stand.SetTopLeft(pos_x, pos_y);
 		if (isMovingDown) {
 			down.SetTopLeft(stand.Left(), stand.Top() + 78);
 			down.OnShow();
 		}
 		else if (isMovingLeft) {
 			goLeft.SetTopLeft(stand.Left(), stand.Top());
-			if (y < floor) {
+			if (pos_y < floor) {
 				jumpLeft.SetTopLeft(stand.Left(), stand.Top());
 				jumpLeft.OnShow();
 				jumpLeft.OnMove();
@@ -167,7 +167,7 @@ namespace game_framework {
 		}
 		else if (isMovingRight) {
 			goRight.SetTopLeft(stand.Left(), stand.Top());
-			if (y < floor) {
+			if (pos_y < floor) {
 				jumpRight.SetTopLeft(stand.Left(), stand.Top());
 				jumpRight.OnShow();
 				jumpRight.OnMove();

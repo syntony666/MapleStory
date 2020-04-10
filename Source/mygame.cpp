@@ -206,7 +206,7 @@ CGameStateRun::~CGameStateRun()
 
 void CGameStateRun::OnBeginState()
 {
-	/*const int BALL_GAP = 90;
+	const int BALL_GAP = 90;
 	const int BALL_XY_OFFSET = 45;
 	const int BALL_PER_ROW = 7;
 	const int HITS_LEFT = 10;
@@ -222,11 +222,12 @@ void CGameStateRun::OnBeginState()
 void CGameStateRun::OnMove()							// 移動遊戲元素
 {
 	// 移動擦子
+	Position hero_pos(character, gamemap);
 	character->OnMove();
 	gamemap.OnMove();
 	monster.OnMove();
-	TRACE("----------------%d\n", character->getX());
-	if (character->getX() <= 100) {
+	TRACE("----------------%d\n", hero_pos.getX());
+	if (character->getX() <= 100 && character->ifMovingLeft()) {
 		gamemap.SetMovingLeft(true);
 		monster.SetMovingLeft(true);
 	}
@@ -234,7 +235,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		gamemap.SetMovingLeft(false);
 		monster.SetMovingLeft(false);
 	}
-	if (character->getX() >= 1164) {
+	if (character->getX() >= 1164 && character->ifMovingRight()) {
 		gamemap.SetMovingRight(true);
 		monster.SetMovingRight(true);
 	}
@@ -298,10 +299,14 @@ void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_UP    = 0x26; // keyboard上箭頭
 	const char KEY_RIGHT = 0x27; // keyboard右箭頭
 	const char KEY_DOWN  = 0x28; // keyboard下箭頭
-	if (nChar == KEY_LEFT)
+	if (nChar == KEY_LEFT) {
 		character->SetMovingLeft(false);
-	if (nChar == KEY_RIGHT)
+		gamemap.SetMovingRight(false);
+	}
+	if (nChar == KEY_RIGHT) {
 		character->SetMovingRight(false);
+		gamemap.SetMovingLeft(false);
+	}
 	if (nChar == KEY_UP)
 		character->SetMovingUp(false);
 	if (nChar == KEY_DOWN)
