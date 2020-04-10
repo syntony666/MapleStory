@@ -22,7 +22,9 @@ namespace game_framework {
 
 	enum AUDIO_ID {				// 定義各種音效的編號
 		BGM_MENU,				// 0
-		BGM_STAGE1				// 1
+		BGM_STAGE1,				// 1
+		BGM_GAMEOVER,			// 2
+		SFX_JUMP				// 3
 	};
 
 	/////////////////////////////////////////////////////////////////////////////

@@ -172,6 +172,7 @@ void CGameStateOver::OnInit()
 	// 開始載入資料
 	//
 	CAudio::Instance()->Load(BGM_STAGE1, "sounds\\bgm_stage1.mp3");
+	CAudio::Instance()->Load(SFX_JUMP, "sounds\\sfx_jump.mp3");
 	//
 	// 最終進度為100%
 	//
