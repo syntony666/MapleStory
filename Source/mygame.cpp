@@ -73,7 +73,7 @@ void CGameStateInit::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_UP = 0x26;		// keyboard上箭頭
 	const char KEY_DOWN = 0x28;		// keyboard下箭頭
 
-	if (nChar == KEY_ENTER && menu == 1) {
+	if (nChar == KEY_ENTER && menu == 1) {	
 		GotoGameState(GAME_STATE_RUN);
 	}
 
