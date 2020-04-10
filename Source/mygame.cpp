@@ -58,6 +58,7 @@ void CGameStateInit::OnInit()
 	menu = 1;
 	
 	ShowInitProgress(33);
+
 	//
 	// 此OnInit動作會接到CGameStaterRun::OnInit()，所以進度還沒到100%
 	//
@@ -65,6 +66,8 @@ void CGameStateInit::OnInit()
 
 void CGameStateInit::OnBeginState()
 {
+	CAudio::Instance()->Load(BGM_MENU, "sounds\\bgm_menu.mp3");
+	CAudio::Instance()->Play(BGM_MENU, true);
 }
 
 void CGameStateInit::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -168,6 +171,7 @@ void CGameStateOver::OnInit()
 	//
 	// 開始載入資料
 	//
+	CAudio::Instance()->Load(BGM_STAGE1, "sounds\\bgm_stage1.mp3");
 	//
 	// 最終進度為100%
 	//
@@ -217,6 +221,9 @@ void CGameStateRun::OnBeginState()
 	character.Initialize();
 	gamemap.Initialize();
 	monster.Initialize();
+
+	CAudio::Instance()->Stop(BGM_MENU);
+	CAudio::Instance()->Play(BGM_STAGE1, true);
 }
 
 void CGameStateRun::OnMove()							// 移動遊戲元素
