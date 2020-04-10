@@ -329,6 +329,10 @@
     <Image Include="RES\start1.bmp" />
     <Image Include="RES\start2.bmp" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="Sounds\bgm_menu.mp3" />
+    <Media Include="Sounds\bgm_stage1.mp3" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

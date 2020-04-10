@@ -186,4 +186,12 @@
       <Filter>Systems</Filter>
     </ResourceCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="Sounds\bgm_menu.mp3">
+      <Filter>Sounds</Filter>
+    </Media>
+    <Media Include="Sounds\bgm_stage1.mp3">
+      <Filter>Sounds</Filter>
+    </Media>
+  </ItemGroup>
 </Project>
