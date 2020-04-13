@@ -5,7 +5,7 @@
 #include "map.h"
 
 namespace game_framework {
-	class Position
+	class Position		//位置
 	{
 	public:
 		Position(Character* c, Map m);
@@ -28,7 +28,7 @@ namespace game_framework {
 		int _x_begin, _x_last, _y;
 	};
 
-	class Floor
+	class Floor		//平台集合體
 	{
 	public:
 		Floor(Platform plats[], int count);
