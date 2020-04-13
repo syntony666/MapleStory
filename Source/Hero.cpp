@@ -56,6 +56,7 @@ namespace game_framework {
 		hP = Health;
 	}
 
+
 	//bool Hero::ifMovingLeft()
 	//{
 	//	return isMovingLeft;
@@ -86,29 +87,36 @@ namespace game_framework {
 	{
 		int frogLeft[] = { IDB_FROG_GO_LEFT1,IDB_FROG_GO_LEFT2, IDB_FROG_STAND_LEFT};
 		int frogRight[] = { IDB_FROG_GO_RIGHT1,IDB_FROG_GO_RIGHT2, IDB_FROG_STAND_RIGHT };
-		goRight = CAnimation(5);
-		goLeft = CAnimation(5);
+		goRight = CAnimation(3);
+		goLeft = CAnimation(3);
 		for (int i = 0; i < 3; i++) {
 			goLeft.AddBitmap(frogLeft[i], RGB(255, 255, 255));
 			goRight.AddBitmap(frogRight[i], RGB(255, 255, 255));
 		}
+
 		int frogAttackRight[] = { IDB_FROG_ATTACK_RIGHT1, IDB_FROG_ATTACK_RIGHT2, IDB_FROG_ATTACK_RIGHT3,
 								  IDB_FROG_ATTACK_RIGHT4, IDB_FROG_ATTACK_RIGHT5, IDB_FROG_ATTACK_RIGHT6 };
 		int frogAttackLeft[] = { IDB_FROG_ATTACK_LEFT1, IDB_FROG_ATTACK_LEFT2, IDB_FROG_ATTACK_LEFT3,
 								 IDB_FROG_ATTACK_LEFT4, IDB_FROG_ATTACK_LEFT5, IDB_FROG_ATTACK_LEFT6 };
+		attackRight = CAnimation(1);
+		attackLeft = CAnimation(1);
+		for (int i = 0; i < 6; i++) {
+			attackLeft.AddBitmap(frogAttackLeft[i], RGB(255, 255, 255));
+			attackRight.AddBitmap(frogAttackRight[i], RGB(255, 255, 255));
+		}
+
 		stand.AddBitmap(IDB_FROG_STAND_RIGHT, RGB(255, 255, 255));
-		standLeft.AddBitmap(IDB_FROG_GO_LEFT, RGB(255, 255, 255));
-		down.AddBitmap(IDB_FROG_DOWN, RGB(255, 255, 255));
+		standLeft.AddBitmap(IDB_FROG_STAND_LEFT, RGB(255, 255, 255));
+		downRight.AddBitmap(IDB_FROG_DOWN_RIGHT, RGB(255, 255, 255));
+		downLeft.AddBitmap(IDB_FROG_DOWN_LEFT, RGB(255, 255, 255));
 		jumpRight.AddBitmap(IDB_FROG_JUMP_RIGHT, RGB(255, 255, 255));
 		jumpLeft.AddBitmap(IDB_FROG_JUMP_LEFT, RGB(255, 255, 255));
 	}
 
 	void Hero::OnMove()
 	{
-		stand.OnMove();
-		int STEP_SIZE;
 
-		if (isMovingDown && pos_y >= floor) { //移動速度、趴下靜止
+		if (isMovingDown || isAttacking && pos_y >= floor) { //移動速度、趴下靜止
 			STEP_SIZE = 0;
 		}
 		else {
@@ -173,37 +181,87 @@ namespace game_framework {
 	}
 
 	void Hero::OnShow()
-	{
-		stand.SetTopLeft(pos_x, pos_y);
-		if (isMovingDown) {
-			down.SetTopLeft(stand.Left(), stand.Top() + 78);
-			down.OnShow();
-		}
-		else if (isMovingLeft) {
-			goLeft.SetTopLeft(stand.Left(), stand.Top());
-			if (pos_y < floor) {
-				jumpLeft.SetTopLeft(stand.Left(), stand.Top());
-				jumpLeft.OnShow();
-				jumpLeft.OnMove();
+	{	
+		// 向右看的貼圖
+		if (facing == 1) {
+			stand.SetTopLeft(pos_x, pos_y);
+			if (isAttacking) {
+				attackRight.SetTopLeft(stand.Left(), stand.Top() - 12);
+				attackRight.OnShow();
+				attackRight.OnMove();
+			}
+			else if (isMovingDown) {
+				downRight.SetTopLeft(stand.Left(), stand.Top() + 78);
+				downRight.OnShow();
+			}
+			else if (isMovingLeft) {
+				goLeft.SetTopLeft(stand.Left(), stand.Top());
+				if (pos_y < floor) {
+					jumpLeft.SetTopLeft(stand.Left(), stand.Top());
+					jumpLeft.OnShow();
+					jumpLeft.OnMove();
+				}
+				else {
+					goLeft.OnShow();
+					goLeft.OnMove();
+				}
+			}
+			else if (isMovingRight) {
+				goRight.SetTopLeft(stand.Left(), stand.Top());
+				if (pos_y < floor) {
+					jumpRight.SetTopLeft(stand.Left(), stand.Top());
+					jumpRight.OnShow();
+					jumpRight.OnMove();
+				}
+				else {
+					goRight.OnShow();
+					goRight.OnMove();
+				}
 			}
 			else {
-				goLeft.OnShow();
-				goLeft.OnMove();
+				stand.OnShow();
 			}
 		}
-		else if (isMovingRight) {
-			goRight.SetTopLeft(stand.Left(), stand.Top());
-			if (pos_y < floor) {
-				jumpRight.SetTopLeft(stand.Left(), stand.Top());
-				jumpRight.OnShow();
-				jumpRight.OnMove();
-			}else{
-				goRight.OnShow();
-				goRight.OnMove();
+
+		// 向左看的貼圖
+		if (facing == 2) {
+			standLeft.SetTopLeft(pos_x, pos_y);
+			if (isAttacking) {
+				attackLeft.SetTopLeft(standLeft.Left() - 35, standLeft.Top() - 12);
+				attackLeft.OnShow();
+				attackLeft.OnMove();
 			}
-		} 
-		else {
-			stand.OnShow();
+			else if (isMovingDown) {
+				downLeft.SetTopLeft(standLeft.Left() - 40, standLeft.Top() + 78);
+				downLeft.OnShow();
+			}
+			else if (isMovingLeft) {
+				goLeft.SetTopLeft(standLeft.Left(), standLeft.Top());
+				if (pos_y < floor) {
+					jumpLeft.SetTopLeft(standLeft.Left(), standLeft.Top());
+					jumpLeft.OnShow();
+					jumpLeft.OnMove();
+				}
+				else {
+					goLeft.OnShow();
+					goLeft.OnMove();
+				}
+			}
+			else if (isMovingRight) {
+				goRight.SetTopLeft(standLeft.Left(), standLeft.Top());
+				if (pos_y < floor) {
+					jumpRight.SetTopLeft(standLeft.Left(), standLeft.Top());
+					jumpRight.OnShow();
+					jumpRight.OnMove();
+				}
+				else {
+					goRight.OnShow();
+					goRight.OnMove();
+				}
+			}
+			else {
+				standLeft.OnShow();
+			}
 		}
 	}
 }

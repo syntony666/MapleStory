@@ -289,13 +289,20 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_UP    = 0x26; // keyboard上箭頭
 	const char KEY_RIGHT = 0x27; // keyboard右箭頭
 	const char KEY_DOWN  = 0x28; // keyboard下箭頭
+	const char KEY_Z = 0x5A; // keyboard Z
+
+	if (nChar == KEY_Z) {
+		character->SetAttacking(true);
+	}
 
 	if (nChar == KEY_LEFT) {
 		character->SetMovingLeft(true);
+		character->SetFacing(2);
 	}
 	
 	if (nChar == KEY_RIGHT) {
 		character->SetMovingRight(true);
+		character->SetFacing(1);
 	}
 
 	if (nChar == KEY_UP) {
@@ -312,6 +319,12 @@ void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_UP    = 0x26; // keyboard上箭頭
 	const char KEY_RIGHT = 0x27; // keyboard右箭頭
 	const char KEY_DOWN  = 0x28; // keyboard下箭頭
+	const char KEY_Z = 0x5A; // keyboard Z
+
+	if (nChar == KEY_Z) {
+		character->SetAttacking(false);
+
+	}
 	if (nChar == KEY_LEFT) {
 		character->SetMovingLeft(false);
 		gamemap.SetMovingRight(false);

@@ -33,7 +33,8 @@ namespace game_framework {
 	protected:
 		CAnimation stand;			// 站立
 		CAnimation standLeft;		// 站立面向左
-		CAnimation down;			// 趴下
+		CAnimation downRight;		// 向右趴下
+		CAnimation downLeft;		// 向左趴下
 		CAnimation goLeft;			// 向左走
 		CAnimation goRight;			// 向右走
 		CAnimation jumpRight;		// 向右跳
@@ -50,5 +51,6 @@ namespace game_framework {
 		bool rising;			// true表上升、false表下降
 		int initial_velocity;	// 初始速度
 		int velocity;			// 目前的速度(點/次)
+		int STEP_SIZE = 8;
 	};
 }

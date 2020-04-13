@@ -48,7 +48,7 @@ namespace game_framework {
 		CMovingBitmap start2;
 		CMovingBitmap exit1;
 		CMovingBitmap exit2;
-		int menu = 1;					//判別值 1=上 2=下
+		int menu = 1;									//判別值 1=上 2=下
 	};
 
 	/////////////////////////////////////////////////////////////////////////////

@@ -29,6 +29,8 @@ namespace game_framework {
 		void SetMovingLeft(bool flag) { isMovingLeft = flag; };	// 設定是否正在往左移動
 		void SetMovingRight(bool flag) { isMovingRight = flag; };	// 設定是否正在往右移動
 		void SetMovingUp(bool flag) { isMovingUp = flag; };		// 設定是否正在往上移動
+		void SetAttacking(bool flag) { isAttacking = flag; };		// 設定是否正在攻擊
+		void SetFacing(int face) {	facing = face;	};			// 設定面向方向
 		void SetXY(int nx, int ny) {		// 設定Hero左上角座標
 
 		}
@@ -41,10 +43,12 @@ namespace game_framework {
 		int pos_y;
 		int pos_rx;
 		int pos_ry;
+		int facing = 1;				// 1=面向右 2=面向左
 		bool isMovingDown;			// 是否正在往下移動
 		bool isMovingLeft;			// 是否正在往左移動
 		bool isMovingRight;			// 是否正在往右移動
 		bool isMovingUp;			// 是否正在往上移動
+		bool isAttacking = false;	// 是否正在攻擊
 	};
 }
 #endif

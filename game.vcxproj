@@ -325,6 +325,8 @@
     <Image Include="RES\frog_attack_right5.bmp" />
     <Image Include="RES\frog_attack_right6.bmp" />
     <Image Include="res\frog_down.bmp" />
+    <Image Include="RES\frog_down_left.bmp" />
+    <Image Include="res\frog_down_right.bmp" />
     <Image Include="RES\frog_go_left.bmp" />
     <Image Include="RES\frog_go_left1.bmp" />
     <Image Include="RES\frog_go_left2.bmp" />
