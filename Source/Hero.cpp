@@ -171,11 +171,8 @@ namespace game_framework {
 	void Hero::OnShow()
 	{
 		stand.SetTopLeft(pos_x, pos_y);
-		if (isAttacking) {
-			//§ðÀ»°Êµe
-		}
-		else if (isMovingDown) {
-			down.SetTopLeft(stand.Left(), stand.Top() + 80);
+		if (isMovingDown) {
+			down.SetTopLeft(stand.Left(), stand.Top() + 78);
 			down.OnShow();
 		}
 		else if (isMovingLeft) {

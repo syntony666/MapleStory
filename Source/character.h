@@ -29,7 +29,6 @@ namespace game_framework {
 		void SetMovingLeft(bool flag) { isMovingLeft = flag; };	// 設定是否正在往左移動
 		void SetMovingRight(bool flag) { isMovingRight = flag; };	// 設定是否正在往右移動
 		void SetMovingUp(bool flag) { isMovingUp = flag; };		// 設定是否正在往上移動
-		void SetAttacking(bool flag) { isAttacking = flag; };		// 設定是否正在攻擊
 		void SetXY(int nx, int ny) {		// 設定Hero左上角座標
 
 		}
@@ -46,7 +45,6 @@ namespace game_framework {
 		bool isMovingLeft;			// 是否正在往左移動
 		bool isMovingRight;			// 是否正在往右移動
 		bool isMovingUp;			// 是否正在往上移動
-		bool isAttacking;			// 是否正在攻擊
 	};
 }
 #endif
