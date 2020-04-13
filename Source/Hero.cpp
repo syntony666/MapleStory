@@ -116,7 +116,7 @@ namespace game_framework {
 	void Hero::OnMove()
 	{
 
-		if (isMovingDown || isAttacking && pos_y >= floor) { //移動速度、趴下靜止
+		if (isMovingDown  && pos_y >= floor || isAttacking && pos_y >= floor) { //移動速度、趴下靜止
 			STEP_SIZE = 0;
 		}
 		else {
