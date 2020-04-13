@@ -146,6 +146,42 @@
     <Image Include="res\logo.bmp">
       <Filter>Resouces</Filter>
     </Image>
+    <Image Include="RES\frog_attack_left1.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\frog_attack_left2.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\frog_attack_left3.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\frog_attack_left4.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\frog_attack_left5.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\frog_attack_left6.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\frog_attack_right1.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\frog_attack_right2.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\frog_attack_right3.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\frog_attack_right4.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\frog_attack_right5.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\frog_attack_right6.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="RES\continue.bmp">

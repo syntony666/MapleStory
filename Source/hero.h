@@ -38,8 +38,8 @@ namespace game_framework {
 		CAnimation goRight;			// 向右走
 		CAnimation jumpRight;		// 向右跳
 		CAnimation jumpLeft;		// 向左跳
-		CAnimation AttackRight;		// 向右攻擊
-		CAnimation AttackLeft;		// 向左攻擊
+		CAnimation attackRight;		// 向右攻擊
+		CAnimation attackLeft;		// 向左攻擊
 		//bool isMovingDown;			// 是否正在往下移動
 		//bool isMovingLeft;			// 是否正在往左移動
 		//bool isMovingRight;			// 是否正在往右移動

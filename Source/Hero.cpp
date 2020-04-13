@@ -92,6 +92,10 @@ namespace game_framework {
 			goLeft.AddBitmap(frogLeft[i], RGB(255, 255, 255));
 			goRight.AddBitmap(frogRight[i], RGB(255, 255, 255));
 		}
+		int frogAttackRight[] = { IDB_FROG_ATTACK_RIGHT1, IDB_FROG_ATTACK_RIGHT2, IDB_FROG_ATTACK_RIGHT3,
+								  IDB_FROG_ATTACK_RIGHT4, IDB_FROG_ATTACK_RIGHT5, IDB_FROG_ATTACK_RIGHT6 };
+		int frogAttackLeft[] = { IDB_FROG_ATTACK_LEFT1, IDB_FROG_ATTACK_LEFT2, IDB_FROG_ATTACK_LEFT3,
+								 IDB_FROG_ATTACK_LEFT4, IDB_FROG_ATTACK_LEFT5, IDB_FROG_ATTACK_LEFT6 };
 		stand.AddBitmap(IDB_FROG_STAND_RIGHT, RGB(255, 255, 255));
 		standLeft.AddBitmap(IDB_FROG_GO_LEFT, RGB(255, 255, 255));
 		down.AddBitmap(IDB_FROG_DOWN, RGB(255, 255, 255));

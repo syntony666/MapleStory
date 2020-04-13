@@ -104,6 +104,30 @@ IDB_START1              BITMAP                  "..\\res\\start1.bmp"
 
 IDB_START2              BITMAP                  "..\\res\\start2.bmp"
 
+IDB_FROG_ATTACK_LEFT1   BITMAP                  "..\\res\\frog_attack_left1.bmp"
+
+IDB_FROG_ATTACK_LEFT2   BITMAP                  "..\\res\\frog_attack_left2.bmp"
+
+IDB_FROG_ATTACK_LEFT3   BITMAP                  "..\\res\\frog_attack_left3.bmp"
+
+IDB_FROG_ATTACK_LEFT4   BITMAP                  "..\\res\\frog_attack_left4.bmp"
+
+IDB_FROG_ATTACK_LEFT5   BITMAP                  "..\\res\\frog_attack_left5.bmp"
+
+IDB_FROG_ATTACK_LEFT6   BITMAP                  "..\\res\\frog_attack_left6.bmp"
+
+IDB_FROG_ATTACK_RIGHT1  BITMAP                  "..\\res\\frog_attack_right1.bmp"
+
+IDB_FROG_ATTACK_RIGHT2  BITMAP                  "..\\res\\frog_attack_right2.bmp"
+
+IDB_FROG_ATTACK_RIGHT3  BITMAP                  "..\\res\\frog_attack_right3.bmp"
+
+IDB_FROG_ATTACK_RIGHT4  BITMAP                  "..\\res\\frog_attack_right4.bmp"
+
+IDB_FROG_ATTACK_RIGHT5  BITMAP                  "..\\res\\frog_attack_right5.bmp"
+
+IDB_FROG_ATTACK_RIGHT6  BITMAP                  "..\\res\\frog_attack_right6.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
