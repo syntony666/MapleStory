@@ -78,6 +78,9 @@
     <ClInclude Include="Source\StdAfx.h">
       <Filter>Systems</Filter>
     </ClInclude>
+    <ClInclude Include="Source\floor.h">
+      <Filter>MapleStory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="RES\bg1.bmp">

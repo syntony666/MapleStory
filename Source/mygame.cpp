@@ -58,6 +58,11 @@ void CGameStateInit::OnInit()
 	menu = 1;
 	
 	ShowInitProgress(33);
+	int arr[][3] = { { 145,230,250},{312,510,204},{402,683,53},{620,983,140} };
+	Floor floor(arr,7);
+	TRACE("%d", floor.get(0, 0));
+
+
 
 	//
 	// 此OnInit動作會接到CGameStaterRun::OnInit()，所以進度還沒到100%
@@ -234,7 +239,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	character->OnMove();
 	gamemap.OnMove();
 	monster.OnMove();
-	TRACE("----------------%d\n", hero_pos.getX());
+	TRACE("----------------(%d, %d)\n", hero_pos.getX(),hero_pos.getY());
 	if (character->getX() <= 100 && character->ifMovingLeft()) {
 		gamemap.SetMovingLeft(true);
 		monster.SetMovingLeft(true);

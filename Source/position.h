@@ -1,3 +1,6 @@
+#ifndef POSITION_H
+#define POSITION_H
+
 #include "character.h"
 #include "map.h"
 
@@ -7,7 +10,7 @@ namespace game_framework {
 	public:
 		Position(Character* c, Map m) {
 			pos_x = c->getX() - m.getX();
-			pos_y = 570 - c->getX();
+			pos_y = 570 - c->getY();
 		}
 		int getX() {
 			return pos_x;
@@ -20,3 +23,7 @@ namespace game_framework {
 		int pos_y;
 	};
 }
+
+#endif // !POSITION_H
+
+

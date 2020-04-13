@@ -15,6 +15,7 @@
 #include "map.h"
 #include "monster.h"
 #include "position.h"
+#include "floor.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////

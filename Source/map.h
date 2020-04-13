@@ -13,6 +13,7 @@ namespace game_framework {
 		void SetMovingRight(bool flag); // 設定是否正在往右移動
 		void OnMove();
 		int getX();
+		int getY();
 		bool ifMovingLeft();
 		bool ifMovingRight();
 

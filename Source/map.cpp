@@ -35,8 +35,8 @@ namespace game_framework {
 	void Map::SetMovingLeft(bool flag) {	// 設定是否正在往左移動
 		isMovingLeft = flag;
 	}
-	void Map::SetMovingRight(bool flag) {	// 設定是否正在往右移動
-		isMovingRight = flag;
+	void Map::SetMovingRight(bool flag) {
+		isMovingRight = flag;	// 設定是否正在往右移動
 	}
 	void Map::OnMove() {
 		const int STEP_SIZE = 8;
@@ -53,10 +53,8 @@ namespace game_framework {
 		map1.SetTopLeft(x, y);
 		map1.ShowBitmap(zoom);
 	}
-	int Map::getX() {
-		return x;
-	}
-
-	bool Map::ifMovingLeft() { return isMovingLeft; }
-	bool Map::ifMovingRight() { return isMovingRight; }
+	int Map::getX() {return x;}
+	int Map::getY() {return y;}
+	bool Map::ifMovingLeft() {	return isMovingLeft;	}
+	bool Map::ifMovingRight() { return isMovingRight;	}
 }
