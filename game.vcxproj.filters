@@ -42,9 +42,6 @@
     <ClInclude Include="Source\audio.h">
       <Filter>Sounds</Filter>
     </ClInclude>
-    <ClInclude Include="Source\position.h">
-      <Filter>MapleStory</Filter>
-    </ClInclude>
     <ClInclude Include="Source\mygame.h">
       <Filter>MapleStory</Filter>
     </ClInclude>
@@ -80,6 +77,9 @@
     </ClInclude>
     <ClInclude Include="Source\StdAfx.h">
       <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\position.h">
+      <Filter>MapleStory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

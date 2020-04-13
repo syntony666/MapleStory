@@ -36,6 +36,26 @@ namespace game_framework {
 		return pos_ry + stand.Height();
 	}
 
+	int Hero::GetAttack()
+	{
+		return attack;
+	}
+
+	void Hero::SetAttack(int Attack)
+	{
+		attack = Attack;
+	}
+
+	int Hero::GetHP()
+	{
+		return hP;
+	}
+
+	void Hero::SetHP(int Health)
+	{
+		hP = Health;
+	}
+
 	//bool Hero::ifMovingLeft()
 	//{
 	//	return isMovingLeft;
@@ -55,6 +75,8 @@ namespace game_framework {
 		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
 		const int INITIAL_VELOCITY = 14;
 		const int FLOOR = 570;
+		hP = 100;
+		attack = 50;
 		rising = false;
 		floor = FLOOR;
 		initial_velocity = INITIAL_VELOCITY;

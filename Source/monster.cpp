@@ -37,6 +37,26 @@ namespace game_framework {
 		return y + monsterRight.Height();
 	}
 
+	int Monster::GetAttack()
+	{
+		return attack;
+	}
+
+	void Monster::SetAttack(int Attack)
+	{
+		attack = Attack;
+	}
+
+	int Monster::GetHP()
+	{
+		return hP;
+	}
+
+	void Monster::SetHP(int Health)
+	{
+		hP = Health;
+	}
+
 	void Monster::Initialize()
 	{
 		const int X_POS = 500;
@@ -46,6 +66,8 @@ namespace game_framework {
 		range_X = X_POS;
 		isMovingLeft = isMovingRight = false;
 		STEP_SIZE = 3;
+		attack = 1;
+		hP = 10;
 		const int FLOOR = 570;
 		floor = FLOOR;
 	}
