@@ -34,6 +34,9 @@
     <ClCompile Include="Source\StdAfx.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
+    <ClCompile Include="Source\position.cpp">
+      <Filter>MapleStory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\audio.h">
@@ -77,9 +80,6 @@
     </ClInclude>
     <ClInclude Include="Source\StdAfx.h">
       <Filter>Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\floor.h">
-      <Filter>MapleStory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

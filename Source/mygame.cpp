@@ -58,9 +58,9 @@ void CGameStateInit::OnInit()
 	menu = 1;
 	
 	ShowInitProgress(33);
-	int arr[][3] = { { 145,230,250},{312,510,204},{402,683,53},{620,983,140} };
-	Floor floor(arr,7);
-	TRACE("%d", floor.get(0, 0));
+	Platform arr[4] = { Platform(145,230,250),Platform(312,510,204),Platform(402,683,53),Platform(620,983,140) };
+	Floor floor(arr,3);
+	//TRACE("%d", floor.getXBegin);
 
 
 
