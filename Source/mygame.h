@@ -73,9 +73,9 @@ namespace game_framework {
 		void OnMove();									// 移動遊戲元素
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
-		CMovingBitmap	background;	// 背景圖
-		Character *character = new Hero;	// 角色
-		Map gamemap;				// 地圖
+		CMovingBitmap	background;					// 背景圖
+		Character *character = new Hero;			// 角色
+		Map gamemap;								// 地圖
 		Character *monster = new Monster;			// 怪物
 	};
 
