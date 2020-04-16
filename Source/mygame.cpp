@@ -226,7 +226,7 @@ void CGameStateRun::OnBeginState()
 	const int ANIMATION_SPEED = 15;
 	character->Initialize();
 	gamemap.Initialize();
-	monster.Initialize();
+	monster->Initialize();
 
 	CAudio::Instance()->Stop(BGM_MENU);
 	CAudio::Instance()->Play(BGM_STAGE1, true);
@@ -236,25 +236,36 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 {
 	// 移動擦子
 	Position hero_pos(character, gamemap);
+	Position monster_pos(monster, gamemap);
 	character->OnMove();
 	gamemap.OnMove();
-	monster.OnMove();
+	monster->OnMove();
 	TRACE("----------------(%d, %d)\n", hero_pos.getX(),hero_pos.getY());
 	if (character->getX() <= 100 && character->ifMovingLeft()) {
 		gamemap.SetMovingLeft(true);
-		monster.SetMovingLeft(true);
+		if (hero_pos.getX() <= 110) {
+			monster->SetMovingLeft(false);
+		}
+		else {
+			monster->SetMovingLeft(true);
+		}
 	}
 	else {
 		gamemap.SetMovingLeft(false);
-		monster.SetMovingLeft(false);
+		monster->SetMovingLeft(false);
 	}
 	if (character->getX() >= 1164 && character->ifMovingRight()) {
 		gamemap.SetMovingRight(true);
-		monster.SetMovingRight(true);
+		if (hero_pos.getX() >= 2200) {
+			monster->SetMovingRight(false);
+		}
+		else {
+			monster->SetMovingRight(true);
+		}
 	}
 	else {
 		gamemap.SetMovingRight(false);
-		monster.SetMovingRight(false);
+		monster->SetMovingRight(false);
 	}
 }
 
@@ -268,7 +279,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	//
 	// 開始載入資料
 	//
-	monster.LoadBitmap();
+	monster->LoadBitmap();
 	character->LoadBitmap();
 	gamemap.LoadBitmap(IDB_BACKGROUND);					// 載入背景的圖形
 	//
@@ -367,7 +378,7 @@ void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)
 void CGameStateRun::OnShow()
 {
 	gamemap.OnShow();			// 貼上背景圖
-	monster.OnShow();
+	monster->OnShow();
 	character->OnShow();			// 貼上人物
 }
 }

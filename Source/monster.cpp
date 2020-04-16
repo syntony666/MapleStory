@@ -91,7 +91,7 @@ namespace game_framework {
 			x += STEP_SIZE;
 			range_X += STEP_SIZE;
 		}
-		else if (isMovingRight) {
+		if (isMovingRight) {
 			x += (STEP_SIZE - HERO_STEP);
 			range_X += STEP_SIZE;
 		}
@@ -103,13 +103,6 @@ namespace game_framework {
 			x += STEP_SIZE;
 			range_X += STEP_SIZE;
 		}
-	}
-
-	void Monster::SetMovingLeft(bool flag) {	// 設定是否正在往左移動
-		isMovingLeft = flag;
-	}
-	void Monster::SetMovingRight(bool flag) {	// 設定是否正在往右移動
-		isMovingRight = flag;
 	}
 
 	void Monster::SetXY(int nx, int ny)
