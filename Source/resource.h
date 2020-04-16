@@ -49,6 +49,18 @@
 #define IDB_FROG_ATTACK_RIGHT6          206
 #define IDB_BITMAP2                     207
 #define IDB_FROG_DOWN_LEFT              207
+#define IDB_HP_0                        208
+#define IDB_HP_10                       209
+#define IDB_HP_20                       210
+#define IDB_HP_30                       211
+#define IDB_BITMAP8                     212
+#define IDB_HP_40                       212
+#define IDB_HP_50                       213
+#define IDB_HP_60                       214
+#define IDB_HP_70                       215
+#define IDB_HP_80                       216
+#define IDB_HP_90                       217
+#define IDB_HP_100                      218
 #define IDC_README                      1001
 #define ID_FILE_PAUSE                   32771
 #define ID_TOGGLE_FULLSCREEN            32772
@@ -61,7 +73,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        208
+#define _APS_NEXT_RESOURCE_VALUE        219
 #define _APS_NEXT_COMMAND_VALUE         32776
 #define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           101

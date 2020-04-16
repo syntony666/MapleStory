@@ -188,6 +188,39 @@
     <Image Include="RES\frog_down_left.bmp">
       <Filter>Resouces</Filter>
     </Image>
+    <Image Include="RES\HP_bar\HP_0.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\HP_bar\HP_10.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\HP_bar\HP_20.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\HP_bar\HP_30.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\HP_bar\HP_40.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\HP_bar\HP_50.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\HP_bar\HP_60.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\HP_bar\HP_70.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\HP_bar\HP_80.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\HP_bar\HP_90.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\HP_bar\HP_100.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="RES\continue.bmp">

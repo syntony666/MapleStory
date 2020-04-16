@@ -338,6 +338,17 @@
     <Image Include="res\frog_stand.bmp" />
     <Image Include="RES\frog_stand_left.bmp" />
     <Image Include="res\frog_stand_right.bmp" />
+    <Image Include="RES\HP_bar\HP_0.bmp" />
+    <Image Include="RES\HP_bar\HP_10.bmp" />
+    <Image Include="RES\HP_bar\HP_100.bmp" />
+    <Image Include="RES\HP_bar\HP_20.bmp" />
+    <Image Include="RES\HP_bar\HP_30.bmp" />
+    <Image Include="RES\HP_bar\HP_40.bmp" />
+    <Image Include="RES\HP_bar\HP_50.bmp" />
+    <Image Include="RES\HP_bar\HP_60.bmp" />
+    <Image Include="RES\HP_bar\HP_70.bmp" />
+    <Image Include="RES\HP_bar\HP_80.bmp" />
+    <Image Include="RES\HP_bar\HP_90.bmp" />
     <Image Include="res\logo.bmp" />
     <Image Include="RES\monster_stand_left.bmp" />
     <Image Include="RES\monster_stand_right.bmp" />
