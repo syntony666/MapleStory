@@ -22,6 +22,7 @@ namespace game_framework {
 		void SetAttack(int Atk);		// 設定攻擊力
 		int GetHP();					// 擷取生命值
 		void SetHP(int Health);			// 設定生命值
+		void SetMaxHP(int Health);		// 設定最大生命值
 		//void SetMovingDown(bool flag);	// 設定是否正在往下移動
 		//void SetMovingLeft(bool flag);	// 設定是否正在往左移動
 		//void SetMovingRight(bool flag); // 設定是否正在往右移動

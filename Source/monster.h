@@ -19,10 +19,6 @@ namespace game_framework {
 		void OnMove();					// 移動monster
 		void OnShow();					// 將monster圖形貼到畫面
 		void SetXY(int nx, int ny);		// 設定monster左上角座標
-		int GetAttack();				// 擷取攻擊力
-		void SetAttack(int Atk);		// 設定攻擊力
-		int GetHP();					// 擷取生命值
-		void SetHP(int Health);			// 設定生命值
 
 	protected:
 		CAnimation monsterRight;		// 站立
@@ -31,8 +27,6 @@ namespace game_framework {
 		int x, y, range_X;				// Hero左上角座標
 		int STEP_SIZE;
 		int tempX, tempY;
-		int hP;					// 生命值
-		int attack;				// 攻擊力
 		int floor;				// 地板的Y座標
 	};
 }

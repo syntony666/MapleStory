@@ -230,6 +230,8 @@ void CGameStateRun::OnBeginState()
 
 	CAudio::Instance()->Stop(BGM_MENU);
 	CAudio::Instance()->Play(BGM_STAGE1, true);
+
+	monster->SetMaxHP(100);
 }
 
 void CGameStateRun::OnMove()							// 移動遊戲元素
@@ -304,6 +306,7 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 
 	if (nChar == KEY_Z) {
 		character->SetAttacking(true);
+		monster->SetHP(monster->GetHP()-10);		//測試血量系統用
 	}
 
 	if (nChar == KEY_LEFT) {
