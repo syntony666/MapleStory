@@ -18,11 +18,6 @@ namespace game_framework {
 		void LoadBitmap();				// 載入圖形
 		void OnMove();					// 移動Hero
 		void OnShow();					// 將Hero圖形貼到畫面
-		int GetAttack();				// 擷取攻擊力
-		void SetAttack(int Atk);		// 設定攻擊力
-		int GetHP();					// 擷取生命值
-		void SetHP(int Health);			// 設定生命值
-		void SetMaxHP(int Health);		// 設定最大生命值
 		//void SetMovingDown(bool flag);	// 設定是否正在往下移動
 		//void SetMovingLeft(bool flag);	// 設定是否正在往左移動
 		//void SetMovingRight(bool flag); // 設定是否正在往右移動
@@ -47,7 +42,6 @@ namespace game_framework {
 		//bool isMovingRight;			// 是否正在往右移動
 		//bool isMovingUp;			// 是否正在往上移動
 		int floor;				// 地板的Y座標
-		int hP;					// 生命值
 		int attack;				// 攻擊力
 		bool rising;			// true表上升、false表下降
 		int initial_velocity;	// 初始速度

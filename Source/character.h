@@ -40,7 +40,9 @@ namespace game_framework {
 		void SetMovingRight(bool flag) { isMovingRight = flag; };	// 設定是否正在往右移動
 		void SetMovingUp(bool flag) { isMovingUp = flag; };		// 設定是否正在往上移動
 		void SetAttacking(bool flag) { isAttacking = flag; };		// 設定是否正在攻擊
-		void SetFacing(int face) {	facing = face;	};			// 設定面向方向
+		bool ifAttacking(bool flag) { return isAttacking; };
+		void SetFacing(int face) { facing = face; };			// 設定面向方向
+		int GetFacing() { return facing; };
 		void SetXY(int nx, int ny) {		// 設定Hero左上角座標
 
 		}

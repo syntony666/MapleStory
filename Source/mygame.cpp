@@ -216,14 +216,6 @@ CGameStateRun::~CGameStateRun()
 
 void CGameStateRun::OnBeginState()
 {
-	const int BALL_GAP = 90;
-	const int BALL_XY_OFFSET = 45;
-	const int BALL_PER_ROW = 7;
-	const int HITS_LEFT = 10;
-	const int HITS_LEFT_X = 590;
-	const int HITS_LEFT_Y = 0;
-	const int BACKGROUND_X = 0;
-	const int ANIMATION_SPEED = 15;
 	character->Initialize();
 	gamemap.Initialize();
 	monster->Initialize();
@@ -232,7 +224,13 @@ void CGameStateRun::OnBeginState()
 	CAudio::Instance()->Play(BGM_STAGE1, true);
 
 	monster->SetMaxHP(100);
+	monster->SetAttack(50);
+	character->SetMaxHP(500);
+	character->SetAttack(30);
 }
+
+#define MONSTER_HIT_CHARACTER hero_pos.getX() - monster_pos.getX() <= 50 && monster_pos.getX() - hero_pos.getX() <= 0 || hero_pos.getX() - monster_pos.getX() <= 0 && monster_pos.getX() - hero_pos.getX() <= 50
+#define CHARACTER_HIT_MONSTER character->ifAttacking(true) && character->GetFacing() == 2 && hero_pos.getX() - monster_pos.getX() <= 100 && monster_pos.getX() - hero_pos.getX() <= 0 || character->ifAttacking(true) && character->GetFacing() == 1 && hero_pos.getX() - monster_pos.getX() <= 0 && monster_pos.getX() - hero_pos.getX() <= 100
 
 void CGameStateRun::OnMove()							// 移動遊戲元素
 {
@@ -242,7 +240,11 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	character->OnMove();
 	gamemap.OnMove();
 	monster->OnMove();
-	TRACE("----------------(%d, %d)\n", hero_pos.getX(),hero_pos.getY());
+	TRACE("----hero-pos_xy---(%d, %d)\n", hero_pos.getX(),hero_pos.getY());
+	TRACE("----mons-pos_xy---(%d, %d)\n", monster_pos.getX(), monster_pos.getY());
+	TRACE("----------HP------(%d, %d)\n", monster->GetHP(), character->GetHP());
+
+	// 移動相關
 	if (character->getX() <= 100 && character->ifMovingLeft()) {
 		gamemap.SetMovingLeft(true);
 		if (hero_pos.getX() <= 110) {
@@ -269,6 +271,12 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		gamemap.SetMovingRight(false);
 		monster->SetMovingRight(false);
 	}
+
+	// 攻擊互動相關
+	if (MONSTER_HIT_CHARACTER)
+		character->SetHP(character->GetHP() - monster->GetAttack());
+	if (CHARACTER_HIT_MONSTER)
+		monster->SetHP(monster->GetHP() - character->GetAttack());
 }
 
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -306,7 +314,6 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 
 	if (nChar == KEY_Z) {
 		character->SetAttacking(true);
-		monster->SetHP(monster->GetHP()-10);		//測試血量系統用
 	}
 
 	if (nChar == KEY_LEFT) {

@@ -36,26 +36,6 @@ namespace game_framework {
 		return pos_ry + stand.Height();
 	}
 
-	int Hero::GetAttack()
-	{
-		return attack;
-	}
-
-	void Hero::SetAttack(int Attack)
-	{
-		attack = Attack;
-	}
-
-	int Hero::GetHP()
-	{
-		return hP;
-	}
-
-	void Hero::SetHP(int Health)
-	{
-		hP = Health;
-	}
-
 
 	//bool Hero::ifMovingLeft()
 	//{
@@ -76,8 +56,6 @@ namespace game_framework {
 		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
 		const int INITIAL_VELOCITY = 14;
 		const int FLOOR = 570;
-		hP = 100;
-		attack = 50;
 		rising = false;
 		floor = FLOOR;
 		initial_velocity = INITIAL_VELOCITY;
@@ -111,6 +89,18 @@ namespace game_framework {
 		downLeft.AddBitmap(IDB_FROG_DOWN_LEFT, RGB(255, 255, 255));
 		jumpRight.AddBitmap(IDB_FROG_JUMP_RIGHT, RGB(255, 255, 255));
 		jumpLeft.AddBitmap(IDB_FROG_JUMP_LEFT, RGB(255, 255, 255));
+
+		hP_0.AddBitmap(IDB_HP_0);
+		hP_10.AddBitmap(IDB_HP_10);
+		hP_20.AddBitmap(IDB_HP_20);
+		hP_30.AddBitmap(IDB_HP_30);
+		hP_40.AddBitmap(IDB_HP_40);
+		hP_50.AddBitmap(IDB_HP_50);
+		hP_60.AddBitmap(IDB_HP_60);
+		hP_70.AddBitmap(IDB_HP_70);
+		hP_80.AddBitmap(IDB_HP_80);
+		hP_90.AddBitmap(IDB_HP_90);
+		hP_100.AddBitmap(IDB_HP_100);
 	}
 
 	void Hero::OnMove()
@@ -179,6 +169,8 @@ namespace game_framework {
 	{
 		pos_x = nx; pos_y = ny;
 	}
+
+#define HP_PERCENT 100*hP/maxHP
 
 	void Hero::OnShow()
 	{	
@@ -262,6 +254,48 @@ namespace game_framework {
 			else {
 				standLeft.OnShow();
 			}
+		}
+
+		// ¦ε¶qΕγ¥ά
+		if (HP_PERCENT > 90) {
+			hP_100.SetTopLeft(pos_x, pos_y - 20);
+			hP_100.OnShow();
+		}
+		else if (HP_PERCENT > 80 && HP_PERCENT <= 90) {
+			hP_90.SetTopLeft(pos_x, pos_y - 20);
+			hP_90.OnShow();
+		}
+		else if (HP_PERCENT > 70 && HP_PERCENT <= 80) {
+			hP_80.SetTopLeft(pos_x, pos_y - 20);
+			hP_80.OnShow();
+		}
+		else if (HP_PERCENT > 60 && HP_PERCENT <= 70) {
+			hP_70.SetTopLeft(pos_x, pos_y - 20);
+			hP_70.OnShow();
+		}
+		else if (HP_PERCENT > 50 && HP_PERCENT <= 60) {
+			hP_60.SetTopLeft(pos_x, pos_y - 20);
+			hP_60.OnShow();
+		}
+		else if (HP_PERCENT > 40 && HP_PERCENT <= 50) {
+			hP_50.SetTopLeft(pos_x, pos_y - 20);
+			hP_50.OnShow();
+		}
+		else if (HP_PERCENT > 30 && HP_PERCENT <= 40) {
+			hP_40.SetTopLeft(pos_x, pos_y - 20);
+			hP_40.OnShow();
+		}
+		else if (HP_PERCENT > 20 && HP_PERCENT <= 30) {
+			hP_30.SetTopLeft(pos_x, pos_y - 20);
+			hP_30.OnShow();
+		}
+		else if (HP_PERCENT > 10 && HP_PERCENT <= 20) {
+			hP_20.SetTopLeft(pos_x, pos_y - 20);
+			hP_20.OnShow();
+		}
+		else if (HP_PERCENT > 0 && HP_PERCENT <= 10) {
+			hP_10.SetTopLeft(pos_x, pos_y - 20);
+			hP_10.OnShow();
 		}
 	}
 }
