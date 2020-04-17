@@ -1,10 +1,11 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "Resource.h"
 #include <mmsystem.h>
 #include <ddraw.h>
 #include "audio.h"
 #include "gamelib.h"
-#include "Hero.h"
+#include "hero.h"
+#include "position.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -68,6 +69,7 @@ namespace game_framework {
 
 	void Hero::Initialize()
 	{
+
 		const int X_POS = 100;
 		const int Y_POS = 570;
 		pos_x = X_POS;
@@ -108,7 +110,7 @@ namespace game_framework {
 		stand.OnMove();
 		int STEP_SIZE;
 
-		if (isMovingDown && pos_y >= floor) { //²¾°Ê³t«×¡B­w¤UÀR¤î
+		if (isMovingDown && pos_y >= floor) { //ç§»å‹•é€Ÿåº¦ã€è¶´ä¸‹éœæ­¢
 			STEP_SIZE = 0;
 		}
 		else {
@@ -126,46 +128,26 @@ namespace game_framework {
 			velocity = initial_velocity;
 		}
 
-		if (rising) {			// ¤W¤Éª¬ºA
+		if (rising) {			// ä¸Šå‡ç‹€æ…‹
 			if (velocity > 0) {
-				pos_y -= velocity*2;	// ·í³t«× > 0®É¡Ay¶b¤W¤É(²¾°Êvelocity­ÓÂI¡Avelocityªº³æ¦ì¬° ÂI/¦¸)
-				velocity--;		// ¨ü­«¤O¼vÅT¡A¤U¦¸ªº¤W¤É³t«×­°§C
+				pos_y -= velocity*2;	// ç•¶é€Ÿåº¦ > 0æ™‚ï¼Œyè»¸ä¸Šå‡(ç§»å‹•velocityå€‹é»ï¼Œvelocityçš„å–®ä½ç‚º é»/æ¬¡)
+				velocity--;		// å—é‡åŠ›å½±éŸ¿ï¼Œä¸‹æ¬¡çš„ä¸Šå‡é€Ÿåº¦é™ä½
 			}
 			else {
-				rising = false; // ·í³t«× <= 0¡A¤W¤É²×¤î¡A¤U¦¸§ï¬°¤U­°
-				velocity = 1;	// ¤U­°ªºªì³t(velocity)¬°1
+				rising = false; // ç•¶é€Ÿåº¦ <= 0ï¼Œä¸Šå‡çµ‚æ­¢ï¼Œä¸‹æ¬¡æ”¹ç‚ºä¸‹é™
+				velocity = 1;	// ä¸‹é™çš„åˆé€Ÿ(velocity)ç‚º1
 			}
 		}
-		else {				// ¤U­°ª¬ºA
-			if (pos_y < floor) {  // ·íy®y¼ĞÁÙ¨S¸I¨ì¦aªO
-				pos_y += velocity*2;	// y¶b¤U­°(²¾°Êvelocity­ÓÂI¡Avelocityªº³æ¦ì¬° ÂI/¦¸)
-				velocity++;		// ¨ü­«¤O¼vÅT¡A¤U¦¸ªº¤U­°³t«×¼W¥[
+		else {				// ä¸‹é™ç‹€æ…‹
+			if (pos_y < floor) {  // ç•¶yåº§æ¨™é‚„æ²’ç¢°åˆ°åœ°æ¿
+				pos_y += velocity*2;	// yè»¸ä¸‹é™(ç§»å‹•velocityå€‹é»ï¼Œvelocityçš„å–®ä½ç‚º é»/æ¬¡)
+				velocity++;		// å—é‡åŠ›å½±éŸ¿ï¼Œä¸‹æ¬¡çš„ä¸‹é™é€Ÿåº¦å¢åŠ 
 			}
 			else {
-				pos_y = floor;  // ·íy®y¼Ğ§C©ó¦aªO¡A§ó¥¿¬°¦aªO¤W
+				pos_y = floor;  // ç•¶yåº§æ¨™ä½æ–¼åœ°æ¿ï¼Œæ›´æ­£ç‚ºåœ°æ¿ä¸Š
 			}
 		}
 	}
-
-	//void Hero::SetMovingDown(bool flag)
-	//{
-	//	isMovingDown = flag;
-	//}
-
-	//void Hero::SetMovingLeft(bool flag)
-	//{
-	//	isMovingLeft = flag;
-	//}
-
-	//void Hero::SetMovingRight(bool flag)
-	//{
-	//	isMovingRight = flag;
-	//}
-
-	//void Hero::SetMovingUp(bool flag)
-	//{
-	//	isMovingUp = flag;
-	//}
 
 	void Hero::SetXY(int nx, int ny)
 	{

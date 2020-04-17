@@ -29,14 +29,14 @@ namespace game_framework {
 		void SetMovingLeft(bool flag) { isMovingLeft = flag; };	// 設定是否正在往左移動
 		void SetMovingRight(bool flag) { isMovingRight = flag; };	// 設定是否正在往右移動
 		void SetMovingUp(bool flag) { isMovingUp = flag; };		// 設定是否正在往上移動
-		void SetXY(int nx, int ny) {		// 設定Hero左上角座標
+		void SetXY(int nx, int ny) {		// 設定角色左上角座標
 
 		}
 		bool ifMovingLeft() { return isMovingLeft; }
 		bool ifMovingRight() { return isMovingRight; }
 		bool ifMovingUp() { return isMovingUp; }
 		bool ifMovingDown() { return isMovingDown; }
-		//protected:
+	protected:
 		int pos_x;
 		int pos_y;
 		int pos_rx;

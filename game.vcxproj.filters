@@ -13,9 +13,6 @@
     <ClCompile Include="Source\map.cpp">
       <Filter>MapleStory</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Hero.cpp">
-      <Filter>MapleStory</Filter>
-    </ClCompile>
     <ClCompile Include="Source\game.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
@@ -35,6 +32,9 @@
       <Filter>Systems</Filter>
     </ClCompile>
     <ClCompile Include="Source\position.cpp">
+      <Filter>MapleStory</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\hero.cpp">
       <Filter>MapleStory</Filter>
     </ClCompile>
   </ItemGroup>
@@ -79,6 +79,9 @@
       <Filter>Systems</Filter>
     </ClInclude>
     <ClInclude Include="Source\position.h">
+      <Filter>MapleStory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\initialize.h">
       <Filter>MapleStory</Filter>
     </ClInclude>
   </ItemGroup>

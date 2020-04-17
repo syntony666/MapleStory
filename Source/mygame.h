@@ -15,6 +15,7 @@
 #include "map.h"
 #include "monster.h"
 #include "position.h"
+#include "initialize.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////

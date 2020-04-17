@@ -1,3 +1,5 @@
+#ifndef HERO_H
+#define HERO_H
 #include "character.h"
 
 namespace game_framework {
@@ -22,13 +24,7 @@ namespace game_framework {
 		void SetAttack(int Atk);		// 設定攻擊力
 		int GetHP();					// 擷取生命值
 		void SetHP(int Health);			// 設定生命值
-		//void SetMovingDown(bool flag);	// 設定是否正在往下移動
-		//void SetMovingLeft(bool flag);	// 設定是否正在往左移動
-		//void SetMovingRight(bool flag); // 設定是否正在往右移動
-		//void SetMovingUp(bool flag);	// 設定是否正在往上移動
 		void SetXY(int nx, int ny);		// 設定Hero左上角座標
-		//bool ifMovingLeft();
-		//bool ifMovingRight();
 
 	protected:
 		CAnimation stand;			// 站立
@@ -52,3 +48,4 @@ namespace game_framework {
 		int velocity;			// 目前的速度(點/次)
 	};
 }
+#endif

@@ -37,6 +37,8 @@ namespace game_framework {
 		delete[] _plat;
 	}
 	int Floor::getXBegin() {
+		if (_mem == -1)
+			throw("there's no platform");
 		return _plat[_mem].getXBegin();
 	}
 	int Floor::getXLast() {
