@@ -51,17 +51,7 @@ namespace game_framework {
 		bool ifMovingUp() { return isMovingUp; }
 		bool ifMovingDown() { return isMovingDown; }
 		//protected:
-		CAnimation hP_0;
-		CAnimation hP_10;
-		CAnimation hP_20;
-		CAnimation hP_30;
-		CAnimation hP_40;
-		CAnimation hP_50;
-		CAnimation hP_60;
-		CAnimation hP_70;
-		CAnimation hP_80;
-		CAnimation hP_90;
-		CAnimation hP_100;
+		CAnimation hP_0, hP_10, hP_20, hP_30, hP_40, hP_50, hP_60, hP_70, hP_80, hP_90, hP_100;
 		int pos_x;
 		int pos_y;
 		int pos_rx;
