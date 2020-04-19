@@ -37,6 +37,9 @@
     <ClCompile Include="Source\hero.cpp">
       <Filter>MapleStory</Filter>
     </ClCompile>
+    <ClCompile Include="Source\floor.cpp">
+      <Filter>MapleStory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\audio.h">
@@ -82,6 +85,9 @@
       <Filter>MapleStory</Filter>
     </ClInclude>
     <ClInclude Include="Source\initialize.h">
+      <Filter>MapleStory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\floor.h">
       <Filter>MapleStory</Filter>
     </ClInclude>
   </ItemGroup>

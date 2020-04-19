@@ -53,6 +53,9 @@ namespace game_framework {
 		map1.SetTopLeft(x, y);
 		map1.ShowBitmap(zoom);
 	}
+	Floor Map::getFloor(int i) const{
+		return floors[i];
+	}
 	int Map::getX() {return x;}
 	int Map::getY() {return y;}
 	bool Map::ifMovingLeft() {	return isMovingLeft;	}

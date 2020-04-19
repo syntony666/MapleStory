@@ -1,6 +1,8 @@
 #ifndef MAP_H
 #define MAP_H
 
+#include "floor.h"
+
 namespace game_framework {
 	class Map
 	{
@@ -12,6 +14,7 @@ namespace game_framework {
 		void SetMovingLeft(bool flag);	// 設定是否正在往左移動
 		void SetMovingRight(bool flag); // 設定是否正在往右移動
 		void OnMove();
+		Floor getFloor(int i) const;
 		int getX();
 		int getY();
 		bool ifMovingLeft();
@@ -24,7 +27,9 @@ namespace game_framework {
 		int initial_velocity;	// 初始速度
 		int velocity;			// 目前的速度(點/次)
 		bool isMovingRight, isMovingLeft;
+		int floor_num = 2;
+		P plats[2] = { {2,2,3},{2,4,3} };
+		Floor *floors=new Floor(plats, 2);
 	};
-
 }
 #endif
