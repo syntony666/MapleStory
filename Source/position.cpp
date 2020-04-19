@@ -5,7 +5,6 @@
 #include "audio.h"
 #include "gamelib.h"
 #include "position.h"
-#include "map.h"
 
 namespace game_framework {
 

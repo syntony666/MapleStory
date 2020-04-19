@@ -2,6 +2,7 @@
 #define POSITION_H
 
 #include "character.h"
+#include "map.h"
 
 namespace game_framework {
 	class Map;

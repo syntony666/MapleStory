@@ -233,11 +233,11 @@ void CGameStateRun::OnBeginState()
 
 void CGameStateRun::OnMove()							// 移動遊戲元素
 {
-	// 移動擦子
+	// 移動
 	Position hero_pos(character, gamemap);
 	Position monster_pos(monster, gamemap);
-	character->OnMove();
 	gamemap.OnMove();
+	character->OnMove();
 	monster->OnMove();
 	TRACE("----hero-pos_xy---(%d, %d)\n", hero_pos.getX(),hero_pos.getY());
 	TRACE("----mons-pos_xy---(%d, %d)\n", monster_pos.getX(), monster_pos.getY());

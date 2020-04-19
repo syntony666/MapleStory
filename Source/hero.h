@@ -1,5 +1,6 @@
 #ifndef HERO_H
 #define HERO_H
+
 #include "character.h"
 
 namespace game_framework {

@@ -29,11 +29,9 @@ namespace game_framework {
 		for (int i = 0; i < _count; i++) {
 			if (p.getY() >= _plat[i].getY() && p.getX() < _plat[i].getXBegin() && p.getX() > _plat[i].getXLast())
 			{
-				_mem = i;
 				return true;
 			}
 		}
-		_mem = -1;
 		return false;
 	}*/
 
