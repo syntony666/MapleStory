@@ -25,11 +25,25 @@ namespace game_framework {
 		}
 		virtual void OnMove() = 0;	// 移動
 		virtual void OnShow() = 0;	// 顯示角色
+
+		int GetAttack() { return attack; };			// 擷取攻擊力
+		void SetAttack(int Atk) { attack = Atk; };	// 設定攻擊力
+		int GetHP() { return hP; };					// 擷取生命值
+		void SetHP(int Health) { hP = Health; };	// 設定生命值
+		void SetMaxHP(int Health){					// 設定最大生命值
+			maxHP = Health;
+			hP = Health;
+		};
+
 		void SetMovingDown(bool flag) { isMovingDown = flag; };	// 設定是否正在往下移動
 		void SetMovingLeft(bool flag) { isMovingLeft = flag; };	// 設定是否正在往左移動
 		void SetMovingRight(bool flag) { isMovingRight = flag; };	// 設定是否正在往右移動
 		void SetMovingUp(bool flag) { isMovingUp = flag; };		// 設定是否正在往上移動
-		void SetXY(int nx, int ny) {		// 設定角色左上角座標
+		void SetAttacking(bool flag) { isAttacking = flag; };		// 設定是否正在攻擊
+		bool ifAttacking(bool flag) { return isAttacking; };
+		void SetFacing(int face) { facing = face; };			// 設定面向方向
+		int GetFacing() { return facing; };
+		void SetXY(int nx, int ny) {		// 設定Hero左上角座標
 
 		}
 		bool ifMovingLeft() { return isMovingLeft; }
@@ -37,14 +51,19 @@ namespace game_framework {
 		bool ifMovingUp() { return isMovingUp; }
 		bool ifMovingDown() { return isMovingDown; }
 	protected:
+		CAnimation hP_0, hP_10, hP_20, hP_30, hP_40, hP_50, hP_60, hP_70, hP_80, hP_90, hP_100;
 		int pos_x;
 		int pos_y;
 		int pos_rx;
 		int pos_ry;
+		int attack;
+		int hP, maxHP;
+		int facing = 1;				// 1=面向右 2=面向左
 		bool isMovingDown;			// 是否正在往下移動
 		bool isMovingLeft;			// 是否正在往左移動
 		bool isMovingRight;			// 是否正在往右移動
 		bool isMovingUp;			// 是否正在往上移動
+		bool isAttacking = false;	// 是否正在攻擊
 	};
 }
 #endif

@@ -72,7 +72,7 @@ IDB_LOGO                BITMAP                  "..\\res\\logo.bmp"
 
 IDB_FROG_STAND_RIGHT    BITMAP                  "..\\res\\frog_stand_right.bmp"
 
-IDB_FROG_DOWN           BITMAP                  "..\\res\\frog_down.bmp"
+IDB_FROG_DOWN_RIGHT     BITMAP                  "..\\res\\frog_down_right.bmp"
 
 IDB_FROG_GO_RIGHT       BITMAP                  "..\\res\\frog_go_right.bmp"
 
@@ -127,6 +127,30 @@ IDB_FROG_ATTACK_RIGHT4  BITMAP                  "..\\res\\frog_attack_right4.bmp
 IDB_FROG_ATTACK_RIGHT5  BITMAP                  "..\\res\\frog_attack_right5.bmp"
 
 IDB_FROG_ATTACK_RIGHT6  BITMAP                  "..\\res\\frog_attack_right6.bmp"
+
+IDB_FROG_DOWN_LEFT      BITMAP                  "..\\res\\frog_down_left.bmp"
+
+IDB_HP_0                BITMAP                  "..\\res\\HP_bar\\HP_0.bmp"
+
+IDB_HP_10               BITMAP                  "..\\res\\HP_bar\\HP_10.bmp"
+
+IDB_HP_20               BITMAP                  "..\\res\\HP_bar\\HP_20.bmp"
+
+IDB_HP_30               BITMAP                  "..\\res\\HP_bar\\HP_30.bmp"
+
+IDB_HP_40               BITMAP                  "..\\res\\HP_bar\\HP_40.bmp"
+
+IDB_HP_50               BITMAP                  "..\\res\\HP_bar\\HP_50.bmp"
+
+IDB_HP_60               BITMAP                  "..\\res\\HP_bar\\HP_60.bmp"
+
+IDB_HP_70               BITMAP                  "..\\res\\HP_bar\\HP_70.bmp"
+
+IDB_HP_80               BITMAP                  "..\\res\\HP_bar\\HP_80.bmp"
+
+IDB_HP_90               BITMAP                  "..\\res\\HP_bar\\HP_90.bmp"
+
+IDB_HP_100              BITMAP                  "..\\res\\HP_bar\\HP_100.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////
