@@ -273,6 +273,19 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		monster->SetMovingRight(false);
 	}
 
+	// 地板判定相關
+	int flag = 0;
+	for (int i = 0; i < 7; i++) {
+		if (hero_pos.getY() >= gamemap.getFloorY(i) && hero_pos.getX() >= gamemap.getFloorXBegin(i) && hero_pos.getX() <= gamemap.getFloorXLast(i)) {
+			character->SetFloor(570 - gamemap.getFloorY(i));
+		}
+		else
+			flag++;
+	}
+	if (flag == 7) {
+		character->SetFloor(570);
+	}
+
 	// 攻擊互動相關
 	if (MONSTER_HIT_CHARACTER)
 		character->SetHP(character->GetHP() - monster->GetAttack());

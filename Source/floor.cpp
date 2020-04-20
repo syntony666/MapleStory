@@ -23,7 +23,7 @@ namespace game_framework {
 		return _plat[i].xLast;
 	}
 	int Floor::getY(int i) const{
-		return 570 - _plat[i].y;
+		return _plat[i].y;
 	}
 	/*bool Floor::isFloor(Position& p) {
 		for (int i = 0; i < _count; i++) {
