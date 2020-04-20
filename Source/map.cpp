@@ -64,6 +64,6 @@ namespace game_framework {
 	}
 	int Map::getX() {return x;}
 	int Map::getY() {return y;}
-	bool Map::ifMovingLeft() {	return isMovingLeft;	}
+	bool Map::ifMovingLeft() {	return isMovingLeft; 	}
 	bool Map::ifMovingRight() { return isMovingRight;	}
 }

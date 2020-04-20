@@ -58,23 +58,18 @@ namespace game_framework {
 		bool ifMovingDown() { return isMovingDown; }
 	protected:
 		CAnimation hP_0, hP_10, hP_20, hP_30, hP_40, hP_50, hP_60, hP_70, hP_80, hP_90, hP_100;
-		int pos_x;
-		int pos_y;
-		int pos_rx;
-		int pos_ry;
+		int pos_x,	pos_y;			//左邊座標
+		int pos_rx, pos_ry;			//右邊座標
 		int attack;
-		int floor;
+		int floor;					//地板高度
 		int hP, maxHP;
 		int facing = 1;				// 1=面向右 2=面向左
-		bool isMovingDown;			// 是否正在往下移動
-		bool isMovingLeft;			// 是否正在往左移動
-		bool isMovingRight;			// 是否正在往右移動
-		bool isMovingUp;			// 是否正在往上移動
+		bool isMovingDown, isMovingLeft, isMovingRight, isMovingUp;		// 是否正在移動
 		bool isAttacking = false;	// 是否正在攻擊
-		bool rising;			// true表上升、false表下降
-		int initial_velocity;	// 初始速度
-		int velocity;			// 目前的速度(點/次)
-		int STEP_SIZE = 8;//
+		bool rising;					// true表上升、false表下降
+		int initial_velocity;		// 初始速度
+		int velocity;				// 目前的速度(點/次)
+		int STEP_SIZE = 8;			// 行走速度
 	};
 }
 #endif
