@@ -17,37 +17,6 @@ namespace game_framework {
 		Initialize();
 	}
 
-	int Hero::GetX1()
-	{
-		return pos_x;
-	}
-
-	int Hero::GetY1()
-	{
-		return pos_y;
-	}
-
-	int Hero::GetX2()
-	{
-		return pos_rx + stand.Width();
-	}
-
-	int Hero::GetY2()
-	{
-		return pos_ry + stand.Height();
-	}
-
-
-	//bool Hero::ifMovingLeft()
-	//{
-	//	return isMovingLeft;
-	//}
-
-	//bool Hero::ifMovingRight()
-	//{
-	//	return isMovingRight;
-	//}
-
 	void Hero::Initialize()
 	{
 
@@ -145,11 +114,6 @@ namespace game_framework {
 				pos_y = floor;  // 當y座標低於地板，更正為地板上
 			}
 		}
-	}
-
-	void Hero::SetXY(int nx, int ny)
-	{
-		pos_x = nx; pos_y = ny;
 	}
 
 #define HP_PERCENT 100*hP/maxHP

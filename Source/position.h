@@ -5,7 +5,6 @@
 #include "map.h"
 
 namespace game_framework {
-	class Map;
 
 	class Position		//¦ì¸m
 	{

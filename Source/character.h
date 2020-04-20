@@ -17,11 +17,15 @@ namespace game_framework {
 		int getY() {		// 左邊 y 座標
 			return pos_y;
 		}
-		int  GetXr() {		// 右邊 x 座標
+		int  getXr() {		// 右邊 x 座標
 			return pos_rx;
 		}
-		int  GetYr() {		// 右邊 y 座標
+		int  getYr() {		// 右邊 y 座標
 			return pos_ry;
+		}
+		void getXY(int nx, int ny)
+		{
+			pos_x = nx; pos_y = ny;
 		}
 		virtual void OnMove() = 0;	// 移動
 		virtual void OnShow() = 0;	// 顯示角色
@@ -67,6 +71,11 @@ namespace game_framework {
 		bool isMovingRight;			// 是否正在往右移動
 		bool isMovingUp;			// 是否正在往上移動
 		bool isAttacking = false;	// 是否正在攻擊
+		int floor;				// 地板的Y座標//
+		bool rising;			// true表上升、false表下降
+		int initial_velocity;	// 初始速度
+		int velocity;			// 目前的速度(點/次)
+		int STEP_SIZE = 8;//
 	};
 }
 #endif
