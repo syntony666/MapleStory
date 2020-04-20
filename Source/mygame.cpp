@@ -232,6 +232,7 @@ void CGameStateRun::OnBeginState()
 
 #define MONSTER_HIT_CHARACTER hero_pos.getX() - monster_pos.getX() <= 50 && monster_pos.getX() - hero_pos.getX() <= 0 || hero_pos.getX() - monster_pos.getX() <= 0 && monster_pos.getX() - hero_pos.getX() <= 50
 #define CHARACTER_HIT_MONSTER character->ifAttacking(true) && character->GetFacing() == 2 && hero_pos.getX() - monster_pos.getX() <= 100 && monster_pos.getX() - hero_pos.getX() <= 0 || character->ifAttacking(true) && character->GetFacing() == 1 && hero_pos.getX() - monster_pos.getX() <= 0 && monster_pos.getX() - hero_pos.getX() <= 100
+#define ON_PLATFORM hero_pos.getY() <= gamemap.getFloorY(i) + 10 && hero_pos.getY() >= gamemap.getFloorY(i) - 3 && hero_pos.getX() >= gamemap.getFloorXBegin(i) && hero_pos.getX() <= gamemap.getFloorXLast(i)
 
 void CGameStateRun::OnMove()							// 移動遊戲元素
 {
@@ -244,6 +245,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	TRACE("----hero-pos_xy---(%d, %d)\n", hero_pos.getX(),hero_pos.getY());
 	TRACE("----mons-pos_xy---(%d, %d)\n", monster_pos.getX(), monster_pos.getY());
 	TRACE("----------HP------(%d, %d)\n", monster->GetHP(), character->GetHP());
+	TRACE("-------Floor------(%d, %d)\n", character->GetFloor());
 
 	// 移動相關
 	if (character->getX() <= 100 && character->ifMovingLeft()) {
@@ -276,13 +278,15 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	// 地板判定相關
 	int flag = 0;
 	for (int i = 0; i < 7; i++) {
-		if (hero_pos.getY() >= gamemap.getFloorY(i) && hero_pos.getX() >= gamemap.getFloorXBegin(i) && hero_pos.getX() <= gamemap.getFloorXLast(i)) {
+		if (ON_PLATFORM) {
 			character->SetFloor(570 - gamemap.getFloorY(i));
 		}
-		else
+		else {
 			flag++;
+		}
 	}
-	if (flag == 7) {
+
+	if(flag == 7) {
 		character->SetFloor(570);
 	}
 

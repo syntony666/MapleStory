@@ -26,7 +26,6 @@ namespace game_framework {
 		int range_X;				// Hero左上角座標
 		int STEP_SIZE;
 		int tempX, tempY;
-		int floor;				// 地板的Y座標//
 	};
 }
 #endif

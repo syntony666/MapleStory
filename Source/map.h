@@ -29,7 +29,7 @@ namespace game_framework {
 		int initial_velocity;	// 初始速度
 		int velocity;			// 目前的速度(點/次)
 		bool isMovingRight, isMovingLeft;
-		P plats[7] = {  {294,452,200},
+		P plats[7] = {  {268,404,200},
 						{624,1018,205},
 						{802,1264,52 },
 						{1240,1964,140},
