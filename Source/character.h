@@ -35,6 +35,8 @@ namespace game_framework {
 			hP = Health;
 		};
 
+		void SetFloor(int Floor) { floor = Floor; };	// 設定地板
+
 		void SetMovingDown(bool flag) { isMovingDown = flag; };	// 設定是否正在往下移動
 		void SetMovingLeft(bool flag) { isMovingLeft = flag; };	// 設定是否正在往左移動
 		void SetMovingRight(bool flag) { isMovingRight = flag; };	// 設定是否正在往右移動
@@ -57,6 +59,7 @@ namespace game_framework {
 		int pos_rx;
 		int pos_ry;
 		int attack;
+		int floor;
 		int hP, maxHP;
 		int facing = 1;				// 1=面向右 2=面向左
 		bool isMovingDown;			// 是否正在往下移動

@@ -4,7 +4,7 @@
 #include <ddraw.h>
 #include "audio.h"
 #include "gamelib.h"
-#include"floor.h"
+#include "floor.h"
 
 namespace game_framework {
 	Floor::Floor(P plats[], int count) {
@@ -23,7 +23,7 @@ namespace game_framework {
 		return _plat[i].xLast;
 	}
 	int Floor::getY(int i) const{
-		return _plat[i].y;
+		return 570 - _plat[i].y;
 	}
 	/*bool Floor::isFloor(Position& p) {
 		for (int i = 0; i < _count; i++) {

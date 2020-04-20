@@ -226,6 +226,8 @@ void CGameStateRun::OnBeginState()
 	monster->SetAttack(50);
 	character->SetMaxHP(500);
 	character->SetAttack(30);
+
+	
 }
 
 #define MONSTER_HIT_CHARACTER hero_pos.getX() - monster_pos.getX() <= 50 && monster_pos.getX() - hero_pos.getX() <= 0 || hero_pos.getX() - monster_pos.getX() <= 0 && monster_pos.getX() - hero_pos.getX() <= 50

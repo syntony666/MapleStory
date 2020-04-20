@@ -27,9 +27,14 @@ namespace game_framework {
 		int initial_velocity;	// 初始速度
 		int velocity;			// 目前的速度(點/次)
 		bool isMovingRight, isMovingLeft;
-		int floor_num = 2;
-		P plats[2] = { {2,2,3},{2,4,3} };
-		Floor *floors=new Floor(plats, 2);
+		P plats[7] = {  {147,226,247},
+						{312,509,205},
+						{401,682,52 },
+						{620,982,140},
+						{739,983,220},
+						{901,1099,50},
+						{995,1114,272} };
+		Floor *floors=new Floor(plats, 7);
 	};
 }
 #endif
