@@ -54,13 +54,13 @@ namespace game_framework {
 		map1.ShowBitmap(zoom);
 	}
 	int Map::getFloorXBegin(int i) const{
-		return floors->getXBegin;
+		return floors->getXBegin(i);
 	}
 	int Map::getFloorXLast(int i) const {
-		return floors->getXLast;
+		return floors->getXLast(i);
 	}
 	int Map::getFloorY(int i) const {
-		return floors->getY;
+		return floors->getY(i);
 	}
 	int Map::getX() {return x;}
 	int Map::getY() {return y;}
