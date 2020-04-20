@@ -17,26 +17,6 @@ namespace game_framework {
 		Initialize();
 	}
 
-	int Monster::GetX1()
-	{
-		return pos_x;
-	}
-
-	int Monster::GetY1()
-	{
-		return pos_y;
-	}
-
-	int Monster::GetX2()
-	{
-		return pos_x + monsterRight.Width();
-	}
-
-	int Monster::GetY2()
-	{
-		return pos_y + monsterRight.Height();
-	}
-
 	void Monster::Initialize()
 	{
 		const int X_POS = 500;
@@ -92,11 +72,6 @@ namespace game_framework {
 			pos_x += STEP_SIZE;
 			range_X += STEP_SIZE;
 		}
-	}
-
-	void Monster::SetXY(int nx, int ny)
-	{
-		pos_x = nx; pos_y = ny;
 	}
 
 #define HP_PERCENT 100*hP/maxHP

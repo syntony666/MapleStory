@@ -17,11 +17,15 @@ namespace game_framework {
 		int getY() {		// 左邊 y 座標
 			return pos_y;
 		}
-		int  GetXr() {		// 右邊 x 座標
+		int  getXr() {		// 右邊 x 座標
 			return pos_rx;
 		}
-		int  GetYr() {		// 右邊 y 座標
+		int  getYr() {		// 右邊 y 座標
 			return pos_ry;
+		}
+		void getXY(int nx, int ny)
+		{
+			pos_x = nx; pos_y = ny;
 		}
 		virtual void OnMove() = 0;	// 移動
 		virtual void OnShow() = 0;	// 顯示角色
