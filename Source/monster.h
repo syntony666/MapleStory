@@ -22,11 +22,11 @@ namespace game_framework {
 	protected:
 		CAnimation monsterRight;		// 站立
 		CAnimation monsterLeft;
-		const int HERO_STEP = 8;
+		const int HERO_STEP = 8;//
 		int range_X;				// Hero左上角座標
 		int STEP_SIZE;
 		int tempX, tempY;
-		int floor;				// 地板的Y座標
+		int floor;				// 地板的Y座標//
 	};
 }
 #endif

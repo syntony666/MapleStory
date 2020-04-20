@@ -14,7 +14,9 @@ namespace game_framework {
 		void SetMovingLeft(bool flag);	// 設定是否正在往左移動
 		void SetMovingRight(bool flag); // 設定是否正在往右移動
 		void OnMove();
-		Floor getFloor(int i) const;
+		int getFloorXBegin(int i) const;
+		int getFloorXLast(int i) const;
+		int getFloorY(int i) const;
 		int getX();
 		int getY();
 		bool ifMovingLeft();
