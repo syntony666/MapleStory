@@ -277,11 +277,16 @@ void CGameStateRun::OnMove()							// ²¾°Ê¹CÀ¸¤¸¯À
 	int flag = 0;
 	for (int i = 0; i < 7; i++) {
 		if (hero_pos.getY() >= gamemap.getFloorY(i) && hero_pos.getX() >= gamemap.getFloorXBegin(i) && hero_pos.getX() <= gamemap.getFloorXLast(i)) {
+			if (hero_pos.getY() == gamemap.getFloorY(i)) {
+				character->SetFloor(570 - gamemap.getFloorY(i));
+				break;
+			}
 			character->SetFloor(570 - gamemap.getFloorY(i));
 		}
 		else
 			flag++;
 	}
+	TRACE("----------------%d\n", flag);
 	if (flag == 7) {
 		character->SetFloor(570);
 	}
