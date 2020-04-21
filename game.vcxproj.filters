@@ -40,6 +40,9 @@
     <ClCompile Include="Source\floor.cpp">
       <Filter>MapleStory</Filter>
     </ClCompile>
+    <ClCompile Include="Source\character.cpp">
+      <Filter>MapleStory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\audio.h">
