@@ -40,6 +40,7 @@ namespace game_framework {
 		};
 
 		void SetFloor(int Floor) { floor = Floor; };	// 設定地板
+		int GetFloor() { return floor; };
 
 		void SetMovingDown(bool flag) { isMovingDown = flag; };	// 設定是否正在往下移動
 		void SetMovingLeft(bool flag) { isMovingLeft = flag; };	// 設定是否正在往左移動
