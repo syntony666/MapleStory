@@ -32,14 +32,14 @@ namespace game_framework {
 
 	void Monster::LoadBitmap()
 	{
-		monsterRight.AddBitmap(IDB_MONSTER_STAND_RIGHT, RGB(255, 255, 255));
-		monsterLeft.AddBitmap(IDB_MONSTER_STAND_LEFT, RGB(255, 255, 255));
+		a.standRight.AddBitmap(IDB_MONSTER_STAND_RIGHT, RGB(255, 255, 255));
+		a.standLeft.AddBitmap(IDB_MONSTER_STAND_LEFT, RGB(255, 255, 255));
 		hp_addBitmaps();
 	}
 
 	void Monster::OnMove()
 	{
-		monsterRight.OnMove();
+		a.standRight.OnMove();
 		if (range_X >= 700) {	//若碰壁就動地圖直到地圖的邊緣
 			STEP_SIZE = -3;
 			pos_x += STEP_SIZE;
@@ -68,12 +68,12 @@ namespace game_framework {
 
 	void Monster::OnShow()
 	{
-		monsterRight.SetTopLeft(pos_x, pos_y);
-		monsterLeft.SetTopLeft(pos_x, pos_y);
+		a.standRight.SetTopLeft(pos_x, pos_y);
+		a.standLeft.SetTopLeft(pos_x, pos_y);
 		if (STEP_SIZE >= 0) {
-			monsterRight.OnShow();
+			a.standRight.OnShow();
 		}
-		else monsterLeft.OnShow();
+		else a.standLeft.OnShow();
 		hp_OnShow();
 	}
 }

@@ -36,30 +36,30 @@ namespace game_framework {
 	{
 		int frogLeft[] = { IDB_FROG_GO_LEFT1,IDB_FROG_GO_LEFT2, IDB_FROG_STAND_LEFT};
 		int frogRight[] = { IDB_FROG_GO_RIGHT1,IDB_FROG_GO_RIGHT2, IDB_FROG_STAND_RIGHT };
-		goRight = CAnimation(3);
-		goLeft = CAnimation(3);
+		a.goRight = CAnimation(3);
+		a.goLeft = CAnimation(3);
 		for (int i = 0; i < 3; i++) {
-			goLeft.AddBitmap(frogLeft[i], RGB(255, 255, 255));
-			goRight.AddBitmap(frogRight[i], RGB(255, 255, 255));
+			a.goLeft.AddBitmap(frogLeft[i], RGB(255, 255, 255));
+			a.goRight.AddBitmap(frogRight[i], RGB(255, 255, 255));
 		}
 
 		int frogAttackRight[] = { IDB_FROG_ATTACK_RIGHT1, IDB_FROG_ATTACK_RIGHT2, IDB_FROG_ATTACK_RIGHT3,
 								  IDB_FROG_ATTACK_RIGHT4, IDB_FROG_ATTACK_RIGHT5, IDB_FROG_ATTACK_RIGHT6 };
 		int frogAttackLeft[] = { IDB_FROG_ATTACK_LEFT1, IDB_FROG_ATTACK_LEFT2, IDB_FROG_ATTACK_LEFT3,
 								 IDB_FROG_ATTACK_LEFT4, IDB_FROG_ATTACK_LEFT5, IDB_FROG_ATTACK_LEFT6 };
-		attackRight = CAnimation(1);
-		attackLeft = CAnimation(1);
+		a.attackRight = CAnimation(1);
+		a.attackLeft = CAnimation(1);
 		for (int i = 0; i < 6; i++) {
-			attackLeft.AddBitmap(frogAttackLeft[i], RGB(255, 255, 255));
-			attackRight.AddBitmap(frogAttackRight[i], RGB(255, 255, 255));
+			a.attackLeft.AddBitmap(frogAttackLeft[i], RGB(255, 255, 255));
+			a.attackRight.AddBitmap(frogAttackRight[i], RGB(255, 255, 255));
 		}
 
-		stand.AddBitmap(IDB_FROG_STAND_RIGHT, RGB(255, 255, 255));
-		standLeft.AddBitmap(IDB_FROG_STAND_LEFT, RGB(255, 255, 255));
-		downRight.AddBitmap(IDB_FROG_DOWN_RIGHT, RGB(255, 255, 255));
-		downLeft.AddBitmap(IDB_FROG_DOWN_LEFT, RGB(255, 255, 255));
-		jumpRight.AddBitmap(IDB_FROG_JUMP_RIGHT, RGB(255, 255, 255));
-		jumpLeft.AddBitmap(IDB_FROG_JUMP_LEFT, RGB(255, 255, 255));
+		a.standRight.AddBitmap(IDB_FROG_STAND_RIGHT, RGB(255, 255, 255));
+		a.standLeft.AddBitmap(IDB_FROG_STAND_LEFT, RGB(255, 255, 255));
+		a.downRight.AddBitmap(IDB_FROG_DOWN_RIGHT, RGB(255, 255, 255));
+		a.downLeft.AddBitmap(IDB_FROG_DOWN_LEFT, RGB(255, 255, 255));
+		a.jumpRight.AddBitmap(IDB_FROG_JUMP_RIGHT, RGB(255, 255, 255));
+		a.jumpLeft.AddBitmap(IDB_FROG_JUMP_LEFT, RGB(255, 255, 255));
 		hp_addBitmaps();
 	}
 
@@ -112,83 +112,83 @@ namespace game_framework {
 	{	
 		// 向右看的貼圖
 		if (facing == 1) {
-			stand.SetTopLeft(pos_x, pos_y);
+			a.standRight.SetTopLeft(pos_x, pos_y);
 			if (isAttacking) {
-				attackRight.SetTopLeft(stand.Left(), stand.Top() - 12);
-				attackRight.OnShow();
-				attackRight.OnMove();
+				a.attackRight.SetTopLeft(a.standRight.Left(), a.standRight.Top() - 12);
+				a.attackRight.OnShow();
+				a.attackRight.OnMove();
 			}
 			else if (isMovingDown) {
-				downRight.SetTopLeft(stand.Left(), stand.Top() + 78);
-				downRight.OnShow();
+				a.downRight.SetTopLeft(a.standRight.Left(), a.standRight.Top() + 78);
+				a.downRight.OnShow();
 			}
 			else if (isMovingLeft) {
-				goLeft.SetTopLeft(stand.Left(), stand.Top());
+				a.goLeft.SetTopLeft(a.standRight.Left(), a.standRight.Top());
 				if (pos_y < floor) {
-					jumpLeft.SetTopLeft(stand.Left(), stand.Top());
-					jumpLeft.OnShow();
-					jumpLeft.OnMove();
+					a.jumpLeft.SetTopLeft(a.standRight.Left(), a.standRight.Top());
+					a.jumpLeft.OnShow();
+					a.jumpLeft.OnMove();
 				}
 				else {
-					goLeft.OnShow();
-					goLeft.OnMove();
+					a.goLeft.OnShow();
+					a.goLeft.OnMove();
 				}
 			}
 			else if (isMovingRight) {
-				goRight.SetTopLeft(stand.Left(), stand.Top());
+				a.goRight.SetTopLeft(a.standRight.Left(), a.standRight.Top());
 				if (pos_y < floor) {
-					jumpRight.SetTopLeft(stand.Left(), stand.Top());
-					jumpRight.OnShow();
-					jumpRight.OnMove();
+					a.jumpRight.SetTopLeft(a.standRight.Left(), a.standRight.Top());
+					a.jumpRight.OnShow();
+					a.jumpRight.OnMove();
 				}
 				else {
-					goRight.OnShow();
-					goRight.OnMove();
+					a.goRight.OnShow();
+					a.goRight.OnMove();
 				}
 			}
 			else {
-				stand.OnShow();
+				a.standRight.OnShow();
 			}
 		}
 
 		// 向左看的貼圖
 		if (facing == 2) {
-			standLeft.SetTopLeft(pos_x, pos_y);
+			a.standLeft.SetTopLeft(pos_x, pos_y);
 			if (isAttacking) {
-				attackLeft.SetTopLeft(standLeft.Left() - 35, standLeft.Top() - 12);
-				attackLeft.OnShow();
-				attackLeft.OnMove();
+				a.attackLeft.SetTopLeft(a.standLeft.Left() - 35, a.standLeft.Top() - 12);
+				a.attackLeft.OnShow();
+				a.attackLeft.OnMove();
 			}
 			else if (isMovingDown) {
-				downLeft.SetTopLeft(standLeft.Left() - 40, standLeft.Top() + 78);
-				downLeft.OnShow();
+				a.downLeft.SetTopLeft(a.standLeft.Left() - 40, a.standLeft.Top() + 78);
+				a.downLeft.OnShow();
 			}
 			else if (isMovingLeft) {
-				goLeft.SetTopLeft(standLeft.Left(), standLeft.Top());
+				a.goLeft.SetTopLeft(a.standLeft.Left(), a.standLeft.Top());
 				if (pos_y < floor) {
-					jumpLeft.SetTopLeft(standLeft.Left(), standLeft.Top());
-					jumpLeft.OnShow();
-					jumpLeft.OnMove();
+					a.jumpLeft.SetTopLeft(a.standLeft.Left(), a.standLeft.Top());
+					a.jumpLeft.OnShow();
+					a.jumpLeft.OnMove();
 				}
 				else {
-					goLeft.OnShow();
-					goLeft.OnMove();
+					a.goLeft.OnShow();
+					a.goLeft.OnMove();
 				}
 			}
 			else if (isMovingRight) {
-				goRight.SetTopLeft(standLeft.Left(), standLeft.Top());
+				a.goRight.SetTopLeft(a.standLeft.Left(), a.standLeft.Top());
 				if (pos_y < floor) {
-					jumpRight.SetTopLeft(standLeft.Left(), standLeft.Top());
-					jumpRight.OnShow();
-					jumpRight.OnMove();
+					a.jumpRight.SetTopLeft(a.standLeft.Left(), a.standLeft.Top());
+					a.jumpRight.OnShow();
+					a.jumpRight.OnMove();
 				}
 				else {
-					goRight.OnShow();
-					goRight.OnMove();
+					a.goRight.OnShow();
+					a.goRight.OnMove();
 				}
 			}
 			else {
-				standLeft.OnShow();
+				a.standLeft.OnShow();
 			}
 		}
 		hp_OnShow();

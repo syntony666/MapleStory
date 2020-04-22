@@ -19,9 +19,8 @@ namespace game_framework {
 		void OnMove();					// 移動monster
 		void OnShow();					// 將monster圖形貼到畫面
 
+
 	protected:
-		CAnimation monsterRight;		// 站立
-		CAnimation monsterLeft;
 		const int HERO_STEP = 8;
 		int range_X;				// Hero左上角座標
 		int tempX, tempY;

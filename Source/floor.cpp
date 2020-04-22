@@ -7,9 +7,9 @@
 #include "floor.h"
 
 namespace game_framework {
-	Floor::Floor(P plats[], int count) {
+	Floor::Floor(Platform plats[], int count) {
 		_count = count;
-		_plat = new P[_count];
+		_plat = new Platform[_count];
 		for (int i = 0; i < count; ++i)
 			_plat[i] = plats[i];
 	}
@@ -25,14 +25,5 @@ namespace game_framework {
 	int Floor::getY(int i) const{
 		return _plat[i].y;
 	}
-	/*bool Floor::isFloor(Position& p) {
-		for (int i = 0; i < _count; i++) {
-			if (p.getY() >= _plat[i].getY() && p.getX() < _plat[i].getXBegin() && p.getX() > _plat[i].getXLast())
-			{
-				return true;
-			}
-		}
-		return false;
-	}*/
 
 }

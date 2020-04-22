@@ -9,34 +9,42 @@ namespace game_framework {
 	public:
 		Map();
 		void Initialize();
-		void LoadBitmap(int bitmap);
+		void LoadBitmap();
 		void OnShow();
+		void OnMove();
+
+		//SETs Init
+
+		void setInitFloor(int i);
+		void setInitXY(int x, int y);
+		void setInitZoom(double i);
+		void setInitPlatform(Platform *plats,int i);
+		void setInitBitmap(int bitmap);
+
+		//SETs in game
+
 		void SetMovingLeft(bool flag);	// 設定是否正在往左移動
 		void SetMovingRight(bool flag); // 設定是否正在往右移動
-		void OnMove();
+
+		//GETs
+
 		int getFloorXBegin(int i) const;
 		int getFloorXLast(int i) const;
 		int getFloorY(int i) const;
-		int getX();
-		int getY();
-		bool ifMovingLeft();
-		bool ifMovingRight();
+		int getX() const;
+		int getY() const;
+		bool ifMovingLeft() const;
+		bool ifMovingRight() const;
 
 	protected:
-		CMovingBitmap map1;
-		int x, y, zoom, charX, charY, floor;
+		CMovingBitmap map;
+		int _x, _y, floor;
+		double zoom;
 		bool rising;			// true表上升、false表下降
-		int initial_velocity;	// 初始速度
 		int velocity;			// 目前的速度(點/次)
+		int _bitmap;
 		bool isMovingRight, isMovingLeft;
-		P plats[7] = {  {268,404,200},
-						{624,1018,205},
-						{802,1264,52 },
-						{1240,1964,140},
-						{1478,1966,220},
-						{1802,2198,50},
-						{1990,2228,272} };
-		Floor *floors=new Floor(plats, 7);
+		Floor *floors;
 	};
 }
 #endif

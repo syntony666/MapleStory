@@ -216,7 +216,6 @@ CGameStateRun::~CGameStateRun()
 void CGameStateRun::OnBeginState()
 {
 	character->Initialize();
-	gamemap.Initialize();
 	monster->Initialize();
 
 	CAudio::Instance()->Stop(BGM_MENU);
@@ -232,14 +231,14 @@ void CGameStateRun::OnBeginState()
 
 #define MONSTER_HIT_CHARACTER hero_pos.getX() - monster_pos.getX() <= 50 && monster_pos.getX() - hero_pos.getX() <= 0 || hero_pos.getX() - monster_pos.getX() <= 0 && monster_pos.getX() - hero_pos.getX() <= 50
 #define CHARACTER_HIT_MONSTER character->ifAttacking(true) && character->GetFacing() == 2 && hero_pos.getX() - monster_pos.getX() <= 100 && monster_pos.getX() - hero_pos.getX() <= 0 || character->ifAttacking(true) && character->GetFacing() == 1 && hero_pos.getX() - monster_pos.getX() <= 0 && monster_pos.getX() - hero_pos.getX() <= 100
-#define ON_PLATFORM hero_pos.getY() <= gamemap.getFloorY(i) + 10 && hero_pos.getY() >= gamemap.getFloorY(i) - 3 && hero_pos.getX() >= gamemap.getFloorXBegin(i) && hero_pos.getX() <= gamemap.getFloorXLast(i)
+#define ON_PLATFORM hero_pos.getY() <= map1.getFloorY(i) + 10 && hero_pos.getY() >= map1.getFloorY(i) - 3 && hero_pos.getX() >= map1.getFloorXBegin(i) && hero_pos.getX() <= map1.getFloorXLast(i)
 
 void CGameStateRun::OnMove()							// 移動遊戲元素
 {
 	// 移動
-	Position hero_pos(character, gamemap);
-	Position monster_pos(monster, gamemap);
-	gamemap.OnMove();
+	Position hero_pos(character, map1);
+	Position monster_pos(monster, map1);
+	map1.OnMove();
 	character->OnMove();
 	monster->OnMove();
 	TRACE("----hero-pos_xy---(%d, %d)\n", hero_pos.getX(),hero_pos.getY());
@@ -249,7 +248,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 	// 移動相關
 	if (character->getX() <= 100 && character->ifMovingLeft()) {
-		gamemap.SetMovingLeft(true);
+		map1.SetMovingLeft(true);
 		if (hero_pos.getX() <= 110) {
 			monster->SetMovingLeft(false);
 		}
@@ -258,11 +257,11 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		}
 	}
 	else {
-		gamemap.SetMovingLeft(false);
+		map1.SetMovingLeft(false);
 		monster->SetMovingLeft(false);
 	}
 	if (character->getX() >= 1164 && character->ifMovingRight()) {
-		gamemap.SetMovingRight(true);
+		map1.SetMovingRight(true);
 		if (hero_pos.getX() >= 2200) {
 			monster->SetMovingRight(false);
 		}
@@ -271,22 +270,22 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		}
 	}
 	else {
-		gamemap.SetMovingRight(false);
+		map1.SetMovingRight(false);
 		monster->SetMovingRight(false);
 	}
 
 	// 地板判定相關
 	int flag = 0;
-	for (int i = 0; i < 7; i++) {
+	for (int i = 0; i < 8; i++) {
 		if (ON_PLATFORM) {
-			character->SetFloor(570 - gamemap.getFloorY(i));
+			character->SetFloor(570 - map1.getFloorY(i));
 		}
 		else {
 			flag++;
 		}
 	}
 
-	if(flag == 7) {
+	if(flag == 8) {
 		character->SetFloor(570);
 	}
 
@@ -309,7 +308,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	//
 	monster->LoadBitmap();
 	character->LoadBitmap();
-	gamemap.LoadBitmap(IDB_BACKGROUND);					// 載入背景的圖形
+	map1.LoadBitmap();					// 載入背景的圖形
 	//
 	// 完成部分Loading動作，提高進度
 	//
@@ -366,11 +365,11 @@ void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	}
 	if (nChar == KEY_LEFT) {
 		character->SetMovingLeft(false);
-		gamemap.SetMovingRight(false);
+		map1.SetMovingRight(false);
 	}
 	if (nChar == KEY_RIGHT) {
 		character->SetMovingRight(false);
-		gamemap.SetMovingLeft(false);
+		map1.SetMovingLeft(false);
 	}
 	if (nChar == KEY_UP)
 		character->SetMovingUp(false);
@@ -405,7 +404,7 @@ void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)
 
 void CGameStateRun::OnShow()
 {
-	gamemap.OnShow();			// 貼上背景圖
+	map1.OnShow();			// 貼上背景圖
 	monster->OnShow();
 	character->OnShow();			// 貼上人物
 }

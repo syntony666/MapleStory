@@ -76,8 +76,8 @@ namespace game_framework {
 	private:
 		CMovingBitmap	background;					// 背景圖
 		Character *character = new Hero;			// 角色
-		Map gamemap;								// 地圖
-		Character *monster = new Monster;			// 怪物
+		Map map1 = Map1();					// 地圖
+		Character *monster=Monster1();			// 怪物
 	};
 
 	/////////////////////////////////////////////////////////////////////////////

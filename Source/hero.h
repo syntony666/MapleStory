@@ -18,7 +18,7 @@ namespace game_framework {
 		void OnMove();					// 移動Hero
 		void OnShow();					// 將Hero圖形貼到畫面
 
-	protected:
+	protected:/*
 		CAnimation stand;			// 站立
 		CAnimation standLeft;		// 站立面向左
 		CAnimation downRight;		// 向右趴下
@@ -28,7 +28,7 @@ namespace game_framework {
 		CAnimation jumpRight;		// 向右跳
 		CAnimation jumpLeft;			// 向左跳
 		CAnimation attackRight;		// 向右攻擊
-		CAnimation attackLeft;		// 向左攻擊
+		CAnimation attackLeft;		// 向左攻擊*/
 	};
 }
 #endif
