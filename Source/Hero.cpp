@@ -98,10 +98,12 @@ namespace game_framework {
 		else {				// 下降狀態
 			if (pos_y < floor) {  // 當y座標還沒碰到地板
 				pos_y += velocity*2;	// y軸下降(移動velocity個點，velocity的單位為 點/次)
-				velocity++;		// 受重力影響，下次的下降速度增加
+				if (velocity <= 14)
+					velocity++;
 			}
 			else {
 				pos_y = floor;  // 當y座標低於地板，更正為地板上
+				velocity = 0;
 			}
 		}
 	}
