@@ -23,6 +23,7 @@
     <RootNamespace>game</RootNamespace>
     <Keyword>MFCProj</Keyword>
     <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <ProjectName>Game</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='UnitTest|Win32'" Label="Configuration">
@@ -342,6 +343,21 @@
     <Image Include="res\frog_stand.bmp" />
     <Image Include="RES\frog_stand_left.bmp" />
     <Image Include="res\frog_stand_right.bmp" />
+    <Image Include="RES\GameOver\GAME_OVER_0.bmp" />
+    <Image Include="RES\GameOver\GAME_OVER_1.bmp" />
+    <Image Include="RES\GameOver\GAME_OVER_10.bmp" />
+    <Image Include="RES\GameOver\GAME_OVER_11.bmp" />
+    <Image Include="RES\GameOver\GAME_OVER_12.bmp" />
+    <Image Include="RES\GameOver\GAME_OVER_13.bmp" />
+    <Image Include="RES\GameOver\GAME_OVER_14.bmp" />
+    <Image Include="RES\GameOver\GAME_OVER_2.bmp" />
+    <Image Include="RES\GameOver\GAME_OVER_3.bmp" />
+    <Image Include="RES\GameOver\GAME_OVER_4.bmp" />
+    <Image Include="RES\GameOver\GAME_OVER_5.bmp" />
+    <Image Include="RES\GameOver\GAME_OVER_6.bmp" />
+    <Image Include="RES\GameOver\GAME_OVER_7.bmp" />
+    <Image Include="RES\GameOver\GAME_OVER_8.bmp" />
+    <Image Include="RES\GameOver\GAME_OVER_9.bmp" />
     <Image Include="RES\HP_bar\HP_0.bmp" />
     <Image Include="RES\HP_bar\HP_10.bmp" />
     <Image Include="RES\HP_bar\HP_100.bmp" />

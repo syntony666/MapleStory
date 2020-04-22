@@ -61,6 +61,36 @@
 #define IDB_HP_80                       216
 #define IDB_HP_90                       217
 #define IDB_HP_100                      218
+#define IDB_BITMAP3                     219
+#define IDB_GAME_OVER_0                 219
+#define IDB_BITMAP4                     220
+#define IDB_BITMAP6                     221
+#define IDB_BITMAP7                     222
+#define IDB_BITMAP10                    223
+#define IDB_BITMAP11                    224
+#define IDB_BITMAP12                    225
+#define IDB_BITMAP13                    226
+#define IDB_BITMAP14                    227
+#define IDB_BITMAP15                    228
+#define IDB_BITMAP16                    229
+#define IDB_BITMAP17                    230
+#define IDB_BITMAP18                    231
+#define IDB_BITMAP19                    232
+#define IDB_GAME_OVER_1                 233
+#define IDB_GAME_OVER_10                234
+#define IDB_GAME_OVER_11                235
+#define IDB_GAME_OVER_12                236
+#define IDB_GAME_OVER_13                237
+#define IDB_GAME_OVER_14                238
+#define IDB_GAME_OVER_4                 239
+#define IDB_GAME_OVER_3                 240
+#define IDB_GAME_OVER_6                 241
+#define IDB_GAME_OVER_7                 242
+#define IDB_GAME_OVER_9                 243
+#define IDB_GAME_OVER_8                 244
+#define IDB_GAME_OVER_5                 245
+#define IDB_GAME_OVER_2                 246
+#define IDB_BITMAP20                    247
 #define IDC_README                      1001
 #define ID_FILE_PAUSE                   32771
 #define ID_TOGGLE_FULLSCREEN            32772
@@ -73,7 +103,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        219
+#define _APS_NEXT_RESOURCE_VALUE        248
 #define _APS_NEXT_COMMAND_VALUE         32776
 #define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           101

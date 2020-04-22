@@ -152,6 +152,36 @@ IDB_HP_90               BITMAP                  "..\\res\\HP_bar\\HP_90.bmp"
 
 IDB_HP_100              BITMAP                  "..\\res\\HP_bar\\HP_100.bmp"
 
+IDB_GAME_OVER_1         BITMAP                  "..\\res\\GameOver\\GAME_OVER_1.bmp"
+
+IDB_GAME_OVER_2         BITMAP                  "..\\res\\GameOver\\GAME_OVER_2.bmp"
+
+IDB_GAME_OVER_3         BITMAP                  "..\\res\\GameOver\\GAME_OVER_3.bmp"
+
+IDB_GAME_OVER_4         BITMAP                  "..\\res\\GameOver\\GAME_OVER_4.bmp"
+
+IDB_GAME_OVER_5         BITMAP                  "..\\res\\GameOver\\GAME_OVER_5.bmp"
+
+IDB_GAME_OVER_6         BITMAP                  "..\\res\\GameOver\\GAME_OVER_6.bmp"
+
+IDB_GAME_OVER_7         BITMAP                  "..\\res\\GameOver\\GAME_OVER_7.bmp"
+
+IDB_GAME_OVER_8         BITMAP                  "..\\res\\GameOver\\GAME_OVER_8.bmp"
+
+IDB_GAME_OVER_9         BITMAP                  "..\\res\\GameOver\\GAME_OVER_9.bmp"
+
+IDB_GAME_OVER_10        BITMAP                  "..\\res\\GameOver\\GAME_OVER_10.bmp"
+
+IDB_GAME_OVER_11        BITMAP                  "..\\res\\GameOver\\GAME_OVER_11.bmp"
+
+IDB_GAME_OVER_12        BITMAP                  "..\\res\\GameOver\\GAME_OVER_12.bmp"
+
+IDB_GAME_OVER_13        BITMAP                  "..\\res\\GameOver\\GAME_OVER_13.bmp"
+
+IDB_GAME_OVER_14        BITMAP                  "..\\res\\GameOver\\GAME_OVER_14.bmp"
+
+IDB_GAME_OVER_0         BITMAP                  "..\\res\\GameOver\\GAME_OVER_0.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

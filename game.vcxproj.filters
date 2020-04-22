@@ -233,6 +233,51 @@
     <Image Include="RES\HP_bar\HP_100.bmp">
       <Filter>Resouces</Filter>
     </Image>
+    <Image Include="RES\GameOver\GAME_OVER_1.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\GameOver\GAME_OVER_2.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\GameOver\GAME_OVER_3.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\GameOver\GAME_OVER_4.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\GameOver\GAME_OVER_5.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\GameOver\GAME_OVER_6.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\GameOver\GAME_OVER_7.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\GameOver\GAME_OVER_8.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\GameOver\GAME_OVER_9.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\GameOver\GAME_OVER_10.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\GameOver\GAME_OVER_11.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\GameOver\GAME_OVER_12.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\GameOver\GAME_OVER_13.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\GameOver\GAME_OVER_14.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\GameOver\GAME_OVER_0.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="RES\continue.bmp">

@@ -49,19 +49,21 @@ void CGameStateInit::OnInit()
 	//
 	// 開始載入資料
 	//
-	logo.LoadBitmap(IDB_LOGO);
-	start1.LoadBitmap(IDB_START1, RGB(255, 255, 255));
-	start2.LoadBitmap(IDB_START2, RGB(255, 255, 255));
-	exit1.LoadBitmap(IDB_EXIT1, RGB(255, 255, 255));
-	exit2.LoadBitmap(IDB_EXIT2, RGB(255, 255, 255));
+	CAudio::Instance()->Load(BGM_MENU, "sounds\\bgm_menu.mp3");
+	CAudio::Instance()->Play(BGM_MENU, true);
+	CAudio::Instance()->Load(BGM_STAGE1, "sounds\\bgm_stage1.mp3");
+	CAudio::Instance()->Load(SFX_JUMP, "sounds\\sfx_jump.mp3");
+	CAudio::Instance()->Load(BGM_GAMEOVER, "sounds\\bgm_gameover.mp3");
 
 	menu = 1;
 	
 	ShowInitProgress(33);
 
-	//TRACE("%d", floor.getXBegin);
-
-
+	logo.LoadBitmap(IDB_LOGO);
+	start1.LoadBitmap(IDB_START1, RGB(255, 255, 255));
+	start2.LoadBitmap(IDB_START2, RGB(255, 255, 255));
+	exit1.LoadBitmap(IDB_EXIT1, RGB(255, 255, 255));
+	exit2.LoadBitmap(IDB_EXIT2, RGB(255, 255, 255));
 
 	//
 	// 此OnInit動作會接到CGameStaterRun::OnInit()，所以進度還沒到100%
@@ -70,8 +72,6 @@ void CGameStateInit::OnInit()
 
 void CGameStateInit::OnBeginState()
 {
-	CAudio::Instance()->Load(BGM_MENU, "sounds\\bgm_menu.mp3");
-	CAudio::Instance()->Play(BGM_MENU, true);
 }
 
 void CGameStateInit::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -156,13 +156,29 @@ CGameStateOver::CGameStateOver(CGame *g)
 void CGameStateOver::OnMove()
 {
 	counter--;
-	if (counter < 0)
+	if (counter < 0) {
+		CAudio::Instance()->Play(BGM_MENU, true);
 		GotoGameState(GAME_STATE_INIT);
+	}
 }
 
 void CGameStateOver::OnBeginState()
 {
-	counter = 30 * 5; // 5 seconds
+	counter = 30 * 7; // 7 seconds
+	CAudio::Instance()->Stop(BGM_STAGE1);
+	CAudio::Instance()->Play(BGM_GAMEOVER, false);
+
+	int over[] = { IDB_GAME_OVER_0 ,IDB_GAME_OVER_1 ,IDB_GAME_OVER_2 ,IDB_GAME_OVER_3,
+					IDB_GAME_OVER_4 ,IDB_GAME_OVER_5 ,IDB_GAME_OVER_6 ,IDB_GAME_OVER_7,
+					IDB_GAME_OVER_8 ,IDB_GAME_OVER_9 ,IDB_GAME_OVER_10,IDB_GAME_OVER_11,
+					IDB_GAME_OVER_12,IDB_GAME_OVER_13,IDB_GAME_OVER_14,IDB_GAME_OVER_0,
+					IDB_GAME_OVER_0 ,IDB_GAME_OVER_0 ,IDB_GAME_OVER_0 ,IDB_GAME_OVER_0,
+					IDB_GAME_OVER_0 ,IDB_GAME_OVER_0 ,IDB_GAME_OVER_0 ,IDB_GAME_OVER_0,
+					IDB_GAME_OVER_0 ,IDB_GAME_OVER_0 ,IDB_GAME_OVER_0 ,IDB_GAME_OVER_0, };
+
+	Gameover = CAnimation(9);
+	for (int i = 0; i < 28; i++)
+		Gameover.AddBitmap(over[i], RGB(255, 255, 255));
 }
 
 void CGameStateOver::OnInit()
@@ -171,12 +187,11 @@ void CGameStateOver::OnInit()
 	// 當圖很多時，OnInit載入所有的圖要花很多時間。為避免玩遊戲的人
 	//     等的不耐煩，遊戲會出現「Loading ...」，顯示Loading的進度。
 	//
+
 	ShowInitProgress(66);	// 接個前一個狀態的進度，此處進度視為66%
 	//
 	// 開始載入資料
 	//
-	CAudio::Instance()->Load(BGM_STAGE1, "sounds\\bgm_stage1.mp3");
-	CAudio::Instance()->Load(SFX_JUMP, "sounds\\sfx_jump.mp3");
 	//
 	// 最終進度為100%
 	//
@@ -185,6 +200,10 @@ void CGameStateOver::OnInit()
 
 void CGameStateOver::OnShow()
 {
+	Gameover.SetTopLeft(233, 234);
+	Gameover.OnShow();
+	Gameover.OnMove();
+	/*
 	CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
 	CFont f, *fp;
 	f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
@@ -196,6 +215,7 @@ void CGameStateOver::OnShow()
 	pDC->TextOut(240, 210, str);
 	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
 	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+	*/
 }
 
 
@@ -294,6 +314,10 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		character->SetHP(character->GetHP() - monster->GetAttack());
 	if (CHARACTER_HIT_MONSTER)
 		monster->SetHP(monster->GetHP() - character->GetAttack());
+
+	// 死亡相關
+	if (character->GetHP() <= 0)
+		GotoGameState(GAME_STATE_OVER);
 }
 
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
