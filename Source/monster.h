@@ -22,8 +22,6 @@ namespace game_framework {
 
 	protected:
 		const int HERO_STEP = 8;
-		int range_X;				// Hero¥ª¤W¨¤®y¼Ð
-		int tempX, tempY;
 	};
 }
 #endif

@@ -74,29 +74,44 @@ namespace game_framework {
 			STEP_SIZE = 8;
 		}
 
-		if (isMovingLeft && pos_x >= 100 && !isHit) 
+		if (isMovingLeft && pos_x >= 100 && !isHitLeft && !isHitRight) 
 			pos_x -= STEP_SIZE;
 
-		if (isMovingRight && pos_x <= 1164 && !isHit)
+		if (isMovingRight && pos_x <= 1164 && !isHitLeft && !isHitRight)
 			pos_x += STEP_SIZE;
 
-		if (isMovingUp && pos_y == floor && !isHit) {
+		if (isMovingUp && pos_y == floor && !isHitLeft && !isHitRight) {
 			rising = true;
 			velocity = initial_velocity;
 		}
 
-		if (isHit) {
+		if (isHitLeft) {
 			if (hit_time == 0) {
 				hit_time = 18;
-				isHit = false;
+				isHitLeft = false;
 			}
 			else if (hit_time >= 17) {
 				rising = true;
-				velocity = initial_velocity - 5;
+				velocity = initial_velocity - 7;
 			}
 			else if (hit_time > 0)
 			{
 				pos_x -= STEP_SIZE * 2;
+			}
+			hit_time--;
+		}
+		if (isHitRight) {
+			if (hit_time == 0) {
+				hit_time = 18;
+				isHitRight = false;
+			}
+			else if (hit_time >= 17) {
+				rising = true;
+				velocity = initial_velocity - 7;
+			}
+			else if (hit_time > 0)
+			{
+				pos_x += STEP_SIZE * 2;
 			}
 			hit_time--;
 		}

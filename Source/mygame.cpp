@@ -245,11 +245,10 @@ void CGameStateRun::OnBeginState()
 	monster->SetAttack(50);
 	character->SetMaxHP(500);
 	character->SetAttack(30);
-
-	
 }
 
-#define HEIGHT_CHECK hero_pos.getY() <= monster_pos.getY()
+#define HEIGHT_CHECK hero_pos.getY() <= monster_pos.getY() + 100 && hero_pos.getY() + 100 >= monster_pos.getY()
+#define HIT_CHECK_CHARACTER !character->ifHitLeft() && !character->ifHitRight()
 #define MONSTER_HIT_CHARACTER hero_pos.getX() - monster_pos.getX() <= 50 && monster_pos.getX() - hero_pos.getX() <= 0 || hero_pos.getX() - monster_pos.getX() <= 0 && monster_pos.getX() - hero_pos.getX() <= 50
 #define CHARACTER_HIT_MONSTER character->ifAttacking() && character->GetFacing() == 2 && hero_pos.getX() - monster_pos.getX() <= 100 && monster_pos.getX() - hero_pos.getX() <= 0 || character->ifAttacking() && character->GetFacing() == 1 && hero_pos.getX() - monster_pos.getX() <= 0 && monster_pos.getX() - hero_pos.getX() <= 100
 #define ON_PLATFORM hero_pos.getY() <= map1.getFloorY(i) + 100 && hero_pos.getY() >= map1.getFloorY(i) - 14 && hero_pos.getX() >= map1.getFloorXBegin(i) && hero_pos.getX() <= map1.getFloorXLast(i)
@@ -265,9 +264,10 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	TRACE("----hero-pos_xy---(%d, %d)\n", hero_pos.getX(),hero_pos.getY());
 	TRACE("----mons-pos_xy---(%d, %d)\n", monster_pos.getX(), monster_pos.getY());
 	TRACE("----------HP------(%d, %d)\n", monster->GetHP(), character->GetHP());
-	TRACE("-------Floor------(%d, %d)\n", character->GetFloor());
+	TRACE("-------Floor------(%d)\n", character->GetFloor());
+	TRACE("------y to y------(%d, %d)\n", hero_pos.getY(), monster_pos.getY());
 
-	// 移動相關
+	// 人物移動相關
 	if (character->getX() <= 100 && character->ifMovingLeft()) {
 		map1.SetMovingLeft(true);
 		if (hero_pos.getX() <= 110) {
@@ -295,6 +295,16 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		monster->SetMovingRight(false);
 	}
 
+	// 怪物移動相關
+	if (monster_pos.getX() >= hero_pos.getX()) {
+		monster->Set_Monster_Go_Left(true);
+		monster->Set_Monster_Go_Right(false);
+	}
+	else {
+		monster->Set_Monster_Go_Right(true);
+		monster->Set_Monster_Go_Left(false);
+	}
+
 	// 地板判定相關
 	int flag = 0;
 	for (int i = 0; i < 8; i++) {
@@ -311,12 +321,19 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	}
 
 	// 攻擊互動相關
-	if (HEIGHT_CHECK && MONSTER_HIT_CHARACTER && !character->ifHit()) {
-		character->SetHP(character->GetHP() - monster->GetAttack());
-		character->SetHit();
+	if (MONSTER_HIT_CHARACTER && HIT_CHECK_CHARACTER) {
+		if (HEIGHT_CHECK) {
+			character->SetHP(character->GetHP() - monster->GetAttack());
+			if (monster_pos.getX() >= hero_pos.getX())
+				character->SetHitLeft();
+			else if (monster_pos.getX() < hero_pos.getX())
+				character->SetHitRight();
+		}
 	}
-	if (HEIGHT_CHECK && CHARACTER_HIT_MONSTER) {
-		monster->SetHP(monster->GetHP() - character->GetAttack());
+	if (CHARACTER_HIT_MONSTER) {
+		if (HEIGHT_CHECK) {
+			monster->SetHP(monster->GetHP() - character->GetAttack());
+		}
 	}
 
 	// 死亡相關

@@ -48,7 +48,12 @@ namespace game_framework {
 		void SetAttacking(bool flag);	// 設定是否正在攻擊
 		void SetFacing(int face);		// 設定面向方向
 		void SetXY(int nx, int ny);		// 設定Hero左上角座標
-		void SetHit();					// 設定是否被擊中
+		void SetHitLeft();				// 設定是否被擊中
+		void SetHitRight();				// 設定是否被擊中
+
+		//Monsters
+		void Set_Monster_Go_Left(bool flag);
+		void Set_Monster_Go_Right(bool flag);
 
 		//GETs
 
@@ -61,7 +66,8 @@ namespace game_framework {
 		int GetFloor();					// 擷取地板
 		int GetFacing();
 		bool ifAttacking();
-		bool ifHit();
+		bool ifHitLeft();
+		bool ifHitRight();
 		bool ifMovingLeft();
 		bool ifMovingRight();
 		bool ifMovingUp();
@@ -77,8 +83,11 @@ namespace game_framework {
 		bool isMovingDown, isMovingUp,// 是否正在移動
 			 isMovingRight, isMovingLeft;
 		bool isAttacking = false;		// 是否正在攻擊
-		bool isHit = false;				// 是否受到攻擊
+		bool isHitLeft = false;			// 是否受到攻擊
+		bool isHitRight = false;		// 是否受到攻擊
 		bool rising;					// true表上升、false表下降
+		bool is_Monster_Go_Left = false;
+		bool is_Monster_Go_Right = false;
 		int initial_velocity;			// 初始速度
 		int hit_time = 18;
 		int velocity;					// 目前的速度(點/次)

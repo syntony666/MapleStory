@@ -64,11 +64,17 @@ namespace game_framework {
 	bool Character::ifAttacking() { 
 		return isAttacking; 
 	}
-	void Character::SetHit() {
-		isHit = true;
+	void Character::SetHitLeft() {
+		isHitLeft = true;
 	}
-	bool Character::ifHit() {
-		return isHit;
+	bool Character::ifHitLeft() {
+		return isHitLeft;
+	}
+	void Character::SetHitRight() {
+		isHitRight = true;
+	}
+	bool Character::ifHitRight() {
+		return isHitRight;
 	}
 	void Character::SetFacing(int face) {
 		facing = face; 
@@ -101,5 +107,13 @@ namespace game_framework {
 	}
 	bool Character::ifMovingDown() { 
 		return isMovingDown;
+	}
+	
+	// Monsters
+	void Character::Set_Monster_Go_Left(bool flag) {
+		is_Monster_Go_Left = flag;
+	}
+	void Character::Set_Monster_Go_Right(bool flag) {
+		is_Monster_Go_Right = flag;
 	}
 }

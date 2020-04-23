@@ -23,7 +23,6 @@ namespace game_framework {
 		const int Y_POS = 570;
 		pos_x = X_POS;
 		pos_y = Y_POS;
-		range_X = X_POS;
 		isMovingLeft = isMovingRight = false;
 		STEP_SIZE = 3;
 		const int FLOOR = 570;
@@ -40,27 +39,19 @@ namespace game_framework {
 	void Monster::OnMove()
 	{
 		a.standRight.OnMove();
-		if (range_X >= 700) {	//若碰壁就動地圖直到地圖的邊緣
+		if (is_Monster_Go_Left) {	//若碰壁就動地圖直到地圖的邊緣
 			STEP_SIZE = -3;
 			pos_x += STEP_SIZE;
-			range_X += STEP_SIZE;
 		}
-		else if (range_X <= 400) {		//若碰壁就動地圖直到地圖的邊緣
+		else if (is_Monster_Go_Right) {		//若碰壁就動地圖直到地圖的邊緣
 			STEP_SIZE = 3;
 			pos_x += STEP_SIZE;
-			range_X += STEP_SIZE;
 		}
 		if (isMovingRight) {
-			pos_x += (STEP_SIZE - HERO_STEP);
-			range_X += STEP_SIZE;
+			pos_x -= HERO_STEP;
 		}
 		else if (isMovingLeft) {
-			pos_x += (STEP_SIZE + HERO_STEP);
-			range_X += STEP_SIZE;
-		}
-		else {
-			pos_x += STEP_SIZE;
-			range_X += STEP_SIZE;
+			pos_x += HERO_STEP;
 		}
 	}
 
