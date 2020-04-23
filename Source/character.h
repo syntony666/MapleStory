@@ -48,6 +48,7 @@ namespace game_framework {
 		void SetAttacking(bool flag);	// 設定是否正在攻擊
 		void SetFacing(int face);		// 設定面向方向
 		void SetXY(int nx, int ny);		// 設定Hero左上角座標
+		void SetHit();					// 設定是否被擊中
 
 		//GETs
 
@@ -59,7 +60,8 @@ namespace game_framework {
 		int GetHP();						// 擷取生命值
 		int GetFloor();					// 擷取地板
 		int GetFacing();
-		bool ifAttacking(bool flag);
+		bool ifAttacking();
+		bool ifHit();
 		bool ifMovingLeft();
 		bool ifMovingRight();
 		bool ifMovingUp();
@@ -75,8 +77,10 @@ namespace game_framework {
 		bool isMovingDown, isMovingUp,// 是否正在移動
 			 isMovingRight, isMovingLeft;
 		bool isAttacking = false;		// 是否正在攻擊
-		bool rising;						// true表上升、false表下降
+		bool isHit = false;				// 是否受到攻擊
+		bool rising;					// true表上升、false表下降
 		int initial_velocity;			// 初始速度
+		int hit_time = 18;
 		int velocity;					// 目前的速度(點/次)
 		int STEP_SIZE = 8;				// 行走速度
 		Animations a;

@@ -61,8 +61,14 @@ namespace game_framework {
 	void Character::SetAttacking(bool flag) { 
 		isAttacking = flag; 
 	}
-	bool Character::ifAttacking(bool flag) { 
+	bool Character::ifAttacking() { 
 		return isAttacking; 
+	}
+	void Character::SetHit() {
+		isHit = true;
+	}
+	bool Character::ifHit() {
+		return isHit;
 	}
 	void Character::SetFacing(int face) {
 		facing = face; 

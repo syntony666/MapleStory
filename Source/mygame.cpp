@@ -249,8 +249,9 @@ void CGameStateRun::OnBeginState()
 	
 }
 
+#define HEIGHT_CHECK hero_pos.getY() <= monster_pos.getY()
 #define MONSTER_HIT_CHARACTER hero_pos.getX() - monster_pos.getX() <= 50 && monster_pos.getX() - hero_pos.getX() <= 0 || hero_pos.getX() - monster_pos.getX() <= 0 && monster_pos.getX() - hero_pos.getX() <= 50
-#define CHARACTER_HIT_MONSTER character->ifAttacking(true) && character->GetFacing() == 2 && hero_pos.getX() - monster_pos.getX() <= 100 && monster_pos.getX() - hero_pos.getX() <= 0 || character->ifAttacking(true) && character->GetFacing() == 1 && hero_pos.getX() - monster_pos.getX() <= 0 && monster_pos.getX() - hero_pos.getX() <= 100
+#define CHARACTER_HIT_MONSTER character->ifAttacking() && character->GetFacing() == 2 && hero_pos.getX() - monster_pos.getX() <= 100 && monster_pos.getX() - hero_pos.getX() <= 0 || character->ifAttacking() && character->GetFacing() == 1 && hero_pos.getX() - monster_pos.getX() <= 0 && monster_pos.getX() - hero_pos.getX() <= 100
 #define ON_PLATFORM hero_pos.getY() <= map1.getFloorY(i) + 100 && hero_pos.getY() >= map1.getFloorY(i) - 14 && hero_pos.getX() >= map1.getFloorXBegin(i) && hero_pos.getX() <= map1.getFloorXLast(i)
 
 void CGameStateRun::OnMove()							// 移動遊戲元素
@@ -310,10 +311,13 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	}
 
 	// 攻擊互動相關
-	if (MONSTER_HIT_CHARACTER)
+	if (HEIGHT_CHECK && MONSTER_HIT_CHARACTER && !character->ifHit()) {
 		character->SetHP(character->GetHP() - monster->GetAttack());
-	if (CHARACTER_HIT_MONSTER)
+		character->SetHit();
+	}
+	if (HEIGHT_CHECK && CHARACTER_HIT_MONSTER) {
 		monster->SetHP(monster->GetHP() - character->GetAttack());
+	}
 
 	// 死亡相關
 	if (character->GetHP() <= 0)
