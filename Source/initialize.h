@@ -1,10 +1,10 @@
-#pragma once
 #ifndef INITIALIZE_H
 #define INITIALIZE_H
 #include "hero.h"
 #include "map.h"
 #include "monster.h"
 #include "position.h"
+#include <vector>
 namespace game_framework {
 	inline Map Map1() {
 		Map gamemap;
@@ -23,12 +23,25 @@ namespace game_framework {
 		gamemap.setInitBitmap(IDB_BACKGROUND);
 		return gamemap;
 	}
-	inline Character* Monster1() {
-		Character *monster = new Monster(500, 570);
+	inline Character* Hero1() {
+		Character *hero = new Hero;
+		hero->setInitXY(100, 570);
+		return hero;
+	}
+	inline vector<Character*> Monster1() {
+	inline vector<Character*> Monster1() {
+		/*int monster_num = 5;
+		Character* m = new Monster;
+		vector<Character*> monster;
+		for (int i = 0; i < monster_num; i++) {
+			monster.push_back(m);
+		}
+		monster[0]->setInitXY(500, 570);
+		return monster;*/
+		Character* monster = new Monster;
+		monster->setInitXY(500, 570);
 		return monster;
 	}
 }
 
 #endif // !INITIALIZE_H
-
-

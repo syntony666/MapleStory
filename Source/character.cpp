@@ -7,6 +7,12 @@
 #include "character.h"
 
 namespace game_framework {
+
+	void Character::setInitXY(int nx, int ny) {
+		pos_x = nx;
+		pos_y = ny;
+	}
+
 	int Character::getX() {
 	return pos_x;
 	}

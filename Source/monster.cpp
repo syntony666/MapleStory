@@ -12,11 +12,9 @@ namespace game_framework {
 	// Monster: class
 	/////////////////////////////////////////////////////////////////////////////
 
-	Monster::Monster(int init_x, int init_y)
+	Monster::Monster()
 	{
 		Initialize();
-		pos_x = init_x;
-		pos_y = init_y;
 	}
 
 	void Monster::Initialize()

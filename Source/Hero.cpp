@@ -12,11 +12,9 @@ namespace game_framework {
 	// Hero: Eraser class
 	/////////////////////////////////////////////////////////////////////////////
 
-	Hero::Hero(int init_x, int init_y)
+	Hero::Hero()
 	{
 		Initialize();
-		pos_x = init_x;
-		pos_y = init_y;
 	}
 
 	void Hero::Initialize()
