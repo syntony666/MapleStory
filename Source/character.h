@@ -50,6 +50,7 @@ namespace game_framework {
 		void SetXY(int nx, int ny);		// 設定Hero左上角座標
 		void SetHitLeft();				// 設定是否被擊中
 		void SetHitRight();				// 設定是否被擊中
+		void SetDead(bool flag);		// 設定是否死亡
 
 		//Monsters
 		void Set_Monster_Go_Left(bool flag);
@@ -85,6 +86,7 @@ namespace game_framework {
 		bool isAttacking = false;		// 是否正在攻擊
 		bool isHitLeft = false;			// 是否受到攻擊
 		bool isHitRight = false;		// 是否受到攻擊
+		bool isDead = false;
 		bool rising;					// true表上升、false表下降
 		bool is_Monster_Go_Left = false;
 		bool is_Monster_Go_Right = false;

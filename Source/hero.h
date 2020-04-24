@@ -12,7 +12,7 @@ namespace game_framework {
 	class Hero: public Character
 	{
 	public:
-		Hero();
+		Hero(int init_x, int init_y);
 		void Initialize();				// 設定Hero為初始值
 		void LoadBitmap();				// 載入圖形
 		void OnMove();					// 移動Hero

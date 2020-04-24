@@ -61,6 +61,9 @@ namespace game_framework {
 	void Character::SetAttacking(bool flag) { 
 		isAttacking = flag; 
 	}
+	void Character::SetDead(bool flag) {
+		isDead = flag;
+	}
 	bool Character::ifAttacking() { 
 		return isAttacking; 
 	}

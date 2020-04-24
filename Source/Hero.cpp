@@ -12,18 +12,15 @@ namespace game_framework {
 	// Hero: Eraser class
 	/////////////////////////////////////////////////////////////////////////////
 
-	Hero::Hero()
+	Hero::Hero(int init_x, int init_y)
 	{
 		Initialize();
+		pos_x = init_x;
+		pos_y = init_y;
 	}
 
 	void Hero::Initialize()
 	{
-
-		const int X_POS = 100;
-		const int Y_POS = 570;
-		pos_x = X_POS;
-		pos_y = Y_POS;
 		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
 		const int INITIAL_VELOCITY = 14;
 		const int FLOOR = 570;

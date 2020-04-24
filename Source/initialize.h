@@ -24,7 +24,7 @@ namespace game_framework {
 		return gamemap;
 	}
 	inline Character* Monster1() {
-		Character *monster = new Monster;
+		Character *monster = new Monster(500, 570);
 		return monster;
 	}
 }

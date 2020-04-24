@@ -12,21 +12,22 @@ namespace game_framework {
 	// Monster: class
 	/////////////////////////////////////////////////////////////////////////////
 
-	Monster::Monster()
+	Monster::Monster(int init_x, int init_y)
 	{
 		Initialize();
+		pos_x = init_x;
+		pos_y = init_y;
 	}
 
 	void Monster::Initialize()
 	{
-		const int X_POS = 500;
-		const int Y_POS = 570;
-		pos_x = X_POS;
-		pos_y = Y_POS;
 		isMovingLeft = isMovingRight = false;
 		STEP_SIZE = 3;
 		const int FLOOR = 570;
 		floor = FLOOR;
+		const int INITIAL_VELOCITY = 14;
+		rising = false;
+		initial_velocity = INITIAL_VELOCITY;
 	}
 
 	void Monster::LoadBitmap()
@@ -38,7 +39,6 @@ namespace game_framework {
 
 	void Monster::OnMove()
 	{
-		a.standRight.OnMove();
 		if (is_Monster_Go_Left) {	//若碰壁就動地圖直到地圖的邊緣
 			STEP_SIZE = -3;
 			pos_x += STEP_SIZE;
@@ -53,6 +53,59 @@ namespace game_framework {
 		else if (isMovingLeft) {
 			pos_x += HERO_STEP;
 		}
+
+		if (isHitLeft) {
+			if (hit_time == 0) {
+				hit_time = 18;
+				isHitLeft = false;
+			}
+			else if (hit_time >= 17) {
+				rising = true;
+				velocity = initial_velocity - 7;
+			}
+			else if (hit_time > 0)
+			{
+				pos_x -= HERO_STEP * 2;
+			}
+			hit_time--;
+		}
+		if (isHitRight) {
+			if (hit_time == 0) {
+				hit_time = 18;
+				isHitRight = false;
+			}
+			else if (hit_time >= 17) {
+				rising = true;
+				velocity = initial_velocity - 7;
+			}
+			else if (hit_time > 0)
+			{
+				pos_x += HERO_STEP * 2;
+			}
+			hit_time--;
+		}
+
+		if (rising) {			// 上升狀態
+			if (velocity > 0) {
+				pos_y -= velocity * 2;	// 當速度 > 0時，y軸上升(移動velocity個點，velocity的單位為 點/次)
+				velocity--;		// 受重力影響，下次的上升速度降低
+			}
+			else {
+				rising = false; // 當速度 <= 0，上升終止，下次改為下降
+				velocity = 1;	// 下降的初速(velocity)為1
+			}
+		}
+		else {				// 下降狀態
+			if (pos_y < floor) {  // 當y座標還沒碰到地板
+				pos_y += velocity * 2;	// y軸下降(移動velocity個點，velocity的單位為 點/次)
+				if (velocity <= 14)
+					velocity++;
+			}
+			else {
+				pos_y = floor;  // 當y座標低於地板，更正為地板上
+				velocity = 0;
+			}
+		}
 	}
 
 
@@ -63,8 +116,12 @@ namespace game_framework {
 		a.standLeft.SetTopLeft(pos_x, pos_y);
 		if (STEP_SIZE >= 0) {
 			a.standRight.OnShow();
+			a.standRight.OnMove();
 		}
-		else a.standLeft.OnShow();
+		else {
+			a.standLeft.OnShow();
+			a.standLeft.OnMove();
+		}
 		hp_OnShow();
 	}
 }
