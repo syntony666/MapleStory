@@ -327,6 +327,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		// 攻擊互動相關
 		if (MONSTER_HIT_CHARACTER && HIT_CHECK_CHARACTER) {
 			if (HEIGHT_CHECK) {
+				monster[i]->SetAttacking(true);
 				character->SetHP(character->GetHP() - monster[i]->GetAttack());
 				if (monster_pos.getX() >= hero_pos.getX())
 					character->SetHitLeft();

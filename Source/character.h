@@ -30,9 +30,6 @@ namespace game_framework {
 		virtual void OnMove() = 0;		// 移動
 		virtual void OnShow() = 0;		// 顯示角色
 
-		//SETs Init
-		void setInitXY(int nx, int ny);
-
 		//HP
 
 		void hp_addBitmaps();

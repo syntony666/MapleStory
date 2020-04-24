@@ -14,6 +14,7 @@ namespace game_framework {
 	{
 	public:
 		Monster(int nx, int ny);
+		~Monster();
 		void Initialize();				// 設定monster為初始值
 		void LoadBitmap();				// 載入圖形
 		void OnMove();					// 移動monster

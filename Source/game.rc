@@ -182,6 +182,18 @@ IDB_GAME_OVER_14        BITMAP                  "..\\res\\GameOver\\GAME_OVER_14
 
 IDB_GAME_OVER_0         BITMAP                  "..\\res\\GameOver\\GAME_OVER_0.bmp"
 
+IDB_MONSTER_ATTACK_LEFT1 BITMAP                  "..\\res\\monster_attack_left1.bmp"
+
+IDB_MONSTER_ATTACK_LEFT2 BITMAP                  "..\\res\\monster_attack_left2.bmp"
+
+IDB_MONSTER_ATTACK_LEFT3 BITMAP                  "..\\res\\monster_attack_left3.bmp"
+
+IDB_MONSTER_ATTACK_RIGHT1 BITMAP                  "..\\res\\monster_attack_right1.bmp"
+
+IDB_MONSTER_ATTACK_RIGHT2 BITMAP                  "..\\res\\monster_attack_right2.bmp"
+
+IDB_MONSTER_ATTACK_RIGHT3 BITMAP                  "..\\res\\monster_attack_right3.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
