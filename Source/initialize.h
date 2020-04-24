@@ -28,8 +28,8 @@ namespace game_framework {
 		hero->setInitXY(100, 570);
 		return hero;
 	}
-	inline vector<Character*> Monster1() {
-	inline vector<Character*> Monster1() {
+	//inline vector<Character*> Monster1() {
+	inline Character* Monster1() {
 		/*int monster_num = 5;
 		Character* m = new Monster;
 		vector<Character*> monster;
