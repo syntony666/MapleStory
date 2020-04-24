@@ -119,11 +119,11 @@ namespace game_framework {
 		}
 
 		if (isAttacking) {
-			if (hit_time == 5) {
-				hit_time = 18;
+			if (attack_time == 0) {
+				attack_time = 15;
 				isAttacking = false;
 			}
-			hit_time--;
+			attack_time--;
 		}
 	}
 
