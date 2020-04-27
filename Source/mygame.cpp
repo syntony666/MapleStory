@@ -294,10 +294,10 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		map1.SetMovingRight(false);
 
 	// 人物移動相關
-	if (character->getX() <= 100) {
+	if (hero_pos.getX() <= 100) {
 		character->SetXY(100, character->getY());
 	}
-	else if (character->getX() >= 1164) {
+	else if (hero_pos.getX() >= 2204) {
 		character->SetXY(1164, character->getY());
 	}
 
