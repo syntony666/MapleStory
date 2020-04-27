@@ -12,15 +12,20 @@ namespace game_framework {
 	// Hero: Eraser class
 	/////////////////////////////////////////////////////////////////////////////
 
-	Hero::Hero(int nx, int ny)
-	{
+	Hero::Hero() {
 		Initialize();
-		SetXY(nx, ny);
 	}
+
+	//Hero::Hero(int nx, int ny)
+	//{
+	//	Initialize();
+	//	SetXY(nx, ny);
+	//}
 
 	void Hero::Initialize()
 	{
 		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
+		isAttacking=isHitLeft=isHitRight=isDead=false;
 		const int INITIAL_VELOCITY = 14;
 		const int FLOOR = 570;
 		rising = false;

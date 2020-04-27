@@ -23,17 +23,18 @@ namespace game_framework {
 		gamemap.setInitBitmap(IDB_BACKGROUND);
 		return gamemap;
 	}
-	inline Character* Hero1() {
-		Character *hero = new Hero(100, 570);
-		return hero;
+	inline void initHero(Character& hero) {
+		hero.Initialize();
+		hero.SetXY(100, 570);
+		hero.SetFacing(1);
 	}
-	inline void initHero(Character& hero1) {
-		hero1.SetXY(100, 570);
+	inline void initMonster1(vector<Character*> & monster) {
+		monster.push_back(new Monster(500, 570));
+		monster.push_back(new Monster(800, 570));
 	}
 	inline vector<Character*> Monster1() {
 		vector<Character*> monster;
-		monster.push_back(new Monster(500, 570));
-		monster.push_back(new Monster(800, 570));
+		initMonster1(monster);
 		return monster;
 	}
 }

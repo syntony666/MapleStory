@@ -50,6 +50,8 @@ namespace game_framework {
 		void SetXY(int nx, int ny);		// 設定Hero左上角座標
 		void SetHitLeft();				// 設定是否被擊中
 		void SetHitRight();				// 設定是否被擊中
+		void SetHitLeft(bool flag);				// 設定是否被擊中
+		void SetHitRight(bool flag);				// 設定是否被擊中
 		void SetDead(bool flag);		// 設定是否死亡
 
 		//Monsters

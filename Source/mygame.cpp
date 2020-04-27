@@ -236,6 +236,7 @@ CGameStateRun::~CGameStateRun()
 void CGameStateRun::OnBeginState()
 {
 	initHero(*character);
+	
 	character->SetMaxHP(500);
 	character->SetAttack(30);
 
@@ -258,7 +259,7 @@ void CGameStateRun::OnBeginState()
 
 void CGameStateRun::OnMove()							// 移動遊戲元素
 {
-
+	TRACE("----monster_num---%d\n", monster.size());
 	character->OnMove();
 	map1.OnMove();
 	// 移動
@@ -266,11 +267,11 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		Position hero_pos(character, map1);
 		Position monster_pos(monster[i], map1);
 		monster[i]->OnMove();
-		TRACE("----hero-pos_xy---(%d, %d)\n", hero_pos.getX(), hero_pos.getY());
-		TRACE("----mons-pos_xy---(%d, %d)\n", monster_pos.getX(), monster_pos.getY());
-		TRACE("----------HP------(%d, %d)\n", monster[0]->GetHP(), character->GetHP());
-		TRACE("-------Floor------(%d)\n", character->GetFloor());
-		TRACE("------y to y------(%d, %d)\n", hero_pos.getY(), monster_pos.getY());
+		//TRACE("----hero-pos_xy---(%d, %d)\n", hero_pos.getX(), hero_pos.getY());
+		//TRACE("----mons-pos_xy---(%d, %d)\n", monster_pos.getX(), monster_pos.getY());
+		//TRACE("----------HP------(%d, %d)\n", monster[0]->GetHP(), character->GetHP());
+		//TRACE("-------Floor------(%d)\n", character->GetFloor());
+		//TRACE("------y to y------(%d, %d)\n", hero_pos.getY(), monster_pos.getY());
 
 		// 人物移動相關
 		if (character->getX() <= 100 && character->ifMovingLeft()) {
