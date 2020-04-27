@@ -71,11 +71,17 @@ namespace game_framework {
 	void Character::SetHitLeft() {
 		isHitLeft = true;
 	}
+	void Character::SetHitLeft(bool flag) {
+		isHitLeft = flag;
+	}
 	bool Character::ifHitLeft() {
 		return isHitLeft;
 	}
 	void Character::SetHitRight() {
 		isHitRight = true;
+	}
+	void Character::SetHitRight(bool flag) {
+		isHitRight = flag;
 	}
 	bool Character::ifHitRight() {
 		return isHitRight;

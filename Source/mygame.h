@@ -77,7 +77,7 @@ namespace game_framework {
 		CAnimation portal;
 		int portalX = 2180;
 		CMovingBitmap	background;					// 背景圖
-		Character *character = Hero1();			// 角色
+		Character *character = new Hero();			// 角色
 		Map map1 = Map1();					// 地圖
 		vector<Character*> monster = Monster1();			// 怪物
 	};
