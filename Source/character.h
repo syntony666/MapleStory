@@ -30,9 +30,6 @@ namespace game_framework {
 		virtual void OnMove() = 0;		// 移動
 		virtual void OnShow() = 0;		// 顯示角色
 
-		//SETs Init
-		void setInitXY(int nx, int ny);
-
 		//HP
 
 		void hp_addBitmaps();
@@ -95,6 +92,7 @@ namespace game_framework {
 		bool is_Monster_Go_Right = false;
 		int initial_velocity;			// 初始速度
 		int hit_time = 18;
+		int attack_time = 15;
 		int velocity;					// 目前的速度(點/次)
 		int STEP_SIZE = 8;				// 行走速度
 		Animations a;

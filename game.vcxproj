@@ -370,6 +370,12 @@
     <Image Include="RES\HP_bar\HP_80.bmp" />
     <Image Include="RES\HP_bar\HP_90.bmp" />
     <Image Include="res\logo.bmp" />
+    <Image Include="RES\monster_attack_left1.bmp" />
+    <Image Include="RES\monster_attack_left2.bmp" />
+    <Image Include="RES\monster_attack_left3.bmp" />
+    <Image Include="RES\monster_attack_right1.bmp" />
+    <Image Include="RES\monster_attack_right2.bmp" />
+    <Image Include="RES\monster_attack_right3.bmp" />
     <Image Include="RES\monster_stand_left.bmp" />
     <Image Include="RES\monster_stand_right.bmp" />
     <Image Include="RES\start1.bmp" />

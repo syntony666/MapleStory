@@ -278,6 +278,24 @@
     <Image Include="RES\GameOver\GAME_OVER_0.bmp">
       <Filter>Resouces</Filter>
     </Image>
+    <Image Include="RES\monster_attack_left1.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\monster_attack_left2.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\monster_attack_left3.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\monster_attack_right1.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\monster_attack_right2.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\monster_attack_right3.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="RES\continue.bmp">

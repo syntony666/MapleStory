@@ -24,23 +24,20 @@ namespace game_framework {
 		return gamemap;
 	}
 	inline Character* Hero1() {
-		Character *hero = new Hero;
-		hero->setInitXY(100, 570);
+		Character *hero = new Hero(100, 570);
 		return hero;
 	}
-	//inline vector<Character*> Monster1() {
-	inline Character* Monster1() {
-		/*int monster_num = 5;
-		Character* m = new Monster;
+	inline vector<Character*> Monster1() {
+		int monster_num = 1;
+		Character* m = new Monster(500, 570);
 		vector<Character*> monster;
 		for (int i = 0; i < monster_num; i++) {
 			monster.push_back(m);
 		}
-		monster[0]->setInitXY(500, 570);
-		return monster;*/
-		Character* monster = new Monster;
-		monster->setInitXY(500, 570);
 		return monster;
+		//Character* monster = new Monster;
+		//monster->setInitXY(500, 570);
+		//return monster;
 	}
 }
 
