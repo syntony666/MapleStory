@@ -261,7 +261,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 	character->OnMove();
 	map1.OnMove();
-	// 移動
+
 	for (size_t i = 0; i < monster.size(); i++) {
 		Position hero_pos(character, map1);
 		Position monster_pos(monster[i], map1);
@@ -345,8 +345,6 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 					monster[i]->SetHitRight();
 			}
 		}
-
-
 
 		// 死亡相關
 		if (monster[i]->GetHP() <= 0)
