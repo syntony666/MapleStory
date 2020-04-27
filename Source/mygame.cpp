@@ -261,9 +261,38 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 	character->OnMove();
 	map1.OnMove();
+	Position hero_pos(character, map1);
+
+	// 地圖移動相關
+	if (character->getX() <= 100 && character->ifMovingLeft())
+		map1.SetMovingLeft(true);
+	else 
+		map1.SetMovingLeft(false);
+	if (character->getX() >= 1164 && character->ifMovingRight())
+		map1.SetMovingRight(true);
+	else
+		map1.SetMovingRight(false);
+
+	// 地板判定相關
+	int flag = 0;
+	for (int i = 0; i < 8; i++) {
+		if (ON_PLATFORM) {
+			character->SetFloor(570 - map1.getFloorY(i));
+		}
+		else {
+			flag++;
+		}
+	}
+
+	if (flag == 8) {
+		character->SetFloor(570);
+	}
+
+	// 玩家死亡相關
+	if (character->GetHP() <= 0)
+		GotoGameState(GAME_STATE_OVER);
 
 	for (size_t i = 0; i < monster.size(); i++) {
-		Position hero_pos(character, map1);
 		Position monster_pos(monster[i], map1);
 		monster[i]->OnMove();
 		TRACE("----hero-pos_xy---(%d, %d)\n", hero_pos.getX(), hero_pos.getY());
@@ -273,8 +302,17 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		TRACE("------y to y------(%d, %d)\n", hero_pos.getY(), monster_pos.getY());
 
 		// 人物移動相關
+		if (character->getX() <= 100) {
+			character->SetXY(100, character->getY());
+		}
+		else if (character->getX() >= 1164) {
+			character->SetXY(1164, character->getY());
+		}
+
+		if (character->getX() <= 100) {
+			character->SetXY(100, character->getY());
+		}
 		if (character->getX() <= 100 && character->ifMovingLeft()) {
-			map1.SetMovingLeft(true);
 			if (hero_pos.getX() <= 110) {
 				monster[i]->SetMovingLeft(false);
 			}
@@ -283,11 +321,9 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 			}
 		}
 		else {
-			map1.SetMovingLeft(false);
 			monster[i]->SetMovingLeft(false);
 		}
 		if (character->getX() >= 1164 && character->ifMovingRight()) {
-			map1.SetMovingRight(true);
 			if (hero_pos.getX() >= 2200) {
 				monster[i]->SetMovingRight(false);
 			}
@@ -296,7 +332,6 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 			}
 		}
 		else {
-			map1.SetMovingRight(false);
 			monster[i]->SetMovingRight(false);
 		}
 
@@ -311,19 +346,6 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		}
 
 		// 地板判定相關
-		int flag = 0;
-		for (int i = 0; i < 8; i++) {
-			if (ON_PLATFORM) {
-				character->SetFloor(570 - map1.getFloorY(i));
-			}
-			else {
-				flag++;
-			}
-		}
-
-		if (flag == 8) {
-			character->SetFloor(570);
-		}
 
 		// 攻擊互動相關
 		if (MONSTER_HIT_CHARACTER && HIT_CHECK_CHARACTER) {
@@ -349,8 +371,6 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		// 死亡相關
 		if (monster[i]->GetHP() <= 0)
 			monster.erase(monster.begin() + i);
-		if (character->GetHP() <= 0)
-			GotoGameState(GAME_STATE_OVER);
 	}
 }
 
