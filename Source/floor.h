@@ -18,7 +18,6 @@ namespace game_framework {
 		int getY(int i) const;
 		//bool isFloor(Position& p);
 	private:
-		int** _points;
 		int _count;
 		Platform* _plat;
 		int _mem = -1;
