@@ -235,7 +235,7 @@ CGameStateRun::~CGameStateRun()
 
 void CGameStateRun::OnBeginState()
 {
-	character->Initialize();
+	initHero(*character);
 	character->SetMaxHP(500);
 	character->SetAttack(30);
 
