@@ -194,6 +194,18 @@ IDB_MONSTER_ATTACK_RIGHT2 BITMAP                  "..\\res\\monster_attack_right
 
 IDB_MONSTER_ATTACK_RIGHT3 BITMAP                  "..\\res\\monster_attack_right3.bmp"
 
+IDB_BACKGROUND2         BITMAP                  "..\\res\\bg2.bmp"
+
+IDB_BACKGROUND3         BITMAP                  "..\\res\\bg3.bmp"
+
+IDB_PORTAL_BLUE1        BITMAP                  "..\\res\\Portal\\Portal_Blue_1.bmp"
+
+IDB_PORTAL_BLUE2        BITMAP                  "..\\res\\Portal\\Portal_Blue_2.bmp"
+
+IDB_PORTAL_PURPLE1      BITMAP                  "..\\res\\Portal\\Portal_Purple_1.bmp"
+
+IDB_PORTAL_PURPLE2      BITMAP                  "..\\res\\Portal\\Portal_Purple_2.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

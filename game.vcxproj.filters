@@ -296,6 +296,24 @@
     <Image Include="RES\monster_attack_right3.bmp">
       <Filter>Resouces</Filter>
     </Image>
+    <Image Include="RES\bg2.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\bg3.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Portal\Portal_Blue_1.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Portal\Portal_Blue_2.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Portal\Portal_Purple_1.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Portal\Portal_Purple_2.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="RES\continue.bmp">
