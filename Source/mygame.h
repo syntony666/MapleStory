@@ -74,6 +74,8 @@ namespace game_framework {
 		void OnMove();									// 移動遊戲元素
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
+		CAnimation portal;
+		int portalX = 2180;
 		CMovingBitmap	background;					// 背景圖
 		Character *character = Hero1();			// 角色
 		Map map1 = Map1();					// 地圖

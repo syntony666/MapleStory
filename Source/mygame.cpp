@@ -247,6 +247,14 @@ void CGameStateRun::OnBeginState()
 		monster[i]->SetMaxHP(100);
 		monster[i]->SetAttack(50);
 	}
+
+	int blue[] = { IDB_PORTAL_BLUE1,IDB_PORTAL_BLUE2 };
+
+	portal = CAnimation(2);
+	for (int i = 0; i < 2; i++)
+		portal.AddBitmap(blue[i], RGB(255, 255, 255));
+
+	portal.SetTopLeft(portalX, 550);
 }
 
 #define HEIGHT_CHECK hero_pos.getY() <= monster_pos.getY() + 100 && hero_pos.getY() + 100 >= monster_pos.getY()
@@ -261,17 +269,36 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 	character->OnMove();
 	map1.OnMove();
+	portal.OnMove();
 	Position hero_pos(character, map1);
 
 	// 地圖移動相關
-	if (character->getX() <= 100 && character->ifMovingLeft())
+	if (character->getX() <= 100 && character->ifMovingLeft()) {
 		map1.SetMovingLeft(true);
+		if (hero_pos.getX() > 100) {
+			portalX += 8;
+			portal.SetTopLeft(portalX, 550);
+		}
+	}
 	else 
 		map1.SetMovingLeft(false);
-	if (character->getX() >= 1164 && character->ifMovingRight())
+	if (character->getX() >= 1164 && character->ifMovingRight()) {
 		map1.SetMovingRight(true);
+		if (hero_pos.getX() < 2204) {
+			portalX -= 8;
+			portal.SetTopLeft(portalX, 550);
+		}
+	}
 	else
 		map1.SetMovingRight(false);
+
+	// 人物移動相關
+	if (character->getX() <= 100) {
+		character->SetXY(100, character->getY());
+	}
+	else if (character->getX() >= 1164) {
+		character->SetXY(1164, character->getY());
+	}
 
 	// 地板判定相關
 	int flag = 0;
@@ -302,16 +329,6 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		TRACE("------y to y------(%d, %d)\n", hero_pos.getY(), monster_pos.getY());
 
 		// 人物移動相關
-		if (character->getX() <= 100) {
-			character->SetXY(100, character->getY());
-		}
-		else if (character->getX() >= 1164) {
-			character->SetXY(1164, character->getY());
-		}
-
-		if (character->getX() <= 100) {
-			character->SetXY(100, character->getY());
-		}
 		if (character->getX() <= 100 && character->ifMovingLeft()) {
 			if (hero_pos.getX() <= 110) {
 				monster[i]->SetMovingLeft(false);
@@ -345,8 +362,6 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 			monster[i]->Set_Monster_Go_Left(false);
 		}
 
-		// 地板判定相關
-
 		// 攻擊互動相關
 		if (MONSTER_HIT_CHARACTER && HIT_CHECK_CHARACTER) {
 			if (HEIGHT_CHECK) {
@@ -368,7 +383,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 			}
 		}
 
-		// 死亡相關
+		// 怪物死亡相關
 		if (monster[i]->GetHP() <= 0)
 			monster.erase(monster.begin() + i);
 	}
@@ -485,6 +500,7 @@ void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)
 void CGameStateRun::OnShow()
 {
 	map1.OnShow();			// 貼上背景圖
+	portal.OnShow();
 	for (size_t i = 0; i < monster.size(); i++) {
 		monster[i]->OnShow();
 	}
