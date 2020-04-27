@@ -13,6 +13,7 @@ namespace game_framework {
 	class Monster: public Character
 	{
 	public:
+		Monster(){}
 		Monster(int nx, int ny);
 		~Monster();
 		void Initialize();				// 設定monster為初始值

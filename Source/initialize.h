@@ -27,6 +27,9 @@ namespace game_framework {
 		Character *hero = new Hero(100, 570);
 		return hero;
 	}
+	inline void initHero(Character& hero1) {
+		hero1.SetXY(100, 570);
+	}
 	inline vector<Character*> Monster1() {
 		vector<Character*> monster;
 		monster.push_back(new Monster(500, 570));
