@@ -258,12 +258,13 @@ void CGameStateRun::OnBeginState()
 
 void CGameStateRun::OnMove()							// 移動遊戲元素
 {
+
+	character->OnMove();
+	map1.OnMove();
 	// 移動
 	for (size_t i = 0; i < monster.size(); i++) {
 		Position hero_pos(character, map1);
 		Position monster_pos(monster[i], map1);
-		map1.OnMove();
-		character->OnMove();
 		monster[i]->OnMove();
 		TRACE("----hero-pos_xy---(%d, %d)\n", hero_pos.getX(), hero_pos.getY());
 		TRACE("----mons-pos_xy---(%d, %d)\n", monster_pos.getX(), monster_pos.getY());
@@ -345,11 +346,13 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 			}
 		}
 
+
+
 		// 死亡相關
+		if (monster[i]->GetHP() <= 0)
+			monster.erase(monster.begin() + i);
 		if (character->GetHP() <= 0)
 			GotoGameState(GAME_STATE_OVER);
-		if (monster[i]->GetHP() <= 0)
-			monster[i]->SetDead(true);
 	}
 }
 
