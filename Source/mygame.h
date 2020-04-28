@@ -77,6 +77,7 @@ namespace game_framework {
 		CAnimation portal;
 		int portalX = 2080;
 		int stage = 1;
+		int stage_count = 2;
 		CMovingBitmap	background;					// 背景圖
 		Character *character = new Hero();			// 角色
 		Map map1 = Map1();							// 地圖

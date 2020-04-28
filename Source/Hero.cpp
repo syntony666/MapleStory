@@ -25,7 +25,7 @@ namespace game_framework {
 	void Hero::Initialize()
 	{
 		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
-		isAttacking=isHitLeft=isHitRight=isDead=false;
+		isAttacking = isHitLeft = isHitRight = isDead = false;
 		const int INITIAL_VELOCITY = 14;
 		const int FLOOR = 570;
 		rising = false;

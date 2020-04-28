@@ -265,38 +265,70 @@ void CGameStateRun::OnBeginState()
 #define HIT_CHECK_MONSTER !monster[i]->ifHitLeft() && !monster[i]->ifHitRight()
 #define MONSTER_HIT_CHARACTER hero_pos.getX() - monster_pos.getX() <= 50 && monster_pos.getX() - hero_pos.getX() <= 0 || hero_pos.getX() - monster_pos.getX() <= 0 && monster_pos.getX() - hero_pos.getX() <= 50
 #define CHARACTER_HIT_MONSTER character->ifAttacking() && character->GetFacing() == 2 && hero_pos.getX() - monster_pos.getX() <= 100 && monster_pos.getX() - hero_pos.getX() <= 0 || character->ifAttacking() && character->GetFacing() == 1 && hero_pos.getX() - monster_pos.getX() <= 0 && monster_pos.getX() - hero_pos.getX() <= 100
-#define ON_PLATFORM hero_pos.getY() <= map1.getFloorY(i) + 100 && hero_pos.getY() >= map1.getFloorY(i) - 14 && hero_pos.getX() >= map1.getFloorXBegin(i) && hero_pos.getX() <= map1.getFloorXLast(i)
+#define ON_PLATFORM_STAGE1 hero_pos.getY() <= map1.getFloorY(i) + 100 && hero_pos.getY() >= map1.getFloorY(i) - 14 && hero_pos.getX() >= map1.getFloorXBegin(i) && hero_pos.getX() <= map1.getFloorXLast(i)
+#define ON_PLATFORM_STAGE2 hero_pos.getY() <= map2.getFloorY(i) + 100 && hero_pos.getY() >= map2.getFloorY(i) - 14 && hero_pos.getX() >= map2.getFloorXBegin(i) && hero_pos.getX() <= map2.getFloorXLast(i)
+#define ON_PLATFORM_STAGE3 hero_pos.getY() <= map3.getFloorY(i) + 100 && hero_pos.getY() >= map3.getFloorY(i) - 14 && hero_pos.getX() >= map3.getFloorXBegin(i) && hero_pos.getX() <= map3.getFloorXLast(i)
 #define IN_PORTAL hero_pos.getY() == 150 && hero_pos.getX() >= 2060 && hero_pos.getX() <= 2132
 
 void CGameStateRun::OnMove()							// 移動遊戲元素
 {
 	TRACE("----monster_num---%d\n", monster.size());
 	character->OnMove();
-	map1.OnMove();
-	portal.OnMove();
+	if (stage == 1) {
+		map1.OnMove();
+	}
+	else if (stage == 2) {
+		map2.OnMove();
+	}
+	else if (stage == 3) {
+		map3.OnMove();
+	}
 	Position hero_pos(character, map1);
+	portal.OnMove();
 	TRACE("----hero-pos_xy---(%d, %d)\n", hero_pos.getX(), hero_pos.getY());
 	TRACE("----hero-level----(%d, %d)\n", character->GetLevel(), character->GetHP());
 
 	// 地圖移動相關
 	if (character->getX() <= 100 && character->ifMovingLeft()) {
-		map1.SetMovingLeft(true);
+		if (stage == 1)
+			map1.SetMovingLeft(true);
+		if (stage == 2)
+			map2.SetMovingLeft(true);
+		if (stage == 3)
+			map3.SetMovingLeft(true);
 		if (hero_pos.getX() > 100) {
 			portalX += 8;
 			portal.SetTopLeft(portalX, 410);
 		}
 	}
-	else 
-		map1.SetMovingLeft(false);
+	else {
+		if (stage == 1)
+			map1.SetMovingLeft(false);
+		if (stage == 2)
+			map2.SetMovingLeft(false);
+		if (stage == 3)
+			map3.SetMovingLeft(false);
+	}
 	if (character->getX() >= 1164 && character->ifMovingRight()) {
-		map1.SetMovingRight(true);
+		if (stage == 1)
+			map1.SetMovingRight(true);
+		if (stage == 2)
+			map2.SetMovingRight(true);
+		if (stage == 3)
+			map3.SetMovingRight(true);
 		if (hero_pos.getX() < 2204) {
 			portalX -= 8;
 			portal.SetTopLeft(portalX, 410);
 		}
 	}
-	else
-		map1.SetMovingRight(false);
+	else {
+		if (stage == 1)
+			map1.SetMovingRight(false);
+		if (stage == 2)
+			map2.SetMovingRight(false);
+		if (stage == 3)
+			map3.SetMovingRight(false);
+	}
 
 	// 人物移動相關
 	if (hero_pos.getX() <= 100) {
@@ -309,7 +341,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	// 地板判定相關
 	int flag = 0;
 	for (int i = 0; i < 8; i++) {
-		if (ON_PLATFORM) {
+		if (ON_PLATFORM_STAGE1) {
 			character->SetFloor(570 - map1.getFloorY(i));
 		}
 		else {
@@ -335,11 +367,6 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	for (size_t i = 0; i < monster.size(); i++) {
 		Position monster_pos(monster[i], map1);
 		monster[i]->OnMove();
-		//TRACE("----hero-pos_xy---(%d, %d)\n", hero_pos.getX(), hero_pos.getY());
-		//TRACE("----mons-pos_xy---(%d, %d)\n", monster_pos.getX(), monster_pos.getY());
-		//TRACE("----------HP------(%d, %d)\n", monster[0]->GetHP(), character->GetHP());
-		//TRACE("-------Floor------(%d)\n", character->GetFloor());
-		//TRACE("------y to y------(%d, %d)\n", hero_pos.getY(), monster_pos.getY());
 
 		// 人物移動相關
 		if (character->getX() <= 100 && character->ifMovingLeft()) {
@@ -533,11 +560,23 @@ void CGameStateRun::OnShow()
 			portal.OnShow();
 	}
 	if (stage == 2) {
+		if (stage_count == 2) {
+			initHero(*character);
+			//monster.push_back(new Monster(500, 570, 50));
+			//monster.push_back(new Monster(800, 570, 50));
+			stage_count++;
+		}
 		map2.OnShow();			// 貼上背景圖
 		if (monster.size() == 0)
 			portal.OnShow();
 	}
 	if (stage == 3) {
+		if (stage_count == 3) {
+			initHero(*character);
+			//monster.push_back(new Monster(500, 570, 50));
+			//monster.push_back(new Monster(800, 570, 50));
+			stage_count++;
+		}
 		map3.OnShow();			// 貼上背景圖
 		if (monster.size() == 0)
 			portal.OnShow();
