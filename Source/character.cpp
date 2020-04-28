@@ -34,6 +34,9 @@ namespace game_framework {
 	int Character::GetHP() {
 		return hP;
 	}
+	int Character::GetMaxHP() {
+		return maxHP;
+	}
 	void Character::SetHP(int Health){
 		hP = Health;
 	}
@@ -46,6 +49,18 @@ namespace game_framework {
 	}
 	int Character::GetFloor() {
 		return floor;
+	}
+	void Character::SetXP(int nxp) {
+		exp = nxp;
+	}
+	int Character::GetXP() {
+		return exp;
+	}
+	void Character::SetLevel(int nlv) {
+		level = nlv;
+	}
+	int Character::GetLevel() {
+		return level;
 	}
 	void Character::SetMovingDown(bool flag) {
 		isMovingDown = flag; 

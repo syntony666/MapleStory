@@ -12,10 +12,11 @@ namespace game_framework {
 	// Monster: class
 	/////////////////////////////////////////////////////////////////////////////
 
-	Monster::Monster(int nx, int ny)
+	Monster::Monster(int nx, int ny, int nxp)
 	{
 		Initialize();
 		SetXY(nx, ny);
+		exp = nxp;
 	}
 
 	Monster::~Monster() {

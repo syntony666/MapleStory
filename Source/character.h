@@ -40,6 +40,8 @@ namespace game_framework {
 		void SetHP(int Health);			// 設定生命值
 		void SetAttack(int Atk);			// 設定攻擊力
 		void SetMaxHP(int Health);		// 設定最大生命值
+		void SetXP(int nxp);			// 設定經驗值
+		void SetLevel(int nlv);			// 設定等級
 		void SetFloor(int Floor);		// 設定地板
 		void SetMovingDown(bool flag);	// 設定是否正在往下移動
 		void SetMovingLeft(bool flag);	// 設定是否正在往左移動
@@ -66,6 +68,9 @@ namespace game_framework {
 		int getYr();						// 右邊 y 座標
 		int GetAttack();					// 擷取攻擊力
 		int GetHP();						// 擷取生命值
+		int GetMaxHP();
+		int GetXP();
+		int GetLevel();
 		int GetFloor();					// 擷取地板
 		int GetFacing();
 		bool ifAttacking();
@@ -82,6 +87,8 @@ namespace game_framework {
 		int attack;
 		int floor;						//地板高度
 		int hP, maxHP;
+		int exp = 0;
+		int level = 1;
 		int facing = 1;					// 1=面向右 2=面向左
 		bool isMovingDown, isMovingUp,// 是否正在移動
 			 isMovingRight, isMovingLeft;

@@ -75,10 +75,13 @@ namespace game_framework {
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
 		CAnimation portal;
-		int portalX = 2180;
+		int portalX = 2080;
+		int stage = 1;
 		CMovingBitmap	background;					// 背景圖
 		Character *character = new Hero();			// 角色
-		Map map1 = Map1();					// 地圖
+		Map map1 = Map1();							// 地圖
+		Map map2 = Map2();							// 地圖
+		Map map3 = Map3();							// 地圖
 		vector<Character*> monster = Monster1();			// 怪物
 	};
 

@@ -239,6 +239,8 @@ void CGameStateRun::OnBeginState()
 	
 	character->SetMaxHP(500);
 	character->SetAttack(30);
+	character->SetXP(0);
+	character->SetLevel(1);
 
 	CAudio::Instance()->Stop(BGM_MENU);
 	CAudio::Instance()->Play(BGM_STAGE1, true);
@@ -255,7 +257,7 @@ void CGameStateRun::OnBeginState()
 	for (int i = 0; i < 2; i++)
 		portal.AddBitmap(blue[i], RGB(255, 255, 255));
 
-	portal.SetTopLeft(portalX, 550);
+	portal.SetTopLeft(portalX, 410);
 }
 
 #define HEIGHT_CHECK hero_pos.getY() <= monster_pos.getY() + 100 && hero_pos.getY() + 100 >= monster_pos.getY()
@@ -264,6 +266,7 @@ void CGameStateRun::OnBeginState()
 #define MONSTER_HIT_CHARACTER hero_pos.getX() - monster_pos.getX() <= 50 && monster_pos.getX() - hero_pos.getX() <= 0 || hero_pos.getX() - monster_pos.getX() <= 0 && monster_pos.getX() - hero_pos.getX() <= 50
 #define CHARACTER_HIT_MONSTER character->ifAttacking() && character->GetFacing() == 2 && hero_pos.getX() - monster_pos.getX() <= 100 && monster_pos.getX() - hero_pos.getX() <= 0 || character->ifAttacking() && character->GetFacing() == 1 && hero_pos.getX() - monster_pos.getX() <= 0 && monster_pos.getX() - hero_pos.getX() <= 100
 #define ON_PLATFORM hero_pos.getY() <= map1.getFloorY(i) + 100 && hero_pos.getY() >= map1.getFloorY(i) - 14 && hero_pos.getX() >= map1.getFloorXBegin(i) && hero_pos.getX() <= map1.getFloorXLast(i)
+#define IN_PORTAL hero_pos.getY() == 150 && hero_pos.getX() >= 2060 && hero_pos.getX() <= 2132
 
 void CGameStateRun::OnMove()							// 移動遊戲元素
 {
@@ -272,13 +275,15 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	map1.OnMove();
 	portal.OnMove();
 	Position hero_pos(character, map1);
+	TRACE("----hero-pos_xy---(%d, %d)\n", hero_pos.getX(), hero_pos.getY());
+	TRACE("----hero-level----(%d, %d)\n", character->GetLevel(), character->GetHP());
 
 	// 地圖移動相關
 	if (character->getX() <= 100 && character->ifMovingLeft()) {
 		map1.SetMovingLeft(true);
 		if (hero_pos.getX() > 100) {
 			portalX += 8;
-			portal.SetTopLeft(portalX, 550);
+			portal.SetTopLeft(portalX, 410);
 		}
 	}
 	else 
@@ -287,7 +292,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		map1.SetMovingRight(true);
 		if (hero_pos.getX() < 2204) {
 			portalX -= 8;
-			portal.SetTopLeft(portalX, 550);
+			portal.SetTopLeft(portalX, 410);
 		}
 	}
 	else
@@ -314,6 +319,13 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 	if (flag == 8) {
 		character->SetFloor(570);
+	}
+
+	// 玩家等級相關
+	if (character->GetXP() >= 100) {
+		character->SetXP(0);
+		character->SetLevel(character->GetLevel() + 1);
+		character->SetMaxHP(character->GetMaxHP() + character->GetLevel() * 50);
 	}
 
 	// 玩家死亡相關
@@ -364,29 +376,35 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		}
 
 		// 攻擊互動相關
-		if (MONSTER_HIT_CHARACTER && HIT_CHECK_CHARACTER) {
-			if (HEIGHT_CHECK) {
-				monster[i]->SetAttacking(true);
-				character->SetHP(character->GetHP() - monster[i]->GetAttack());
-				if (monster_pos.getX() >= hero_pos.getX())
-					character->SetHitLeft();
-				else if (monster_pos.getX() < hero_pos.getX())
-					character->SetHitRight();
+		if (MONSTER_HIT_CHARACTER) {
+			if (HIT_CHECK_CHARACTER) {
+				if (HEIGHT_CHECK) {
+					monster[i]->SetAttacking(true);
+					character->SetHP(character->GetHP() - monster[i]->GetAttack());
+					if (monster_pos.getX() >= hero_pos.getX())
+						character->SetHitLeft();
+					else if (monster_pos.getX() < hero_pos.getX())
+						character->SetHitRight();
+				}
 			}
 		}
-		if (CHARACTER_HIT_MONSTER && HIT_CHECK_MONSTER) {
-			if (HEIGHT_CHECK) {
-				monster[i]->SetHP(monster[i]->GetHP() - character->GetAttack());
-				if (character->GetFacing() == 2)
-					monster[i]->SetHitLeft();
-				else if (character->GetFacing() == 1)
-					monster[i]->SetHitRight();
+		if (CHARACTER_HIT_MONSTER) {
+			if (HIT_CHECK_MONSTER) {
+				if (HEIGHT_CHECK) {
+					monster[i]->SetHP(monster[i]->GetHP() - character->GetAttack());
+					if (character->GetFacing() == 2)
+						monster[i]->SetHitLeft();
+					else if (character->GetFacing() == 1)
+						monster[i]->SetHitRight();
+				}
 			}
 		}
 
 		// 怪物死亡相關
-		if (monster[i]->GetHP() <= 0)
+		if (monster[i]->GetHP() <= 0) {
+			character->SetXP(character->GetXP() + monster[i]->GetXP());
 			monster.erase(monster.begin() + i);
+		}
 	}
 }
 
@@ -405,6 +423,8 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	}
 	character->LoadBitmap();
 	map1.LoadBitmap();					// 載入背景的圖形
+	map2.LoadBitmap();
+	map3.LoadBitmap();
 	//
 	// 完成部分Loading動作，提高進度
 	//
@@ -424,6 +444,7 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_RIGHT = 0x27; // keyboard右箭頭
 	const char KEY_DOWN  = 0x28; // keyboard下箭頭
 	const char KEY_Z = 0x5A; // keyboard Z
+	Position hero_pos(character, map1);
 
 	if (nChar == KEY_Z) {
 		character->SetAttacking(true);
@@ -440,7 +461,13 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	}
 
 	if (nChar == KEY_UP) {
-		character->SetMovingUp(true);
+		if (monster.size() == 0) {
+			if (IN_PORTAL)
+				stage++;
+			else
+				character->SetMovingUp(true);
+		}else
+			character->SetMovingUp(true);
 	}
 	if (nChar == KEY_DOWN) {
 		character->SetMovingDown(true);
@@ -500,8 +527,21 @@ void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)
 
 void CGameStateRun::OnShow()
 {
-	map1.OnShow();			// 貼上背景圖
-	portal.OnShow();
+	if (stage == 1) {
+		map1.OnShow();			// 貼上背景圖
+		if (monster.size() == 0)
+			portal.OnShow();
+	}
+	if (stage == 2) {
+		map2.OnShow();			// 貼上背景圖
+		if (monster.size() == 0)
+			portal.OnShow();
+	}
+	if (stage == 3) {
+		map3.OnShow();			// 貼上背景圖
+		if (monster.size() == 0)
+			portal.OnShow();
+	}
 	for (size_t i = 0; i < monster.size(); i++) {
 		monster[i]->OnShow();
 	}
