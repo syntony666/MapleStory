@@ -9,9 +9,11 @@ namespace game_framework {
 	class Position		//¦ì¸m
 	{
 	public:
+		Position();
 		Position(Character* c, Map m);
 		int getX();
 		int getY();
+		void SetPosition(Character* c, Map m);
 	private:
 		int pos_x, pos_y;
 	};

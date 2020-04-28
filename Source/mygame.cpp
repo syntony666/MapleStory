@@ -276,14 +276,16 @@ void CGameStateRun::OnMove()							// ²¾°Ê¹CÀ¸¤¸¯À
 	character->OnMove();
 	if (stage == 1) {
 		map1.OnMove();
+		hero_pos.SetPosition(character, map1);
 	}
 	else if (stage == 2) {
 		map2.OnMove();
+		hero_pos.SetPosition(character, map2);
 	}
 	else if (stage == 3) {
 		map3.OnMove();
+		hero_pos.SetPosition(character, map3);
 	}
-	Position hero_pos(character, map1);
 	portal.OnMove();
 	TRACE("----hero-pos_xy---(%d, %d)\n", hero_pos.getX(), hero_pos.getY());
 	TRACE("----hero-level----(%d, %d)\n", character->GetLevel(), character->GetHP());

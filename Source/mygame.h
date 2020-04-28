@@ -84,6 +84,7 @@ namespace game_framework {
 		Map map2 = Map2();							// 地圖
 		Map map3 = Map3();							// 地圖
 		vector<Character*> monster = Monster1();			// 怪物
+		Position hero_pos;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
