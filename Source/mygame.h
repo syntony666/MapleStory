@@ -75,7 +75,9 @@ namespace game_framework {
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
 		CAnimation portal;
-		int portalX = 2080;
+		int portal1X = 2080;
+		int portal2X = 2100;
+		int portal3X = 2100;
 		int stage = 1;
 		int stage_count = 2;
 		CMovingBitmap	background;					// 背景圖

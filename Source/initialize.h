@@ -25,14 +25,14 @@ namespace game_framework {
 	}
 	inline Map Map2() {
 		Map gamemap;
-		Platform plats[8] = { {260, 404, 200},
-								{580, 980, 290},
-								{764, 1316,590},
-								{1204,1908,418},
-								{1436,1924,253},
-								{1948,2196,150},
-								{1780,2148,590},
-								{0,3000,0} };
+		Platform plats[8] = {	{460 , 948,118},
+								{1044,1780,192},
+								{1748,1980,323},
+								{1300,1704,441},
+								{868 ,1276,560},
+								{460 ,780 ,513},
+								{20  ,404 ,390},
+								{1756,1924,568} };
 		gamemap.setInitFloor(570);
 		gamemap.setInitZoom(2);
 		gamemap.setInitXY(0, 0);
@@ -42,7 +42,7 @@ namespace game_framework {
 	}
 	inline Map Map3() {
 		Map gamemap;
-		Platform plats[8] = { {260, 404, 200},
+		Platform plats[8] = {	{260, 404, 200},
 								{580, 980, 290},
 								{764, 1316,590},
 								{1204,1908,418},

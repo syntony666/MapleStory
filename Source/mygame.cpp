@@ -257,7 +257,7 @@ void CGameStateRun::OnBeginState()
 	for (int i = 0; i < 2; i++)
 		portal.AddBitmap(blue[i], RGB(255, 255, 255));
 
-	portal.SetTopLeft(portalX, 410);
+	portal.SetTopLeft(portal1X, 410);
 }
 
 #define HEIGHT_CHECK hero_pos.getY() <= monster_pos.getY() + 100 && hero_pos.getY() + 100 >= monster_pos.getY()
@@ -265,10 +265,12 @@ void CGameStateRun::OnBeginState()
 #define HIT_CHECK_MONSTER !monster[i]->ifHitLeft() && !monster[i]->ifHitRight()
 #define MONSTER_HIT_CHARACTER hero_pos.getX() - monster_pos.getX() <= 50 && monster_pos.getX() - hero_pos.getX() <= 0 || hero_pos.getX() - monster_pos.getX() <= 0 && monster_pos.getX() - hero_pos.getX() <= 50
 #define CHARACTER_HIT_MONSTER character->ifAttacking() && character->GetFacing() == 2 && hero_pos.getX() - monster_pos.getX() <= 100 && monster_pos.getX() - hero_pos.getX() <= 0 || character->ifAttacking() && character->GetFacing() == 1 && hero_pos.getX() - monster_pos.getX() <= 0 && monster_pos.getX() - hero_pos.getX() <= 100
-#define ON_PLATFORM_STAGE1 hero_pos.getY() <= map1.getFloorY(i) + 100 && hero_pos.getY() >= map1.getFloorY(i) - 14 && hero_pos.getX() >= map1.getFloorXBegin(i) && hero_pos.getX() <= map1.getFloorXLast(i)
-#define ON_PLATFORM_STAGE2 hero_pos.getY() <= map2.getFloorY(i) + 100 && hero_pos.getY() >= map2.getFloorY(i) - 14 && hero_pos.getX() >= map2.getFloorXBegin(i) && hero_pos.getX() <= map2.getFloorXLast(i)
-#define ON_PLATFORM_STAGE3 hero_pos.getY() <= map3.getFloorY(i) + 100 && hero_pos.getY() >= map3.getFloorY(i) - 14 && hero_pos.getX() >= map3.getFloorXBegin(i) && hero_pos.getX() <= map3.getFloorXLast(i)
-#define IN_PORTAL hero_pos.getY() == 150 && hero_pos.getX() >= 2060 && hero_pos.getX() <= 2132
+#define ON_PLATFORM_STAGE1 hero_pos.getY() <= map1.getFloorY(i) + 50 && hero_pos.getY() >= map1.getFloorY(i) - 14 && hero_pos.getX() >= map1.getFloorXBegin(i) && hero_pos.getX() <= map1.getFloorXLast(i)
+#define ON_PLATFORM_STAGE2 hero_pos.getY() <= map2.getFloorY(i) + 50 && hero_pos.getY() >= map2.getFloorY(i) - 14 && hero_pos.getX() >= map2.getFloorXBegin(i) && hero_pos.getX() <= map2.getFloorXLast(i)
+#define ON_PLATFORM_STAGE3 hero_pos.getY() <= map3.getFloorY(i) + 50 && hero_pos.getY() >= map3.getFloorY(i) - 14 && hero_pos.getX() >= map3.getFloorXBegin(i) && hero_pos.getX() <= map3.getFloorXLast(i)
+#define IN_PORTAL1 hero_pos.getY() == 150 && hero_pos.getX() >= 2060 && hero_pos.getX() <= 2132
+#define IN_PORTAL2 hero_pos.getY() <= 20 && hero_pos.getX() >= 2084 && hero_pos.getX() <= 2156
+#define IN_PORTAL3 hero_pos.getY() == 100 && hero_pos.getX() >= 2084 && hero_pos.getX() <= 2156
 
 void CGameStateRun::OnMove()							// 移動遊戲元素
 {
@@ -299,8 +301,18 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		if (stage == 3)
 			map3.SetMovingLeft(true);
 		if (hero_pos.getX() > 100) {
-			portalX += 8;
-			portal.SetTopLeft(portalX, 410);
+			if (stage == 1) {
+				portal1X += 8;
+				portal.SetTopLeft(portal1X, 410);
+			}
+			if (stage == 2) {
+				portal2X += 8;
+				portal.SetTopLeft(portal2X, 550);
+			}
+			if (stage == 3) {
+				portal3X += 8;
+				portal.SetTopLeft(portal3X, 450);
+			}
 		}
 	}
 	else {
@@ -319,8 +331,18 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		if (stage == 3)
 			map3.SetMovingRight(true);
 		if (hero_pos.getX() < 2204) {
-			portalX -= 8;
-			portal.SetTopLeft(portalX, 410);
+			if (stage == 1) {
+				portal1X -= 8;
+				portal.SetTopLeft(portal1X, 410);
+			}
+			if (stage == 2) {
+				portal2X -= 8;
+				portal.SetTopLeft(portal2X, 500);
+			}
+			if (stage == 3) {
+				portal3X -= 8;
+				portal.SetTopLeft(portal3X, 450);
+			}
 		}
 	}
 	else {
@@ -343,11 +365,23 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	// 地板判定相關
 	int flag = 0;
 	for (int i = 0; i < 8; i++) {
-		if (ON_PLATFORM_STAGE1) {
-			character->SetFloor(570 - map1.getFloorY(i));
+		if (stage == 1) {
+			if (ON_PLATFORM_STAGE1) 
+				character->SetFloor(570 - map1.getFloorY(i));
+			else 
+				flag++;
 		}
-		else {
-			flag++;
+		if (stage == 2) {
+			if (ON_PLATFORM_STAGE2) 
+				character->SetFloor(570 - map2.getFloorY(i));
+			else
+				flag++;
+		}
+		if (stage == 3) {
+			if (ON_PLATFORM_STAGE3) 
+				character->SetFloor(570 - map3.getFloorY(i));
+			else
+				flag++;
 		}
 	}
 
@@ -491,10 +525,24 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 
 	if (nChar == KEY_UP) {
 		if (monster.size() == 0) {
-			if (IN_PORTAL)
-				stage++;
-			else
-				character->SetMovingUp(true);
+			if (stage == 1) {
+				if (IN_PORTAL1)
+					stage++;
+				else
+					character->SetMovingUp(true);
+			}
+			if (stage == 2) {
+				if (IN_PORTAL2)
+					stage++;
+				else
+					character->SetMovingUp(true);
+			}
+			if (stage == 3) {
+				if (IN_PORTAL3)
+					stage++;
+				else
+					character->SetMovingUp(true);
+			}
 		}else
 			character->SetMovingUp(true);
 	}
@@ -564,6 +612,7 @@ void CGameStateRun::OnShow()
 	if (stage == 2) {
 		if (stage_count == 2) {
 			initHero(*character);
+			portal.SetTopLeft(portal2X, 550);
 			//monster.push_back(new Monster(500, 570, 50));
 			//monster.push_back(new Monster(800, 570, 50));
 			stage_count++;
@@ -575,6 +624,7 @@ void CGameStateRun::OnShow()
 	if (stage == 3) {
 		if (stage_count == 3) {
 			initHero(*character);
+			portal.SetTopLeft(portal3X, 450);
 			//monster.push_back(new Monster(500, 570, 50));
 			//monster.push_back(new Monster(800, 570, 50));
 			stage_count++;
