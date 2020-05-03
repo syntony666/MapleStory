@@ -81,11 +81,9 @@ namespace game_framework {
 		int stage = 1;
 		int stage_count = 2;
 		CMovingBitmap	background;					// 背景圖
-		Character *character = new Hero();			// 角色
-		Map map1 = Map1();							// 地圖
-		Map map2 = Map2();							// 地圖
-		Map map3 = Map3();							// 地圖
-		vector<Character*> monster = Monster1();			// 怪物
+		Character *hero;			// 角色
+		vector<Map> map;								// 地圖
+		vector<Character*> monster1;					// 怪物
 		Position hero_pos;
 	};
 

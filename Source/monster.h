@@ -17,12 +17,12 @@ namespace game_framework {
 		Monster(int nx, int ny, int nxp);
 		~Monster();
 		void Initialize();				// 設定monster為初始值
-		void LoadBitmap();				// 載入圖形
 		void OnMove();					// 移動monster
 		void OnShow();					// 將monster圖形貼到畫面
 
 	protected:
 		const int HERO_STEP = 8;
+		int initX, initY;
 	};
 }
 #endif

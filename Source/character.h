@@ -26,9 +26,10 @@ namespace game_framework {
 	public:
 		Character() {}
 		virtual void Initialize() = 0;	// 設定初始值
-		virtual void LoadBitmap() = 0;	// 載入圖形
 		virtual void OnMove() = 0;		// 移動
 		virtual void OnShow() = 0;		// 顯示角色
+		void addBitmap(int standR, int standL, int downR, int downL, int jumpR, int jumpL, vector<int> goR, vector<int> goL, vector<int> attackR, vector<int> attackL);
+		//加入圖形(沒有的填0)
 
 		//HP
 

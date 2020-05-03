@@ -134,6 +134,38 @@ namespace game_framework {
 		return isMovingDown;
 	}
 	
+
+
+	void Character::addBitmap(int standR, int standL, int downR, int downL, int jumpR, int jumpL, vector<int> goR, vector<int> goL, vector<int> attackR, vector<int> attackL)
+	{
+		if (standR != 0)
+			a.standRight.AddBitmap(standR, DEFAULT_RGB);
+		if (standL != 0)
+			a.standLeft.AddBitmap(standL, DEFAULT_RGB);
+		if (downR != 0)
+			a.downRight.AddBitmap(downR, DEFAULT_RGB);
+		if (downL != 0)
+			a.downLeft.AddBitmap(downL, DEFAULT_RGB);
+		if (jumpR != 0)
+			a.jumpRight.AddBitmap(jumpR, DEFAULT_RGB);
+		if (jumpL != 0)
+			a.jumpLeft.AddBitmap(jumpL, DEFAULT_RGB);
+		a.goRight = CAnimation(3);
+		a.goLeft = CAnimation(3);
+		a.attackRight = CAnimation(1);
+		a.attackLeft = CAnimation(1);
+		for (size_t i = 0; i < goR.size(); i++) 
+			a.goRight.AddBitmap(goR[i], DEFAULT_RGB);
+		for (size_t i = 0; i < goL.size(); i++) 
+			a.goLeft.AddBitmap(goL[i], DEFAULT_RGB);
+		for (size_t i = 0; i < attackR.size(); i++) 
+			a.attackRight.AddBitmap(attackR[i], DEFAULT_RGB);
+		for (size_t i = 0; i < attackL.size(); i++) 
+			a.attackLeft.AddBitmap(attackL[i], DEFAULT_RGB);
+		hp_addBitmaps();
+	}
+
+
 	// Monsters
 	void Character::Set_Monster_Go_Left(bool flag) {
 		is_Monster_Go_Left = flag;

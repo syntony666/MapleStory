@@ -60,16 +60,18 @@ namespace game_framework {
 	inline void initHero(Character& hero) {
 		hero.Initialize();
 		hero.SetXY(100, 570);
-		hero.SetFacing(1);
+		hero.SetFacing(1);	
+		hero.SetMaxHP(500);
+		hero.SetAttack(30);
+		hero.SetXP(0);
+		hero.SetLevel(1);
 	}
 	inline void initMonster1(vector<Character*> & monster) {
-		monster.push_back(new Monster(500, 570, 50));
-		monster.push_back(new Monster(800, 570, 50));
-	}
-	inline vector<Character*> Monster1() {
-		vector<Character*> monster;
-		initMonster1(monster);
-		return monster;
+		for (size_t i = 0; i < monster.size(); i++) {
+			monster[i]->Initialize();
+			monster[i]->SetMaxHP(100);
+			monster[i]->SetAttack(50);
+		}
 	}
 }
 

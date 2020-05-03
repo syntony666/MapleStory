@@ -14,9 +14,10 @@ namespace game_framework {
 
 	Monster::Monster(int nx, int ny, int nxp)
 	{
-		Initialize();
-		SetXY(nx, ny);
+		//Initialize();
 		exp = nxp;
+		initX = nx;
+		initY = ny;
 	}
 
 	Monster::~Monster() {
@@ -25,28 +26,14 @@ namespace game_framework {
 	void Monster::Initialize()
 	{
 		isMovingLeft = isMovingRight = false;
+		isAttacking = isHitLeft = isHitRight = isDead = false;
 		STEP_SIZE = 3;
 		const int FLOOR = 570;
 		floor = FLOOR;
 		const int INITIAL_VELOCITY = 14;
 		rising = false;
 		initial_velocity = INITIAL_VELOCITY;
-	}
-
-	void Monster::LoadBitmap()
-	{
-		a.standRight.AddBitmap(IDB_MONSTER_STAND_RIGHT, RGB(255, 255, 255));
-		a.standLeft.AddBitmap(IDB_MONSTER_STAND_LEFT, RGB(255, 255, 255));
-		hp_addBitmaps();
-
-		int attackLeft[] = { IDB_MONSTER_ATTACK_LEFT1,IDB_MONSTER_ATTACK_LEFT2, IDB_MONSTER_ATTACK_LEFT3 };
-		int attackRight[] = { IDB_MONSTER_ATTACK_RIGHT1,IDB_MONSTER_ATTACK_RIGHT2, IDB_MONSTER_ATTACK_RIGHT3 };
-		a.attackRight = CAnimation(3);
-		a.attackLeft = CAnimation(3);
-		for (int i = 0; i < 3; i++) {
-			a.attackLeft.AddBitmap(attackLeft[i], RGB(255, 255, 255));
-			a.attackRight.AddBitmap(attackRight[i], RGB(255, 255, 255));
-		}
+		SetXY(initX, initY);
 	}
 
 	void Monster::OnMove()
