@@ -105,6 +105,20 @@
 #define IDB_PORTAL_PURPLE1              258
 #define IDB_BITMAP25                    259
 #define IDB_PORTAL_PURPLE2              259
+#define IDB_SLASH_01                    260
+#define IDB_SLASH_02                    261
+#define IDB_SLASH_03                    262
+#define IDB_SLASH_04                    263
+#define IDB_SLASH_05                    264
+#define IDB_SLASH_06                    265
+#define IDB_SLASH_07                    266
+#define IDB_SLASH_08                    267
+#define IDB_SLASH_09                    268
+#define IDB_SLASH_10                    269
+#define IDB_SLASH_11                    270
+#define IDB_SLASH_12                    271
+#define IDB_BITMAP35                    272
+#define IDB_SLASH_13                    272
 #define IDC_README                      1001
 #define ID_FILE_PAUSE                   32771
 #define ID_TOGGLE_FULLSCREEN            32772
@@ -117,7 +131,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        260
+#define _APS_NEXT_RESOURCE_VALUE        273
 #define _APS_NEXT_COMMAND_VALUE         32776
 #define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           101

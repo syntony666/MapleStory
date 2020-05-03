@@ -19,6 +19,7 @@ namespace game_framework {
 		CAnimation jumpLeft;			// 向左跳
 		CAnimation attackRight;		// 向右攻擊
 		CAnimation attackLeft;		// 向左攻擊
+		CAnimation slashAnimation;	// 技能動畫
 	};
 
 	class Character
@@ -61,6 +62,10 @@ namespace game_framework {
 		void Set_Monster_Go_Left(bool flag);
 		void Set_Monster_Go_Right(bool flag);
 
+		//Hero
+		void SetSlashing(bool flag);
+		bool ifSlashing();
+
 		//GETs
 
 		int getX();						// 左邊 x 座標
@@ -94,6 +99,7 @@ namespace game_framework {
 		bool isMovingDown, isMovingUp,// 是否正在移動
 			 isMovingRight, isMovingLeft;
 		bool isAttacking = false;		// 是否正在攻擊
+		bool isSlashing = false;		// 是否正在施放技能
 		bool isHitLeft = false;			// 是否受到攻擊
 		bool isHitRight = false;		// 是否受到攻擊
 		bool isDead = false;
@@ -103,8 +109,10 @@ namespace game_framework {
 		int initial_velocity;			// 初始速度
 		int hit_time = 18;
 		int attack_time = 15;
+		int skill_time = 26;		// 技能動畫時間
 		int velocity;					// 目前的速度(點/次)
 		int STEP_SIZE = 8;				// 行走速度
+		int cooldown = 30 * 10;			// 技能冷卻 10 秒
 		Animations a;
 	};
 }

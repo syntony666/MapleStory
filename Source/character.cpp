@@ -173,4 +173,12 @@ namespace game_framework {
 	void Character::Set_Monster_Go_Right(bool flag) {
 		is_Monster_Go_Right = flag;
 	}
+
+	// Hero
+	void Character::SetSlashing(bool flag) {
+		isSlashing = flag;
+	}
+	bool Character::ifSlashing() {
+		return isSlashing;
+	}
 }

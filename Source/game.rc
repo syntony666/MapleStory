@@ -206,6 +206,32 @@ IDB_PORTAL_PURPLE1      BITMAP                  "..\\res\\Portal\\Portal_Purple_
 
 IDB_PORTAL_PURPLE2      BITMAP                  "..\\res\\Portal\\Portal_Purple_2.bmp"
 
+IDB_SLASH_01            BITMAP                  "..\\res\\Skill\\slash_01.bmp"
+
+IDB_SLASH_02            BITMAP                  "..\\res\\Skill\\slash_02.bmp"
+
+IDB_SLASH_03            BITMAP                  "..\\res\\Skill\\slash_03.bmp"
+
+IDB_SLASH_04            BITMAP                  "..\\res\\Skill\\slash_04.bmp"
+
+IDB_SLASH_05            BITMAP                  "..\\res\\Skill\\slash_05.bmp"
+
+IDB_SLASH_06            BITMAP                  "..\\res\\skill\\slash_06.bmp"
+
+IDB_SLASH_07            BITMAP                  "..\\res\\Skill\\slash_07.bmp"
+
+IDB_SLASH_08            BITMAP                  "..\\res\\Skill\\slash_08.bmp"
+
+IDB_SLASH_09            BITMAP                  "..\\res\\Skill\\slash_09.bmp"
+
+IDB_SLASH_10            BITMAP                  "..\\res\\Skill\\slash_10.bmp"
+
+IDB_SLASH_11            BITMAP                  "..\\res\\Skill\\slash_11.bmp"
+
+IDB_SLASH_12            BITMAP                  "..\\res\\Skill\\slash_12.bmp"
+
+IDB_SLASH_13            BITMAP                  "..\\res\\Skill\\slash_13.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
