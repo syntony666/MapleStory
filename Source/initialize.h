@@ -65,6 +65,10 @@ namespace game_framework {
 	inline void initMonster1(vector<Character*> & monster) {
 		monster.push_back(new Monster(500, 570, 50));
 		monster.push_back(new Monster(800, 570, 50));
+		monster.push_back(new Monster(1000, 570, 50));
+		monster.push_back(new Monster(1100, 570, 50));
+		monster.push_back(new Monster(1300, 570, 50));
+		monster.push_back(new Monster(2000, 570, 50));
 	}
 	inline vector<Character*> Monster1() {
 		vector<Character*> monster;

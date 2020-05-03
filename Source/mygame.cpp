@@ -291,9 +291,9 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		hero_pos.SetPosition(character, map3);
 	}
 	portal.OnMove();
-	TRACE("----hero-pos_xy---(%d, %d)\n", hero_pos.getX(), hero_pos.getY());
-	TRACE("--hero-level_HP---(%d, %d)\n", character->GetLevel(), character->GetHP());
-	TRACE("----Slash_CD------(%d)\n", slash_cd/60);
+	TRACE("-----------hero-pos_xy---(%d, %d)\n", hero_pos.getX(), hero_pos.getY());
+	TRACE("--hero-level_Attack_HP---(%d, %d, %d)\n", character->GetLevel(), character->GetAttack(), character->GetHP());
+	TRACE("-----------Slash_CD------(%d)\n", slash_cd/30);
 
 	// 地圖移動相關
 	if (character->getX() <= 100 && character->ifMovingLeft()) {
@@ -397,6 +397,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		character->SetXP(0);
 		character->SetLevel(character->GetLevel() + 1);
 		character->SetMaxHP(character->GetMaxHP() + character->GetLevel() * 50);
+		character->SetAttack(character->GetAttack() + character->GetLevel() * 5);
 	}
 
 	// 玩家技能相關
