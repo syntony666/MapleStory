@@ -27,46 +27,6 @@ namespace game_framework {
 		initial_velocity = INITIAL_VELOCITY;
 	}
 
-	void Hero::LoadBitmap()
-	{
-		int frogLeft[] = { IDB_FROG_GO_LEFT1,IDB_FROG_GO_LEFT2, IDB_FROG_STAND_LEFT};
-		int frogRight[] = { IDB_FROG_GO_RIGHT1,IDB_FROG_GO_RIGHT2, IDB_FROG_STAND_RIGHT };
-		a.goRight = CAnimation(3);
-		a.goLeft = CAnimation(3);
-		for (int i = 0; i < 3; i++) {
-			a.goLeft.AddBitmap(frogLeft[i], RGB(255, 255, 255));
-			a.goRight.AddBitmap(frogRight[i], RGB(255, 255, 255));
-		}
-
-		int frogAttackRight[] = { IDB_FROG_ATTACK_RIGHT1, IDB_FROG_ATTACK_RIGHT2, IDB_FROG_ATTACK_RIGHT3,
-								  IDB_FROG_ATTACK_RIGHT4, IDB_FROG_ATTACK_RIGHT5, IDB_FROG_ATTACK_RIGHT6 };
-		int frogAttackLeft[] = { IDB_FROG_ATTACK_LEFT1, IDB_FROG_ATTACK_LEFT2, IDB_FROG_ATTACK_LEFT3,
-								 IDB_FROG_ATTACK_LEFT4, IDB_FROG_ATTACK_LEFT5, IDB_FROG_ATTACK_LEFT6 };
-		a.attackRight = CAnimation(1);
-		a.attackLeft = CAnimation(1);
-		for (int i = 0; i < 6; i++) {
-			a.attackLeft.AddBitmap(frogAttackLeft[i], RGB(255, 255, 255));
-			a.attackRight.AddBitmap(frogAttackRight[i], RGB(255, 255, 255));
-		}
-
-		int Slash[] = { IDB_SLASH_01, IDB_SLASH_02, IDB_SLASH_03, IDB_SLASH_04,
-						IDB_SLASH_05, IDB_SLASH_06, IDB_SLASH_07, IDB_SLASH_08,
-						IDB_SLASH_09, IDB_SLASH_10, IDB_SLASH_11, IDB_SLASH_12,
-						IDB_SLASH_13 };
-		a.slashAnimation = CAnimation(2);
-		for (int i = 0; i < 13; i++) {
-			a.slashAnimation.AddBitmap(Slash[i], RGB(0, 0, 0));
-		}
-
-		a.standRight.AddBitmap(IDB_FROG_STAND_RIGHT, RGB(255, 255, 255));
-		a.standLeft.AddBitmap(IDB_FROG_STAND_LEFT, RGB(255, 255, 255));
-		a.downRight.AddBitmap(IDB_FROG_DOWN_RIGHT, RGB(255, 255, 255));
-		a.downLeft.AddBitmap(IDB_FROG_DOWN_LEFT, RGB(255, 255, 255));
-		a.jumpRight.AddBitmap(IDB_FROG_JUMP_RIGHT, RGB(255, 255, 255));
-		a.jumpLeft.AddBitmap(IDB_FROG_JUMP_LEFT, RGB(255, 255, 255));
-		hp_addBitmaps();
-	}
-
 	void Hero::OnMove()
 	{
 		TRACE("---------------%d\n", floor);

@@ -29,7 +29,7 @@ namespace game_framework {
 		virtual void Initialize() = 0;	// 設定初始值
 		virtual void OnMove() = 0;		// 移動
 		virtual void OnShow() = 0;		// 顯示角色
-		void addBitmap(int standR, int standL, int downR, int downL, int jumpR, int jumpL, vector<int> goR, vector<int> goL, vector<int> attackR, vector<int> attackL);
+		void addBitmap(int standR, int standL, int downR, int downL, int jumpR, int jumpL, vector<int> goR, vector<int> goL, vector<int> attackR, vector<int> attackL,vector<int> slash);
 		//加入圖形(沒有的填0)
 
 		//HP
@@ -79,6 +79,7 @@ namespace game_framework {
 		int GetLevel();
 		int GetFloor();					// 擷取地板
 		int GetFacing();
+
 		bool ifAttacking();
 		bool ifHitLeft();
 		bool ifHitRight();
@@ -86,6 +87,7 @@ namespace game_framework {
 		bool ifMovingRight();
 		bool ifMovingUp();
 		bool ifMovingDown();
+		bool ifDead();
 	protected:
 		CAnimation hp[11];
 		int pos_x,	pos_y;				//左邊座標

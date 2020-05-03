@@ -133,10 +133,13 @@ namespace game_framework {
 	bool Character::ifMovingDown() { 
 		return isMovingDown;
 	}
+	bool Character::ifDead() {
+		return isDead;
+	}
 	
 
 
-	void Character::addBitmap(int standR, int standL, int downR, int downL, int jumpR, int jumpL, vector<int> goR, vector<int> goL, vector<int> attackR, vector<int> attackL)
+	void Character::addBitmap(int standR, int standL, int downR, int downL, int jumpR, int jumpL, vector<int> goR, vector<int> goL, vector<int> attackR, vector<int> attackL, vector<int> slash)
 	{
 		if (standR != 0)
 			a.standRight.AddBitmap(standR, DEFAULT_RGB);
@@ -154,6 +157,7 @@ namespace game_framework {
 		a.goLeft = CAnimation(3);
 		a.attackRight = CAnimation(1);
 		a.attackLeft = CAnimation(1);
+		a.slashAnimation = CAnimation(2);
 		for (size_t i = 0; i < goR.size(); i++) 
 			a.goRight.AddBitmap(goR[i], DEFAULT_RGB);
 		for (size_t i = 0; i < goL.size(); i++) 
@@ -162,6 +166,8 @@ namespace game_framework {
 			a.attackRight.AddBitmap(attackR[i], DEFAULT_RGB);
 		for (size_t i = 0; i < attackL.size(); i++) 
 			a.attackLeft.AddBitmap(attackL[i], DEFAULT_RGB);
+		for (size_t i = 0; i < slash.size(); i++)
+			a.slashAnimation.AddBitmap(slash[i], DEFAULT_RGB);
 		hp_addBitmaps();
 	}
 

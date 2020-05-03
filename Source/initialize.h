@@ -6,6 +6,9 @@
 #include "position.h"
 #include <vector>
 namespace game_framework {
+
+	// Map 直接回傳物件
+
 	inline Map Map1() {
 		Map gamemap;
 		Platform plats[8] = {	{260, 404, 200},
@@ -57,6 +60,9 @@ namespace game_framework {
 		gamemap.setInitBitmap(IDB_BACKGROUND3);
 		return gamemap;
 	}
+
+	// Character 只重置數值
+
 	inline void initHero(Character& hero) {
 		hero.Initialize();
 		hero.SetXY(100, 570);
@@ -67,17 +73,9 @@ namespace game_framework {
 		hero.SetLevel(1);
 	}
 	inline void initMonster1(vector<Character*> & monster) {
-		monster.push_back(new Monster(500, 570, 50));
-		monster.push_back(new Monster(800, 570, 50));
-		monster.push_back(new Monster(1000, 570, 50));
-		monster.push_back(new Monster(1100, 570, 50));
-		monster.push_back(new Monster(1300, 570, 50));
-		monster.push_back(new Monster(2000, 570, 50));
-	}
-	inline vector<Character*> Monster1() {
-		vector<Character*> monster;
-		initMonster1(monster);
-		return monster;
+		if(monster.size()<6){
+		
+		}
 		for (size_t i = 0; i < monster.size(); i++) {
 			monster[i]->Initialize();
 			monster[i]->SetMaxHP(100);

@@ -237,20 +237,9 @@ void CGameStateRun::OnBeginState()
 {
 	initHero(*hero);
 	initMonster1(monster1);
-	
-	hero->SetMaxHP(500);
-	hero->SetAttack(30);
-	hero->SetXP(0);
-	hero->SetLevel(1);
 
 	CAudio::Instance()->Stop(BGM_MENU);
 	CAudio::Instance()->Play(BGM_STAGE1, true);
-
-	for (size_t i = 0; i < monster1.size(); i++) {
-		monster1[i]->Initialize();
-		monster1[i]->SetMaxHP(100);
-		monster1[i]->SetAttack(50);
-	}
 
 	int blue[] = { IDB_PORTAL_BLUE1,IDB_PORTAL_BLUE2 };
 
@@ -261,16 +250,16 @@ void CGameStateRun::OnBeginState()
 	portal.SetTopLeft(portal1X, 410);
 }
 
-#define HEIGHT_CHECK hero_pos.getY() <= monster_pos.getY() + 100 && hero_pos.getY() + 100 >= monster_pos.getY()
-#define SLASH_HEIGHT_CHECK hero_pos.getY() <= monster_pos.getY() + 100 && hero_pos.getY() + 300 >= monster_pos.getY()
-#define HIT_CHECK_CHARACTER !character->ifHitLeft() && !character->ifHitRight()
-#define HIT_CHECK_MONSTER !monster[i]->ifHitLeft() && !monster[i]->ifHitRight()
-#define MONSTER_HIT_CHARACTER hero_pos.getX() - monster_pos.getX() <= 50 && monster_pos.getX() - hero_pos.getX() <= 0 || hero_pos.getX() - monster_pos.getX() <= 0 && monster_pos.getX() - hero_pos.getX() <= 50
-#define CHARACTER_HIT_MONSTER character->ifAttacking() && character->GetFacing() == 2 && hero_pos.getX() - monster_pos.getX() <= 100 && monster_pos.getX() - hero_pos.getX() <= 0 || character->ifAttacking() && character->GetFacing() == 1 && hero_pos.getX() - monster_pos.getX() <= 0 && monster_pos.getX() - hero_pos.getX() <= 100
-#define CHARACTER_SLASH_MONSTER character->ifSlashing() && hero_pos.getX() - monster_pos.getX() <= 340 && monster_pos.getX() - hero_pos.getX() <= 0 || character->ifSlashing() && hero_pos.getX() - monster_pos.getX() <= 0 && monster_pos.getX() - hero_pos.getX() <= 340
-#define ON_PLATFORM_STAGE1 hero_pos.getY() <= map1.getFloorY(i) + 50 && hero_pos.getY() >= map1.getFloorY(i) - 14 && hero_pos.getX() >= map1.getFloorXBegin(i) && hero_pos.getX() <= map1.getFloorXLast(i)
-#define ON_PLATFORM_STAGE2 hero_pos.getY() <= map2.getFloorY(i) + 50 && hero_pos.getY() >= map2.getFloorY(i) - 14 && hero_pos.getX() >= map2.getFloorXBegin(i) && hero_pos.getX() <= map2.getFloorXLast(i)
-#define ON_PLATFORM_STAGE3 hero_pos.getY() <= map3.getFloorY(i) + 50 && hero_pos.getY() >= map3.getFloorY(i) - 14 && hero_pos.getX() >= map3.getFloorXBegin(i) && hero_pos.getX() <= map3.getFloorXLast(i)
+#define HEIGHT_CHECK hero_pos.getY() <= monster1_pos.getY() + 100 && hero_pos.getY() + 100 >= monster1_pos.getY()
+#define SLASH_HEIGHT_CHECK hero_pos.getY() <= monster1_pos.getY() + 100 && hero_pos.getY() + 300 >= monster1_pos.getY()
+#define HIT_CHECK_CHARACTER !hero->ifHitLeft() && !hero->ifHitRight()
+#define HIT_CHECK_MONSTER !monster1[i]->ifHitLeft() && !monster1[i]->ifHitRight()
+#define MONSTER_HIT_CHARACTER hero_pos.getX() - monster1_pos.getX() <= 50 && monster1_pos.getX() - hero_pos.getX() <= 0 || hero_pos.getX() - monster1_pos.getX() <= 0 && monster1_pos.getX() - hero_pos.getX() <= 50
+#define CHARACTER_HIT_MONSTER hero->ifAttacking() && hero->GetFacing() == 2 && hero_pos.getX() - monster1_pos.getX() <= 100 && monster1_pos.getX() - hero_pos.getX() <= 0 || hero->ifAttacking() && hero->GetFacing() == 1 && hero_pos.getX() - monster1_pos.getX() <= 0 && monster1_pos.getX() - hero_pos.getX() <= 100
+#define CHARACTER_SLASH_MONSTER hero->ifSlashing() && hero_pos.getX() - monster1_pos.getX() <= 340 && monster1_pos.getX() - hero_pos.getX() <= 0 || hero->ifSlashing() && hero_pos.getX() - monster1_pos.getX() <= 0 && monster1_pos.getX() - hero_pos.getX() <= 340
+#define ON_PLATFORM_STAGE1 hero_pos.getY() <= map[0].getFloorY(i) + 50 && hero_pos.getY() >= map[0].getFloorY(i) - 14 && hero_pos.getX() >= map[0].getFloorXBegin(i) && hero_pos.getX() <= map[0].getFloorXLast(i)
+#define ON_PLATFORM_STAGE2 hero_pos.getY() <= map[1].getFloorY(i) + 50 && hero_pos.getY() >= map[1].getFloorY(i) - 14 && hero_pos.getX() >= map[1].getFloorXBegin(i) && hero_pos.getX() <= map[1].getFloorXLast(i)
+#define ON_PLATFORM_STAGE3 hero_pos.getY() <= map[2].getFloorY(i) + 50 && hero_pos.getY() >= map[2].getFloorY(i) - 14 && hero_pos.getX() >= map[2].getFloorXBegin(i) && hero_pos.getX() <= map[2].getFloorXLast(i)
 #define IN_PORTAL1 hero_pos.getY() == 150 && hero_pos.getX() >= 2060 && hero_pos.getX() <= 2132
 #define IN_PORTAL2 hero_pos.getY() <= 20 && hero_pos.getX() >= 2084 && hero_pos.getX() <= 2156
 #define IN_PORTAL3 hero_pos.getY() == 100 && hero_pos.getX() >= 2084 && hero_pos.getX() <= 2156
@@ -293,7 +282,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	}
 	portal.OnMove();
 	TRACE("-----------hero-pos_xy---(%d, %d)\n", hero_pos.getX(), hero_pos.getY());
-	TRACE("--hero-level_Attack_HP---(%d, %d, %d)\n", character->GetLevel(), character->GetAttack(), character->GetHP());
+	TRACE("--hero-level_Attack_HP---(%d, %d, %d)\n", hero->GetLevel(), hero->GetAttack(), hero->GetHP());
 	TRACE("-----------Slash_CD------(%d)\n", slash_cd/30);
 
 	// 地圖移動相關
@@ -394,11 +383,11 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	}
 
 	// 玩家等級相關
-	if (character->GetXP() >= 100) {
-		character->SetXP(0);
-		character->SetLevel(character->GetLevel() + 1);
-		character->SetMaxHP(character->GetMaxHP() + character->GetLevel() * 50);
-		character->SetAttack(character->GetAttack() + character->GetLevel() * 5);
+	if (hero->GetXP() >= 100) {
+		hero->SetXP(0);
+		hero->SetLevel(hero->GetLevel() + 1);
+		hero->SetMaxHP(hero->GetMaxHP() + hero->GetLevel() * 50);
+		hero->SetAttack(hero->GetAttack() + hero->GetLevel() * 5);
 	}
 
 	// 玩家技能相關
@@ -413,6 +402,9 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		GotoGameState(GAME_STATE_OVER);
 
 	for (size_t i = 0; i < monster1.size(); i++) {
+		if (monster1[i]->ifDead()) {
+			continue;
+		}
 		Position monster1_pos(monster1[i], map[0]);
 		monster1[i]->OnMove();
 
@@ -466,22 +458,22 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		if (CHARACTER_HIT_MONSTER) {
 			if (HIT_CHECK_MONSTER) {
 				if (HEIGHT_CHECK) {
-					monster[i]->SetHP(monster[i]->GetHP() - character->GetAttack());
-					if (character->GetFacing() == 2)
-						monster[i]->SetHitLeft();
-					else if (character->GetFacing() == 1)
-						monster[i]->SetHitRight();
+					monster1[i]->SetHP(monster1[i]->GetHP() - hero->GetAttack());
+					if (hero->GetFacing() == 2)
+						monster1[i]->SetHitLeft();
+					else if (hero->GetFacing() == 1)
+						monster1[i]->SetHitRight();
 				}
 			}
 		}
 		if (CHARACTER_SLASH_MONSTER) {
 			if (HIT_CHECK_MONSTER) {
 				if (SLASH_HEIGHT_CHECK) {
-					monster[i]->SetHP(monster[i]->GetHP() - character->GetAttack() * 2);
-					if (monster_pos.getX() >= hero_pos.getX())
-						monster[i]->SetHitRight();
+					monster1[i]->SetHP(monster1[i]->GetHP() - hero->GetAttack() * 2);
+					if (monster1_pos.getX() >= hero_pos.getX())
+						monster1[i]->SetHitRight();
 					else
-						monster[i]->SetHitLeft();
+						monster1[i]->SetHitLeft();
 				}
 			}
 		}
@@ -489,7 +481,8 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		// 怪物死亡相關
 		if (monster1[i]->GetHP() <= 0) {
 			hero->SetXP(hero->GetXP() + monster1[i]->GetXP());
-			monster1.erase(monster1.begin() + i);
+			monster1[i]->SetDead(true);
+			monster1[i]->SetXY(-1, -1);
 		}
 	}
 }
@@ -506,13 +499,17 @@ void CGameStateRun::OnInit() {
 							  IDB_FROG_ATTACK_RIGHT4, IDB_FROG_ATTACK_RIGHT5, IDB_FROG_ATTACK_RIGHT6 };
 	vector<int> hero_attackLeft = { IDB_FROG_ATTACK_LEFT1, IDB_FROG_ATTACK_LEFT2, IDB_FROG_ATTACK_LEFT3,
 							 IDB_FROG_ATTACK_LEFT4, IDB_FROG_ATTACK_LEFT5, IDB_FROG_ATTACK_LEFT6 };
+	vector<int> slash = { IDB_SLASH_01, IDB_SLASH_02, IDB_SLASH_03, IDB_SLASH_04,
+				IDB_SLASH_05, IDB_SLASH_06, IDB_SLASH_07, IDB_SLASH_08,
+				IDB_SLASH_09, IDB_SLASH_10, IDB_SLASH_11, IDB_SLASH_12,
+				IDB_SLASH_13 };
 
 	hero->addBitmap(
 		IDB_FROG_STAND_RIGHT, IDB_FROG_STAND_LEFT,
 		IDB_FROG_DOWN_RIGHT, IDB_FROG_DOWN_LEFT,
 		IDB_FROG_JUMP_RIGHT, IDB_FROG_JUMP_LEFT,
 		hero_goRight, hero_goLeft,
-		hero_attackRight, hero_attackLeft);
+		hero_attackRight, hero_attackLeft,slash);
 
 	ShowInitProgress(33);	
 
@@ -520,17 +517,22 @@ void CGameStateRun::OnInit() {
 
 	monster1.push_back(new Monster(500, 570, 50));
 	monster1.push_back(new Monster(800, 570, 50));
+	monster1.push_back(new Monster(1000, 570, 50));
+	monster1.push_back(new Monster(1100, 570, 50));
+	monster1.push_back(new Monster(1300, 570, 50));
+	monster1.push_back(new Monster(2000, 570, 50));
 
 	for (size_t i = 0; i < monster1.size(); i++) {
 		vector<int> attackRight = { IDB_MONSTER_ATTACK_RIGHT1,IDB_MONSTER_ATTACK_RIGHT2, IDB_MONSTER_ATTACK_RIGHT3 };
 		vector<int> attackLeft = { IDB_MONSTER_ATTACK_LEFT1,IDB_MONSTER_ATTACK_LEFT2, IDB_MONSTER_ATTACK_LEFT3 };
 		vector<int> goRight;
 		vector<int> goLeft;
+		vector<int> slash;
 		monster1[i]->addBitmap(
 		IDB_MONSTER_STAND_RIGHT, IDB_MONSTER_STAND_LEFT,
 		0, 0, 0, 0,
 		goRight, goLeft,
-		attackLeft, attackRight);
+		attackLeft, attackRight,slash);
 	}
 
 	ShowInitProgress(66);
@@ -555,7 +557,7 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_DOWN  = 0x28; // keyboard下箭頭
 	const char KEY_Z = 0x5A; // keyboard Z
 	const char KEY_X = 0x58; // keyboard X
-	Position hero_pos(character, map1);
+	Position hero_pos(hero, map[0]);
 
 	if (nChar == KEY_Z) {
 		hero->SetAttacking(true);
@@ -563,7 +565,7 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 
 	if (nChar == KEY_X) {
 		if (slash_cd == 300) {
-			character->SetSlashing(true);
+			hero->SetSlashing(true);
 			slash_cd--;
 		}
 	}
@@ -659,9 +661,14 @@ void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)
 
 void CGameStateRun::OnShow()
 {
+	int monster_num = 0;
+
 	if (stage == 1) {
 		map[0].OnShow();			// 貼上背景圖
-		if (monster1.size() == 0)
+		for (size_t i = 0; i < monster1.size(); i++)
+			if (!monster1[i]->ifDead())
+				monster_num++;
+		if (monster_num == 0)
 			portal.OnShow();
 	}
 	if (stage == 2) {

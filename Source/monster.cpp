@@ -38,6 +38,8 @@ namespace game_framework {
 
 	void Monster::OnMove()
 	{
+		if (isDead)
+			return;
 		if (is_Monster_Go_Left) {	//若碰壁就動地圖直到地圖的邊緣
 			STEP_SIZE = -3;
 			pos_x += STEP_SIZE;
@@ -119,31 +121,34 @@ namespace game_framework {
 
 	void Monster::OnShow()
 	{
-		a.standRight.SetTopLeft(pos_x, pos_y);
-		a.standLeft.SetTopLeft(pos_x, pos_y);
+		if (!isDead) {
 
-		if (STEP_SIZE >= 0) {
-			if (isAttacking) {
-				a.attackRight.SetTopLeft(a.standRight.Left(), a.standRight.Top());
-				a.attackRight.OnShow();
-				a.attackRight.OnMove();
+			a.standRight.SetTopLeft(pos_x, pos_y);
+			a.standLeft.SetTopLeft(pos_x, pos_y);
+
+			if (STEP_SIZE >= 0) {
+				if (isAttacking) {
+					a.attackRight.SetTopLeft(a.standRight.Left(), a.standRight.Top());
+					a.attackRight.OnShow();
+					a.attackRight.OnMove();
+				}
+				else {
+					a.standRight.OnShow();
+					a.standRight.OnMove();
+				}
 			}
 			else {
-				a.standRight.OnShow();
-				a.standRight.OnMove();
+				if (isAttacking) {
+					a.attackLeft.SetTopLeft(a.standLeft.Left(), a.standLeft.Top());
+					a.attackLeft.OnShow();
+					a.attackLeft.OnMove();
+				}
+				else {
+					a.standLeft.OnShow();
+					a.standLeft.OnMove();
+				}
 			}
+			hp_OnShow();
 		}
-		else {
-			if (isAttacking) {
-				a.attackLeft.SetTopLeft(a.standLeft.Left(), a.standLeft.Top());
-				a.attackLeft.OnShow();
-				a.attackLeft.OnMove();
-			}
-			else {
-				a.standLeft.OnShow();
-				a.standLeft.OnMove();
-			}
-		}
-		hp_OnShow();
 	}
 }
