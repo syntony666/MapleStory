@@ -399,6 +399,13 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		character->SetMaxHP(character->GetMaxHP() + character->GetLevel() * 50);
 	}
 
+	// 玩家技能相關
+	if (slash_cd <= 299) {
+		slash_cd--;
+		if (slash_cd == 0)
+			slash_cd = 300;
+	}
+
 	// 玩家死亡相關
 	if (character->GetHP() <= 0)
 		GotoGameState(GAME_STATE_OVER);
@@ -477,12 +484,6 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 			}
 		}
 
-		if (slash_cd <= 599) {
-			slash_cd--;
-			if (slash_cd == 0)
-				slash_cd = 600;
-		}
-
 		// 怪物死亡相關
 		if (monster[i]->GetHP() <= 0) {
 			character->SetXP(character->GetXP() + monster[i]->GetXP());
@@ -535,7 +536,7 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	}
 
 	if (nChar == KEY_X) {
-		if (slash_cd == 600) {
+		if (slash_cd == 300) {
 			character->SetSlashing(true);
 			slash_cd--;
 		}

@@ -80,7 +80,7 @@ namespace game_framework {
 		int portal3X = 2100;
 		int stage = 1;
 		int stage_count = 2;
-		int slash_cd = 600;							// 技能CD
+		int slash_cd = 300;							// 技能CD
 		CMovingBitmap	background;					// 背景圖
 		Character *character = new Hero();			// 角色
 		Map map1 = Map1();							// 地圖
