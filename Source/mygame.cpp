@@ -261,10 +261,12 @@ void CGameStateRun::OnBeginState()
 }
 
 #define HEIGHT_CHECK hero_pos.getY() <= monster_pos.getY() + 100 && hero_pos.getY() + 100 >= monster_pos.getY()
+#define SLASH_HEIGHT_CHECK hero_pos.getY() <= monster_pos.getY() + 100 && hero_pos.getY() + 300 >= monster_pos.getY()
 #define HIT_CHECK_CHARACTER !character->ifHitLeft() && !character->ifHitRight()
 #define HIT_CHECK_MONSTER !monster[i]->ifHitLeft() && !monster[i]->ifHitRight()
 #define MONSTER_HIT_CHARACTER hero_pos.getX() - monster_pos.getX() <= 50 && monster_pos.getX() - hero_pos.getX() <= 0 || hero_pos.getX() - monster_pos.getX() <= 0 && monster_pos.getX() - hero_pos.getX() <= 50
 #define CHARACTER_HIT_MONSTER character->ifAttacking() && character->GetFacing() == 2 && hero_pos.getX() - monster_pos.getX() <= 100 && monster_pos.getX() - hero_pos.getX() <= 0 || character->ifAttacking() && character->GetFacing() == 1 && hero_pos.getX() - monster_pos.getX() <= 0 && monster_pos.getX() - hero_pos.getX() <= 100
+#define CHARACTER_SLASH_MONSTER character->ifSlashing() && hero_pos.getX() - monster_pos.getX() <= 340 && monster_pos.getX() - hero_pos.getX() <= 0 || character->ifSlashing() && hero_pos.getX() - monster_pos.getX() <= 0 && monster_pos.getX() - hero_pos.getX() <= 340
 #define ON_PLATFORM_STAGE1 hero_pos.getY() <= map1.getFloorY(i) + 50 && hero_pos.getY() >= map1.getFloorY(i) - 14 && hero_pos.getX() >= map1.getFloorXBegin(i) && hero_pos.getX() <= map1.getFloorXLast(i)
 #define ON_PLATFORM_STAGE2 hero_pos.getY() <= map2.getFloorY(i) + 50 && hero_pos.getY() >= map2.getFloorY(i) - 14 && hero_pos.getX() >= map2.getFloorXBegin(i) && hero_pos.getX() <= map2.getFloorXLast(i)
 #define ON_PLATFORM_STAGE3 hero_pos.getY() <= map3.getFloorY(i) + 50 && hero_pos.getY() >= map3.getFloorY(i) - 14 && hero_pos.getX() >= map3.getFloorXBegin(i) && hero_pos.getX() <= map3.getFloorXLast(i)
@@ -290,7 +292,8 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	}
 	portal.OnMove();
 	TRACE("----hero-pos_xy---(%d, %d)\n", hero_pos.getX(), hero_pos.getY());
-	TRACE("----hero-level----(%d, %d)\n", character->GetLevel(), character->GetHP());
+	TRACE("--hero-level_HP---(%d, %d)\n", character->GetLevel(), character->GetHP());
+	TRACE("----Slash_CD------(%d)\n", slash_cd/60);
 
 	// 地圖移動相關
 	if (character->getX() <= 100 && character->ifMovingLeft()) {
@@ -462,6 +465,23 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 				}
 			}
 		}
+		if (CHARACTER_SLASH_MONSTER) {
+			if (HIT_CHECK_MONSTER) {
+				if (SLASH_HEIGHT_CHECK) {
+					monster[i]->SetHP(monster[i]->GetHP() - character->GetAttack() * 2);
+					if (monster_pos.getX() >= hero_pos.getX())
+						monster[i]->SetHitRight();
+					else
+						monster[i]->SetHitLeft();
+				}
+			}
+		}
+
+		if (slash_cd <= 599) {
+			slash_cd--;
+			if (slash_cd == 0)
+				slash_cd = 600;
+		}
 
 		// 怪物死亡相關
 		if (monster[i]->GetHP() <= 0) {
@@ -507,10 +527,18 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_RIGHT = 0x27; // keyboard右箭頭
 	const char KEY_DOWN  = 0x28; // keyboard下箭頭
 	const char KEY_Z = 0x5A; // keyboard Z
+	const char KEY_X = 0x58; // keyboard X
 	Position hero_pos(character, map1);
 
 	if (nChar == KEY_Z) {
 		character->SetAttacking(true);
+	}
+
+	if (nChar == KEY_X) {
+		if (slash_cd == 600) {
+			character->SetSlashing(true);
+			slash_cd--;
+		}
 	}
 
 	if (nChar == KEY_LEFT) {

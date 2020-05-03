@@ -55,6 +55,15 @@ namespace game_framework {
 			a.attackRight.AddBitmap(frogAttackRight[i], RGB(255, 255, 255));
 		}
 
+		int Slash[] = { IDB_SLASH_01, IDB_SLASH_02, IDB_SLASH_03, IDB_SLASH_04,
+						IDB_SLASH_05, IDB_SLASH_06, IDB_SLASH_07, IDB_SLASH_08,
+						IDB_SLASH_09, IDB_SLASH_10, IDB_SLASH_11, IDB_SLASH_12,
+						IDB_SLASH_13 };
+		a.slashAnimation = CAnimation(2);
+		for (int i = 0; i < 13; i++) {
+			a.slashAnimation.AddBitmap(Slash[i], RGB(0, 0, 0));
+		}
+
 		a.standRight.AddBitmap(IDB_FROG_STAND_RIGHT, RGB(255, 255, 255));
 		a.standLeft.AddBitmap(IDB_FROG_STAND_LEFT, RGB(255, 255, 255));
 		a.downRight.AddBitmap(IDB_FROG_DOWN_RIGHT, RGB(255, 255, 255));
@@ -68,18 +77,20 @@ namespace game_framework {
 	{
 		TRACE("---------------%d\n", floor);
 
-		if (isMovingDown  && pos_y >= floor || isAttacking && pos_y >= floor) { //移動速度、趴下靜止
+		if (isMovingDown  && pos_y >= floor || isAttacking && pos_y >= floor || isSlashing) { //移動速度、趴下靜止
 			STEP_SIZE = 0;
 		}
 		else {
 			STEP_SIZE = 8;
 		}
 
-		if (isMovingLeft && pos_x >= 100 && !isHitLeft && !isHitRight) 
+		if (isMovingLeft && pos_x >= 100 && !isHitLeft && !isHitRight) {
 			pos_x -= STEP_SIZE;
+		}
 
-		if (isMovingRight && pos_x <= 1164 && !isHitLeft && !isHitRight)
+		if (isMovingRight && pos_x <= 1164 && !isHitLeft && !isHitRight) {
 			pos_x += STEP_SIZE;
+		}
 
 		if (isMovingUp && pos_y == floor && !isHitLeft && !isHitRight) {
 			rising = true;
@@ -144,85 +155,100 @@ namespace game_framework {
 
 	void Hero::OnShow()
 	{	
-		// 向右看的貼圖
-		if (facing == 1) {
-			a.standRight.SetTopLeft(pos_x, pos_y);
-			if (isAttacking) {
-				a.attackRight.SetTopLeft(a.standRight.Left(), a.standRight.Top() - 12);
-				a.attackRight.OnShow();
-				a.attackRight.OnMove();
-			}
-			else if (isMovingDown) {
-				a.downRight.SetTopLeft(a.standRight.Left(), a.standRight.Top() + 78);
-				a.downRight.OnShow();
-			}
-			else if (isMovingLeft) {
-				a.goLeft.SetTopLeft(a.standRight.Left(), a.standRight.Top());
-				if (pos_y < floor) {
-					a.jumpLeft.SetTopLeft(a.standRight.Left(), a.standRight.Top());
-					a.jumpLeft.OnShow();
-					a.jumpLeft.OnMove();
-				}
-				else {
-					a.goLeft.OnShow();
-					a.goLeft.OnMove();
-				}
-			}
-			else if (isMovingRight) {
-				a.goRight.SetTopLeft(a.standRight.Left(), a.standRight.Top());
-				if (pos_y < floor) {
-					a.jumpRight.SetTopLeft(a.standRight.Left(), a.standRight.Top());
-					a.jumpRight.OnShow();
-					a.jumpRight.OnMove();
-				}
-				else {
-					a.goRight.OnShow();
-					a.goRight.OnMove();
-				}
+		// 施放技能時的貼圖
+		if (isSlashing) {
+			if (skill_time == 0) {
+				skill_time = 26;
+				isSlashing = false;
 			}
 			else {
-				a.standRight.OnShow();
+				a.slashAnimation.SetTopLeft(pos_x - 370, pos_y - 240);
+				a.slashAnimation.OnShow();
+				a.slashAnimation.OnMove();
+				skill_time--;
 			}
 		}
+		else {
+			// 向右看的貼圖
+			if (facing == 1) {
+				a.standRight.SetTopLeft(pos_x, pos_y);
+				if (isAttacking) {
+					a.attackRight.SetTopLeft(a.standRight.Left(), a.standRight.Top() - 12);
+					a.attackRight.OnShow();
+					a.attackRight.OnMove();
+				}
+				else if (isMovingDown) {
+					a.downRight.SetTopLeft(a.standRight.Left(), a.standRight.Top() + 78);
+					a.downRight.OnShow();
+				}
+				else if (isMovingLeft) {
+					a.goLeft.SetTopLeft(a.standRight.Left(), a.standRight.Top());
+					if (pos_y < floor) {
+						a.jumpLeft.SetTopLeft(a.standRight.Left(), a.standRight.Top());
+						a.jumpLeft.OnShow();
+						a.jumpLeft.OnMove();
+					}
+					else {
+						a.goLeft.OnShow();
+						a.goLeft.OnMove();
+					}
+				}
+				else if (isMovingRight) {
+					a.goRight.SetTopLeft(a.standRight.Left(), a.standRight.Top());
+					if (pos_y < floor) {
+						a.jumpRight.SetTopLeft(a.standRight.Left(), a.standRight.Top());
+						a.jumpRight.OnShow();
+						a.jumpRight.OnMove();
+					}
+					else {
+						a.goRight.OnShow();
+						a.goRight.OnMove();
+					}
+				}
+				else {
+					a.standRight.OnShow();
+				}
+			}
 
-		// 向左看的貼圖
-		if (facing == 2) {
-			a.standLeft.SetTopLeft(pos_x, pos_y);
-			if (isAttacking) {
-				a.attackLeft.SetTopLeft(a.standLeft.Left() - 35, a.standLeft.Top() - 12);
-				a.attackLeft.OnShow();
-				a.attackLeft.OnMove();
-			}
-			else if (isMovingDown) {
-				a.downLeft.SetTopLeft(a.standLeft.Left() - 40, a.standLeft.Top() + 78);
-				a.downLeft.OnShow();
-			}
-			else if (isMovingLeft) {
-				a.goLeft.SetTopLeft(a.standLeft.Left(), a.standLeft.Top());
-				if (pos_y < floor) {
-					a.jumpLeft.SetTopLeft(a.standLeft.Left(), a.standLeft.Top());
-					a.jumpLeft.OnShow();
-					a.jumpLeft.OnMove();
+			// 向左看的貼圖
+			if (facing == 2) {
+				a.standLeft.SetTopLeft(pos_x, pos_y);
+				if (isAttacking) {
+					a.attackLeft.SetTopLeft(a.standLeft.Left() - 35, a.standLeft.Top() - 12);
+					a.attackLeft.OnShow();
+					a.attackLeft.OnMove();
+				}
+				else if (isMovingDown) {
+					a.downLeft.SetTopLeft(a.standLeft.Left() - 40, a.standLeft.Top() + 78);
+					a.downLeft.OnShow();
+				}
+				else if (isMovingLeft) {
+					a.goLeft.SetTopLeft(a.standLeft.Left(), a.standLeft.Top());
+					if (pos_y < floor) {
+						a.jumpLeft.SetTopLeft(a.standLeft.Left(), a.standLeft.Top());
+						a.jumpLeft.OnShow();
+						a.jumpLeft.OnMove();
+					}
+					else {
+						a.goLeft.OnShow();
+						a.goLeft.OnMove();
+					}
+				}
+				else if (isMovingRight) {
+					a.goRight.SetTopLeft(a.standLeft.Left(), a.standLeft.Top());
+					if (pos_y < floor) {
+						a.jumpRight.SetTopLeft(a.standLeft.Left(), a.standLeft.Top());
+						a.jumpRight.OnShow();
+						a.jumpRight.OnMove();
+					}
+					else {
+						a.goRight.OnShow();
+						a.goRight.OnMove();
+					}
 				}
 				else {
-					a.goLeft.OnShow();
-					a.goLeft.OnMove();
+					a.standLeft.OnShow();
 				}
-			}
-			else if (isMovingRight) {
-				a.goRight.SetTopLeft(a.standLeft.Left(), a.standLeft.Top());
-				if (pos_y < floor) {
-					a.jumpRight.SetTopLeft(a.standLeft.Left(), a.standLeft.Top());
-					a.jumpRight.OnShow();
-					a.jumpRight.OnMove();
-				}
-				else {
-					a.goRight.OnShow();
-					a.goRight.OnMove();
-				}
-			}
-			else {
-				a.standLeft.OnShow();
 			}
 		}
 		hp_OnShow();
