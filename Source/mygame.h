@@ -25,8 +25,17 @@ namespace game_framework {
 	enum AUDIO_ID {				// 定義各種音效的編號
 		BGM_MENU,				// 0
 		BGM_STAGE1,				// 1
-		BGM_GAMEOVER,			// 2
-		SFX_JUMP				// 3
+		BGM_STAGE2,				// 2
+		BGM_STAGE3,				// 3
+		BGM_STAGE4,				// 4
+		BGM_BOSS,				// 5
+		BGM_GAMEOVER,			// 6
+		SFX_JUMP,				// 7
+		SFX_ATTACK,				// 8
+		SFX_SLASH,				// 9
+		SFX_HERO_HIT,			// 10
+		SFX_MONSTER_HIT,		// 11
+		SFX_GUN,				// 12
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -80,6 +89,7 @@ namespace game_framework {
 		int portal3X = 2100;
 		int stage = 1;
 		int stage_count = 2;
+		int monster_num = 0;
 		int slash_cd = 300;							// 技能CD
 		CMovingBitmap	background;					// 背景圖
 		Character *hero;			// 角色
