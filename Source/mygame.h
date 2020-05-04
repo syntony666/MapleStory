@@ -86,6 +86,7 @@ namespace game_framework {
 		vector<Map> map;								// ¦a¹Ï
 		vector<Character*> monster1;					// ©Çª«
 		Position hero_pos;
+		inline int monster_num(vector<Character*> monster);
 	};
 
 	/////////////////////////////////////////////////////////////////////////////

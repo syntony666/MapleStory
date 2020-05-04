@@ -91,7 +91,7 @@ namespace game_framework {
 #define SLASH_HEIGHT_CHECK hero_pos.getY() <= monster1_pos.getY() + 100 && hero_pos.getY() + 300 >= monster1_pos.getY()
 #define HIT_CHECK_CHARACTER !hero->ifHitLeft() && !hero->ifHitRight()
 #define HIT_CHECK_MONSTER !monster1[i]->ifHitLeft() && !monster1[i]->ifHitRight()
-#define MONSTER_HIT_CHARACTER hero_pos.getX() - monster1_pos.getX() <= 50 && monster1_pos.getX() - hero_pos.getX() <= 0 || hero_pos.getX() - monster1_pos.getX() <= 0 && monster1_pos.getX() - hero_pos.getX() <= 50
+#define MONSTER_HIT_CHARACTER(a) (hero_pos.getX() - monster1_pos.getX() <= a && monster1_pos.getX() - hero_pos.getX() <= a)
 #define CHARACTER_HIT_MONSTER hero->ifAttacking() && hero->GetFacing() == 2 && hero_pos.getX() - monster1_pos.getX() <= 100 && monster1_pos.getX() - hero_pos.getX() <= 0 || hero->ifAttacking() && hero->GetFacing() == 1 && hero_pos.getX() - monster1_pos.getX() <= 0 && monster1_pos.getX() - hero_pos.getX() <= 100
 #define CHARACTER_SLASH_MONSTER hero->ifSlashing() && hero_pos.getX() - monster1_pos.getX() <= 340 && monster1_pos.getX() - hero_pos.getX() <= 0 || hero->ifSlashing() && hero_pos.getX() - monster1_pos.getX() <= 0 && monster1_pos.getX() - hero_pos.getX() <= 340
 #define ON_PLATFORM_STAGE1 hero_pos.getY() <= map[0].getFloorY(i) + 50 && hero_pos.getY() >= map[0].getFloorY(i) - 14 && hero_pos.getX() >= map[0].getFloorXBegin(i) && hero_pos.getX() <= map[0].getFloorXLast(i)

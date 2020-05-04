@@ -388,9 +388,9 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		GotoGameState(GAME_STATE_OVER);
 
 	for (size_t i = 0; i < monster1.size(); i++) {
-		if (monster1[i]->ifDead()) {
+		if (monster1[i]->ifDead())
 			continue;
-		}
+
 		Position monster1_pos(monster1[i], map[0]);
 		monster1[i]->OnMove();
 
@@ -419,17 +419,21 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		}
 
 		// 怪物移動相關
-		if (monster1_pos.getX() >= hero_pos.getX()) {
+		if (monster1_pos.getX() - hero_pos.getX()>=200) {
 			monster1[i]->Set_Monster_Go_Left(true);
 			monster1[i]->Set_Monster_Go_Right(false);
 		}
-		else {
+		else if(hero_pos.getX() - monster1_pos.getX()>= 200) {
 			monster1[i]->Set_Monster_Go_Right(true);
+			monster1[i]->Set_Monster_Go_Left(false);
+		}
+		else {
+			monster1[i]->Set_Monster_Go_Right(false);
 			monster1[i]->Set_Monster_Go_Left(false);
 		}
 
 		// 攻擊互動相關
-		if (MONSTER_HIT_CHARACTER) {
+		if (MONSTER_HIT_CHARACTER(200)) {
 			if (HIT_CHECK_CHARACTER) {
 				if (HEIGHT_CHECK) {
 					monster1[i]->SetAttacking(true);
@@ -518,7 +522,7 @@ void CGameStateRun::OnInit() {
 		IDB_MONSTER_STAND_RIGHT, IDB_MONSTER_STAND_LEFT,
 		0, 0, 0, 0,
 		goRight, goLeft,
-		attackLeft, attackRight,slash);
+		attackRight, attackLeft,slash);
 	}
 
 	ShowInitProgress(66);
@@ -567,7 +571,7 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	}
 
 	if (nChar == KEY_UP) {
-		if (monster1.size() == 0) {
+		if (monster_num(monster1)==0) {
 			if (stage == 1) {
 				if (IN_PORTAL1)
 					stage++;
@@ -647,14 +651,10 @@ void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)
 
 void CGameStateRun::OnShow()
 {
-	int monster_num = 0;
 
 	if (stage == 1) {
 		map[0].OnShow();			// 貼上背景圖
-		for (size_t i = 0; i < monster1.size(); i++)
-			if (!monster1[i]->ifDead())
-				monster_num++;
-		if (monster_num == 0)
+		if (monster_num(monster1) == 0)
 			portal.OnShow();
 	}
 	if (stage == 2) {
@@ -666,7 +666,7 @@ void CGameStateRun::OnShow()
 			stage_count++;
 		}
 		map[1].OnShow();			// 貼上背景圖
-		if (monster1.size() == 0)
+		if (monster_num(monster1) == 0)
 			portal.OnShow();
 	}
 	if (stage == 3) {
@@ -678,12 +678,19 @@ void CGameStateRun::OnShow()
 			stage_count++;
 		}
 		map[2].OnShow();			// 貼上背景圖
-		if (monster1.size() == 0)
+		if (monster_num(monster1) == 0)
 			portal.OnShow();
 	}
 	for (size_t i = 0; i < monster1.size(); i++) {
 		monster1[i]->OnShow();
 	}
 	hero->OnShow();			// 貼上人物
+}
+inline int CGameStateRun::monster_num(vector<Character*>monster) {
+	int n = 0;
+	for (size_t i = 0; i < monster.size(); i++)
+		if (!monster[i]->ifDead())
+			n++;
+	return n;
 }
 }
