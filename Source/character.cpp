@@ -167,7 +167,7 @@ namespace game_framework {
 		for (size_t i = 0; i < attackL.size(); i++) 
 			a.attackLeft.AddBitmap(attackL[i], DEFAULT_RGB);
 		for (size_t i = 0; i < slash.size(); i++)
-			a.slashAnimation.AddBitmap(slash[i], DEFAULT_RGB);
+			a.slashAnimation.AddBitmap(slash[i], RGB(0,0,0));
 		hp_addBitmaps();
 	}
 

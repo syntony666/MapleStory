@@ -250,20 +250,6 @@ void CGameStateRun::OnBeginState()
 	portal.SetTopLeft(portal1X, 410);
 }
 
-#define HEIGHT_CHECK hero_pos.getY() <= monster1_pos.getY() + 100 && hero_pos.getY() + 100 >= monster1_pos.getY()
-#define SLASH_HEIGHT_CHECK hero_pos.getY() <= monster1_pos.getY() + 100 && hero_pos.getY() + 300 >= monster1_pos.getY()
-#define HIT_CHECK_CHARACTER !hero->ifHitLeft() && !hero->ifHitRight()
-#define HIT_CHECK_MONSTER !monster1[i]->ifHitLeft() && !monster1[i]->ifHitRight()
-#define MONSTER_HIT_CHARACTER hero_pos.getX() - monster1_pos.getX() <= 50 && monster1_pos.getX() - hero_pos.getX() <= 0 || hero_pos.getX() - monster1_pos.getX() <= 0 && monster1_pos.getX() - hero_pos.getX() <= 50
-#define CHARACTER_HIT_MONSTER hero->ifAttacking() && hero->GetFacing() == 2 && hero_pos.getX() - monster1_pos.getX() <= 100 && monster1_pos.getX() - hero_pos.getX() <= 0 || hero->ifAttacking() && hero->GetFacing() == 1 && hero_pos.getX() - monster1_pos.getX() <= 0 && monster1_pos.getX() - hero_pos.getX() <= 100
-#define CHARACTER_SLASH_MONSTER hero->ifSlashing() && hero_pos.getX() - monster1_pos.getX() <= 340 && monster1_pos.getX() - hero_pos.getX() <= 0 || hero->ifSlashing() && hero_pos.getX() - monster1_pos.getX() <= 0 && monster1_pos.getX() - hero_pos.getX() <= 340
-#define ON_PLATFORM_STAGE1 hero_pos.getY() <= map[0].getFloorY(i) + 50 && hero_pos.getY() >= map[0].getFloorY(i) - 14 && hero_pos.getX() >= map[0].getFloorXBegin(i) && hero_pos.getX() <= map[0].getFloorXLast(i)
-#define ON_PLATFORM_STAGE2 hero_pos.getY() <= map[1].getFloorY(i) + 50 && hero_pos.getY() >= map[1].getFloorY(i) - 14 && hero_pos.getX() >= map[1].getFloorXBegin(i) && hero_pos.getX() <= map[1].getFloorXLast(i)
-#define ON_PLATFORM_STAGE3 hero_pos.getY() <= map[2].getFloorY(i) + 50 && hero_pos.getY() >= map[2].getFloorY(i) - 14 && hero_pos.getX() >= map[2].getFloorXBegin(i) && hero_pos.getX() <= map[2].getFloorXLast(i)
-#define IN_PORTAL1 hero_pos.getY() == 150 && hero_pos.getX() >= 2060 && hero_pos.getX() <= 2132
-#define IN_PORTAL2 hero_pos.getY() <= 20 && hero_pos.getX() >= 2084 && hero_pos.getX() <= 2156
-#define IN_PORTAL3 hero_pos.getY() == 100 && hero_pos.getX() >= 2084 && hero_pos.getX() <= 2156
-
 void CGameStateRun::OnMove()							// ²¾°Ê¹CÀ¸¤¸¯À
 {
 	TRACE("----monster1_num---%d\n", monster1.size());
