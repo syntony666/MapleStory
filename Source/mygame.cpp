@@ -591,7 +591,7 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 					stage++;
 				else
 				{
-					if (hero->ifMovingUp())
+					if (hero->ifMovingUp() == false)
 						CAudio::Instance()->Play(SFX_JUMP, false);
 					hero->SetMovingUp(true);
 				}
@@ -601,7 +601,7 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 					stage++;
 				else
 				{
-					if (hero->ifMovingUp())
+					if (hero->ifMovingUp() == false)
 						CAudio::Instance()->Play(SFX_JUMP, false);
 					hero->SetMovingUp(true);
 				}
@@ -611,14 +611,14 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 					stage++;
 				else 
 				{
-					if (hero->ifMovingUp())
+					if (hero->ifMovingUp() == false)
 						CAudio::Instance()->Play(SFX_JUMP, false);
 					hero->SetMovingUp(true);
 				}
 			}
 		}
 		else {
-			if (hero->ifMovingUp())
+			if (hero->ifMovingUp() == false)
 				CAudio::Instance()->Play(SFX_JUMP, false);
 			hero->SetMovingUp(true);
 		}
