@@ -63,6 +63,7 @@ void CGameStateInit::OnInit()
 	CAudio::Instance()->Load(SFX_HERO_HIT, "sounds\\sfx_hero_hit.mp3");
 	CAudio::Instance()->Load(SFX_MONSTER_HIT, "sounds\\sfx_monster_hit.mp3");
 	CAudio::Instance()->Load(SFX_GUN, "sounds\\sfx_gun.mp3");
+	CAudio::Instance()->Load(SFX_LEVEL_UP, "sounds\\sfx_levelup.mp3");
 
 	menu = 1;
 	
@@ -382,8 +383,9 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	}
 
 	// 玩家等級相關
-	if (hero->GetXP() >= 100) {
+	if (hero->GetXP() >= hero->GetLevel() * 50) {
 		hero->SetXP(0);
+		CAudio::Instance()->Play(SFX_LEVEL_UP, false);
 		hero->SetLevel(hero->GetLevel() + 1);
 		hero->SetMaxHP(hero->GetMaxHP() + hero->GetLevel() * 50);
 		hero->SetAttack(hero->GetAttack() + hero->GetLevel() * 5);
@@ -694,7 +696,7 @@ void CGameStateRun::OnShow()
 	}
 	if (stage == 2) {
 		if (stage_count == 2) {
-			initHero(*hero);
+			hero->SetXY(100, 570);
 			portal.SetTopLeft(portal2X, 550);
 			//monster1.push_back(new Monster(500, 570, 50));
 			//monster1.push_back(new Monster(800, 570, 50));
@@ -703,12 +705,15 @@ void CGameStateRun::OnShow()
 			CAudio::Instance()->Play(BGM_STAGE2, true);
 		}
 		map[1].OnShow();			// 貼上背景圖
-		if (monster1.size() == 0)
+		for (size_t i = 0; i < monster1.size(); i++)
+			if (!monster1[i]->ifDead())
+				monster_num++;
+		if (monster_num == 0)
 			portal.OnShow();
 	}
 	if (stage == 3) {
 		if (stage_count == 3) {
-			initHero(*hero);
+			hero->SetXY(100, 570);
 			portal.SetTopLeft(portal3X, 450);
 			//monster1.push_back(new Monster(500, 570, 50));
 			//monster1.push_back(new Monster(800, 570, 50));
@@ -717,12 +722,40 @@ void CGameStateRun::OnShow()
 			CAudio::Instance()->Play(BGM_STAGE3, true);
 		}
 		map[2].OnShow();			// 貼上背景圖
-		if (monster1.size() == 0)
+		for (size_t i = 0; i < monster1.size(); i++)
+			if (!monster1[i]->ifDead())
+				monster_num++;
+		if (monster_num == 0)
 			portal.OnShow();
 	}
 	for (size_t i = 0; i < monster1.size(); i++) {
 		monster1[i]->OnShow();
 	}
 	hero->OnShow();			// 貼上人物
+
+	// 介面UI文字
+	CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC
+	CFont f, *fp;
+	f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
+	fp = pDC->SelectObject(&f);					// 選用 font f
+	pDC->SetBkColor(RGB(0, 0, 0));
+	pDC->SetTextColor(RGB(255, 255, 255));
+	char HP[80];								// Demo 數字對字串的轉換
+	sprintf(HP, "HP %d/%d", hero->GetHP(), hero->GetMaxHP());
+	char ATK[80];								// Demo 數字對字串的轉換
+	sprintf(ATK, "ATK %d", hero->GetAttack());
+	char LV[80];								// Demo 數字對字串的轉換
+	sprintf(LV, "Level %d", hero->GetLevel());
+	char SLASH_CD[80];								// Demo 數字對字串的轉換
+	if (slash_cd == 300)
+		sprintf(SLASH_CD, "破空斬 準備施放");
+	else
+		sprintf(SLASH_CD, "破空斬 CD %d", slash_cd/30);
+	pDC->TextOut(10, 20, LV);
+	pDC->TextOut(10, 40, HP);
+	pDC->TextOut(10, 60, ATK);
+	pDC->TextOut(10, 80, SLASH_CD);
+	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
+	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 }
 }

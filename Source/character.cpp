@@ -155,8 +155,8 @@ namespace game_framework {
 			a.jumpLeft.AddBitmap(jumpL, DEFAULT_RGB);
 		a.goRight = CAnimation(3);
 		a.goLeft = CAnimation(3);
-		a.attackRight = CAnimation(1);
-		a.attackLeft = CAnimation(1);
+		a.attackRight = CAnimation(2);
+		a.attackLeft = CAnimation(2);
 		a.slashAnimation = CAnimation(2);
 		for (size_t i = 0; i < goR.size(); i++) 
 			a.goRight.AddBitmap(goR[i], DEFAULT_RGB);

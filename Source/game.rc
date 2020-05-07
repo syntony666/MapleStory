@@ -232,6 +232,46 @@ IDB_SLASH_12            BITMAP                  "..\\res\\Skill\\slash_12.bmp"
 
 IDB_SLASH_13            BITMAP                  "..\\res\\Skill\\slash_13.bmp"
 
+IDB_LV_UP_01            BITMAP                  "..\\res\\Levelup\\lv_up_01.bmp"
+
+IDB_LV_UP_02            BITMAP                  "..\\res\\Levelup\\lv_up_02.bmp"
+
+IDB_LV_UP_03            BITMAP                  "..\\res\\Levelup\\lv_up_03.bmp"
+
+IDB_LV_UP_04            BITMAP                  "..\\res\\Levelup\\lv_up_04.bmp"
+
+IDB_LV_UP_05            BITMAP                  "..\\res\\Levelup\\lv_up_05.bmp"
+
+IDB_LV_UP_06            BITMAP                  "..\\res\\Levelup\\lv_up_06.bmp"
+
+IDB_LV_UP_07            BITMAP                  "..\\res\\Levelup\\lv_up_07.bmp"
+
+IDB_LV_UP_08            BITMAP                  "..\\res\\Levelup\\lv_up_08.bmp"
+
+IDB_LV_UP_09            BITMAP                  "..\\res\\Levelup\\lv_up_09.bmp"
+
+IDB_LV_UP_10            BITMAP                  "..\\res\\Levelup\\lv_up_10.bmp"
+
+IDB_LV_UP_11            BITMAP                  "..\\res\\Levelup\\lv_up_11.bmp"
+
+IDB_LV_UP_12            BITMAP                  "..\\res\\Levelup\\lv_up_12.bmp"
+
+IDB_LV_UP_13            BITMAP                  "..\\res\\Levelup\\lv_up_13.bmp"
+
+IDB_LV_UP_14            BITMAP                  "..\\res\\Levelup\\lv_up_14.bmp"
+
+IDB_LV_UP_15            BITMAP                  "..\\res\\Levelup\\lv_up_15.bmp"
+
+IDB_LV_UP_16            BITMAP                  "..\\res\\Levelup\\lv_up_16.bmp"
+
+IDB_LV_UP_17            BITMAP                  "..\\res\\Levelup\\lv_up_17.bmp"
+
+IDB_LV_UP_18            BITMAP                  "..\\res\\Levelup\\lv_up_18.bmp"
+
+IDB_LV_UP_19            BITMAP                  "..\\res\\Levelup\\lv_up_19.bmp"
+
+IDB_LV_UP_20            BITMAP                  "..\\res\\Levelup\\lv_up_20.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

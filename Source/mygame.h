@@ -36,6 +36,7 @@ namespace game_framework {
 		SFX_HERO_HIT,			// 10
 		SFX_MONSTER_HIT,		// 11
 		SFX_GUN,				// 12
+		SFX_LEVEL_UP,			// 13
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
