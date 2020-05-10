@@ -386,6 +386,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	if (hero->GetXP() >= hero->GetLevel() * 50) {
 		hero->SetXP(0);
 		CAudio::Instance()->Play(SFX_LEVEL_UP, false);
+		hero->SetLevelUP();
 		hero->SetLevel(hero->GetLevel() + 1);
 		hero->SetMaxHP(hero->GetMaxHP() + hero->GetLevel() * 50);
 		hero->SetAttack(hero->GetAttack() + hero->GetLevel() * 5);
@@ -507,13 +508,17 @@ void CGameStateRun::OnInit() {
 				IDB_SLASH_05, IDB_SLASH_06, IDB_SLASH_07, IDB_SLASH_08,
 				IDB_SLASH_09, IDB_SLASH_10, IDB_SLASH_11, IDB_SLASH_12,
 				IDB_SLASH_13 };
+	vector<int> lv_up = { IDB_LV_UP_01, IDB_LV_UP_02, IDB_LV_UP_03, IDB_LV_UP_04, IDB_LV_UP_05
+						, IDB_LV_UP_06, IDB_LV_UP_07, IDB_LV_UP_08, IDB_LV_UP_09, IDB_LV_UP_10
+						, IDB_LV_UP_11, IDB_LV_UP_12, IDB_LV_UP_13, IDB_LV_UP_14, IDB_LV_UP_15
+						, IDB_LV_UP_16, IDB_LV_UP_17, IDB_LV_UP_18, IDB_LV_UP_19, IDB_LV_UP_20 };
 
 	hero->addBitmap(
 		IDB_FROG_STAND_RIGHT, IDB_FROG_STAND_LEFT,
 		IDB_FROG_DOWN_RIGHT, IDB_FROG_DOWN_LEFT,
 		IDB_FROG_JUMP_RIGHT, IDB_FROG_JUMP_LEFT,
 		hero_goRight, hero_goLeft,
-		hero_attackRight, hero_attackLeft,slash);
+		hero_attackRight, hero_attackLeft,slash,lv_up);
 
 	ShowInitProgress(33);	
 
@@ -536,7 +541,7 @@ void CGameStateRun::OnInit() {
 		IDB_MONSTER_STAND_RIGHT, IDB_MONSTER_STAND_LEFT,
 		0, 0, 0, 0,
 		goRight, goLeft,
-		attackLeft, attackRight,slash);
+		attackLeft, attackRight,slash,lv_up);
 	}
 
 	ShowInitProgress(66);
@@ -569,6 +574,7 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	}
 
 	if (nChar == KEY_X) {
+		//hero->SetXP(hero->GetLevel() * 50); //作弊升級用
 		if (slash_cd == 300) {
 			hero->SetSlashing(true);
 			CAudio::Instance()->Play(SFX_SLASH, false);
@@ -732,30 +738,5 @@ void CGameStateRun::OnShow()
 		monster1[i]->OnShow();
 	}
 	hero->OnShow();			// 貼上人物
-
-	// 介面UI文字
-	CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC
-	CFont f, *fp;
-	f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
-	fp = pDC->SelectObject(&f);					// 選用 font f
-	pDC->SetBkColor(RGB(0, 0, 0));
-	pDC->SetTextColor(RGB(255, 255, 255));
-	char HP[80];								// Demo 數字對字串的轉換
-	sprintf(HP, "HP %d/%d", hero->GetHP(), hero->GetMaxHP());
-	char ATK[80];								// Demo 數字對字串的轉換
-	sprintf(ATK, "ATK %d", hero->GetAttack());
-	char LV[80];								// Demo 數字對字串的轉換
-	sprintf(LV, "Level %d", hero->GetLevel());
-	char SLASH_CD[80];								// Demo 數字對字串的轉換
-	if (slash_cd == 300)
-		sprintf(SLASH_CD, "破空斬 準備施放");
-	else
-		sprintf(SLASH_CD, "破空斬 CD %d", slash_cd/30);
-	pDC->TextOut(10, 20, LV);
-	pDC->TextOut(10, 40, HP);
-	pDC->TextOut(10, 60, ATK);
-	pDC->TextOut(10, 80, SLASH_CD);
-	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
-	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 }
 }

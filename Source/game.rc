@@ -272,6 +272,32 @@ IDB_LV_UP_19            BITMAP                  "..\\res\\Levelup\\lv_up_19.bmp"
 
 IDB_LV_UP_20            BITMAP                  "..\\res\\Levelup\\lv_up_20.bmp"
 
+IDB_1                   BITMAP                  "..\\res\\Number\\1.bmp"
+
+IDB_2                   BITMAP                  "..\\res\\Number\\2.bmp"
+
+IDB_3                   BITMAP                  "..\\res\\Number\\3.bmp"
+
+IDB_4                   BITMAP                  "..\\res\\Number\\4.bmp"
+
+IDB_5                   BITMAP                  "..\\res\\Number\\5.bmp"
+
+IDB_6                   BITMAP                  "..\\res\\Number\\6.bmp"
+
+IDB_7                   BITMAP                  "..\\res\\Number\\7.bmp"
+
+IDB_8                   BITMAP                  "..\\res\\Number\\8.bmp"
+
+IDB_9                   BITMAP                  "..\\res\\Number\\9.bmp"
+
+IDB_0                   BITMAP                  "..\\res\\Number\\0.bmp"
+
+IDB_ATK                 BITMAP                  "..\\res\\Number\\Attack.bmp"
+
+IDB_HP                  BITMAP                  "..\\res\\Number\\HP.bmp"
+
+IDB_LV                  BITMAP                  "..\\res\\Number\\Level.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

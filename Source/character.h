@@ -20,6 +20,7 @@ namespace game_framework {
 		CAnimation attackRight;		// 向右攻擊
 		CAnimation attackLeft;		// 向左攻擊
 		CAnimation slashAnimation;	// 技能動畫
+		CAnimation lv_up;			// 升級動畫
 	};
 
 	class Character
@@ -29,13 +30,18 @@ namespace game_framework {
 		virtual void Initialize() = 0;	// 設定初始值
 		virtual void OnMove() = 0;		// 移動
 		virtual void OnShow() = 0;		// 顯示角色
-		void addBitmap(int standR, int standL, int downR, int downL, int jumpR, int jumpL, vector<int> goR, vector<int> goL, vector<int> attackR, vector<int> attackL,vector<int> slash);
+		void addBitmap(int standR, int standL, int downR, int downL, int jumpR, int jumpL, vector<int> goR, vector<int> goL, vector<int> attackR, vector<int> attackL,vector<int> slash, vector<int> lv_up);
 		//加入圖形(沒有的填0)
 
 		//HP
 
 		void hp_addBitmaps();
 		void hp_OnShow();
+
+		//數字
+
+		void number_addBitmaps();
+		void number_OnShow(int nx, int pos_nx, int pos_ny);
 
 		//SETs
 
@@ -44,6 +50,7 @@ namespace game_framework {
 		void SetMaxHP(int Health);		// 設定最大生命值
 		void SetXP(int nxp);			// 設定經驗值
 		void SetLevel(int nlv);			// 設定等級
+		void SetLevelUP();				// 升級囉
 		void SetFloor(int Floor);		// 設定地板
 		void SetMovingDown(bool flag);	// 設定是否正在往下移動
 		void SetMovingLeft(bool flag);	// 設定是否正在往左移動
@@ -90,6 +97,7 @@ namespace game_framework {
 		bool ifDead();
 	protected:
 		CAnimation hp[11];
+		CAnimation num[13];
 		int pos_x,	pos_y;				//左邊座標
 		int pos_rx, pos_ry;				//右邊座標
 		int attack;
@@ -97,6 +105,7 @@ namespace game_framework {
 		int hP, maxHP;
 		int exp = 0;
 		int level = 1;
+		int level_animation = 0;
 		int facing = 1;					// 1=面向右 2=面向左
 		bool isMovingDown, isMovingUp,// 是否正在移動
 			 isMovingRight, isMovingLeft;

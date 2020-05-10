@@ -413,6 +413,45 @@
     <Image Include="RES\Levelup\lv_up_20.bmp">
       <Filter>Resouces</Filter>
     </Image>
+    <Image Include="RES\Number\0.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Number\1.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Number\2.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Number\3.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Number\4.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Number\5.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Number\6.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Number\7.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Number\8.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Number\9.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Number\Attack.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Number\HP.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Number\Level.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="RES\continue.bmp">
