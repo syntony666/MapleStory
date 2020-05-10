@@ -121,6 +121,19 @@ namespace game_framework {
 			}
 		}
 	}
+	void Character::number_addBitmaps() {
+		int number_bitmaps[] = { IDB_0,IDB_1,IDB_2,IDB_3,IDB_4,IDB_5,IDB_6,IDB_7,IDB_8,IDB_9,IDB_LV,IDB_HP,IDB_ATK };
+		for (int i = 0; i < 13; i++)
+			num[i].AddBitmap(number_bitmaps[i], RGB(230, 212, 132));
+	}
+	void Character::number_OnShow(int nx, int pos_nx, int pos_ny) {		//10 = Lv, 11 = HP, 12 = ATK
+		num[nx].SetTopLeft(pos_nx, pos_ny);
+		num[nx].OnShow();
+	}
+	void Character::SetLevelUP() {
+		if(level_animation == 0)
+			level_animation = 80;
+	}
 	bool Character::ifMovingLeft() {
 		return isMovingLeft;
 	}
@@ -139,7 +152,7 @@ namespace game_framework {
 	
 
 
-	void Character::addBitmap(int standR, int standL, int downR, int downL, int jumpR, int jumpL, vector<int> goR, vector<int> goL, vector<int> attackR, vector<int> attackL, vector<int> slash)
+	void Character::addBitmap(int standR, int standL, int downR, int downL, int jumpR, int jumpL, vector<int> goR, vector<int> goL, vector<int> attackR, vector<int> attackL, vector<int> slash, vector<int> lv_up)
 	{
 		if (standR != 0)
 			a.standRight.AddBitmap(standR, DEFAULT_RGB);
@@ -155,9 +168,10 @@ namespace game_framework {
 			a.jumpLeft.AddBitmap(jumpL, DEFAULT_RGB);
 		a.goRight = CAnimation(3);
 		a.goLeft = CAnimation(3);
-		a.attackRight = CAnimation(1);
-		a.attackLeft = CAnimation(1);
+		a.attackRight = CAnimation(2);
+		a.attackLeft = CAnimation(2);
 		a.slashAnimation = CAnimation(2);
+		a.lv_up = CAnimation(4);
 		for (size_t i = 0; i < goR.size(); i++) 
 			a.goRight.AddBitmap(goR[i], DEFAULT_RGB);
 		for (size_t i = 0; i < goL.size(); i++) 
@@ -168,7 +182,10 @@ namespace game_framework {
 			a.attackLeft.AddBitmap(attackL[i], DEFAULT_RGB);
 		for (size_t i = 0; i < slash.size(); i++)
 			a.slashAnimation.AddBitmap(slash[i], RGB(0,0,0));
+		for (size_t i = 0; i < lv_up.size(); i++)
+			a.lv_up.AddBitmap(lv_up[i], RGB(3, 3, 3));
 		hp_addBitmaps();
+		number_addBitmaps();
 	}
 
 

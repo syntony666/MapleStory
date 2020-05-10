@@ -29,7 +29,6 @@ namespace game_framework {
 
 	void Hero::OnMove()
 	{
-		TRACE("---------------%d\n", floor);
 
 		if (isMovingDown  && pos_y >= floor || isAttacking && pos_y >= floor || isSlashing) { //移動速度、趴下靜止
 			STEP_SIZE = 0;
@@ -103,6 +102,7 @@ namespace game_framework {
 				velocity = 0;
 			}
 		}
+
 	}
 
 
@@ -206,5 +206,57 @@ namespace game_framework {
 			}
 		}
 		hp_OnShow();
+
+		if (level_animation > 0) {
+			a.lv_up.SetTopLeft(pos_x - 500, pos_y - 650);
+			a.lv_up.OnShow();
+			a.lv_up.OnMove();
+			level_animation--;
+		}
+
+		//10 = Lv, 11 = HP, 12 = ATK
+		// UI 介面
+		number_OnShow(10, 10, 10);
+		number_OnShow(12, 10, 45);
+		number_OnShow(11, 10, 80);
+
+		// LV 顯示
+		if(level < 10)
+			number_OnShow(level, 165, 10);
+		else {
+			number_OnShow(level / 10, 165, 10);
+			number_OnShow(level % 10, 165+d, 10);
+		}
+
+		// ATK 顯示
+		if (attack < 100) {
+			number_OnShow(attack / 10, 133, 45);
+			number_OnShow(attack % 10, 133+d, 45);
+		}
+		else {
+			number_OnShow(attack / 100, 133, 45);
+			number_OnShow(attack / 10 % 10, 133+d, 45);
+			number_OnShow(attack % 10, 133+d*2, 45);
+		}
+
+		// HP 顯示
+		if (hP < 10) {
+			number_OnShow(hP, 133, 80);
+		}
+		else if (hP < 100) {
+			number_OnShow(hP / 10, 133, 80);
+			number_OnShow(hP % 10, 133+d, 80);
+		}
+		else if(hP < 1000) {
+			number_OnShow(hP / 100, 133, 80);
+			number_OnShow(hP / 10 % 10, 133+d, 80);
+			number_OnShow(hP % 10, 133+d*2, 80);
+		}
+		else if (hP < 10000) {
+			number_OnShow(hP / 1000, 133, 80);
+			number_OnShow(hP / 100 % 10, 133+d, 80);
+			number_OnShow(hP / 10 % 10, 133+d*2, 80);
+			number_OnShow(hP % 10, 133+d*3, 80);
+		}
 	}
 }

@@ -63,6 +63,7 @@ void CGameStateInit::OnInit()
 	CAudio::Instance()->Load(SFX_HERO_HIT, "sounds\\sfx_hero_hit.mp3");
 	CAudio::Instance()->Load(SFX_MONSTER_HIT, "sounds\\sfx_monster_hit.mp3");
 	CAudio::Instance()->Load(SFX_GUN, "sounds\\sfx_gun.mp3");
+	CAudio::Instance()->Load(SFX_LEVEL_UP, "sounds\\sfx_levelup.mp3");
 
 	menu = 1;
 	
@@ -382,8 +383,10 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	}
 
 	// 玩家等級相關
-	if (hero->GetXP() >= 100) {
+	if (hero->GetXP() >= hero->GetLevel() * 50) {
 		hero->SetXP(0);
+		CAudio::Instance()->Play(SFX_LEVEL_UP, false);
+		hero->SetLevelUP();
 		hero->SetLevel(hero->GetLevel() + 1);
 		hero->SetMaxHP(hero->GetMaxHP() + hero->GetLevel() * 50);
 		hero->SetAttack(hero->GetAttack() + hero->GetLevel() * 5);
@@ -509,13 +512,17 @@ void CGameStateRun::OnInit() {
 				IDB_SLASH_05, IDB_SLASH_06, IDB_SLASH_07, IDB_SLASH_08,
 				IDB_SLASH_09, IDB_SLASH_10, IDB_SLASH_11, IDB_SLASH_12,
 				IDB_SLASH_13 };
+	vector<int> lv_up = { IDB_LV_UP_01, IDB_LV_UP_02, IDB_LV_UP_03, IDB_LV_UP_04, IDB_LV_UP_05
+						, IDB_LV_UP_06, IDB_LV_UP_07, IDB_LV_UP_08, IDB_LV_UP_09, IDB_LV_UP_10
+						, IDB_LV_UP_11, IDB_LV_UP_12, IDB_LV_UP_13, IDB_LV_UP_14, IDB_LV_UP_15
+						, IDB_LV_UP_16, IDB_LV_UP_17, IDB_LV_UP_18, IDB_LV_UP_19, IDB_LV_UP_20 };
 
 	hero->addBitmap(
 		IDB_FROG_STAND_RIGHT, IDB_FROG_STAND_LEFT,
 		IDB_FROG_DOWN_RIGHT, IDB_FROG_DOWN_LEFT,
 		IDB_FROG_JUMP_RIGHT, IDB_FROG_JUMP_LEFT,
 		hero_goRight, hero_goLeft,
-		hero_attackRight, hero_attackLeft,slash);
+		hero_attackRight, hero_attackLeft,slash,lv_up);
 
 	ShowInitProgress(33);	
 
@@ -538,7 +545,7 @@ void CGameStateRun::OnInit() {
 		IDB_MONSTER_STAND_RIGHT, IDB_MONSTER_STAND_LEFT,
 		0, 0, 0, 0,
 		goRight, goLeft,
-		attackRight, attackLeft,slash);
+		attackLeft, attackRight,slash,lv_up);
 	}
 
 	ShowInitProgress(66);
@@ -571,6 +578,7 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	}
 
 	if (nChar == KEY_X) {
+		//hero->SetXP(hero->GetLevel() * 50); //作弊升級用
 		if (slash_cd == 300) {
 			hero->SetSlashing(true);
 			CAudio::Instance()->Play(SFX_SLASH, false);
@@ -694,7 +702,7 @@ void CGameStateRun::OnShow()
 	}
 	if (stage == 2) {
 		if (stage_count == 2) {
-			initHero(*hero);
+			hero->SetXY(100, 570);
 			portal.SetTopLeft(portal2X, 550);
 			//monster1.push_back(new Monster(500, 570, 50));
 			//monster1.push_back(new Monster(800, 570, 50));
@@ -703,12 +711,15 @@ void CGameStateRun::OnShow()
 			CAudio::Instance()->Play(BGM_STAGE2, true);
 		}
 		map[1].OnShow();			// 貼上背景圖
-		if (monster_num(monster1) == 0)
+		for (size_t i = 0; i < monster1.size(); i++)
+			if (!monster1[i]->ifDead())
+				monster_num++;
+		if (monster_num == 0)
 			portal.OnShow();
 	}
 	if (stage == 3) {
 		if (stage_count == 3) {
-			initHero(*hero);
+			hero->SetXY(100, 570);
 			portal.SetTopLeft(portal3X, 450);
 			//monster1.push_back(new Monster(500, 570, 50));
 			//monster1.push_back(new Monster(800, 570, 50));
@@ -717,7 +728,10 @@ void CGameStateRun::OnShow()
 			CAudio::Instance()->Play(BGM_STAGE3, true);
 		}
 		map[2].OnShow();			// 貼上背景圖
-		if (monster_num(monster1) == 0)
+		for (size_t i = 0; i < monster1.size(); i++)
+			if (!monster1[i]->ifDead())
+				monster_num++;
+		if (monster_num == 0)
 			portal.OnShow();
 	}
 	for (size_t i = 0; i < monster1.size(); i++) {

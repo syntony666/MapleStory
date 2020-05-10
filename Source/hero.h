@@ -18,6 +18,7 @@ namespace game_framework {
 		void OnShow();					// 將Hero圖形貼到畫面
 
 	protected:
+		const int d = 17;				// UI文字間距
 	};
 }
 #endif
