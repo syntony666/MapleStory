@@ -11,6 +11,9 @@ namespace game_framework {
 	Map::Map(){
 		Initialize();
 	}
+	Map::~Map() {
+		//delete[] floors;
+	}
 	void Map::Initialize() {
 		zoom = 2;
 		isMovingLeft = isMovingRight = false;
@@ -36,10 +39,10 @@ namespace game_framework {
 	void Map::setInitBitmap(int bitmap) {
 		_bitmap = bitmap;
 	}
-	void Map::SetMovingLeft(bool flag) {	
+	void Map::setMovingLeft(bool flag) {	
 		isMovingLeft = flag;
 	}
-	void Map::SetMovingRight(bool flag) {
+	void Map::setMovingRight(bool flag) {
 		isMovingRight = flag;
 	}
 	void Map::OnMove() {

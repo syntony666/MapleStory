@@ -5,7 +5,7 @@
 
 namespace game_framework {
 
-#define HP_PERCENT 100*hP/maxHP
+#define HP_PERCENT 100*HP/maxHP
 #define DEFAULT_RGB RGB(255, 255, 255)
 
 	struct Animations {
@@ -45,47 +45,49 @@ namespace game_framework {
 
 		//SETs
 
-		void SetHP(int Health);			// 設定生命值
-		void SetAttack(int Atk);			// 設定攻擊力
-		void SetMaxHP(int Health);		// 設定最大生命值
-		void SetXP(int nxp);			// 設定經驗值
-		void SetLevel(int nlv);			// 設定等級
-		void SetLevelUP();				// 升級囉
-		void SetFloor(int Floor);		// 設定地板
-		void SetMovingDown(bool flag);	// 設定是否正在往下移動
-		void SetMovingLeft(bool flag);	// 設定是否正在往左移動
-		void SetMovingRight(bool flag);	// 設定是否正在往右移動
-		void SetMovingUp(bool flag);		// 設定是否正在往上移動
-		void SetAttacking(bool flag);	// 設定是否正在攻擊
-		void SetFacing(int face);		// 設定面向方向
-		void SetXY(int nx, int ny);		// 設定Hero左上角座標
-		void SetHitLeft();				// 設定是否被擊中
-		void SetHitRight();				// 設定是否被擊中
-		void SetHitLeft(bool flag);				// 設定是否被擊中
-		void SetHitRight(bool flag);				// 設定是否被擊中
-		void SetDead(bool flag);		// 設定是否死亡
+		void setHP(int Health);			// 設定生命值
+		void setAttack(int Atk);		// 設定攻擊力
+		void setMaxHP(int Health);		// 設定最大生命值
+		void setXP(int nxp);			// 設定經驗值
+		void setLevel(int nlv);			// 設定等級
+		void setLevelUP();				// 升級囉
+		void setFloor(int Floor);		// 設定地板
+		void setMovingDown(bool flag);	// 設定是否正在往下移動
+		void setMovingLeft(bool flag);	// 設定是否正在往左移動
+		void setMovingRight(bool flag);	// 設定是否正在往右移動
+		void setMovingUp(bool flag);	// 設定是否正在往上移動
+		void setAttacking(bool flag);	// 設定是否正在攻擊
+		void setFacing(int face);		// 設定面向方向
+		void setXY(int nx, int ny);		// 設定Hero左上角座標
+		void setHitLeft();				// 設定是否被擊中
+		void setHitRight();				// 設定是否被擊中
+		void setHitLeft(bool flag);		// 設定是否被擊中
+		void setHitRight(bool flag);	// 設定是否被擊中
+		void setDead(bool flag);		// 設定是否死亡
+		void setAttackRange(int n);
 
 		//Monsters
-		void Set_Monster_Go_Left(bool flag);
-		void Set_Monster_Go_Right(bool flag);
+		void set_Monster_Go_Left(bool flag);
+		void set_Monster_Go_Right(bool flag);
 
 		//Hero
-		void SetSlashing(bool flag);
+		void setSlashing(bool flag);
 		bool ifSlashing();
-
+		
 		//GETs
 
 		int getX();						// 左邊 x 座標
 		int getY();						// 左邊 y 座標
-		int getXr();						// 右邊 x 座標
-		int getYr();						// 右邊 y 座標
-		int GetAttack();					// 擷取攻擊力
-		int GetHP();						// 擷取生命值
-		int GetMaxHP();
-		int GetXP();
-		int GetLevel();
-		int GetFloor();					// 擷取地板
-		int GetFacing();
+		int getXr();					// 右邊 x 座標
+		int getYr();					// 右邊 y 座標
+		int getAttack();				// 擷取攻擊力
+		int getHP();					// 擷取生命值
+		int getMaxHP();
+		int getXP();
+		int getLevel();
+		int getFloor();					// 擷取地板
+		int getFacing();
+		int getAttackRange();
 
 		bool ifAttacking();
 		bool ifHitLeft();
@@ -102,12 +104,12 @@ namespace game_framework {
 		int pos_rx, pos_ry;				//右邊座標
 		int attack;
 		int floor;						//地板高度
-		int hP, maxHP;
+		int HP, maxHP;
 		int exp = 0;
 		int level = 1;
 		int level_animation = 0;
 		int facing = 1;					// 1=面向右 2=面向左
-		bool isMovingDown, isMovingUp,// 是否正在移動
+		bool isMovingDown, isMovingUp,	// 是否正在移動
 			 isMovingRight, isMovingLeft;
 		bool isAttacking = false;		// 是否正在攻擊
 		bool isSlashing = false;		// 是否正在施放技能
@@ -124,6 +126,7 @@ namespace game_framework {
 		int velocity;					// 目前的速度(點/次)
 		int STEP_SIZE = 8;				// 行走速度
 		int cooldown = 30 * 10;			// 技能冷卻 10 秒
+		int attackRange;
 		Animations a;
 	};
 }

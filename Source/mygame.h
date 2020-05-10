@@ -88,15 +88,17 @@ namespace game_framework {
 		int portal1X = 2080;
 		int portal2X = 2100;
 		int portal3X = 2100;
-		int stage = 1;
-		int stage_count = 2;
+		int stage, stage_count;
 		int slash_cd = 300;							// 技能CD
 		CMovingBitmap	background;					// 背景圖
 		Character *hero;			// 角色
 		vector<Map> map;								// 地圖
 		vector<Character*> monster1;					// 怪物
+		vector<Character*> monster2;					// 怪物
 		Position hero_pos;
 		inline int monster_num(vector<Character*> monster);
+		void heroMonsterInteraction(Character&hero, vector<Character*> & monster, Map &map);
+
 	};
 
 	/////////////////////////////////////////////////////////////////////////////

@@ -8,6 +8,7 @@ namespace game_framework {
 	{
 	public:
 		Map();
+		~Map();
 		void Initialize();
 		void LoadBitmap();
 		void OnShow();
@@ -23,8 +24,8 @@ namespace game_framework {
 
 		//SETs in game
 
-		void SetMovingLeft(bool flag);	// 設定是否正在往左移動
-		void SetMovingRight(bool flag); // 設定是否正在往右移動
+		void setMovingLeft(bool flag);	// 設定是否正在往左移動
+		void setMovingRight(bool flag); // 設定是否正在往右移動
 
 		//GETs
 

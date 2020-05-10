@@ -16,11 +16,9 @@ namespace game_framework {
 		int getXBegin(int i) const;
 		int getXLast(int i)const;
 		int getY(int i) const;
-		//bool isFloor(Position& p);
 	private:
 		int _count;
-		Platform* _plat;
-		int _mem = -1;
+		vector<Platform> _plat;
 	};
 }
 

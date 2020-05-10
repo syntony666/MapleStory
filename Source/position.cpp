@@ -16,7 +16,7 @@ namespace game_framework {
 		pos_x = c->getX() - m.getX();
 		pos_y = 570 - c->getY();
 	}
-	void Position::SetPosition(Character* c, Map m) {
+	void Position::setPosition(Character* c, Map m) {
 		pos_x = c->getX() - m.getX();
 		pos_y = 570 - c->getY();
 	}

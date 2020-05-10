@@ -9,12 +9,15 @@
 namespace game_framework {
 	Floor::Floor(Platform plats[], int count) {
 		_count = count;
-		_plat = new Platform[_count];
 		for (int i = 0; i < count; ++i)
-			_plat[i] = plats[i];
+			_plat.push_back(plats[i]);
 	}
 	Floor::~Floor() {
-		delete[] _plat;
+		/*if (sizeof(_plat) != 0) {
+			for (auto i = _plat.begin(); i < _plat.end(); i++)
+				delete[] & i;
+			_plat.erase(_plat.begin(), _plat.end());
+		}*/
 	}
 	int Floor::getXBegin(int i) const{
 		return _plat[i].xBegin;

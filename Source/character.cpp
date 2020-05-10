@@ -20,93 +20,101 @@ namespace game_framework {
 	int  Character::getYr() {
 		return pos_ry;
 	}
-	void Character::SetXY(int nx, int ny)
+	void Character::setXY(int nx, int ny)
 	{
 		pos_x = nx; pos_y = ny;
 	}
 
-	int Character::GetAttack() {
+	int Character::getAttack() {
 		return attack; 
 	}
-	void Character::SetAttack(int Atk) {
+	void Character::setAttack(int Atk) {
 		attack = Atk;
 	}
-	int Character::GetHP() {
-		return hP;
+	int Character::getHP() {
+		return HP;
 	}
-	int Character::GetMaxHP() {
+	int Character::getMaxHP() {
 		return maxHP;
 	}
-	void Character::SetHP(int Health){
-		hP = Health;
+	void Character::setHP(int Health){
+		HP = Health;
 	}
-	void Character::SetMaxHP(int Health) {
+	void Character::setMaxHP(int Health) {
 		maxHP = Health;
-		hP = Health;
+		HP = Health;
 	}
-	void Character::SetFloor(int Floor) {
+	void Character::setFloor(int Floor) {
 		floor = Floor;
 	}
-	int Character::GetFloor() {
+	int Character::getFloor() {
 		return floor;
 	}
-	void Character::SetXP(int nxp) {
+	void Character::setXP(int nxp) {
 		exp = nxp;
 	}
-	int Character::GetXP() {
+	int Character::getXP() {
 		return exp;
 	}
-	void Character::SetLevel(int nlv) {
+	void Character::setLevel(int nlv) {
 		level = nlv;
 	}
-	int Character::GetLevel() {
+	int Character::getLevel() {
 		return level;
 	}
-	void Character::SetMovingDown(bool flag) {
+	void Character::setMovingDown(bool flag) {
 		isMovingDown = flag; 
 	}
-	void Character::SetMovingLeft(bool flag) {
+	void Character::setMovingLeft(bool flag) {
 		isMovingLeft = flag;
 	}
-	void Character::SetMovingRight(bool flag) {
+	void Character::setMovingRight(bool flag) {
 		isMovingRight = flag; 
 	}	
-	void Character::SetMovingUp(bool flag) { 
+	void Character::setMovingUp(bool flag) { 
 		isMovingUp = flag; 
 	}
-	void Character::SetAttacking(bool flag) { 
+	void Character::setAttacking(bool flag) { 
 		isAttacking = flag; 
 	}
-	void Character::SetDead(bool flag) {
+	void Character::setDead(bool flag) {
 		isDead = flag;
 	}
 	bool Character::ifAttacking() { 
 		return isAttacking; 
 	}
-	void Character::SetHitLeft() {
+	void Character::setHitLeft() {
 		isHitLeft = true;
 	}
-	void Character::SetHitLeft(bool flag) {
+	void Character::setHitLeft(bool flag) {
 		isHitLeft = flag;
 	}
 	bool Character::ifHitLeft() {
 		return isHitLeft;
 	}
-	void Character::SetHitRight() {
+	void Character::setHitRight() {
 		isHitRight = true;
 	}
-	void Character::SetHitRight(bool flag) {
+	void Character::setHitRight(bool flag) {
 		isHitRight = flag;
 	}
 	bool Character::ifHitRight() {
 		return isHitRight;
 	}
-	void Character::SetFacing(int face) {
+	void Character::setFacing(int face) {
 		facing = face; 
 	}
-	int Character::GetFacing() {
+	int Character::getFacing() {
 		return facing;
 	}
+	void Character::setAttackRange(int x) {
+		attackRange = x;
+	}
+	int Character::getAttackRange() {
+		return attackRange;
+	}
+
+	
 	void Character::hp_addBitmaps() {
 		int hp_bitmaps[] = { IDB_HP_0,IDB_HP_10,IDB_HP_20,IDB_HP_30,IDB_HP_40,IDB_HP_50,IDB_HP_60,IDB_HP_70,IDB_HP_80,IDB_HP_90,IDB_HP_100 };
 		for (int i = 0; i < 11; i++)
@@ -130,7 +138,7 @@ namespace game_framework {
 		num[nx].SetTopLeft(pos_nx, pos_ny);
 		num[nx].OnShow();
 	}
-	void Character::SetLevelUP() {
+	void Character::setLevelUP() {
 		if(level_animation == 0)
 			level_animation = 80;
 	}
@@ -190,15 +198,15 @@ namespace game_framework {
 
 
 	// Monsters
-	void Character::Set_Monster_Go_Left(bool flag) {
+	void Character::set_Monster_Go_Left(bool flag) {
 		is_Monster_Go_Left = flag;
 	}
-	void Character::Set_Monster_Go_Right(bool flag) {
+	void Character::set_Monster_Go_Right(bool flag) {
 		is_Monster_Go_Right = flag;
 	}
 
 	// Hero
-	void Character::SetSlashing(bool flag) {
+	void Character::setSlashing(bool flag) {
 		isSlashing = flag;
 	}
 	bool Character::ifSlashing() {

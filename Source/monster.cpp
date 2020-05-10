@@ -14,7 +14,6 @@ namespace game_framework {
 
 	Monster::Monster(int nx, int ny, int nxp)
 	{
-		//Initialize();
 		exp = nxp;
 		initX = nx;
 		initY = ny;
@@ -33,7 +32,7 @@ namespace game_framework {
 		const int INITIAL_VELOCITY = 14;
 		rising = false;
 		initial_velocity = INITIAL_VELOCITY;
-		SetXY(initX, initY);
+		setXY(initX, initY);
 	}
 
 	void Monster::OnMove()

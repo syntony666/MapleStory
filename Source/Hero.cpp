@@ -240,23 +240,23 @@ namespace game_framework {
 		}
 
 		// HP 顯示
-		if (hP < 10) {
-			number_OnShow(hP, 133, 80);
+		if (HP < 10) {
+			number_OnShow(HP, 133, 80);
 		}
-		else if (hP < 100) {
-			number_OnShow(hP / 10, 133, 80);
-			number_OnShow(hP % 10, 133+d, 80);
+		else if (HP < 100) {
+			number_OnShow(HP / 10, 133, 80);
+			number_OnShow(HP % 10, 133+d, 80);
 		}
-		else if(hP < 1000) {
-			number_OnShow(hP / 100, 133, 80);
-			number_OnShow(hP / 10 % 10, 133+d, 80);
-			number_OnShow(hP % 10, 133+d*2, 80);
+		else if(HP < 1000) {
+			number_OnShow(HP / 100, 133, 80);
+			number_OnShow(HP / 10 % 10, 133+d, 80);
+			number_OnShow(HP % 10, 133+d*2, 80);
 		}
-		else if (hP < 10000) {
-			number_OnShow(hP / 1000, 133, 80);
-			number_OnShow(hP / 100 % 10, 133+d, 80);
-			number_OnShow(hP / 10 % 10, 133+d*2, 80);
-			number_OnShow(hP % 10, 133+d*3, 80);
+		else if (HP < 10000) {
+			number_OnShow(HP / 1000, 133, 80);
+			number_OnShow(HP / 100 % 10, 133+d, 80);
+			number_OnShow(HP / 10 % 10, 133+d*2, 80);
+			number_OnShow(HP % 10, 133+d*3, 80);
 		}
 	}
 }
