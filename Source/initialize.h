@@ -87,7 +87,7 @@ namespace game_framework {
 		hero.setXY(100, 570);
 		hero.setFacing(1);	
 		hero.setMaxHP(500);
-		hero.setAttack(500); //30
+		hero.setAttack(30);
 		hero.setXP(0);
 		hero.setLevel(1);
 	}
