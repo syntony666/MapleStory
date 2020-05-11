@@ -39,6 +39,11 @@ namespace game_framework {
 	void Map::setInitBitmap(int bitmap) {
 		_bitmap = bitmap;
 	}
+	void Map::setPortalBitmap(int bitmap[], int num) {
+		portal = CAnimation(2);
+		for(int i=0;i<num;i++)
+			portal.AddBitmap(bitmap[i], RGB(255, 255, 255));
+	}
 	void Map::setMovingLeft(bool flag) {	
 		isMovingLeft = flag;
 	}

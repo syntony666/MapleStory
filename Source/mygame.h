@@ -95,6 +95,7 @@ namespace game_framework {
 		vector<Map> map;								// 地圖
 		vector<Character*> monster1;					// 怪物
 		vector<Character*> monster2;					// 怪物
+		vector<Character*> monster3;					// 怪物
 		Position hero_pos;
 		inline int monster_num(vector<Character*> monster);
 		void heroMonsterInteraction(Character&hero, vector<Character*> & monster, Map &map);

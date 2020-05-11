@@ -257,6 +257,7 @@ void CGameStateRun::OnBeginState()
 		map[i].setInitXY(0, 0);
 	initMonster1(monster1);
 	initMonster2(monster2);
+	initMonster3(monster3);
 
 	CAudio::Instance()->Stop(BGM_MENU);
 	CAudio::Instance()->Play(BGM_STAGE1, true);
@@ -414,7 +415,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	if (stage == 2)
 		heroMonsterInteraction(*hero, monster2, map[1]);
 	if (stage == 3)
-		heroMonsterInteraction(*hero, monster1, map[2]);
+		heroMonsterInteraction(*hero, monster3, map[2]);
 
 	// 玩家死亡相關
 	if (hero->getHP() <= 0)
@@ -496,6 +497,28 @@ void CGameStateRun::OnInit() {
 	}
 
 	ShowInitProgress(66);
+
+	monster3.push_back(new Monster(500, 570, 50));
+	monster3.push_back(new Monster(800, 570, 50));
+	monster3.push_back(new Monster(1000, 570, 50));
+	monster3.push_back(new Monster(1100, 570, 50));
+	monster3.push_back(new Monster(1300, 570, 50));
+	monster3.push_back(new Monster(2000, 570, 50));
+
+	for (size_t i = 0; i < monster3.size(); i++) {
+		vector<int> attackRight = { IDB_MONSTER_ATTACK_RIGHT1,IDB_MONSTER_ATTACK_RIGHT2, IDB_MONSTER_ATTACK_RIGHT3 };
+		vector<int> attackLeft = { IDB_MONSTER_ATTACK_LEFT1,IDB_MONSTER_ATTACK_LEFT2, IDB_MONSTER_ATTACK_LEFT3 };
+		vector<int> goRight;
+		vector<int> goLeft;
+		vector<int> slash;
+		monster3[i]->addBitmap(
+			IDB_MONSTER_STAND_RIGHT, IDB_MONSTER_STAND_LEFT,
+			0, 0, 0, 0,
+			goRight, goLeft,
+			attackRight, attackLeft, slash, lv_up);
+	}
+
+	ShowInitProgress(90);
 
 	// Load Bitmaps of Maps
 
@@ -670,8 +693,10 @@ void CGameStateRun::OnShow()
 			CAudio::Instance()->Play(BGM_STAGE3, true);
 		}
 		map[2].OnShow();			// 貼上背景圖
-		if (monster_num(monster1) == 0)
+		if (monster_num(monster3) == 0)
 			portal.OnShow();
+		for (size_t i = 0; i < monster3.size(); i++)
+			monster3[i]->OnShow();
 	}
 	hero->OnShow();			// 貼上人物
 }

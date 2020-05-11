@@ -21,6 +21,7 @@ namespace game_framework {
 		void setInitZoom(double i);
 		void setInitPlatform(Platform *plats,int i);
 		void setInitBitmap(int bitmap);
+		void setPortalBitmap(int bitmap[],int num);
 
 		//SETs in game
 
@@ -39,12 +40,14 @@ namespace game_framework {
 
 	protected:
 		CMovingBitmap map;
+		CAnimation portal;
 		int _x, _y, floor;
 		double zoom;
 		bool rising;			// true表上升、false表下降
 		int velocity;			// 目前的速度(點/次)
 		int _bitmap;
 		bool isMovingRight, isMovingLeft;
+		bool ifShowPortal;
 		Floor *floors;
 	};
 }
