@@ -524,7 +524,6 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	}
 
 	if (nChar == KEY_X) {
-		hero->setHP(0);
 		//hero->setXP(hero->getLevel() * 50); //作弊升級用
 		if (slash_cd == 300) {
 			hero->setSlashing(true);
@@ -691,7 +690,6 @@ void CGameStateRun :: heroMonsterInteraction(Character&hero, vector<Character*> 
 			continue;
 
 		Position monster_pos(monster[i], map);
-		Position hero_pos(&hero, map);
 		monster[i]->OnMove();
 
 		// 人物移動相關
