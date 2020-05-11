@@ -195,11 +195,10 @@ void CGameStateOver::OnInit()
 					IDB_GAME_OVER_8 ,IDB_GAME_OVER_9 ,IDB_GAME_OVER_10,IDB_GAME_OVER_11,
 					IDB_GAME_OVER_12,IDB_GAME_OVER_13,IDB_GAME_OVER_14,IDB_GAME_OVER_0,
 					IDB_GAME_OVER_0 ,IDB_GAME_OVER_0 ,IDB_GAME_OVER_0 ,IDB_GAME_OVER_0,
-					IDB_GAME_OVER_0 ,IDB_GAME_OVER_0 ,IDB_GAME_OVER_0 ,IDB_GAME_OVER_0,
-					IDB_GAME_OVER_0 ,IDB_GAME_OVER_0 ,IDB_GAME_OVER_0 ,IDB_GAME_OVER_0, };
+					IDB_GAME_OVER_0 };
 
-	Gameover = CAnimation(9);
-	for (int i = 0; i < 28; i++)
+	Gameover = CAnimation(10);
+	for (int i = 0; i < 21; i++)
 		Gameover.AddBitmap(over[i], RGB(255, 255, 255));
 
 	ShowInitProgress(80);	// 接個前一個狀態的進度，此處進度視為66%
@@ -483,13 +482,13 @@ void CGameStateRun::OnInit() {
 	monster2.push_back(new Monster(2000, 570, 50));
 
 	for (size_t i = 0; i < monster2.size(); i++) {
-		vector<int> attackRight = { IDB_MONSTER_ATTACK_RIGHT1,IDB_MONSTER_ATTACK_RIGHT2, IDB_MONSTER_ATTACK_RIGHT3 };
-		vector<int> attackLeft = { IDB_MONSTER_ATTACK_LEFT1,IDB_MONSTER_ATTACK_LEFT2, IDB_MONSTER_ATTACK_LEFT3 };
+		vector<int> attackRight = { IDB_GUNER_ATTACK_RIGHT1,IDB_GUNER_ATTACK_RIGHT2, IDB_GUNER_ATTACK_RIGHT3 };
+		vector<int> attackLeft = { IDB_GUNER_ATTACK_LEFT1,IDB_GUNER_ATTACK_LEFT2, IDB_GUNER_ATTACK_LEFT3 };
 		vector<int> goRight;
 		vector<int> goLeft;
 		vector<int> slash;
 		monster2[i]->addBitmap(
-			IDB_MONSTER_STAND_RIGHT, IDB_MONSTER_STAND_LEFT,
+			IDB_GUNER_STAND_RIGHT, IDB_GUNER_STAND_LEFT,
 			0, 0, 0, 0,
 			goRight, goLeft,
 			attackRight, attackLeft, slash, lv_up);
@@ -525,6 +524,7 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	}
 
 	if (nChar == KEY_X) {
+		hero->setHP(0);
 		//hero->setXP(hero->getLevel() * 50); //作弊升級用
 		if (slash_cd == 300) {
 			hero->setSlashing(true);
