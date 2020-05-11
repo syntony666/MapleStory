@@ -298,6 +298,22 @@ IDB_HP                  BITMAP                  "..\\res\\Number\\HP.bmp"
 
 IDB_LV                  BITMAP                  "..\\res\\Number\\Level.bmp"
 
+IDB_GUNER_STAND_LEFT    BITMAP                  "..\\res\\NGuner\\Guner_Left.bmp"
+
+IDB_GUNER_ATTACK_LEFT1  BITMAP                  "..\\res\\NGuner\\Guner_Left_Attack01.bmp"
+
+IDB_GUNER_ATTACK_LEFT2  BITMAP                  "..\\res\\NGuner\\Guner_Left_Attack02.bmp"
+
+IDB_GUNER_ATTACK_LEFT3  BITMAP                  "..\\res\\NGuner\\Guner_Left_Attack03.bmp"
+
+IDB_GUNER_STAND_RIGHT   BITMAP                  "..\\res\\NGuner\\Guner_Right.bmp"
+
+IDB_GUNER_ATTACK_RIGHT1 BITMAP                  "..\\res\\NGuner\\Guner_Right_Attack01.bmp"
+
+IDB_GUNER_ATTACK_RIGHT2 BITMAP                  "..\\res\\NGuner\\Guner_Right_Attack02.bmp"
+
+IDB_GUNER_ATTACK_RIGHT3 BITMAP                  "..\\res\\NGuner\\Guner_Right_Attack03.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

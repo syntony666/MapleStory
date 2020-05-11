@@ -452,6 +452,30 @@
     <Image Include="RES\Number\Level.bmp">
       <Filter>Resouces</Filter>
     </Image>
+    <Image Include="RES\Guner\Guner_Left.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Guner\Guner_Left_Attack01.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Guner\Guner_Left_Attack02.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Guner\Guner_Left_Attack03.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Guner\Guner_Right.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Guner\Guner_Right_Attack01.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Guner\Guner_Right_Attack02.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Guner\Guner_Right_Attack03.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="RES\continue.bmp">

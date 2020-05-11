@@ -360,6 +360,14 @@
     <Image Include="RES\GameOver\GAME_OVER_7.bmp" />
     <Image Include="RES\GameOver\GAME_OVER_8.bmp" />
     <Image Include="RES\GameOver\GAME_OVER_9.bmp" />
+    <Image Include="RES\Guner\Guner_Left.bmp" />
+    <Image Include="RES\Guner\Guner_Left_Attack01.bmp" />
+    <Image Include="RES\Guner\Guner_Left_Attack02.bmp" />
+    <Image Include="RES\Guner\Guner_Left_Attack03.bmp" />
+    <Image Include="RES\Guner\Guner_Right.bmp" />
+    <Image Include="RES\Guner\Guner_Right_Attack01.bmp" />
+    <Image Include="RES\Guner\Guner_Right_Attack02.bmp" />
+    <Image Include="RES\Guner\Guner_Right_Attack03.bmp" />
     <Image Include="RES\HP_bar\HP_0.bmp" />
     <Image Include="RES\HP_bar\HP_10.bmp" />
     <Image Include="RES\HP_bar\HP_100.bmp" />
