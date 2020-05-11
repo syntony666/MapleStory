@@ -96,7 +96,7 @@ namespace game_framework {
 			monster[i]->Initialize();
 			monster[i]->setMaxHP(100);
 			monster[i]->setAttack(50);
-			monster[i]->setAttackRange(50);
+			monster[i]->setAttackRange(10);
 		}
 	}
 	inline void initMonster2(vector<Character*> & monster) {

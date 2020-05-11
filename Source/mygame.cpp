@@ -470,7 +470,7 @@ void CGameStateRun::OnInit() {
 		IDB_MONSTER_STAND_RIGHT, IDB_MONSTER_STAND_LEFT,
 		0, 0, 0, 0,
 		goRight, goLeft,
-		attackLeft, attackRight,slash,lv_up);
+		attackRight, attackLeft,slash,lv_up);
 	}
 
 	ShowInitProgress(50);
@@ -492,7 +492,7 @@ void CGameStateRun::OnInit() {
 			IDB_MONSTER_STAND_RIGHT, IDB_MONSTER_STAND_LEFT,
 			0, 0, 0, 0,
 			goRight, goLeft,
-			attackLeft, attackRight, slash, lv_up);
+			attackRight, attackLeft, slash, lv_up);
 	}
 
 	ShowInitProgress(66);
