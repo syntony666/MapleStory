@@ -558,7 +558,7 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	}
 
 	if (nChar == KEY_C) {
-		//hero->setXP(hero->getLevel() * 50); //作弊升級用
+		//stage++;		 //作弊過關用
 		if (heal_cd == 600) {
 			hero->setHP(hero->getMaxHP());
 			CAudio::Instance()->Play(SFX_HEAL, false);
