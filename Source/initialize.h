@@ -19,6 +19,7 @@ namespace game_framework {
 #define ON_PLATFORM_STAGE1 hero_pos.getY() <= map[0].getFloorY(i) + 50 && hero_pos.getY() >= map[0].getFloorY(i) - 14 && hero_pos.getX() >= map[0].getFloorXBegin(i) && hero_pos.getX() <= map[0].getFloorXLast(i)
 #define ON_PLATFORM_STAGE2 hero_pos.getY() <= map[1].getFloorY(i) + 50 && hero_pos.getY() >= map[1].getFloorY(i) - 14 && hero_pos.getX() >= map[1].getFloorXBegin(i) && hero_pos.getX() <= map[1].getFloorXLast(i)
 #define ON_PLATFORM_STAGE3 hero_pos.getY() <= map[2].getFloorY(i) + 50 && hero_pos.getY() >= map[2].getFloorY(i) - 14 && hero_pos.getX() >= map[2].getFloorXBegin(i) && hero_pos.getX() <= map[2].getFloorXLast(i)
+#define ON_PLATFORM_MONSTER monster_pos.getY() <= map.getFloorY(j) + 50 && monster_pos.getY() >= map.getFloorY(j) - 14 && monster_pos.getX() >= map.getFloorXBegin(j) && monster_pos.getX() <= map.getFloorXLast(j)
 #define IN_PORTAL1 hero_pos.getY() == 150 && hero_pos.getX() >= 2060 && hero_pos.getX() <= 2132
 #define IN_PORTAL2 hero_pos.getY() <= 20 && hero_pos.getX() >= 2084 && hero_pos.getX() <= 2156
 #define IN_PORTAL3 hero_pos.getY() == 100 && hero_pos.getX() >= 2084 && hero_pos.getX() <= 2156

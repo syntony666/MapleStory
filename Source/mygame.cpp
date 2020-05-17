@@ -457,12 +457,15 @@ void CGameStateRun::OnInit() {
 
 	// Load Bitmaps of Monsters
 
-	monster1.push_back(new Monster(500, 570, 50));
-	monster1.push_back(new Monster(800, 570, 50));
-	monster1.push_back(new Monster(1000, 570, 50));
-	monster1.push_back(new Monster(1100, 570, 50));
-	monster1.push_back(new Monster(1300, 570, 50));
-	monster1.push_back(new Monster(2000, 570, 50));
+	monster1.push_back(new Monster(500, 570, 40));
+	monster1.push_back(new Monster(350, 370, 40));
+	monster1.push_back(new Monster(700, 280, 40));
+	monster1.push_back(new Monster(750, 280, 40));
+	monster1.push_back(new Monster(1000, -20, 40));
+	monster1.push_back(new Monster(1300, 152, 40));
+	monster1.push_back(new Monster(1500, 317, 40));
+	monster1.push_back(new Monster(2000, 420, 40));
+	monster1.push_back(new Monster(2100, -20, 40));
 
 	for (size_t i = 0; i < monster1.size(); i++) {
 		vector<int> attackRight = { IDB_MONSTER_ATTACK_RIGHT1,IDB_MONSTER_ATTACK_RIGHT2, IDB_MONSTER_ATTACK_RIGHT3 };
@@ -479,12 +482,20 @@ void CGameStateRun::OnInit() {
 
 	ShowInitProgress(50);
 
-	monster2.push_back(new Monster(500, 570, 50));
-	monster2.push_back(new Monster(800, 570, 50));
-	monster2.push_back(new Monster(1000, 570, 50));
-	monster2.push_back(new Monster(1100, 570, 50));
-	monster2.push_back(new Monster(1300, 570, 50));
-	monster2.push_back(new Monster(2000, 570, 50));
+	monster2.push_back(new Monster(500, 570, 70));
+	monster2.push_back(new Monster(800, 570, 70));
+	monster2.push_back(new Monster(1000, 570, 70));
+	monster2.push_back(new Monster(1100, 570, 70));
+	monster2.push_back(new Monster(1300, 570, 70));
+	monster2.push_back(new Monster(2000, 570, 70));
+	monster2.push_back(new Monster(700, 452, 70));
+	monster2.push_back(new Monster(1600, 378, 70));
+	monster2.push_back(new Monster(1900, 570-323, 70));
+	monster2.push_back(new Monster(1700, 570-441, 70));
+	monster2.push_back(new Monster(1200, 570-560, 70));
+	monster2.push_back(new Monster(700, 570-513, 70));
+	monster2.push_back(new Monster(400, 570-390, 70));
+	monster2.push_back(new Monster(1900, 570-568, 70));
 
 	for (size_t i = 0; i < monster2.size(); i++) {
 		vector<int> attackRight = { IDB_GUNER_ATTACK_RIGHT1,IDB_GUNER_ATTACK_RIGHT2, IDB_GUNER_ATTACK_RIGHT3 };
@@ -827,17 +838,29 @@ void CGameStateRun :: heroMonsterInteraction(Character&hero, vector<Character*> 
 		}
 
 		// 怪物移動相關
-		if (monster_pos.getX() - hero_pos.getX() >= monster[i]->getAttackRange()) {
+		if (monster_pos.getX() - hero_pos.getX() >= monster[i]->getAttackRange() && monster_pos.getX() - hero_pos.getX() <= 500) {
 			monster[i]->set_Monster_Go_Left(true);
 			monster[i]->set_Monster_Go_Right(false);
 		}
-		else if (hero_pos.getX() - monster_pos.getX() >= monster[i]->getAttackRange()) {
+		else if (hero_pos.getX() - monster_pos.getX() >= monster[i]->getAttackRange() && hero_pos.getX() - monster_pos.getX() <= 500) {
 			monster[i]->set_Monster_Go_Right(true);
 			monster[i]->set_Monster_Go_Left(false);
 		}
 		else {
 			monster[i]->set_Monster_Go_Right(false);
 			monster[i]->set_Monster_Go_Left(false);
+		}
+
+		int flag = 0;
+		for (int j = 0; j < 8; j++) {
+			if (ON_PLATFORM_MONSTER)
+				monster[i]->setFloor(570 - map.getFloorY(j));
+			else
+				flag++;
+		}
+
+		if (flag == 8) {
+			monster[i]->setFloor(570);
 		}
 
 		// 攻擊互動相關

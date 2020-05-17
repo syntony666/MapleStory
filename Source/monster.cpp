@@ -30,7 +30,7 @@ namespace game_framework {
 		const int FLOOR = 570;
 		floor = FLOOR;
 		const int INITIAL_VELOCITY = 14;
-		rising = false;
+		rising = true;
 		initial_velocity = INITIAL_VELOCITY;
 		setXY(initX, initY);
 	}
