@@ -150,4 +150,10 @@ namespace game_framework {
 			hp_OnShow();
 		}
 	}
+	bool Monster::ifSkill() {
+		return isSkill;
+	}
+	void Monster::setSkill(bool flag) {
+		isSkill = flag;
+	}
 }

@@ -13,11 +13,6 @@ namespace game_framework {
 			_plat.push_back(plats[i]);
 	}
 	Floor::~Floor() {
-		/*if (sizeof(_plat) != 0) {
-			for (auto i = _plat.begin(); i < _plat.end(); i++)
-				delete[] & i;
-			_plat.erase(_plat.begin(), _plat.end());
-		}*/
 	}
 	int Floor::getXBegin(int i) const{
 		return _plat[i].xBegin;

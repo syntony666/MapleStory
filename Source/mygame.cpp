@@ -258,6 +258,7 @@ void CGameStateRun::OnBeginState()
 	initMonster1(monster1);
 	initMonster2(monster2);
 	initMonster3(monster3);
+	monster2_skill_cd = 30 * 5;
 
 	CAudio::Instance()->Stop(BGM_MENU);
 	CAudio::Instance()->Play(BGM_STAGE1, true);
@@ -412,6 +413,24 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		if (heal_cd == 0)
 			heal_cd = 600;
 	}
+	TRACE("--------------(%d)-------------", monster2_skill_cd);
+	if (monster2_skill_cd <= 149 && monster2_skill_cd>=-50) {
+		monster2_skill_cd--;
+		if (monster2_skill_cd >= 0) {
+			hero->setMovingLeft(false);
+			hero->setMovingRight(false);
+			hero->setMovingUp(false);
+			hero->setMovingDown(false);
+		}
+		if (monster2_skill_cd == 75 || monster2_skill_cd == 0) {
+			if (hero->getHP() <= 10)
+				hero->setHP(0);
+			hero->setHP(int(hero->getHP()*0.9));
+		}
+		if (monster2_skill_cd == -50)
+			monster2_skill_cd = 150;
+	}
+
 
 	// 怪物互動相關
 	if (stage == 1)
@@ -573,8 +592,10 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_RIGHT = 0x27; // keyboard右箭頭
 	const char KEY_DOWN  = 0x28; // keyboard下箭頭
 	const char KEY_Z = 0x5A; // keyboard Z
+	const char KEY_Y = 0x59; // keyboard Y
 	const char KEY_X = 0x58; // keyboard X
 	const char KEY_C = 0x43; // keyboard C
+	const char KEY_T = 0x54; // keyboard T
 	Position hero_pos(hero, map[0]);
 
 	if (nChar == KEY_Z) {
@@ -592,13 +613,26 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	}
 
 	if (nChar == KEY_C) {
-		//stage++;		 //作弊過關用
 		if (heal_cd == 600) {
 			hero->setHP(hero->getMaxHP());
 			CAudio::Instance()->Play(SFX_HEAL, false);
 			heal_cd--;
 		}
 	}
+	if (nChar == KEY_Y) {		//monster all dead
+		if (stage == 1)
+			for (auto i = monster1.begin(); i < monster1.end(); i++)
+				(*i)->setDead(1);
+		if (stage == 2)
+			for (auto i = monster2.begin(); i < monster2.end(); i++)
+				(*i)->setDead(1);
+		if (stage == 3)
+			for (auto i = monster3.begin(); i < monster3.end(); i++)
+				(*i)->setDead(1);
+	}
+
+	if (nChar == KEY_T) 
+		stage++;		 //作弊過關用
 
 	if (nChar == KEY_LEFT) {
 		hero->setMovingLeft(true);
@@ -742,6 +776,8 @@ void CGameStateRun::OnShow()
 		for (size_t i = 0; i < monster3.size(); i++)
 			monster3[i]->OnShow();
 	}
+	if (stage == 4)
+		GotoGameState(GAME_STATE_INIT);
 	hero->OnShow();			// 貼上人物
 	if (slash_cd == 300) {
 		slash_cd_0.SetTopLeft(15, 125);
@@ -822,110 +858,118 @@ void CGameStateRun::OnShow()
 }
 inline int CGameStateRun::monster_num(vector<Character*>monster) {
 	int n = 0;
-	for (size_t i = 0; i < monster.size(); i++)
-		if (!monster[i]->ifDead())
+	for (auto i = monster.begin(); i < monster.end(); i++)
+		if (!(*i)->ifDead())
 			n++;
 	return n;
 }
 
 
-void CGameStateRun :: heroMonsterInteraction(Character&hero, vector<Character*> & monster, Map &map) {
+void CGameStateRun :: heroMonsterInteraction(Character&hero, vector<Character*> & monsters, Map &map) {
 
-	for (size_t i = 0; i < monster.size(); i++) {
-		if (monster[i]->ifDead())
+	for (auto monster = monsters.begin(); monster < monsters.end(); monster++) {
+		if ((*monster)->ifDead())
 			continue;
 
-		Position monster_pos(monster[i], map);
-		monster[i]->OnMove();
+		Position monster_pos(*monster, map);
+		(*monster)->OnMove();
 
 		// 人物移動相關
 		if (hero.getX() <= 100 && hero.ifMovingLeft()) {
 			if (hero_pos.getX() <= 110) {
-				monster[i]->setMovingLeft(false);
+				(*monster)->setMovingLeft(false);
 			}
 			else {
-				monster[i]->setMovingLeft(true);
+				(*monster)->setMovingLeft(true);
 			}
 		}
 		else {
-			monster[i]->setMovingLeft(false);
+			(*monster)->setMovingLeft(false);
 		}
 		if (hero.getX() >= 1164 && hero.ifMovingRight()) {
 			if (hero_pos.getX() >= 2200) {
-				monster[i]->setMovingRight(false);
+				(*monster)->setMovingRight(false);
 			}
 			else {
-				monster[i]->setMovingRight(true);
+				(*monster)->setMovingRight(true);
 			}
 		}
 		else {
-			monster[i]->setMovingRight(false);
+			(*monster)->setMovingRight(false);
 		}
 
 		// 怪物移動相關
-		if (monster_pos.getX() - hero_pos.getX() >= monster[i]->getAttackRange() && monster_pos.getX() - hero_pos.getX() <= 500) {
-			monster[i]->set_Monster_Go_Left(true);
-			monster[i]->set_Monster_Go_Right(false);
+		if (monster_pos.getX() - hero_pos.getX() >= (*monster)->getAttackRange() && monster_pos.getX() - hero_pos.getX() <= 500) {
+			(*monster)->set_Monster_Go_Left(true);
+			(*monster)->set_Monster_Go_Right(false);
 		}
-		else if (hero_pos.getX() - monster_pos.getX() >= monster[i]->getAttackRange() && hero_pos.getX() - monster_pos.getX() <= 500) {
-			monster[i]->set_Monster_Go_Right(true);
-			monster[i]->set_Monster_Go_Left(false);
+		else if (hero_pos.getX() - monster_pos.getX() >= (*monster)->getAttackRange() && hero_pos.getX() - monster_pos.getX() <= 500) {
+			(*monster)->set_Monster_Go_Right(true);
+			(*monster)->set_Monster_Go_Left(false);
 		}
 		else {
-			monster[i]->set_Monster_Go_Right(false);
-			monster[i]->set_Monster_Go_Left(false);
+			(*monster)->set_Monster_Go_Right(false);
+			(*monster)->set_Monster_Go_Left(false);
 		}
 
 		int flag = 0;
 		for (int j = 0; j < 8; j++) {
 			if (ON_PLATFORM_MONSTER)
-				monster[i]->setFloor(570 - map.getFloorY(j));
+				(*monster)->setFloor(570 - map.getFloorY(j));
 			else
 				flag++;
 		}
 
 		if (flag == 8) {
-			monster[i]->setFloor(570);
+			(*monster)->setFloor(570);
 		}
 
 		// 攻擊互動相關
-		if (MONSTER_HIT_CHARACTER(monster[i]->getAttackRange())) {
-			if (HIT_CHECK_CHARACTER&&HEIGHT_CHECK) {
-					monster[i]->setAttacking(true);
-					hero.setHP(hero.getHP() - monster[i]->getAttack());
+		TRACE("---------------*monsterSkillRange%d\n", (*monster)->getSkillRange());
+		if ((*monster)->getSkillRange()!=0 && MONSTER_HIT_CHARACTER((*monster)->getSkillRange()) && monster2_skill_cd==150){
+			monster2_skill_cd--;
+		}
+		if ((*monster)->getSkillRange() == 0) {
+			if (MONSTER_HIT_CHARACTER((*monster)->getAttackRange())) {
+				if (HIT_CHECK_CHARACTER && HEIGHT_CHECK) {
+					(*monster)->setAttacking(true);
+					hero.setHP(hero.getHP() - (*monster)->getAttack());
 					CAudio::Instance()->Play(SFX_HERO_HIT, false);
-					if(stage == 2)
+					if (stage == 2)
 						CAudio::Instance()->Play(SFX_GUN, false);
 					if (monster_pos.getX() >= hero_pos.getX())
 						hero.setHitLeft();
 					else if (monster_pos.getX() < hero_pos.getX())
 						hero.setHitRight();
-					if (hero.getHP() <= 0)
-						return;
+				}
+				if (hero.getHP() <= 0)
+					return;
 			}
 		}
 		if (CHARACTER_HIT_MONSTER && HIT_CHECK_MONSTER&&HEIGHT_CHECK){
-			monster[i]->setHP(monster[i]->getHP() - hero.getAttack());
+			(*monster)->setHP((*monster)->getHP() - hero.getAttack());
 			CAudio::Instance()->Play(SFX_MONSTER_HIT, false);
 			if (hero.getFacing() == 2)
-				monster[i]->setHitLeft();
+				(*monster)->setHitLeft();
 			else if (hero.getFacing() == 1)
-				monster[i]->setHitRight();
+				(*monster)->setHitRight();
 		}
 		if (CHARACTER_SLASH_MONSTER && HIT_CHECK_MONSTER && SLASH_HEIGHT_CHECK) {
-			monster[i]->setHP(monster[i]->getHP() - hero.getAttack() * 2);
+			(*monster)->setHP((*monster)->getHP() - hero.getAttack() * 2);
 			CAudio::Instance()->Play(SFX_MONSTER_HIT, false);
 			if (monster_pos.getX() >= hero_pos.getX())
-				monster[i]->setHitRight();
+				(*monster)->setHitRight();
 			else
-				monster[i]->setHitLeft();
+				(*monster)->setHitLeft();
 		}
 
 		// 怪物死亡相關
-		if (monster[i]->getHP() <= 0) {
-			hero.setXP(hero.getXP() + monster[i]->getXP());
-			monster[i]->setDead(true);
-			monster[i]->setXY(-1, -1);
+		if ((*monster)->getHP() <= 0) {
+			if (stage == 2)
+				CAudio::Instance()->Play(SFX_GUN, false);
+			hero.setXP(hero.getXP() + (*monster)->getXP());
+			(*monster)->setDead(true);
+			(*monster)->setXY(-1, -1);
 		}
 	}
 }

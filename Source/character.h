@@ -64,7 +64,8 @@ namespace game_framework {
 		void setHitLeft(bool flag);		// 設定是否被擊中
 		void setHitRight(bool flag);	// 設定是否被擊中
 		void setDead(bool flag);		// 設定是否死亡
-		void setAttackRange(int n);
+		void setAttackRange(int n); 
+		void setSkillRange(int n);
 
 		//Monsters
 		void set_Monster_Go_Left(bool flag);
@@ -88,6 +89,7 @@ namespace game_framework {
 		int getFloor();					// 擷取地板
 		int getFacing();
 		int getAttackRange();
+		int getSkillRange();
 
 		bool ifAttacking();
 		bool ifHitLeft();
@@ -127,6 +129,7 @@ namespace game_framework {
 		int STEP_SIZE = 8;				// 行走速度
 		int cooldown = 30 * 10;			// 技能冷卻 10 秒
 		int attackRange;
+		int skillRange;
 		Animations a;
 	};
 }

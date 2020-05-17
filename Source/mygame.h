@@ -92,6 +92,7 @@ namespace game_framework {
 		int stage, stage_count;
 		int slash_cd = 30 * 10;							// 技能CD
 		int heal_cd = 30 * 20;							// 治癒CD
+		int monster2_skill_cd = 30*5;
 		CMovingBitmap	background;					// 背景圖
 		Character *hero;			// 角色
 		vector<Map> map;								// 地圖

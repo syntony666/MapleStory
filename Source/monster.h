@@ -19,10 +19,14 @@ namespace game_framework {
 		void Initialize();				// 設定monster為初始值
 		void OnMove();					// 移動monster
 		void OnShow();					// 將monster圖形貼到畫面
+		bool ifSkill();
+		void setSkill(bool flag);
 
 	protected:
 		const int HERO_STEP = 8;
 		int initX, initY;
+		int skill = 0;
+		bool isSkill = false;
 	};
 }
 #endif

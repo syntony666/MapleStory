@@ -12,7 +12,7 @@ namespace game_framework {
 		Initialize();
 	}
 	Map::~Map() {
-		//delete[] floors;
+		//delete floors;
 	}
 	void Map::Initialize() {
 		zoom = 2;
