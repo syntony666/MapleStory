@@ -771,29 +771,21 @@ void CGameStateRun :: heroMonsterInteraction(Character&hero, vector<Character*> 
 						return;
 			}
 		}
-		if (CHARACTER_HIT_MONSTER) {
-			if (HIT_CHECK_MONSTER) {
-				if (HEIGHT_CHECK) {
-					monster[i]->setHP(monster[i]->getHP() - hero.getAttack());
-					CAudio::Instance()->Play(SFX_MONSTER_HIT, false);
-					if (hero.getFacing() == 2)
-						monster[i]->setHitLeft();
-					else if (hero.getFacing() == 1)
-						monster[i]->setHitRight();
-				}
-			}
+		if (CHARACTER_HIT_MONSTER && HIT_CHECK_MONSTER&&HEIGHT_CHECK){
+			monster[i]->setHP(monster[i]->getHP() - hero.getAttack());
+			CAudio::Instance()->Play(SFX_MONSTER_HIT, false);
+			if (hero.getFacing() == 2)
+				monster[i]->setHitLeft();
+			else if (hero.getFacing() == 1)
+				monster[i]->setHitRight();
 		}
-		if (CHARACTER_SLASH_MONSTER) {
-			if (HIT_CHECK_MONSTER) {
-				if (SLASH_HEIGHT_CHECK) {
-					monster[i]->setHP(monster[i]->getHP() - hero.getAttack() * 2);
-					CAudio::Instance()->Play(SFX_MONSTER_HIT, false);
-					if (monster_pos.getX() >= hero_pos.getX())
-						monster[i]->setHitRight();
-					else
-						monster[i]->setHitLeft();
-				}
-			}
+		if (CHARACTER_SLASH_MONSTER && HIT_CHECK_MONSTER && SLASH_HEIGHT_CHECK) {
+			monster[i]->setHP(monster[i]->getHP() - hero.getAttack() * 2);
+			CAudio::Instance()->Play(SFX_MONSTER_HIT, false);
+			if (monster_pos.getX() >= hero_pos.getX())
+				monster[i]->setHitRight();
+			else
+				monster[i]->setHitLeft();
 		}
 
 		// 怪物死亡相關
