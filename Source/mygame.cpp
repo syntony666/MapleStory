@@ -60,6 +60,7 @@ void CGameStateInit::OnInit()
 	CAudio::Instance()->Load(SFX_JUMP, "sounds\\sfx_jump.mp3");
 	CAudio::Instance()->Load(SFX_ATTACK, "sounds\\sfx_attack.mp3");
 	CAudio::Instance()->Load(SFX_SLASH, "sounds\\sfx_slash.mp3");
+	CAudio::Instance()->Load(SFX_HEAL, "sounds\\sfx_heal.mp3");
 	CAudio::Instance()->Load(SFX_HERO_HIT, "sounds\\sfx_hero_hit.mp3");
 	CAudio::Instance()->Load(SFX_MONSTER_HIT, "sounds\\sfx_monster_hit.mp3");
 	CAudio::Instance()->Load(SFX_GUN, "sounds\\sfx_gun.mp3");
@@ -405,9 +406,13 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		if (slash_cd == 0)
 			slash_cd = 300;
 	}
+	if (heal_cd <= 599) {
+		heal_cd--;
+		if (heal_cd == 0)
+			heal_cd = 600;
+	}
 
-
-
+	// 怪物互動相關
 	if (stage == 1)
 		heroMonsterInteraction(*hero, monster1, map[0]);
 	if (stage == 2)
@@ -504,6 +509,25 @@ void CGameStateRun::OnInit() {
 	for (size_t i = 0; i < map.size(); i++)
 		map[i].LoadBitmap();
 
+	slash_cd_0.LoadBitmap(IDB_SLASH_CD_0);
+	slash_cd_1.LoadBitmap(IDB_SLASH_CD_1);
+	slash_cd_2.LoadBitmap(IDB_SLASH_CD_2);
+	slash_cd_3.LoadBitmap(IDB_SLASH_CD_3);
+	slash_cd_4.LoadBitmap(IDB_SLASH_CD_4);
+	slash_cd_5.LoadBitmap(IDB_SLASH_CD_5);
+	slash_cd_6.LoadBitmap(IDB_SLASH_CD_6);
+	slash_cd_7.LoadBitmap(IDB_SLASH_CD_7);
+	slash_cd_8.LoadBitmap(IDB_SLASH_CD_8);
+	heal_cd_0.LoadBitmap(IDB_HEAL_CD_0);
+	heal_cd_1.LoadBitmap(IDB_HEAL_CD_1);
+	heal_cd_2.LoadBitmap(IDB_HEAL_CD_2);
+	heal_cd_3.LoadBitmap(IDB_HEAL_CD_3);
+	heal_cd_4.LoadBitmap(IDB_HEAL_CD_4);
+	heal_cd_5.LoadBitmap(IDB_HEAL_CD_5);
+	heal_cd_6.LoadBitmap(IDB_HEAL_CD_6);
+	heal_cd_7.LoadBitmap(IDB_HEAL_CD_7);
+	heal_cd_8.LoadBitmap(IDB_HEAL_CD_8);
+
 	ShowInitProgress(100);
 }
 
@@ -516,6 +540,7 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_DOWN  = 0x28; // keyboard下箭頭
 	const char KEY_Z = 0x5A; // keyboard Z
 	const char KEY_X = 0x58; // keyboard X
+	const char KEY_C = 0x43; // keyboard C
 	Position hero_pos(hero, map[0]);
 
 	if (nChar == KEY_Z) {
@@ -529,6 +554,15 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 			hero->setSlashing(true);
 			CAudio::Instance()->Play(SFX_SLASH, false);
 			slash_cd--;
+		}
+	}
+
+	if (nChar == KEY_C) {
+		//hero->setXP(hero->getLevel() * 50); //作弊升級用
+		if (heal_cd == 600) {
+			hero->setHP(hero->getMaxHP());
+			CAudio::Instance()->Play(SFX_HEAL, false);
+			heal_cd--;
 		}
 	}
 
@@ -673,6 +707,82 @@ void CGameStateRun::OnShow()
 			portal.OnShow();
 	}
 	hero->OnShow();			// 貼上人物
+	if (slash_cd == 300) {
+		slash_cd_0.SetTopLeft(15, 125);
+		slash_cd_0.ShowBitmap();
+	}
+	if (slash_cd <= 299) {
+		if (slash_cd >= 300 * 7 / 8) {
+			slash_cd_8.SetTopLeft(15, 125);
+			slash_cd_8.ShowBitmap();
+		}
+		else if (slash_cd >= 300 * 6 / 8) {
+			slash_cd_7.SetTopLeft(15, 125);
+			slash_cd_7.ShowBitmap();
+		}
+		else if (slash_cd >= 300 * 5 / 8) {
+			slash_cd_6.SetTopLeft(15, 125);
+			slash_cd_6.ShowBitmap();
+		}
+		else if (slash_cd >= 300 * 4 / 8) {
+			slash_cd_5.SetTopLeft(15, 125);
+			slash_cd_5.ShowBitmap();
+		}
+		else if (slash_cd >= 300 * 3 / 8) {
+			slash_cd_4.SetTopLeft(15, 125);
+			slash_cd_4.ShowBitmap();
+		}
+		else if (slash_cd >= 300 * 2 / 8) {
+			slash_cd_3.SetTopLeft(15, 125);
+			slash_cd_3.ShowBitmap();
+		}
+		else if (slash_cd >= 300 * 1 / 8) {
+			slash_cd_2.SetTopLeft(15, 125);
+			slash_cd_2.ShowBitmap();
+		}
+		else if (slash_cd > 300 * 0 / 8) {
+			slash_cd_1.SetTopLeft(15, 125);
+			slash_cd_1.ShowBitmap();
+		}
+	}
+	if (heal_cd == 600) {
+		heal_cd_0.SetTopLeft(60, 125);
+		heal_cd_0.ShowBitmap();
+	}
+	if (heal_cd <= 599) {
+		if (heal_cd >= 600 * 7 / 8) {
+			heal_cd_8.SetTopLeft(60, 125);
+			heal_cd_8.ShowBitmap();
+		}
+		else if (heal_cd >= 600 * 6 / 8) {
+			heal_cd_7.SetTopLeft(60, 125);
+			heal_cd_7.ShowBitmap();
+		}
+		else if (heal_cd >= 600 * 5 / 8) {
+			heal_cd_6.SetTopLeft(60, 125);
+			heal_cd_6.ShowBitmap();
+		}
+		else if (heal_cd >= 600 * 4 / 8) {
+			heal_cd_5.SetTopLeft(60, 125);
+			heal_cd_5.ShowBitmap();
+		}
+		else if (heal_cd >= 600 * 3 / 8) {
+			heal_cd_4.SetTopLeft(60, 125);
+			heal_cd_4.ShowBitmap();
+		}
+		else if (heal_cd >= 600 * 2 / 8) {
+			heal_cd_3.SetTopLeft(60, 125);
+			heal_cd_3.ShowBitmap();
+		}
+		else if (heal_cd >= 600 * 1 / 8) {
+			heal_cd_2.SetTopLeft(60, 125);
+			heal_cd_2.ShowBitmap();
+		}
+		else if (heal_cd > 600 * 0 / 8) {
+			heal_cd_1.SetTopLeft(60, 125);
+			heal_cd_1.ShowBitmap();
+		}
+	}
 }
 inline int CGameStateRun::monster_num(vector<Character*>monster) {
 	int n = 0;
@@ -736,6 +846,8 @@ void CGameStateRun :: heroMonsterInteraction(Character&hero, vector<Character*> 
 					monster[i]->setAttacking(true);
 					hero.setHP(hero.getHP() - monster[i]->getAttack());
 					CAudio::Instance()->Play(SFX_HERO_HIT, false);
+					if(stage == 2)
+						CAudio::Instance()->Play(SFX_GUN, false);
 					if (monster_pos.getX() >= hero_pos.getX())
 						hero.setHitLeft();
 					else if (monster_pos.getX() < hero_pos.getX())
