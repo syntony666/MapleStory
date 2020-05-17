@@ -155,6 +155,35 @@
 #define IDB_HP                          305
 #define IDB_BITMAP24                    306
 #define IDB_LV                          306
+#define IDB_GUNER_STAND_LEFT            307
+#define IDB_GUNER_ATTACK_LEFT1          308
+#define IDB_GUNER_ATTACK_LEFT2          309
+#define IDB_GUNER_ATTACK_LEFT3          310
+#define IDB_GUNER_STAND_RIGHT           311
+#define IDB_GUNER_ATTACK_RIGHT1         312
+#define IDB_GUNER_ATTACK_RIGHT2         313
+#define IDB_BITMAP32                    314
+#define IDB_GUNER_ATTACK_RIGHT3         314
+#define IDB_HEAL_CD_0                   315
+#define IDB_HEAL_CD_1                   316
+#define IDB_HEAL_CD_2                   317
+#define IDB_HEAL_CD_3                   318
+#define IDB_HEAL_CD_4                   319
+#define IDB_HEAL_CD_5                   320
+#define IDB_HEAL_CD_6                   321
+#define IDB_HEAL_CD_7                   322
+#define IDB_SLASH_CD_0                  323
+#define IDB_SLASH_CD_1                  324
+#define IDB_SLASH_CD_2                  325
+#define IDB_SLASH_CD_3                  326
+#define IDB_SLASH_CD_4                  327
+#define IDB_SLASH_CD_5                  328
+#define IDB_SLASH_CD_6                  329
+#define IDB_BITMAP42                    330
+#define IDB_SLASH_CD_7                  330
+#define IDB_HEAL_CD_8                   331
+#define IDB_BITMAP23                    332
+#define IDB_SLASH_CD_8                  332
 #define IDC_README                      1001
 #define ID_FILE_PAUSE                   32771
 #define ID_TOGGLE_FULLSCREEN            32772
@@ -167,7 +196,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        307
+#define _APS_NEXT_RESOURCE_VALUE        333
 #define _APS_NEXT_COMMAND_VALUE         32776
 #define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           101

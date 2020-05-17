@@ -298,6 +298,58 @@ IDB_HP                  BITMAP                  "..\\res\\Number\\HP.bmp"
 
 IDB_LV                  BITMAP                  "..\\res\\Number\\Level.bmp"
 
+IDB_GUNER_STAND_LEFT    BITMAP                  "..\\res\\Guner\\Guner_Left.bmp"
+
+IDB_GUNER_ATTACK_LEFT1  BITMAP                  "..\\res\\Guner\\Guner_Left_Attack01.bmp"
+
+IDB_GUNER_ATTACK_LEFT2  BITMAP                  "..\\res\\Guner\\Guner_Left_Attack02.bmp"
+
+IDB_GUNER_ATTACK_LEFT3  BITMAP                  "..\\res\\Guner\\Guner_Left_Attack03.bmp"
+
+IDB_GUNER_STAND_RIGHT   BITMAP                  "..\\res\\Guner\\Guner_Right.bmp"
+
+IDB_GUNER_ATTACK_RIGHT1 BITMAP                  "..\\res\\Guner\\Guner_Right_Attack01.bmp"
+
+IDB_GUNER_ATTACK_RIGHT2 BITMAP                  "..\\res\\Guner\\Guner_Right_Attack02.bmp"
+
+IDB_GUNER_ATTACK_RIGHT3 BITMAP                  "..\\res\\Guner\\Guner_Right_Attack03.bmp"
+
+IDB_HEAL_CD_0           BITMAP                  "..\\res\\Icon\\Heal_CD_0.bmp"
+
+IDB_HEAL_CD_1           BITMAP                  "..\\res\\Icon\\Heal_CD_1.bmp"
+
+IDB_HEAL_CD_2           BITMAP                  "..\\res\\Icon\\Heal_CD_2.bmp"
+
+IDB_HEAL_CD_3           BITMAP                  "..\\res\\Icon\\Heal_CD_3.bmp"
+
+IDB_HEAL_CD_4           BITMAP                  "..\\res\\Icon\\Heal_CD_4.bmp"
+
+IDB_HEAL_CD_5           BITMAP                  "..\\res\\Icon\\Heal_CD_5.bmp"
+
+IDB_HEAL_CD_6           BITMAP                  "..\\res\\Icon\\Heal_CD_6.bmp"
+
+IDB_HEAL_CD_7           BITMAP                  "..\\res\\Icon\\Heal_CD_7.bmp"
+
+IDB_SLASH_CD_0          BITMAP                  "..\\res\\Icon\\Slash_CD_0.bmp"
+
+IDB_SLASH_CD_1          BITMAP                  "..\\res\\Icon\\Slash_CD_1.bmp"
+
+IDB_SLASH_CD_2          BITMAP                  "..\\res\\Icon\\Slash_CD_2.bmp"
+
+IDB_SLASH_CD_3          BITMAP                  "..\\res\\Icon\\Slash_CD_3.bmp"
+
+IDB_SLASH_CD_4          BITMAP                  "..\\res\\Icon\\Slash_CD_4.bmp"
+
+IDB_SLASH_CD_5          BITMAP                  "..\\res\\Icon\\Slash_CD_5.bmp"
+
+IDB_SLASH_CD_6          BITMAP                  "..\\res\\Icon\\Slash_CD_6.bmp"
+
+IDB_SLASH_CD_7          BITMAP                  "..\\res\\Icon\\Slash_CD_7.bmp"
+
+IDB_HEAL_CD_8           BITMAP                  "..\\res\\Icon\\Heal_CD_8.bmp"
+
+IDB_SLASH_CD_8          BITMAP                  "..\\res\\Icon\\Slash_CD_8.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
