@@ -413,7 +413,6 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		if (heal_cd == 0)
 			heal_cd = 600;
 	}
-	TRACE("--------------(%d)-------------", monster2_skill_cd);
 	if (monster2_skill_cd <= 149 && monster2_skill_cd>=-50) {
 		monster2_skill_cd--;
 		if (monster2_skill_cd >= 0) {
@@ -487,13 +486,13 @@ void CGameStateRun::OnInit() {
 	monster1.push_back(new Monster(2000, 420, 40));
 	monster1.push_back(new Monster(2100, -20, 40));
 
-	for (size_t i = 0; i < monster1.size(); i++) {
+	for (auto monster=monster1.begin();monster<monster1.end();monster++) {
 		vector<int> attackRight = { IDB_MONSTER_ATTACK_RIGHT1,IDB_MONSTER_ATTACK_RIGHT2, IDB_MONSTER_ATTACK_RIGHT3 };
 		vector<int> attackLeft = { IDB_MONSTER_ATTACK_LEFT1,IDB_MONSTER_ATTACK_LEFT2, IDB_MONSTER_ATTACK_LEFT3 };
 		vector<int> goRight;
 		vector<int> goLeft;
 		vector<int> slash;
-		monster1[i]->addBitmap(
+		(*monster)->addBitmap(
 		IDB_MONSTER_STAND_RIGHT, IDB_MONSTER_STAND_LEFT,
 		0, 0, 0, 0,
 		goRight, goLeft,
@@ -517,13 +516,13 @@ void CGameStateRun::OnInit() {
 	monster2.push_back(new Monster(400, 570-390, 70));
 	monster2.push_back(new Monster(1900, 570-568, 70));
 
-	for (size_t i = 0; i < monster2.size(); i++) {
+	for (auto monster = monster2.begin(); monster < monster2.end(); monster++) {
 		vector<int> attackRight = { IDB_GUNER_ATTACK_RIGHT1,IDB_GUNER_ATTACK_RIGHT2, IDB_GUNER_ATTACK_RIGHT3 };
 		vector<int> attackLeft = { IDB_GUNER_ATTACK_LEFT1,IDB_GUNER_ATTACK_LEFT2, IDB_GUNER_ATTACK_LEFT3 };
 		vector<int> goRight;
 		vector<int> goLeft;
 		vector<int> slash;
-		monster2[i]->addBitmap(
+		(*monster)->addBitmap(
 			IDB_GUNER_STAND_RIGHT, IDB_GUNER_STAND_LEFT,
 			0, 0, 0, 0,
 			goRight, goLeft,
@@ -531,21 +530,28 @@ void CGameStateRun::OnInit() {
 	}
 
 	ShowInitProgress(66);
+	TRACE("-------------------heroxy---------(%d, %d)\n", hero->getX(), hero->getY());
 
-	monster3.push_back(new Monster(500, 570, 50));
-	monster3.push_back(new Monster(800, 570, 50));
-	monster3.push_back(new Monster(1000, 570, 50));
-	monster3.push_back(new Monster(1100, 570, 50));
-	monster3.push_back(new Monster(1300, 570, 50));
-	monster3.push_back(new Monster(2000, 570, 50));
+	monster3.push_back(new Monster(812,  570-202, 100));
+	monster3.push_back(new Monster(500,  570-330, 100));
+	monster3.push_back(new Monster(732,  570-488, 100));
+	monster3.push_back(new Monster(1164, 570-606, 100));
+	monster3.push_back(new Monster(1492, 570-441, 100));
+	monster3.push_back(new Monster(2100, 570-320, 100));
+	monster3.push_back(new Monster(1724, 570-320, 100));
+	monster3.push_back(new Monster(1420, 570-194, 100));
+	monster3.push_back(new Monster(1124, 570-124, 100));
+	monster3.push_back(new Monster(716,	 570 ,    100));
+	monster3.push_back(new Monster(1636, 570 ,    100));
+	monster3.push_back(new Monster(2172, 570 ,    100));
 
-	for (size_t i = 0; i < monster3.size(); i++) {
+	for (auto monster = monster3.begin(); monster < monster3.end(); monster++) {
 		vector<int> attackRight = { IDB_MONSTER_ATTACK_RIGHT1,IDB_MONSTER_ATTACK_RIGHT2, IDB_MONSTER_ATTACK_RIGHT3 };
 		vector<int> attackLeft = { IDB_MONSTER_ATTACK_LEFT1,IDB_MONSTER_ATTACK_LEFT2, IDB_MONSTER_ATTACK_LEFT3 };
 		vector<int> goRight;
 		vector<int> goLeft;
 		vector<int> slash;
-		monster3[i]->addBitmap(
+		(*monster)->addBitmap(
 			IDB_MONSTER_STAND_RIGHT, IDB_MONSTER_STAND_LEFT,
 			0, 0, 0, 0,
 			goRight, goLeft,
@@ -745,8 +751,8 @@ void CGameStateRun::OnShow()
 		map[0].OnShow();			// 貼上背景圖
 		if (monster_num(monster1) == 0)
 			portal.OnShow(); 
-		for (size_t i = 0; i < monster1.size(); i++)
-			monster1[i]->OnShow();
+		for (auto monster=monster1.begin();monster<monster1.end();monster++)
+			(*monster)->OnShow();
 	}
 	if (stage == 2) {
 		if (stage_count == 2) {
@@ -759,8 +765,8 @@ void CGameStateRun::OnShow()
 		map[1].OnShow();			// 貼上背景圖
 		if (monster_num(monster2) == 0)
 			portal.OnShow();
-		for (size_t i = 0; i < monster2.size(); i++)
-			monster2[i]->OnShow();
+		for (auto monster = monster2.begin(); monster < monster2.end(); monster++)
+			(*monster)->OnShow();
 	}
 	if (stage == 3) {
 		if (stage_count == 3) {
@@ -773,8 +779,8 @@ void CGameStateRun::OnShow()
 		map[2].OnShow();			// 貼上背景圖
 		if (monster_num(monster3) == 0)
 			portal.OnShow();
-		for (size_t i = 0; i < monster3.size(); i++)
-			monster3[i]->OnShow();
+		for (auto monster = monster3.begin(); monster < monster3.end(); monster++)
+			(*monster)->OnShow();
 	}
 	if (stage == 4)
 		GotoGameState(GAME_STATE_INIT);
@@ -856,10 +862,10 @@ void CGameStateRun::OnShow()
 		}
 	}
 }
-inline int CGameStateRun::monster_num(vector<Character*>monster) {
+inline int CGameStateRun::monster_num(vector<Character*>monsters) {
 	int n = 0;
-	for (auto i = monster.begin(); i < monster.end(); i++)
-		if (!(*i)->ifDead())
+	for (auto monster = monsters.begin(); monster < monsters.end(); monster++)
+		if (!(*monster)->ifDead())
 			n++;
 	return n;
 }
