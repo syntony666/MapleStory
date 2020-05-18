@@ -113,9 +113,9 @@ namespace game_framework {
 	inline void initMonster3(vector<Character*> & monster) {
 		for (size_t i = 0; i < monster.size(); i++) {
 			monster[i]->Initialize();
-			monster[i]->setMaxHP(300);
-			monster[i]->setAttack(100);
-			monster[i]->setAttackRange(-10);
+			monster[i]->setMaxHP(500);
+			monster[i]->setAttack(500);
+			monster[i]->setAttackRange(50);
 			monster[i]->setSkillRange(80);
 		}
 	}
