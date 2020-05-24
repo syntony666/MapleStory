@@ -19,6 +19,7 @@ namespace game_framework {
 #define ON_PLATFORM_STAGE1 hero_pos.getY() <= map[0].getFloorY(i) + 50 && hero_pos.getY() >= map[0].getFloorY(i) - 14 && hero_pos.getX() >= map[0].getFloorXBegin(i) && hero_pos.getX() <= map[0].getFloorXLast(i)
 #define ON_PLATFORM_STAGE2 hero_pos.getY() <= map[1].getFloorY(i) + 50 && hero_pos.getY() >= map[1].getFloorY(i) - 14 && hero_pos.getX() >= map[1].getFloorXBegin(i) && hero_pos.getX() <= map[1].getFloorXLast(i)
 #define ON_PLATFORM_STAGE3 hero_pos.getY() <= map[2].getFloorY(i) + 50 && hero_pos.getY() >= map[2].getFloorY(i) - 14 && hero_pos.getX() >= map[2].getFloorXBegin(i) && hero_pos.getX() <= map[2].getFloorXLast(i)
+#define ON_PLATFORM_STAGE4 hero_pos.getY() <= map[3].getFloorY(i) + 50 && hero_pos.getY() >= map[3].getFloorY(i) - 14 && hero_pos.getX() >= map[3].getFloorXBegin(i) && hero_pos.getX() <= map[3].getFloorXLast(i)
 #define ON_PLATFORM_MONSTER monster_pos.getY() <= map.getFloorY(j) + 50 && monster_pos.getY() >= map.getFloorY(j) - 14 && monster_pos.getX() >= map.getFloorXBegin(j) && monster_pos.getX() <= map.getFloorXLast(j)
 #define IN_PORTAL1 hero_pos.getY() == 150 && hero_pos.getX() >= 2060 && hero_pos.getX() <= 2132
 #define IN_PORTAL2 hero_pos.getY() <= 20 && hero_pos.getX() >= 2084 && hero_pos.getX() <= 2156
@@ -78,6 +79,40 @@ namespace game_framework {
 		gamemap.setInitXY(0, 0);
 		gamemap.setInitPlatform(plats, 8);
 		gamemap.setInitBitmap(IDB_BACKGROUND3);
+		return gamemap;
+	}
+	inline Map Map4() {
+		Map gamemap;
+		Platform plats[8] = { {228, 708, 330},
+								{682,1012, 202},
+								{1068,1236,124},
+								{1324,1564,194},
+								{1508,2232,320},
+								{1313,1706,441},
+								{998 ,1386,606},
+								{582 , 982,488} };
+		gamemap.setInitFloor(570);
+		gamemap.setInitZoom(2);
+		gamemap.setInitXY(0, 0);
+		gamemap.setInitPlatform(plats, 8);
+		gamemap.setInitBitmap(IDB_BACKGROUND4);
+		return gamemap;
+	}
+	inline Map Map5() {
+		Map gamemap;
+		Platform plats[8] = { {228, 708, 330},
+								{682,1012, 202},
+								{1068,1236,124},
+								{1324,1564,194},
+								{1508,2232,320},
+								{1313,1706,441},
+								{998 ,1386,606},
+								{582 , 982,488} };
+		gamemap.setInitFloor(570);
+		gamemap.setInitZoom(2);
+		gamemap.setInitXY(0, 0);
+		gamemap.setInitPlatform(plats, 8);
+		gamemap.setInitBitmap(IDB_BACKGROUND5);
 		return gamemap;
 	}
 

@@ -317,6 +317,8 @@
     <Image Include="RES\bg1.bmp" />
     <Image Include="RES\bg2.bmp" />
     <Image Include="RES\bg3.bmp" />
+    <Image Include="RES\bg4.bmp" />
+    <Image Include="RES\bg_boss.bmp" />
     <Image Include="RES\exit1.bmp" />
     <Image Include="RES\exit2.bmp" />
     <Image Include="RES\frog_attack_left1.bmp" />
