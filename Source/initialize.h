@@ -59,7 +59,7 @@ namespace game_framework {
 		gamemap.setInitXY(0, 0);
 		gamemap.setInitPlatform(plats, 8);
 		gamemap.setInitBitmap(IDB_BACKGROUND2);
-		gamemap.setInitPortal(2100, 550);
+		gamemap.setInitPortal(2100, 560);
 		return gamemap;
 	}
 	inline Map Map3() {
@@ -77,7 +77,7 @@ namespace game_framework {
 		gamemap.setInitXY(0, 0);
 		gamemap.setInitPlatform(plats, 8);
 		gamemap.setInitBitmap(IDB_BACKGROUND3);
-		gamemap.setInitPortal(2100, 550);
+		gamemap.setInitPortal(2100, 560);
 		return gamemap;
 	}
 	inline Map Map4() {
@@ -95,7 +95,7 @@ namespace game_framework {
 		gamemap.setInitXY(0, 0);
 		gamemap.setInitPlatform(plats, 8);
 		gamemap.setInitBitmap(IDB_BACKGROUND4);
-		gamemap.setInitPortal(2100, 410);
+		gamemap.setInitPortal(2100, 560);
 		return gamemap;
 	}
 	inline Map Map5() {
@@ -113,7 +113,7 @@ namespace game_framework {
 		gamemap.setInitXY(0, 0);
 		gamemap.setInitPlatform(plats, 8);
 		gamemap.setInitBitmap(IDB_BACKGROUND5);
-		gamemap.setInitPortal(2100, 410);
+		gamemap.setInitPortal(2100, 560);
 		return gamemap;
 	}
 
@@ -147,6 +147,15 @@ namespace game_framework {
 		}
 	}
 	inline void initMonster3(vector<Character*> & monster) {
+		for (size_t i = 0; i < monster.size(); i++) {
+			monster[i]->Initialize();
+			monster[i]->setMaxHP(500);
+			monster[i]->setAttack(0);
+			monster[i]->setAttackRange(200);
+			monster[i]->setSkillRange(200);
+		}
+	}
+	inline void initMonster4(vector<Character*> & monster) {
 		for (size_t i = 0; i < monster.size(); i++) {
 			monster[i]->Initialize();
 			monster[i]->setMaxHP(500);

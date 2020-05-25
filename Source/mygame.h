@@ -93,7 +93,8 @@ namespace game_framework {
 		CMovingBitmap	background;						// 背景圖
 		Character *hero;								// 角色
 		vector<Map> map;								// 地圖
-		vector<Character*> monster1, monster2, monster3;// 怪物
+		vector<Character*> monster1, monster2, monster3, monster4;// 怪物
+		vector<Character*> *monster;
 		Position hero_pos;
 		inline int monster_num(vector<Character*> monster);
 		void heroMonsterInteraction(Character&hero, vector<Character*> & monster, Map &map);
