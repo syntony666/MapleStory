@@ -150,9 +150,9 @@ namespace game_framework {
 		for (size_t i = 0; i < monster.size(); i++) {
 			monster[i]->Initialize();
 			monster[i]->setMaxHP(500);
-			monster[i]->setAttack(500);
-			monster[i]->setAttackRange(50);
-			monster[i]->setSkillRange(80);
+			monster[i]->setAttack(0);
+			monster[i]->setAttackRange(200);
+			monster[i]->setSkillRange(200);
 		}
 	}
 }

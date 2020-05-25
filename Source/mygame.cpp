@@ -259,7 +259,7 @@ void CGameStateRun::OnBeginState()
 	initMonster1(monster1);
 	initMonster2(monster2);
 	initMonster3(monster3);
-	monster2_skill_cd = 30 * 5;
+	mage_skill_cd = 30 * 5;
 
 	CAudio::Instance()->Stop(BGM_MENU);
 	CAudio::Instance()->Play(BGM_STAGE1, true);
@@ -278,7 +278,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	TRACE("-------hero-pos_xy-------(%d, %d)\n", hero_pos.getX(), hero_pos.getY());
 	TRACE("--hero-level_Attack_HP---(%d, %d, %d)\n", hero->getLevel(), hero->getAttack(), hero->getHP());
 	TRACE("---------Slash_CD--------(%d)\n", slash_cd/30);
-	TRACE("-----Monster_Skill_CD----(%d)\n", monster2_skill_cd / 30);
+	TRACE("-----Monster_Skill_CD----(%d)\n", mage_skill_cd / 30);
 	TRACE("-----------Stage---------(%d)\n", stage);
 	TRACE("\n\n");
 
@@ -339,21 +339,21 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		if (heal_cd == 0)
 			heal_cd = 600;
 	}
-	if (monster2_skill_cd <= 149 && monster2_skill_cd>=-50) {
-		monster2_skill_cd--;
-		if (monster2_skill_cd >= 0) {
+	if (mage_skill_cd <= 149 && mage_skill_cd>=-50) {
+		mage_skill_cd--;
+		if (mage_skill_cd >= 0) {
 			hero->setMovingLeft(false);
 			hero->setMovingRight(false);
 			hero->setMovingUp(false);
 			hero->setMovingDown(false);
 		}
-		if (monster2_skill_cd == 75 || monster2_skill_cd == 0) {
-			if (hero->getHP() <= 10)
-				hero->setHP(0);
-			hero->setHP(int(hero->getHP()*0.9));
+		if (mage_skill_cd == 75 || mage_skill_cd == 0) {
+			if (hero->getHP() * 0.1 <= 50)
+				hero->setHP(hero->getHP() - 50);
+			hero->setHP(int(hero->getHP() * 0.9));
 		}
-		if (monster2_skill_cd == -50)
-			monster2_skill_cd = 150;
+		if (mage_skill_cd == -50)
+			mage_skill_cd = 150;
 	}
 
 
@@ -471,13 +471,17 @@ void CGameStateRun::OnInit() {
 	monster3.push_back(new Monster(2172, 570 ,    100));
 
 	for (auto monster = monster3.begin(); monster < monster3.end(); monster++) {
-		vector<int> attackRight = { IDB_MONSTER_ATTACK_RIGHT1,IDB_MONSTER_ATTACK_RIGHT2, IDB_MONSTER_ATTACK_RIGHT3 };
-		vector<int> attackLeft = { IDB_MONSTER_ATTACK_LEFT1,IDB_MONSTER_ATTACK_LEFT2, IDB_MONSTER_ATTACK_LEFT3 };
+		vector<int> attackRight = { IDB_MAGE_ATTACK_RIGHT1, IDB_MAGE_ATTACK_RIGHT2, IDB_MAGE_ATTACK_RIGHT3,
+									IDB_MAGE_ATTACK_RIGHT4, IDB_MAGE_ATTACK_RIGHT5, IDB_MAGE_ATTACK_RIGHT6,
+									IDB_MAGE_ATTACK_RIGHT7, IDB_MAGE_ATTACK_RIGHT8};
+		vector<int> attackLeft = {  IDB_MAGE_ATTACK_LEFT1, IDB_MAGE_ATTACK_LEFT2, IDB_MAGE_ATTACK_LEFT3,
+									IDB_MAGE_ATTACK_LEFT4, IDB_MAGE_ATTACK_LEFT5, IDB_MAGE_ATTACK_LEFT6,
+									IDB_MAGE_ATTACK_LEFT7, IDB_MAGE_ATTACK_LEFT8 };
 		vector<int> goRight;
 		vector<int> goLeft;
 		vector<int> slash;
 		(*monster)->addBitmap(
-			IDB_MONSTER_STAND_RIGHT, IDB_MONSTER_STAND_LEFT,
+			IDB_MAGE_STAND_RIGHT, IDB_MAGE_STAND_LEFT,
 			0, 0, 0, 0,
 			goRight, goLeft,
 			attackRight, attackLeft, slash, lv_up);
@@ -805,21 +809,23 @@ void CGameStateRun :: heroMonsterInteraction(Character&hero, vector<Character*> 
 		}
 
 		// 攻擊互動相關
-		if ((*monster)->getSkillRange()!=0 && MONSTER_HIT_CHARACTER((*monster)->getSkillRange()) && monster2_skill_cd==150){
-			monster2_skill_cd--;
+		if ((*monster)->getSkillRange()!=0 && MONSTER_HIT_CHARACTER((*monster)->getSkillRange()) && mage_skill_cd==150){
+			mage_skill_cd--;
 		}
-		if ((*monster)->getSkillRange() == 0) {
+		if ((*monster)->getSkillRange() >= 0) { //測試
 			if (MONSTER_HIT_CHARACTER((*monster)->getAttackRange())) {
 				if (HIT_CHECK_CHARACTER && HEIGHT_CHECK) {
 					(*monster)->setAttacking(true);
-					hero.setHP(hero.getHP() - (*monster)->getAttack());
-					CAudio::Instance()->Play(SFX_HERO_HIT, false);
 					if (stage == 2)
 						CAudio::Instance()->Play(SFX_GUN, false);
-					if (monster_pos.getX() >= hero_pos.getX())
-						hero.setHitLeft();
-					else if (monster_pos.getX() < hero_pos.getX())
-						hero.setHitRight();
+					if (stage != 3) {
+						hero.setHP(hero.getHP() - (*monster)->getAttack());
+						CAudio::Instance()->Play(SFX_HERO_HIT, false);
+						if (monster_pos.getX() >= hero_pos.getX())
+							hero.setHitLeft();
+						else if (monster_pos.getX() < hero_pos.getX())
+							hero.setHitRight();
+					}
 				}
 				if (hero.getHP() <= 0)
 					return;
