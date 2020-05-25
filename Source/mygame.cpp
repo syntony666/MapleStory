@@ -251,7 +251,7 @@ CGameStateRun::~CGameStateRun()
 
 void CGameStateRun::OnBeginState()
 {
-	stage = 3;
+	stage = 1;
 	stage_count = stage + 1;
 	initHero(*hero);
 	for (int i = 0; i < 5; i++)
