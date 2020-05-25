@@ -54,7 +54,7 @@ namespace game_framework {
 	};
 	class Portal {
 	public:
-		Portal():_bitmaps(nullptr){}
+		Portal(){}
 		Portal(Map map, int x, int y) {
 			_map = &map;
 			_x = x;
@@ -75,11 +75,16 @@ namespace game_framework {
 		void OnMove() {
 			_portal.OnMove();
 		}
+		int getX() {
+			return _x;
+		}
+		int getY() {
+			return _y;
+		}
 	private:
-		int _x, _y, _bitmaps_num;
+		int _x, _y;
 		CAnimation _portal;
 		Map *_map;
-		int *_bitmaps = nullptr;
 	};
 }
 #endif

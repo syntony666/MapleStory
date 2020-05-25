@@ -85,10 +85,6 @@ namespace game_framework {
 		void OnMove();									// 移動遊戲元素
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
-		CAnimation portal;
-		int portal1X = 2080;
-		int portal2X = 2100;
-		int portal3X = 2100;
 		int stage, stage_count;
 		int slash_cd = 30 * 10;							// 技能CD
 		int heal_cd = 30 * 20;							// 治癒CD
