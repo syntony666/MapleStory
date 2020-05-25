@@ -362,13 +362,13 @@ IDB_MAGE_ATTACK_LEFT2   BITMAP                  "..\\res\\Mage\\Mage_Left_Attack
 
 IDB_MAGE_ATTACK_LEFT3   BITMAP                  "..\\res\\Mage\\Mage_Left_Attack03.bmp"
 
-IDB_MAGE_ATTACK_LEFT4   BITMAP                  "..\\res\\Mage_Left_Attack04.bmp"
+IDB_MAGE_ATTACK_LEFT4   BITMAP                  "..\\res\Mage\\\Mage_Left_Attack04.bmp"
 
-IDB_MAGE_ATTACK_LEFT5   BITMAP                  "..\\res\\Mage_Left_Attack05.bmp"
+IDB_MAGE_ATTACK_LEFT5   BITMAP                  "..\\res\\Mage\\Mage_Left_Attack05.bmp"
 
-IDB_MAGE_ATTACK_LEFT6   BITMAP                  "..\\res\\Mage_Left_Attack06.bmp"
+IDB_MAGE_ATTACK_LEFT6   BITMAP                  "..\\res\\Mage\\Mage_Left_Attack06.bmp"
 
-IDB_MAGE_ATTACK_LEFT7   BITMAP                  "..\\res\\Mage_Left_Attack07.bmp"
+IDB_MAGE_ATTACK_LEFT7   BITMAP                  "..\\res\\Mage\\Mage_Left_Attack07.bmp"
 
 IDB_MAGE_ATTACK_LEFT8   BITMAP                  "..\\res\\Mage\\Mage_Left_Attack08.bmp"
 
