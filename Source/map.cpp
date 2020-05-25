@@ -12,6 +12,7 @@ namespace game_framework {
 		Initialize();
 	}
 	Map::~Map() {
+		//delete _portal;
 	}
 	void Map::Initialize() {
 		zoom = 2;
@@ -33,15 +34,13 @@ namespace game_framework {
 		zoom = i;
 	}
 	void Map::setInitPlatform(Platform *plats,int i) {
-		floors = new Floor(plats, i);
+		floors = Floor(plats, i);
 	}
 	void Map::setInitBitmap(int bitmap) {
 		_bitmap = bitmap;
 	}
-	void Map::setPortalBitmap(int bitmap[], int num) {
-		portal = CAnimation(2);
-		for(int i=0;i<num;i++)
-			portal.AddBitmap(bitmap[i], RGB(255, 255, 255));
+	void Map::setInitPortal(int x, int y) {
+		_portal =new Portal(*this, x, y);
 	}
 	void Map::setMovingLeft(bool flag) {	
 		isMovingLeft = flag;
@@ -65,19 +64,22 @@ namespace game_framework {
 		map.ShowBitmap(zoom);
 	}
 	int Map::getFloorXBegin(int i) const{
-		return floors->getXBegin(i);
+		return floors.getXBegin(i);
 	}
 	int Map::getFloorXLast(int i) const {
-		return floors->getXLast(i);
+		return floors.getXLast(i);
 	}
 	int Map::getFloorY(int i) const {
-		return floors->getY(i);
+		return floors.getY(i);
 	}
 	int Map::getX()const {
 		return _x;
 	}
 	int Map::getY()const {
 		return _y;
+	}
+	Portal* Map::getPortal() {
+		return _portal;
 	}
 	bool Map::ifMovingLeft()const {	
 		return isMovingLeft; 	

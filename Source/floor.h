@@ -11,6 +11,7 @@ namespace game_framework {
 	class Floor		//平台集合體
 	{
 	public:
+		Floor() :_count(0) {}
 		Floor(Platform plats[], int count);
 		~Floor();
 		int getXBegin(int i) const;

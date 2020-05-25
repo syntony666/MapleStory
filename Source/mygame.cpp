@@ -263,42 +263,18 @@ void CGameStateRun::OnBeginState()
 
 	CAudio::Instance()->Stop(BGM_MENU);
 	CAudio::Instance()->Play(BGM_STAGE1, true);
-
-	int blue[] = { IDB_PORTAL_BLUE1,IDB_PORTAL_BLUE2 };
-
-	portal = CAnimation(2);
-	for (int i = 0; i < 2; i++)
-		portal.AddBitmap(blue[i], RGB(255, 255, 255));
-
-	portal.SetTopLeft(portal1X, 410);
 }
 
 void CGameStateRun::OnMove()							// 移動遊戲元素
 {
+	int map_num = stage - 1;
 
 	hero->OnMove();
+	map[stage - 1].OnMove();
+	map[stage-1].getPortal()->OnMove();
 
-	if (stage == 1) {
-		map[0].OnMove();
-		hero_pos.setPosition(hero, map[0]);
-	}
-	else if (stage == 2) {
-		map[1].OnMove();
-		hero_pos.setPosition(hero, map[1]);
-	}
-	else if (stage == 3) {
-		map[2].OnMove();
-		hero_pos.setPosition(hero, map[2]);
-	}
-	else if (stage == 4) {
-		map[3].OnMove();
-		hero_pos.setPosition(hero, map[3]);
-	}
-	else if (stage == 5) {
-		map[4].OnMove();
-		hero_pos.setPosition(hero, map[4]);
-	}
-	portal.OnMove();
+	hero_pos.setPosition(hero, map[map_num]);
+
 	TRACE("-------hero-pos_xy-------(%d, %d)\n", hero_pos.getX(), hero_pos.getY());
 	TRACE("--hero-level_Attack_HP---(%d, %d, %d)\n", hero->getLevel(), hero->getAttack(), hero->getHP());
 	TRACE("---------Slash_CD--------(%d)\n", slash_cd/30);
@@ -308,80 +284,16 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 	// 地圖移動相關
 	if (hero->getX() <= 100 && hero->ifMovingLeft()) {
-		if (stage == 1)
-			map[0].setMovingLeft(true);
-		if (stage == 2)
-			map[1].setMovingLeft(true);
-		if (stage == 3)
-			map[2].setMovingLeft(true);
-		if (stage == 4)
-			map[3].setMovingLeft(true);
-		if (stage == 5)
-			map[4].setMovingLeft(true);
-		if (hero_pos.getX() > 100) {
-			if (stage == 1) {
-				portal1X += 8;
-				portal.SetTopLeft(portal1X, 410);
-			}
-			if (stage == 2) {
-				portal2X += 8;
-				portal.SetTopLeft(portal2X, 550);
-			}
-			if (stage == 3) {
-				portal3X += 8;
-				portal.SetTopLeft(portal3X, 450);
-			}
-		}
+		map[map_num].setMovingLeft(true);
 	}
 	else {
-		if (stage == 1)
-			map[0].setMovingLeft(false);
-		if (stage == 2)
-			map[1].setMovingLeft(false);
-		if (stage == 3)
-			map[2].setMovingLeft(false);
-		if (stage == 4)
-			map[3].setMovingLeft(false);
-		if (stage == 5)
-			map[4].setMovingLeft(false);
+		map[map_num].setMovingLeft(false);
 	}
 	if (hero->getX() >= 1164 && hero->ifMovingRight()) {
-		if (stage == 1)
-			map[0].setMovingRight(true);
-		if (stage == 2)
-			map[1].setMovingRight(true);
-		if (stage == 3)
-			map[2].setMovingRight(true);
-		if (stage == 4)
-			map[3].setMovingRight(true);
-		if (stage == 5)
-			map[4].setMovingRight(true);
-		if (hero_pos.getX() < 2204) {
-			if (stage == 1) {
-				portal1X -= 8;
-				portal.SetTopLeft(portal1X, 410);
-			}
-			if (stage == 2) {
-				portal2X -= 8;
-				portal.SetTopLeft(portal2X, 500);
-			}
-			if (stage == 3) {
-				portal3X -= 8;
-				portal.SetTopLeft(portal3X, 450);
-			}
-		}
+			map[stage-1].setMovingRight(true);
 	}
 	else {
-		if (stage == 1)
-			map[0].setMovingRight(false);
-		if (stage == 2)
-			map[1].setMovingRight(false);
-		if (stage == 3)
-			map[2].setMovingRight(false);
-		if (stage == 4)
-			map[3].setMovingRight(false);
-		if (stage == 5)
-			map[4].setMovingRight(false);
+			map[stage-1].setMovingRight(false);
 	}
 
 	// 人物移動相關
@@ -395,30 +307,11 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	// 地板判定相關
 	int flag = 0;
 	for (int i = 0; i < 8; i++) {
-		if (stage == 1) {
-			if (ON_PLATFORM_STAGE1) 
-				hero->setFloor(570 - map[0].getFloorY(i));
-			else 
-				flag++;
-		}
-		if (stage == 2) {
-			if (ON_PLATFORM_STAGE2) 
-				hero->setFloor(570 - map[1].getFloorY(i));
-			else
-				flag++;
-		}
-		if (stage == 3) {
-			if (ON_PLATFORM_STAGE3) 
-				hero->setFloor(570 - map[2].getFloorY(i));
-			else
-				flag++;
-		}
-		if (stage == 4) {
-			if (ON_PLATFORM_STAGE4)
-				hero->setFloor(570 - map[3].getFloorY(i));
-			else
-				flag++;
-		}
+		if (hero_pos.getY() <= map[map_num].getFloorY(i) + 50 && hero_pos.getY() >= map[map_num].getFloorY(i) - 14 &&
+			hero_pos.getX() >= map[map_num].getFloorXBegin(i) && hero_pos.getX() <= map[map_num].getFloorXLast(i))
+			hero->setFloor(570 - map[map_num].getFloorY(i));
+		else
+			flag++;
 	}
 
 	if (flag == 8) {
@@ -594,32 +487,32 @@ void CGameStateRun::OnInit() {
 
 	// Load Bitmaps of Maps
 
+	int portal_bitmaps[] = { IDB_PORTAL_BLUE1,IDB_PORTAL_BLUE2 };
+
 	map.push_back(Map1());
 	map.push_back(Map2());
 	map.push_back(Map3());
 	map.push_back(Map4());
 	map.push_back(Map5());
-	for (size_t i = 0; i < map.size(); i++)
+	for (size_t i = 0; i < map.size(); i++) {
 		map[i].LoadBitmap();
+		map[i].getPortal()->addBitMaps(portal_bitmaps, 2);
+	}
 
-	slash_cd_0.LoadBitmap(IDB_SLASH_CD_0);
-	slash_cd_1.LoadBitmap(IDB_SLASH_CD_1);
-	slash_cd_2.LoadBitmap(IDB_SLASH_CD_2);
-	slash_cd_3.LoadBitmap(IDB_SLASH_CD_3);
-	slash_cd_4.LoadBitmap(IDB_SLASH_CD_4);
-	slash_cd_5.LoadBitmap(IDB_SLASH_CD_5);
-	slash_cd_6.LoadBitmap(IDB_SLASH_CD_6);
-	slash_cd_7.LoadBitmap(IDB_SLASH_CD_7);
-	slash_cd_8.LoadBitmap(IDB_SLASH_CD_8);
-	heal_cd_0.LoadBitmap(IDB_HEAL_CD_0);
-	heal_cd_1.LoadBitmap(IDB_HEAL_CD_1);
-	heal_cd_2.LoadBitmap(IDB_HEAL_CD_2);
-	heal_cd_3.LoadBitmap(IDB_HEAL_CD_3);
-	heal_cd_4.LoadBitmap(IDB_HEAL_CD_4);
-	heal_cd_5.LoadBitmap(IDB_HEAL_CD_5);
-	heal_cd_6.LoadBitmap(IDB_HEAL_CD_6);
-	heal_cd_7.LoadBitmap(IDB_HEAL_CD_7);
-	heal_cd_8.LoadBitmap(IDB_HEAL_CD_8);
+	int slash_cd_bitmaps[] = {
+		IDB_SLASH_CD_1,IDB_SLASH_CD_2,IDB_SLASH_CD_3,
+		IDB_SLASH_CD_4,IDB_SLASH_CD_5,IDB_SLASH_CD_6,
+		IDB_SLASH_CD_7,IDB_SLASH_CD_8,IDB_SLASH_CD_0 };
+	for (int i = 0; i < 9; i++)
+		slashCD[i].LoadBitmap(slash_cd_bitmaps[i]);
+
+
+	int heal_cd_bitmaps[] = {
+		IDB_HEAL_CD_1,IDB_HEAL_CD_2, IDB_HEAL_CD_3, 
+		IDB_HEAL_CD_4,IDB_HEAL_CD_5, IDB_HEAL_CD_6,
+		IDB_HEAL_CD_7,IDB_HEAL_CD_8, IDB_HEAL_CD_0};
+	for (int i = 0; i < 9; i++)
+		healCD[i].LoadBitmap(heal_cd_bitmaps[i]);
 
 	ShowInitProgress(100);
 }
@@ -645,7 +538,6 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	}
 
 	if (nChar == KEY_X) {
-		//hero->setXP(hero->getLevel() * 50); //作弊升級用
 		if (slash_cd == 300) {
 			hero->setSlashing(true);
 			CAudio::Instance()->Play(SFX_SLASH, false);
@@ -784,46 +676,40 @@ void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)
 
 void CGameStateRun::OnShow()
 {
+	vector<Character*> *monster;
+	int map_num = stage - 1;
 
-	if (stage == 1) {
-		map[0].OnShow();			// 貼上背景圖
-		if (monster_num(monster1) == 0)
-			portal.OnShow(); 
-		for (auto monster=monster1.begin();monster<monster1.end();monster++)
-			(*monster)->OnShow();
+	if (stage == 1)
+		monster = &monster1;
+	if (stage == 2)
+		monster = &monster2;
+	if (stage == 3)
+		monster = &monster3;
+
+	if (stage <= 3) {
+		map[map_num].OnShow();			// 貼上背景圖
+		if (monster_num(*monster) == 0)
+			map[map_num].getPortal()->OnShow(map[map_num]);
+		for (auto m = monster->begin(); m < monster->end(); m++)
+			(*m)->OnShow();
 	}
-	if (stage == 2) {
-		if (stage_count == 2) {
+
+
+	if (stage == stage_count && stage_count == 2) {
 			hero->setXY(100, 570);
-			portal.SetTopLeft(portal2X, 550);
 			stage_count++;
 			CAudio::Instance()->Stop(BGM_STAGE1);
 			CAudio::Instance()->Play(BGM_STAGE2, true);
-		}
-		map[1].OnShow();			// 貼上背景圖
-		if (monster_num(monster2) == 0)
-			portal.OnShow();
-		for (auto monster = monster2.begin(); monster < monster2.end(); monster++)
-			(*monster)->OnShow();
 	}
-	if (stage == 3) {
-		if (stage_count == 3) {
+	if (stage == stage_count && stage_count == 3) {
 			hero->setXY(100, 570);
-			portal.SetTopLeft(portal3X, 450);
 			stage_count++;
 			CAudio::Instance()->Stop(BGM_STAGE2);
 			CAudio::Instance()->Play(BGM_STAGE3, true);
-		}
-		map[2].OnShow();			// 貼上背景圖
-		if (monster_num(monster3) == 0)
-			portal.OnShow();
-		for (auto monster = monster3.begin(); monster < monster3.end(); monster++)
-			(*monster)->OnShow();
 	}
 	if (stage == 4) {
 		if (stage_count == 4) {
 			hero->setXY(100, 570);
-			portal.SetTopLeft(portal3X, 450);
 			stage_count++;
 			CAudio::Instance()->Stop(BGM_STAGE3);
 			CAudio::Instance()->Play(BGM_STAGE4, true);
@@ -833,7 +719,6 @@ void CGameStateRun::OnShow()
 	if (stage == 5) {
 		if (stage_count == 5) {
 			hero->setXY(100, 570);
-			portal.SetTopLeft(portal3X, 450);
 			stage_count++;
 			CAudio::Instance()->Stop(BGM_STAGE4);
 			CAudio::Instance()->Play(BGM_BOSS, true);
@@ -841,82 +726,15 @@ void CGameStateRun::OnShow()
 		map[4].OnShow();			// 貼上背景圖
 	}
 	hero->OnShow();			// 貼上人物
-	if (slash_cd == 300) {
-		slash_cd_0.SetTopLeft(15, 125);
-		slash_cd_0.ShowBitmap();
-	}
-	if (slash_cd <= 299) {
-		if (slash_cd >= 300 * 7 / 8) {
-			slash_cd_8.SetTopLeft(15, 125);
-			slash_cd_8.ShowBitmap();
-		}
-		else if (slash_cd >= 300 * 6 / 8) {
-			slash_cd_7.SetTopLeft(15, 125);
-			slash_cd_7.ShowBitmap();
-		}
-		else if (slash_cd >= 300 * 5 / 8) {
-			slash_cd_6.SetTopLeft(15, 125);
-			slash_cd_6.ShowBitmap();
-		}
-		else if (slash_cd >= 300 * 4 / 8) {
-			slash_cd_5.SetTopLeft(15, 125);
-			slash_cd_5.ShowBitmap();
-		}
-		else if (slash_cd >= 300 * 3 / 8) {
-			slash_cd_4.SetTopLeft(15, 125);
-			slash_cd_4.ShowBitmap();
-		}
-		else if (slash_cd >= 300 * 2 / 8) {
-			slash_cd_3.SetTopLeft(15, 125);
-			slash_cd_3.ShowBitmap();
-		}
-		else if (slash_cd >= 300 * 1 / 8) {
-			slash_cd_2.SetTopLeft(15, 125);
-			slash_cd_2.ShowBitmap();
-		}
-		else if (slash_cd > 300 * 0 / 8) {
-			slash_cd_1.SetTopLeft(15, 125);
-			slash_cd_1.ShowBitmap();
-		}
-	}
-	if (heal_cd == 600) {
-		heal_cd_0.SetTopLeft(60, 125);
-		heal_cd_0.ShowBitmap();
-	}
-	if (heal_cd <= 599) {
-		if (heal_cd >= 600 * 7 / 8) {
-			heal_cd_8.SetTopLeft(60, 125);
-			heal_cd_8.ShowBitmap();
-		}
-		else if (heal_cd >= 600 * 6 / 8) {
-			heal_cd_7.SetTopLeft(60, 125);
-			heal_cd_7.ShowBitmap();
-		}
-		else if (heal_cd >= 600 * 5 / 8) {
-			heal_cd_6.SetTopLeft(60, 125);
-			heal_cd_6.ShowBitmap();
-		}
-		else if (heal_cd >= 600 * 4 / 8) {
-			heal_cd_5.SetTopLeft(60, 125);
-			heal_cd_5.ShowBitmap();
-		}
-		else if (heal_cd >= 600 * 3 / 8) {
-			heal_cd_4.SetTopLeft(60, 125);
-			heal_cd_4.ShowBitmap();
-		}
-		else if (heal_cd >= 600 * 2 / 8) {
-			heal_cd_3.SetTopLeft(60, 125);
-			heal_cd_3.ShowBitmap();
-		}
-		else if (heal_cd >= 600 * 1 / 8) {
-			heal_cd_2.SetTopLeft(60, 125);
-			heal_cd_2.ShowBitmap();
-		}
-		else if (heal_cd > 600 * 0 / 8) {
-			heal_cd_1.SetTopLeft(60, 125);
-			heal_cd_1.ShowBitmap();
-		}
-	}
+
+
+	int slash_part = slash_cd / (300 / 8);
+	slashCD[slash_part].SetTopLeft(15, 125);
+	slashCD[slash_part].ShowBitmap();
+
+	int heal_part = heal_cd / (600 / 8);
+	healCD[heal_part].SetTopLeft(60, 125);
+	healCD[heal_part].ShowBitmap();
 }
 inline int CGameStateRun::monster_num(vector<Character*>monsters) {
 	int n = 0;

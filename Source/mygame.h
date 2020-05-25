@@ -93,17 +93,14 @@ namespace game_framework {
 		int slash_cd = 30 * 10;							// 技能CD
 		int heal_cd = 30 * 20;							// 治癒CD
 		int monster2_skill_cd = 30*5;
-		CMovingBitmap	background;					// 背景圖
-		Character *hero;			// 角色
+		CMovingBitmap slashCD[9], healCD[9];
+		CMovingBitmap	background;						// 背景圖
+		Character *hero;								// 角色
 		vector<Map> map;								// 地圖
-		vector<Character*> monster1;					// 怪物
-		vector<Character*> monster2;					// 怪物
-		vector<Character*> monster3;					// 怪物
+		vector<Character*> monster1, monster2, monster3;// 怪物
 		Position hero_pos;
 		inline int monster_num(vector<Character*> monster);
 		void heroMonsterInteraction(Character&hero, vector<Character*> & monster, Map &map);
-		CMovingBitmap slash_cd_0, slash_cd_1, slash_cd_2, slash_cd_3, slash_cd_4, slash_cd_5, slash_cd_6, slash_cd_7, slash_cd_8;
-		CMovingBitmap heal_cd_0, heal_cd_1, heal_cd_2, heal_cd_3, heal_cd_4, heal_cd_5, heal_cd_6, heal_cd_7, heal_cd_8;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////

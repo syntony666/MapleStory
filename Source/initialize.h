@@ -16,10 +16,6 @@ namespace game_framework {
 #define MONSTER_HIT_CHARACTER(a) (hero_pos.getX() - monster_pos.getX() <= a && monster_pos.getX() - hero_pos.getX() <= a)
 #define CHARACTER_HIT_MONSTER hero.ifAttacking() && hero.getFacing() == 2 && hero_pos.getX() - monster_pos.getX() <= 100 && monster_pos.getX() - hero_pos.getX() <= 0 || hero.ifAttacking() && hero.getFacing() == 1 && hero_pos.getX() - monster_pos.getX() <= 0 && monster_pos.getX() - hero_pos.getX() <= 100
 #define CHARACTER_SLASH_MONSTER hero.ifSlashing() && hero_pos.getX() - monster_pos.getX() <= 340 && monster_pos.getX() - hero_pos.getX() <= 0 || hero.ifSlashing() && hero_pos.getX() - monster_pos.getX() <= 0 && monster_pos.getX() - hero_pos.getX() <= 340
-#define ON_PLATFORM_STAGE1 hero_pos.getY() <= map[0].getFloorY(i) + 50 && hero_pos.getY() >= map[0].getFloorY(i) - 14 && hero_pos.getX() >= map[0].getFloorXBegin(i) && hero_pos.getX() <= map[0].getFloorXLast(i)
-#define ON_PLATFORM_STAGE2 hero_pos.getY() <= map[1].getFloorY(i) + 50 && hero_pos.getY() >= map[1].getFloorY(i) - 14 && hero_pos.getX() >= map[1].getFloorXBegin(i) && hero_pos.getX() <= map[1].getFloorXLast(i)
-#define ON_PLATFORM_STAGE3 hero_pos.getY() <= map[2].getFloorY(i) + 50 && hero_pos.getY() >= map[2].getFloorY(i) - 14 && hero_pos.getX() >= map[2].getFloorXBegin(i) && hero_pos.getX() <= map[2].getFloorXLast(i)
-#define ON_PLATFORM_STAGE4 hero_pos.getY() <= map[3].getFloorY(i) + 50 && hero_pos.getY() >= map[3].getFloorY(i) - 14 && hero_pos.getX() >= map[3].getFloorXBegin(i) && hero_pos.getX() <= map[3].getFloorXLast(i)
 #define ON_PLATFORM_MONSTER monster_pos.getY() <= map.getFloorY(j) + 50 && monster_pos.getY() >= map.getFloorY(j) - 14 && monster_pos.getX() >= map.getFloorXBegin(j) && monster_pos.getX() <= map.getFloorXLast(j)
 #define IN_PORTAL1 hero_pos.getY() == 150 && hero_pos.getX() >= 2060 && hero_pos.getX() <= 2132
 #define IN_PORTAL2 hero_pos.getY() <= 20 && hero_pos.getX() >= 2084 && hero_pos.getX() <= 2156
@@ -45,6 +41,7 @@ namespace game_framework {
 		gamemap.setInitXY(0, 0);
 		gamemap.setInitPlatform(plats, 8);
 		gamemap.setInitBitmap(IDB_BACKGROUND);
+		gamemap.setInitPortal(2080, 410);
 		return gamemap;
 	}
 	inline Map Map2() {
@@ -62,6 +59,7 @@ namespace game_framework {
 		gamemap.setInitXY(0, 0);
 		gamemap.setInitPlatform(plats, 8);
 		gamemap.setInitBitmap(IDB_BACKGROUND2);
+		gamemap.setInitPortal(2100, 550);
 		return gamemap;
 	}
 	inline Map Map3() {
@@ -79,6 +77,7 @@ namespace game_framework {
 		gamemap.setInitXY(0, 0);
 		gamemap.setInitPlatform(plats, 8);
 		gamemap.setInitBitmap(IDB_BACKGROUND3);
+		gamemap.setInitPortal(2100, 410);
 		return gamemap;
 	}
 	inline Map Map4() {
@@ -96,6 +95,7 @@ namespace game_framework {
 		gamemap.setInitXY(0, 0);
 		gamemap.setInitPlatform(plats, 8);
 		gamemap.setInitBitmap(IDB_BACKGROUND4);
+		gamemap.setInitPortal(2100, 410);
 		return gamemap;
 	}
 	inline Map Map5() {
@@ -113,6 +113,7 @@ namespace game_framework {
 		gamemap.setInitXY(0, 0);
 		gamemap.setInitPlatform(plats, 8);
 		gamemap.setInitBitmap(IDB_BACKGROUND5);
+		gamemap.setInitPortal(2100, 410);
 		return gamemap;
 	}
 
