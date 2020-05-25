@@ -814,7 +814,7 @@ void CGameStateRun :: heroMonsterInteraction(Character&hero, vector<Character*> 
 		}
 
 		// 攻擊互動相關
-		if ((*monster)->getSkillRange()!=0 && MONSTER_HIT_CHARACTER((*monster)->getSkillRange()) && mage_skill_cd==150){
+		if ((*monster)->getSkillRange()!=0 && MONSTER_HIT_CHARACTER((*monster)->getSkillRange()) && HEIGHT_CHECK && mage_skill_cd==150){
 			mage_skill_cd--;
 		}
 		if ((*monster)->getSkillRange() >= 0) { //測試
