@@ -350,7 +350,8 @@ void CGameStateRun::OnMove()							// ²¾°Ê¹CÀ¸¤¸¯À
 		if (mage_skill_cd == 75 || mage_skill_cd == 0) {
 			if (hero->getHP() * 0.1 <= 50)
 				hero->setHP(hero->getHP() - 50);
-			hero->setHP(int(hero->getHP() * 0.9));
+			else
+				hero->setHP(int(hero->getHP() * 0.9));
 		}
 		if (mage_skill_cd == -50)
 			mage_skill_cd = 150;
