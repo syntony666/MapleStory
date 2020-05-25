@@ -77,7 +77,7 @@ namespace game_framework {
 		gamemap.setInitXY(0, 0);
 		gamemap.setInitPlatform(plats, 8);
 		gamemap.setInitBitmap(IDB_BACKGROUND3);
-		gamemap.setInitPortal(2100, 410);
+		gamemap.setInitPortal(2100, 550);
 		return gamemap;
 	}
 	inline Map Map4() {

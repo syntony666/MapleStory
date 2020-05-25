@@ -24,5 +24,3 @@ namespace game_framework {
 }
 
 #endif // !FLOOR_H
-
-

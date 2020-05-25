@@ -251,7 +251,7 @@ CGameStateRun::~CGameStateRun()
 
 void CGameStateRun::OnBeginState()
 {
-	stage = 1;
+	stage = 3;
 	stage_count = stage + 1;
 	initHero(*hero);
 	for (int i = 0; i < 5; i++)
@@ -271,15 +271,18 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 	hero->OnMove();
 	map[stage - 1].OnMove();
-	map[stage-1].getPortal()->OnMove();
+	map[stage - 1].getPortal()->OnMove();
 
 	hero_pos.setPosition(hero, map[map_num]);
 
 	TRACE("-------hero-pos_xy-------(%d, %d)\n", hero_pos.getX(), hero_pos.getY());
 	TRACE("--hero-level_Attack_HP---(%d, %d, %d)\n", hero->getLevel(), hero->getAttack(), hero->getHP());
-	TRACE("---------Slash_CD--------(%d)\n", slash_cd/30);
+	TRACE("---------Slash_CD--------(%d)\n", slash_cd / 30);
 	TRACE("-----Monster_Skill_CD----(%d)\n", mage_skill_cd / 30);
 	TRACE("-----------Stage---------(%d)\n", stage);
+	TRACE("-----------portalY---------(%d)\n", hero_pos.getY() == 550 - map[stage - 1].getPortal()->getY());
+	TRACE("-----------portalif2---------(%d)\n", hero_pos.getX() >= map[stage - 1].getPortal()->getX() - 20);
+	TRACE("-----------portalif3---------(%d)\n", hero_pos.getX() <= map[stage - 1].getPortal()->getX() + 40);
 	TRACE("\n\n");
 
 	// 地圖移動相關
@@ -591,7 +594,10 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 
 	if (nChar == KEY_UP) {
 		if (stage == 1 && monster_num(monster1) == 0) {
-			if (IN_PORTAL1)
+
+			if (hero_pos.getY() == 560 - map[stage - 1].getPortal()->getY() && 
+				hero_pos.getX() >= map[stage - 1].getPortal()->getX() - 20 && 
+				hero_pos.getX() <= map[stage - 1].getPortal()->getX() + 20)
 				stage++;
 			else
 			{
@@ -601,7 +607,9 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 			}
 		}
 		if (stage == 2 && monster_num(monster2) == 0) {
-			if (IN_PORTAL2)
+			if (hero_pos.getY() == 550 - map[stage - 1].getPortal()->getY() &&
+				hero_pos.getX() >= map[stage - 1].getPortal()->getX() - 20 &&
+				hero_pos.getX() <= map[stage - 1].getPortal()->getX() + 20)
 				stage++;
 			else
 			{
@@ -610,8 +618,10 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 				hero->setMovingUp(true);
 			}
 		}
-		if (stage == 3) {
-			if (IN_PORTAL3)
+		if (stage == 3 && monster_num(monster3) == 0) {
+			if (hero_pos.getY() == 550 - map[stage - 1].getPortal()->getY() &&
+				hero_pos.getX() >= map[stage - 1].getPortal()->getX() - 20 &&
+				hero_pos.getX() <= map[stage - 1].getPortal()->getX() + 20)
 				stage++;
 			else 
 			{
