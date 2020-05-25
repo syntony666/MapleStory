@@ -168,6 +168,7 @@ void CGameStateOver::OnMove()
 {
 	Gameover.OnMove();
 	counter--;
+	Gameover.OnMove();
 	if (counter < 0) {
 		CAudio::Instance()->Play(BGM_MENU, true);
 		GotoGameState(GAME_STATE_INIT);
@@ -218,7 +219,6 @@ void CGameStateOver::OnShow()
 {
 	Gameover.SetTopLeft(233, 234);
 	Gameover.OnShow();
-	//Gameover.OnMove();
 	/*
 	CDC *pDC = CDDraw::GetBackCDC();			// ¨ú±o Back Plain ªº CDC 
 	CFont f, *fp;

@@ -240,7 +240,7 @@ namespace game_framework {
 		}
 
 		// HP 顯示
-		if (HP < 10) {
+		if (HP < 10 && HP > 0) {
 			number_OnShow(HP, 133, 80);
 		}
 		else if (HP < 100) {
