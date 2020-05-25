@@ -536,44 +536,120 @@
     <Image Include="RES\bg_boss.bmp">
       <Filter>Resouces</Filter>
     </Image>
-    <Image Include="RES\Mage\Mage_Left.bmp" />
-    <Image Include="RES\Mage\Mage_Left_Attack01.bmp" />
-    <Image Include="RES\Mage\Mage_Left_Attack02.bmp" />
-    <Image Include="RES\Mage\Mage_Left_Attack03.bmp" />
-    <Image Include="RES\Mage\Mage_Left_Attack04.bmp" />
-    <Image Include="RES\Mage\Mage_Left_Attack05.bmp" />
-    <Image Include="RES\Mage\Mage_Left_Attack06.bmp" />
-    <Image Include="RES\Mage\Mage_Left_Attack07.bmp" />
-    <Image Include="RES\Mage\Mage_Left_Attack08.bmp" />
-    <Image Include="RES\Mage\Mage_Right.bmp" />
-    <Image Include="RES\Mage\Mage_Right_Attack01.bmp" />
-    <Image Include="RES\Mage\Mage_Right_Attack02.bmp" />
-    <Image Include="RES\Mage\Mage_Right_Attack03.bmp" />
-    <Image Include="RES\Mage\Mage_Right_Attack04.bmp" />
-    <Image Include="RES\Mage\Mage_Right_Attack05.bmp" />
-    <Image Include="RES\Mage\Mage_Right_Attack06.bmp" />
-    <Image Include="RES\Mage\Mage_Right_Attack07.bmp" />
-    <Image Include="RES\Mage\Mage_Right_Attack08.bmp" />
-    <Image Include="RES\Mage\Poison_01.bmp" />
-    <Image Include="RES\Mage\Poison_02.bmp" />
-    <Image Include="RES\Mage\Poison_03.bmp" />
-    <Image Include="RES\Mage\Poison_04.bmp" />
-    <Image Include="RES\Mage\Poison_05.bmp" />
-    <Image Include="RES\Mage\Poison_06.bmp" />
-    <Image Include="RES\Mage\Poison_07.bmp" />
-    <Image Include="RES\Mage\Poison_08.bmp" />
-    <Image Include="RES\Mage\Poison_09.bmp" />
-    <Image Include="RES\Mage\Poison_10.bmp" />
-    <Image Include="RES\Mage\Poison_11.bmp" />
-    <Image Include="RES\Mage\Poison_12.bmp" />
-    <Image Include="RES\Mage\Poison_13.bmp" />
-    <Image Include="RES\Mage\Poison_14.bmp" />
-    <Image Include="RES\Mage\Poison_15.bmp" />
-    <Image Include="RES\Mage\Poison_16.bmp" />
-    <Image Include="RES\Mage\Poison_17.bmp" />
-    <Image Include="RES\Mage\Poison_18.bmp" />
-    <Image Include="RES\Mage\Poison_19.bmp" />
-    <Image Include="RES\Mage\Poison_20.bmp" />
+    <Image Include="RES\Mage\Mage_Left.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Mage_Left_Attack01.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Mage_Left_Attack02.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Mage_Left_Attack03.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Mage_Left_Attack04.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Mage_Left_Attack05.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Mage_Left_Attack06.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Mage_Left_Attack07.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Mage_Left_Attack08.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Mage_Right.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Mage_Right_Attack01.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Mage_Right_Attack02.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Mage_Right_Attack03.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Mage_Right_Attack04.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Mage_Right_Attack05.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Mage_Right_Attack06.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Mage_Right_Attack07.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Mage_Right_Attack08.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Poison_01.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Poison_02.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Poison_03.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Poison_04.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Poison_05.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Poison_06.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Poison_07.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Poison_08.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Poison_09.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Poison_10.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Poison_11.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Poison_12.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Poison_13.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Poison_14.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Poison_15.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Poison_16.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Poison_17.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Poison_18.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Poison_19.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Mage\Poison_20.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="RES\continue.bmp">

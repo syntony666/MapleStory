@@ -400,7 +400,7 @@ void CGameStateRun::OnInit() {
 		IDB_FROG_DOWN_RIGHT, IDB_FROG_DOWN_LEFT,
 		IDB_FROG_JUMP_RIGHT, IDB_FROG_JUMP_LEFT,
 		hero_goRight, hero_goLeft,
-		hero_attackRight, hero_attackLeft,slash,lv_up);
+		hero_attackRight, hero_attackLeft,slash,lv_up,255,255,255);
 
 	ShowInitProgress(33);	
 
@@ -426,7 +426,7 @@ void CGameStateRun::OnInit() {
 		IDB_MONSTER_STAND_RIGHT, IDB_MONSTER_STAND_LEFT,
 		0, 0, 0, 0,
 		goRight, goLeft,
-		attackRight, attackLeft,slash,lv_up);
+		attackRight, attackLeft,slash,lv_up,255,255,255);
 	}
 
 	ShowInitProgress(50);
@@ -456,7 +456,7 @@ void CGameStateRun::OnInit() {
 			IDB_GUNER_STAND_RIGHT, IDB_GUNER_STAND_LEFT,
 			0, 0, 0, 0,
 			goRight, goLeft,
-			attackRight, attackLeft, slash, lv_up);
+			attackRight, attackLeft, slash, lv_up,255,255,255);
 	}
 
 	ShowInitProgress(66);
@@ -488,7 +488,7 @@ void CGameStateRun::OnInit() {
 			IDB_MAGE_STAND_RIGHT, IDB_MAGE_STAND_LEFT,
 			0, 0, 0, 0,
 			goRight, goLeft,
-			attackRight, attackLeft, slash, lv_up);
+			attackRight, attackLeft, slash, lv_up, 0,0,0);
 	}
 
 	ShowInitProgress(90);
@@ -496,15 +496,19 @@ void CGameStateRun::OnInit() {
 	// Load Bitmaps of Maps
 
 	int portal_bitmaps[] = { IDB_PORTAL_BLUE1,IDB_PORTAL_BLUE2 };
+	int portal_boss_bitmaps[] = { IDB_PORTAL_PURPLE1,IDB_PORTAL_PURPLE2 };
 
 	map.push_back(Map1());
 	map.push_back(Map2());
 	map.push_back(Map3());
 	map.push_back(Map4());
 	map.push_back(Map5());
-	for (size_t i = 0; i < map.size(); i++) {
+	for (size_t i = 0; i < map.size() ; i++) {
 		map[i].LoadBitmap();
-		map[i].getPortal()->addBitMaps(portal_bitmaps, 2);
+		if (i < map.size() - 1)
+			map[i].getPortal()->addBitMaps(portal_bitmaps, 2);
+		if(i == map.size() - 1)
+			map[i].getPortal()->addBitMaps(portal_boss_bitmaps, 2);
 	}
 
 	int slash_cd_bitmaps[] = {
@@ -820,7 +824,7 @@ void CGameStateRun :: heroMonsterInteraction(Character&hero, vector<Character*> 
 		}
 
 		// 攻擊互動相關
-		if ((*monster)->getSkillRange()!=0 && MONSTER_HIT_CHARACTER((*monster)->getSkillRange()) && mage_skill_cd==150){
+		if ((*monster)->getSkillRange()!=0 && MONSTER_HIT_CHARACTER((*monster)->getSkillRange()) && HEIGHT_CHECK && mage_skill_cd==150){
 			mage_skill_cd--;
 		}
 		if ((*monster)->getSkillRange() >= 0) { //測試

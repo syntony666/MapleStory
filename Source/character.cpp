@@ -166,20 +166,20 @@ namespace game_framework {
 	
 
 
-	void Character::addBitmap(int standR, int standL, int downR, int downL, int jumpR, int jumpL, vector<int> goR, vector<int> goL, vector<int> attackR, vector<int> attackL, vector<int> slash, vector<int> lv_up)
+	void Character::addBitmap(int standR, int standL, int downR, int downL, int jumpR, int jumpL, vector<int> goR, vector<int> goL, vector<int> attackR, vector<int> attackL, vector<int> slash, vector<int> lv_up, int nR, int nG, int nB)
 	{
 		if (standR != 0)
-			a.standRight.AddBitmap(standR, DEFAULT_RGB);
+			a.standRight.AddBitmap(standR, RGB(nR, nG, nB));
 		if (standL != 0)
-			a.standLeft.AddBitmap(standL, DEFAULT_RGB);
+			a.standLeft.AddBitmap(standL, RGB(nR, nG, nB));
 		if (downR != 0)
-			a.downRight.AddBitmap(downR, DEFAULT_RGB);
+			a.downRight.AddBitmap(downR, RGB(nR, nG, nB));
 		if (downL != 0)
-			a.downLeft.AddBitmap(downL, DEFAULT_RGB);
+			a.downLeft.AddBitmap(downL, RGB(nR, nG, nB));
 		if (jumpR != 0)
-			a.jumpRight.AddBitmap(jumpR, DEFAULT_RGB);
+			a.jumpRight.AddBitmap(jumpR, RGB(nR, nG, nB));
 		if (jumpL != 0)
-			a.jumpLeft.AddBitmap(jumpL, DEFAULT_RGB);
+			a.jumpLeft.AddBitmap(jumpL, RGB(nR, nG, nB));
 		a.goRight = CAnimation(3);
 		a.goLeft = CAnimation(3);
 		a.attackRight = CAnimation(2);
@@ -187,13 +187,13 @@ namespace game_framework {
 		a.slashAnimation = CAnimation(2);
 		a.lv_up = CAnimation(4);
 		for (size_t i = 0; i < goR.size(); i++) 
-			a.goRight.AddBitmap(goR[i], DEFAULT_RGB);
+			a.goRight.AddBitmap(goR[i], RGB(nR, nG, nB));
 		for (size_t i = 0; i < goL.size(); i++) 
-			a.goLeft.AddBitmap(goL[i], DEFAULT_RGB);
+			a.goLeft.AddBitmap(goL[i], RGB(nR, nG, nB));
 		for (size_t i = 0; i < attackR.size(); i++) 
-			a.attackRight.AddBitmap(attackR[i], DEFAULT_RGB);
+			a.attackRight.AddBitmap(attackR[i], RGB(nR, nG, nB));
 		for (size_t i = 0; i < attackL.size(); i++) 
-			a.attackLeft.AddBitmap(attackL[i], DEFAULT_RGB);
+			a.attackLeft.AddBitmap(attackL[i], RGB(nR, nG, nB));
 		for (size_t i = 0; i < slash.size(); i++)
 			a.slashAnimation.AddBitmap(slash[i], RGB(0,0,0));
 		for (size_t i = 0; i < lv_up.size(); i++)
