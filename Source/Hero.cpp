@@ -37,11 +37,11 @@ namespace game_framework {
 			STEP_SIZE = 8;
 		}
 
-		if (isMovingLeft && pos_x >= 100 && !isHitLeft && !isHitRight) {
+		if (isMovingLeft && !isHitLeft && !isHitRight) {
 			pos_x -= STEP_SIZE;
 		}
 
-		if (isMovingRight && pos_x <= 1164 && !isHitLeft && !isHitRight) {
+		if (isMovingRight && !isHitLeft && !isHitRight) {
 			pos_x += STEP_SIZE;
 		}
 

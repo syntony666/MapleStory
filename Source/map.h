@@ -14,7 +14,8 @@ namespace game_framework {
 		void Initialize();
 		void LoadBitmap();
 		void OnShow();
-		void OnMove();
+		void OnMove(); 
+		void portalOnShow();
 
 		//SETs Init
 
@@ -68,12 +69,12 @@ namespace game_framework {
 			for (int i = 0; i < num; i++)
 				_portal.AddBitmap(bitmaps[i], RGB(255, 255, 255));
 		}
-		void OnShow(Map const &map) {
-			_portal.SetTopLeft(_x + map.getX(), _y);
-			_portal.OnShow();
-		}
 		void OnMove() {
 			_portal.OnMove();
+		}
+		void OnShow(int x,int y) {
+			_portal.SetTopLeft(x, y);
+			_portal.OnShow();
 		}
 		int getX() {
 			return _x;

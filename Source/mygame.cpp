@@ -291,33 +291,39 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		map->setMovingLeft(false);
 	}
 	if (hero->getX() >= 1164 && hero->ifMovingRight()) {
-			maps[stage-1].setMovingRight(true);
+			map->setMovingRight(true);
 	}
 	else {
-			maps[stage-1].setMovingRight(false);
+			map->setMovingRight(false);
 	}
 
 	// 人物移動相關
-	if (hero_pos.getX() <= 100) {
+	TRACE("====================(%d)\n", map->getX());
+	TRACE("====================(%d)\n", hero->getX());
+	if (map->getX()==0) {
+		if(hero->getX() <= 10)
+			hero->setXY(10, hero->getY());
+	}
+	else if(hero->getX()<=100)
 		hero->setXY(100, hero->getY());
+
+	if (map->getX() == -1024) {
+		if (hero->getX() >= 1280)
+			hero->setXY(1280, hero->getY());
 	}
-	else if (hero_pos.getX() >= 2204) {
-		hero->setXY(1164, hero->getY());
-	}
+	else if (hero->getX() >= 1180)
+		hero->setXY(1180, hero->getY());
 
 	// 地板判定相關
 	int flag = 0;
 	for (int i = 0; i < 8; i++) {
-		if (hero_pos.getY() <= map->getFloorY(i) + 50 && hero_pos.getY() >= map->getFloorY(i) - 14 &&
-			hero_pos.getX() >= map->getFloorXBegin(i) && hero_pos.getX() <= map->getFloorXLast(i))
+		if (ON_FLOOR)
 			hero->setFloor(570 - map->getFloorY(i));
 		else
 			flag++;
 	}
-
-	if (flag == 8) {
+	if (flag == 8)
 		hero->setFloor(570);
-	}
 
 	// 玩家等級相關
 	if (hero->getXP() >= hero->getLevel() * 50) {
@@ -609,13 +615,9 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	}
 
 	if (nChar == KEY_UP) {
-		if (monster_num(*monster) == 0) {
-			if (hero_pos.getY() == 560 - map->getPortal()->getY() &&
-				hero_pos.getX() >= map->getPortal()->getX() - 20 &&
-				hero_pos.getX() <= map->getPortal()->getX() + 20) {
-				stage++;
-				return;
-			}
+		if (monster_num(*monster) == 0 && ON_PORTAL) {
+			stage++;
+			return;
 		}
 		if (hero->ifMovingUp() == false)
 			CAudio::Instance()->Play(SFX_JUMP, false);
@@ -628,11 +630,11 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 
 void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
-	const char KEY_LEFT  = 0x25; // keyboard左箭頭
-	const char KEY_UP    = 0x26; // keyboard上箭頭
-	const char KEY_RIGHT = 0x27; // keyboard右箭頭
-	const char KEY_DOWN  = 0x28; // keyboard下箭頭
-	const char KEY_Z = 0x5A; // keyboard Z
+	const char KEY_LEFT  = 0x25;	// keyboard左箭頭
+	const char KEY_UP    = 0x26;	// keyboard上箭頭
+	const char KEY_RIGHT = 0x27;	// keyboard右箭頭
+	const char KEY_DOWN  = 0x28;	// keyboard下箭頭
+	const char KEY_Z = 0x5A;		// keyboard Z
 
 	if (nChar == KEY_Z) {
 		hero->setAttacking(false);
@@ -683,7 +685,7 @@ void CGameStateRun::OnShow()
 	map->OnShow();			// 貼上背景圖
 	if (stage <= 4) {
 		if (monster_num(*monster) == 0)
-			map->getPortal()->OnShow(*map);
+			map->portalOnShow();
 		for (auto m = monster->begin(); m < monster->end(); m++)
 			(*m)->OnShow();
 	}
@@ -717,12 +719,10 @@ void CGameStateRun :: heroMonsterInteraction(Character&hero, vector<Character*> 
 
 		// 人物移動相關
 		if (hero.getX() <= 100 && hero.ifMovingLeft()) {
-			if (hero_pos.getX() <= 110) {
+			if (hero_pos.getX() <= 110)
 				(*monster)->setMovingLeft(false);
-			}
-			else {
+			else
 				(*monster)->setMovingLeft(true);
-			}
 		}
 		else {
 			(*monster)->setMovingLeft(false);

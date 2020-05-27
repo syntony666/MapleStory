@@ -51,17 +51,19 @@ namespace game_framework {
 	void Map::OnMove() {
 		const int STEP_SIZE = 8;
 
-		if (_x >= -1034 && isMovingRight) {	//若碰壁就動地圖直到地圖的邊緣
+		if (_x >= -1020 && isMovingRight) {	//若碰壁就動地圖直到地圖的邊緣
 			_x -= STEP_SIZE;
 		}
 		if (_x < 0 && isMovingLeft) {		//若碰壁就動地圖直到地圖的邊緣
 			_x += STEP_SIZE;
 		}
 	}
-
 	void Map::OnShow() {
 		map.SetTopLeft(_x, _y);
 		map.ShowBitmap(zoom);
+	}
+	void Map::portalOnShow() {
+		_portal->OnShow(_portal->getX() + _x, _portal->getY());
 	}
 	int Map::getFloorXBegin(int i) const{
 		return floors.getXBegin(i);
