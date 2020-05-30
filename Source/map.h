@@ -56,14 +56,13 @@ namespace game_framework {
 	class Portal {
 	public:
 		Portal(){}
-		Portal(Map map, int x, int y) {
-			_map = &map;
+		Portal(int x, int y) {
 			_x = x;
 			_y = y;
 		}
-		~Portal() {
+		//~Portal() {
 
-		}
+		//}
 		void addBitMaps(int bitmaps[],int num) {
 			_portal = CAnimation(2);
 			for (int i = 0; i < num; i++)
@@ -85,7 +84,6 @@ namespace game_framework {
 	private:
 		int _x, _y;
 		CAnimation _portal;
-		Map *_map;
 	};
 }
 #endif
