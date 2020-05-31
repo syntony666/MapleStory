@@ -168,7 +168,6 @@ void CGameStateOver::OnMove()
 {
 	Gameover.OnMove();
 	counter--;
-	Gameover.OnMove();
 	if (counter < 0) {
 		CAudio::Instance()->Play(BGM_MENU, true);
 		GotoGameState(GAME_STATE_INIT);
@@ -534,9 +533,9 @@ void CGameStateRun::OnInit() {
 	maps.push_back(Map5());
 	for (size_t i = 0; i < maps.size() ; i++) {
 		maps[i].LoadBitmap();
-		if (i < maps.size() - 1)
+		if (i < 3)
 			maps[i].getPortal()->addBitMaps(portal_bitmaps, 2);
-		if(i == maps.size() - 1)
+		if (i >= 3)
 			maps[i].getPortal()->addBitMaps(portal_boss_bitmaps, 2);
 	}
 

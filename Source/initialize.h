@@ -79,14 +79,14 @@ namespace game_framework {
 	}
 	inline Map Map4() {
 		Map gamemap;
-		Platform plats[8] = { {228, 708, 330},
-								{682,1012, 202},
-								{1068,1236,124},
-								{1324,1564,194},
-								{1508,2232,320},
-								{1313,1706,441},
-								{998 ,1386,606},
-								{582 , 982,488} };
+		Platform plats[8] = {	{52  ,988, 166},
+								{1468,2212, 166},
+								{916 ,1470, 326},
+								{52  ,980, 496},
+								{1316,2244, 494},
+								{0,3000,0},
+								{0,3000,0},
+								{0,3000,0} };
 		gamemap.setInitFloor(570);
 		gamemap.setInitZoom(2);
 		gamemap.setInitXY(0, 0);
@@ -97,14 +97,14 @@ namespace game_framework {
 	}
 	inline Map Map5() {
 		Map gamemap;
-		Platform plats[8] = { {228, 708, 330},
-								{682,1012, 202},
-								{1068,1236,124},
-								{1324,1564,194},
-								{1508,2232,320},
-								{1313,1706,441},
-								{998 ,1386,606},
-								{582 , 982,488} };
+		Platform plats[8] = {	{0,3000,0},
+								{0,3000,0},
+								{0,3000,0},
+								{0,3000,0},
+								{0,3000,0},
+								{0,3000,0},
+								{0,3000,0},
+								{0,3000,0} };
 		gamemap.setInitFloor(570);
 		gamemap.setInitZoom(2);
 		gamemap.setInitXY(0, 0);
@@ -156,9 +156,9 @@ namespace game_framework {
 		for (size_t i = 0; i < monster.size(); i++) {
 			monster[i]->Initialize();
 			monster[i]->setMaxHP(500);
-			monster[i]->setAttack(0);
-			monster[i]->setAttackRange(200);
-			monster[i]->setSkillRange(200);
+			monster[i]->setAttack(150);
+			monster[i]->setAttackRange(100);
+			monster[i]->setSkillRange(0);
 		}
 	}
 }
