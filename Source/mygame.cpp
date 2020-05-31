@@ -71,10 +71,13 @@ void CGameStateInit::OnInit()
 	ShowInitProgress(33);
 
 	logo.LoadBitmap(IDB_LOGO);
+	info.LoadBitmap(IDB_INFO);
 	start1.LoadBitmap(IDB_START1, RGB(255, 255, 255));
 	start2.LoadBitmap(IDB_START2, RGB(255, 255, 255));
 	exit1.LoadBitmap(IDB_EXIT1, RGB(255, 255, 255));
 	exit2.LoadBitmap(IDB_EXIT2, RGB(255, 255, 255));
+	info1.LoadBitmap(IDB_INFO1, RGB(255, 255, 255));
+	info2.LoadBitmap(IDB_INFO2, RGB(255, 255, 255));
 
 	//
 	// 此OnInit動作會接到CGameStaterRun::OnInit()，所以進度還沒到100%
@@ -88,23 +91,34 @@ void CGameStateInit::OnBeginState()
 void CGameStateInit::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
 	const char KEY_ENTER = 0x0D;	// Enter
+	const char KEY_LEFT = 0x25;		// keyboard左箭頭
 	const char KEY_UP = 0x26;		// keyboard上箭頭
 	const char KEY_DOWN = 0x28;		// keyboard下箭頭
 
-	if (nChar == KEY_ENTER && menu == 1) {	
+	if (nChar == KEY_ENTER && menu == 1 && ifInfoOn == 0) {
 		GotoGameState(GAME_STATE_RUN);
 	}
 
-	if (nChar == KEY_ENTER && menu == 2) {
+	if (nChar == KEY_ENTER && menu == 2 && ifInfoOn == 0) {
+		ifInfoOn = 1;
+	}
+
+	if (nChar == KEY_LEFT && ifInfoOn == 1) {
+		ifInfoOn = 0;
+	}
+
+	if (nChar == KEY_ENTER && menu == 3 && ifInfoOn == 0) {
 		PostMessage(AfxGetMainWnd()->m_hWnd, WM_CLOSE, 0, 0);
 	}
 
-	if (nChar == KEY_DOWN) {
-		menu = 2;
+	if (nChar == KEY_DOWN && ifInfoOn == 0) {
+		if(menu < 3)
+			menu++;
 	}
 
-	if (nChar == KEY_UP) {
-		menu = 1;
+	if (nChar == KEY_UP && ifInfoOn == 0) {
+		if (menu > 1)
+			menu--;
 	}
 	
 }
@@ -119,21 +133,40 @@ void CGameStateInit::OnShow()
 	//
 	// 貼上logo
 	//
-	logo.SetTopLeft(0, 0);
-	logo.ShowBitmap();
-
-	if (menu == 1) {
-		start2.SetTopLeft(483, 380);
-		start2.ShowBitmap();
-		exit1.SetTopLeft(483, 520);
-		exit1.ShowBitmap();
+	if (ifInfoOn == 1) {
+		info.SetTopLeft(0, 0);
+		info.ShowBitmap();
 	}
+	else {
+		logo.SetTopLeft(0, 0);
+		logo.ShowBitmap();
 
-	if (menu == 2) {
-		start1.SetTopLeft(483, 380);
-		start1.ShowBitmap();
-		exit2.SetTopLeft(483, 520);
-		exit2.ShowBitmap();
+		if (menu == 1) {
+			start2.SetTopLeft(483, 350);
+			start2.ShowBitmap();
+			info1.SetTopLeft(483, 460);
+			info1.ShowBitmap();
+			exit1.SetTopLeft(483, 570);
+			exit1.ShowBitmap();
+		}
+
+		if (menu == 2) {
+			start1.SetTopLeft(483, 350);
+			start1.ShowBitmap();
+			info2.SetTopLeft(483, 460);
+			info2.ShowBitmap();
+			exit1.SetTopLeft(483, 570);
+			exit1.ShowBitmap();
+		}
+
+		if (menu == 3) {
+			start1.SetTopLeft(483, 350);
+			start1.ShowBitmap();
+			info1.SetTopLeft(483, 460);
+			info1.ShowBitmap();
+			exit2.SetTopLeft(483, 570);
+			exit2.ShowBitmap();
+		}
 	}
 	//
 	// Demo螢幕字型的使用，不過開發時請盡量避免直接使用字型，改用CMovingBitmap比較好

@@ -56,11 +56,15 @@ namespace game_framework {
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
 		CMovingBitmap logo;								// csie的logo
+		CMovingBitmap info;
 		CMovingBitmap start1;
 		CMovingBitmap start2;
 		CMovingBitmap exit1;
 		CMovingBitmap exit2;
+		CMovingBitmap info1;
+		CMovingBitmap info2;
 		int menu = 1;									//判別值 1=上 2=下
+		int ifInfoOn = 0;								//說明選單 0=關 1=開
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
