@@ -438,6 +438,22 @@ IDB_INFO2               BITMAP                  "..\\res\\info2.bmp"
 
 IDB_BOSS_STAND          BITMAP                  "..\\res\\Boss\\boss_stand.bmp"
 
+IDB_BOSS_STAND1         BITMAP                  "C:\\Users\\nelso\\Desktop\\School\\108_2_GameProject\\MapleStory\\RES\\Boss\\boss_01.bmp"
+
+IDB_BOSS_STAND2         BITMAP                  "C:\\Users\\nelso\\Desktop\\School\\108_2_GameProject\\MapleStory\\RES\\Boss\\boss_02.bmp"
+
+IDB_BOSS_STAND3         BITMAP                  "C:\\Users\\nelso\\Desktop\\School\\108_2_GameProject\\MapleStory\\RES\\Boss\\boss_03.bmp"
+
+IDB_BOSS_STAND4         BITMAP                  "C:\\Users\\nelso\\Desktop\\School\\108_2_GameProject\\MapleStory\\RES\\Boss\\boss_04.bmp"
+
+IDB_BOSS_STAND5         BITMAP                  "C:\\Users\\nelso\\Desktop\\School\\108_2_GameProject\\MapleStory\\RES\\Boss\\boss_05.bmp"
+
+IDB_BOSS_STAND6         BITMAP                  "C:\\Users\\nelso\\Desktop\\School\\108_2_GameProject\\MapleStory\\RES\\Boss\\boss_06.bmp"
+
+IDB_BOSS_STAND7         BITMAP                  "C:\\Users\\nelso\\Desktop\\School\\108_2_GameProject\\MapleStory\\RES\\Boss\\boss_07.bmp"
+
+IDB_BOSS_STAND8         BITMAP                  "C:\\Users\\nelso\\Desktop\\School\\108_2_GameProject\\MapleStory\\RES\\Boss\\boss_08.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

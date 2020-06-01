@@ -22,7 +22,7 @@ namespace game_framework {
 
 
 	protected:
-		CMovingBitmap bossStand;
+		CAnimation bossStand;
 		int pos_x, pos_y;
 		bool isMovingRight, isMovingLeft;
 		bool isDead = false;
