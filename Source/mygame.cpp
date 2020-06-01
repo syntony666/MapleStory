@@ -280,6 +280,7 @@ CGameStateRun::CGameStateRun(CGame *g)
 CGameStateRun::~CGameStateRun()
 {
 	delete hero;
+	delete boss;
 }
 
 void CGameStateRun::OnBeginState()
@@ -294,6 +295,7 @@ void CGameStateRun::OnBeginState()
 	initMonster3(monster3);
 	initMonster4(monster4);
 	mage_skill_cd = 30 * 5;
+	boss->setXY(1700, -30);
 
 	CAudio::Instance()->Stop(BGM_MENU);
 	CAudio::Instance()->Play(BGM_STAGE1, true);
@@ -400,6 +402,9 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	// 怪物互動相關
 	heroMonsterInteraction(*hero, *monster, *map);
 
+	// BOSS互動相關
+	heroBossInteraction(*hero, *boss, *map);
+
 	// 玩家死亡相關
 	if (hero->getHP() <= 0)
 		GotoGameState(GAME_STATE_OVER);
@@ -411,6 +416,7 @@ void CGameStateRun::OnInit() {
 	// Load Hero's Bitmap
 
 	hero = new Hero;
+	boss = new Boss;
 	vector<int> hero_goLeft = { IDB_FROG_GO_LEFT1,IDB_FROG_GO_LEFT2, IDB_FROG_STAND_LEFT };
 	vector<int> hero_goRight = { IDB_FROG_GO_RIGHT1,IDB_FROG_GO_RIGHT2, IDB_FROG_STAND_RIGHT };
 	vector<int> hero_attackRight = { IDB_FROG_ATTACK_RIGHT1, IDB_FROG_ATTACK_RIGHT2, IDB_FROG_ATTACK_RIGHT3,
@@ -587,6 +593,8 @@ void CGameStateRun::OnInit() {
 	for (int i = 0; i < 9; i++)
 		healCD[i].LoadBitmap(heal_cd_bitmaps[i]);
 
+	boss->Initialize();
+
 	ShowInitProgress(100);
 }
 
@@ -720,7 +728,8 @@ void CGameStateRun::OnShow()
 			map->portalOnShow();
 		for (auto m = monster->begin(); m < monster->end(); m++)
 			(*m)->OnShow();
-	}
+	}else if (stage = 5)
+		boss->OnShow();
 	hero->OnShow();			// 貼上人物
 
 	int slash_part = slash_cd / (300 / 8);
@@ -848,6 +857,84 @@ void CGameStateRun :: heroMonsterInteraction(Character&hero, vector<Character*> 
 			(*monster)->setXY(-1, -1);
 		}
 	}
+}
+void CGameStateRun::heroBossInteraction(Character& hero, Character& mboss, Map &map) {
+
+	mboss.OnMove();
+
+	// 人物移動相關
+	if (hero.getX() <= 100 && hero.ifMovingLeft()) {
+		if (hero_pos.getX() <= 110)
+			mboss.setMovingLeft(false);
+		else
+			mboss.setMovingLeft(true);
+	}
+	else {
+		mboss.setMovingLeft(false);
+	}
+	if (hero.getX() >= 1164 && hero.ifMovingRight()) {
+		if (hero_pos.getX() >= 2200) {
+			mboss.setMovingRight(false);
+		}
+		else {
+			mboss.setMovingRight(true);
+		}
+	}
+	else {
+		mboss.setMovingRight(false);
+	}
+	/*
+		// 攻擊互動相關
+		if ((*monster)->getSkillRange() != 0 && MONSTER_HIT_CHARACTER((*monster)->getSkillRange()) && HEIGHT_CHECK && mage_skill_cd == 150) {
+			mage_skill_cd--;
+		}
+		if ((*monster)->getSkillRange() >= 0) { //測試
+			if (MONSTER_HIT_CHARACTER((*monster)->getAttackRange())) {
+				if (HIT_CHECK_CHARACTER && HEIGHT_CHECK) {
+					(*monster)->setAttacking(true);
+					if (stage == 2)
+						CAudio::Instance()->Play(SFX_GUN, false);
+					if (stage != 3) {
+						hero.setHP(hero.getHP() - (*monster)->getAttack());
+						CAudio::Instance()->Play(SFX_HERO_HIT, false);
+						if (monster_pos.getX() >= hero_pos.getX())
+							hero.setHitLeft();
+						else if (monster_pos.getX() < hero_pos.getX())
+							hero.setHitRight();
+					}
+				}
+				if (hero.getHP() <= 0)
+					return;
+			}
+		}
+		if (CHARACTER_HIT_MONSTER) {
+			if (HIT_CHECK_MONSTER && HEIGHT_CHECK) {
+				(*monster)->setHP((*monster)->getHP() - hero.getAttack());
+				CAudio::Instance()->Play(SFX_MONSTER_HIT, false);
+				if (hero.getFacing() == 2)
+					(*monster)->setHitLeft();
+				else if (hero.getFacing() == 1)
+					(*monster)->setHitRight();
+			}
+		}
+		if (CHARACTER_SLASH_MONSTER) {
+			if (HIT_CHECK_MONSTER && SLASH_HEIGHT_CHECK) {
+				(*monster)->setHP((*monster)->getHP() - hero.getAttack() * 2);
+				CAudio::Instance()->Play(SFX_MONSTER_HIT, false);
+				if (monster_pos.getX() >= hero_pos.getX())
+					(*monster)->setHitRight();
+				else
+					(*monster)->setHitLeft();
+			}
+		}
+
+		// 怪物死亡相關
+		if ((*monster)->getHP() <= 0) {
+			hero.setXP(hero.getXP() + (*monster)->getXP());
+			(*monster)->setDead(true);
+			(*monster)->setXY(-1, -1);
+		}
+	*/
 }
 void CGameStateRun::checkStage() {
 	if (stage == stage_count) {

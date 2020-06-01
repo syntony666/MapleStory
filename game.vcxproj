@@ -241,6 +241,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\audio.cpp" />
+    <ClCompile Include="Source\boss.cpp" />
     <ClCompile Include="Source\character.cpp" />
     <ClCompile Include="Source\floor.cpp" />
     <ClCompile Include="Source\game.cpp">
@@ -290,6 +291,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\audio.h" />
+    <ClInclude Include="Source\boss.h" />
     <ClInclude Include="Source\character.h" />
     <ClInclude Include="Source\floor.h" />
     <ClInclude Include="Source\hero.h" />
@@ -320,6 +322,7 @@
     <Image Include="RES\bg3.bmp" />
     <Image Include="RES\bg4.bmp" />
     <Image Include="RES\bg_boss.bmp" />
+    <Image Include="RES\Boss\boss_stand.bmp" />
     <Image Include="RES\exit1.bmp" />
     <Image Include="RES\exit2.bmp" />
     <Image Include="RES\frog_attack_left1.bmp" />

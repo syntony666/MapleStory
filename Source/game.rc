@@ -436,6 +436,8 @@ IDB_INFO1               BITMAP                  "..\\res\\info1.bmp"
 
 IDB_INFO2               BITMAP                  "..\\res\\info2.bmp"
 
+IDB_BOSS_STAND          BITMAP                  "C:\\Users\\nelso\\Desktop\\School\\108_2_GameProject\\MapleStory\\RES\\Boss\\boss_stand.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

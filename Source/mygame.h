@@ -14,6 +14,7 @@
 #include "hero.h"
 #include "map.h"
 #include "monster.h"
+#include "boss.h"
 #include "position.h"
 #include "initialize.h"
 
@@ -100,9 +101,11 @@ namespace game_framework {
 		Map *map;
 		vector<Character*> monster1, monster2, monster3, monster4;// й╟кл
 		vector<Character*> *monster;
+		Character *boss;
 		Position hero_pos;
 		inline int monster_num(vector<Character*> monster);
 		void heroMonsterInteraction(Character&hero, vector<Character*> & monster, Map &map);
+		void heroBossInteraction(Character&hero, Character&boss, Map &map);
 		void checkStage();
 	};
 

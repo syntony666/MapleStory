@@ -43,6 +43,9 @@
     <ClCompile Include="Source\character.cpp">
       <Filter>MapleStory</Filter>
     </ClCompile>
+    <ClCompile Include="Source\boss.cpp">
+      <Filter>MapleStory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\audio.h">
@@ -91,6 +94,9 @@
       <Filter>MapleStory</Filter>
     </ClInclude>
     <ClInclude Include="Source\floor.h">
+      <Filter>MapleStory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\boss.h">
       <Filter>MapleStory</Filter>
     </ClInclude>
   </ItemGroup>
@@ -659,6 +665,7 @@
     <Image Include="RES\info1.bmp">
       <Filter>Resouces</Filter>
     </Image>
+    <Image Include="RES\Boss\boss_stand.bmp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="RES\continue.bmp">
