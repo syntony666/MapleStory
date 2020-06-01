@@ -15,9 +15,11 @@ namespace game_framework {
 		void Initialize();				// 設定monster為初始值
 		void OnMove();					// 移動monster
 		void OnShow();					// 將monster圖形貼到畫面
+		void showHPBar(int percent);
 		void setMovingLeft(bool flag);
 		void setMovingRight(bool flag);
 		void setXY(int nx, int ny);
+
 
 	protected:
 		CMovingBitmap bossStand;

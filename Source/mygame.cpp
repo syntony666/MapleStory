@@ -344,8 +344,6 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	}
 
 	//// 人物移動相關
-	TRACE("====================(%d)\n", map->getX());
-	TRACE("====================(%d)\n", hero->getX());
 	if (map->getX()==0) {
 		if(hero->getX() <= 10)
 			hero->setXY(10, hero->getY());
@@ -381,17 +379,10 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		hero->setAttack(hero->getAttack() + hero->getLevel() * 5);
 	}
 
-	//// 玩家技能相關
-	if (slash_cd <= 299) {
-		slash_cd--;
-		if (slash_cd == 0)
-			slash_cd = 300;
-	}
-	if (heal_cd <= 599) {
-		heal_cd--;
-		if (heal_cd == 0)
-			heal_cd = 600;
-	}
+	// 技能倒數相關
+	countDown(slash_cd, 300);
+	countDown(heal_cd, 600);
+	countDown(mage_skill_cd, 150, -50);
 	if (mage_skill_cd <= 149 && mage_skill_cd>=-50) {
 		mage_skill_cd--;
 		if (mage_skill_cd >= 0) {
@@ -758,6 +749,7 @@ void CGameStateRun::OnShow()
 	int heal_part = heal_cd / (600 / 8);
 	healCD[heal_part].SetTopLeft(60, 125);
 	healCD[heal_part].ShowBitmap();
+	boss.showHPBar(20);
 }
 inline int CGameStateRun::monster_num(vector<Character*>monsters) {
 	int n = 0;
@@ -981,6 +973,13 @@ void CGameStateRun::checkStage() {
 		if (stage == 6) {
 			GotoGameState(GAME_STATE_INIT);
 		}
+	}
+}
+void CGameStateRun::countDown(int &cd, int max, int min) {
+	if (cd < max) {
+		cd--;
+		if (cd == min)
+			cd = max;
 	}
 }
 }
