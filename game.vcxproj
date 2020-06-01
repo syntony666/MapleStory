@@ -330,6 +330,7 @@
     <Image Include="RES\Boss\boss_06.bmp" />
     <Image Include="RES\Boss\boss_07.bmp" />
     <Image Include="RES\Boss\boss_08.bmp" />
+    <Image Include="RES\Boss\boss_icon.bmp" />
     <Image Include="RES\Boss\boss_stand.bmp" />
     <Image Include="RES\exit1.bmp" />
     <Image Include="RES\exit2.bmp" />

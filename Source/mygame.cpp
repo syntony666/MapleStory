@@ -298,7 +298,7 @@ CGameStateRun::~CGameStateRun()
 void CGameStateRun::OnBeginState()
 {
 	stage = 1;
-	stage_count = 1;
+	stage_count = stage;
 	initHero(*hero);
 	for (int i = 0; i < 5; i++)
 		maps[i].setInitXY(0, 0);
@@ -738,8 +738,10 @@ void CGameStateRun::OnShow()
 		for (auto m : *monster)
 			m->OnShow();
 	}
-	else if (stage == 5)
+	else if (stage == 5) {
 		boss.OnShow();
+		boss.showHPBar();
+	}
 	hero->OnShow();			// ¶K¤W¤Hª«
 
 	int slash_part = slash_cd / (300 / 8);
@@ -749,7 +751,6 @@ void CGameStateRun::OnShow()
 	int heal_part = heal_cd / (600 / 8);
 	healCD[heal_part].SetTopLeft(60, 125);
 	healCD[heal_part].ShowBitmap();
-	boss.showHPBar(20);
 }
 inline int CGameStateRun::monster_num(vector<Character*>monsters) {
 	int n = 0;

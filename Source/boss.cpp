@@ -19,10 +19,12 @@ namespace game_framework {
 		int boss_stand_bitmaps[] = { IDB_BOSS_STAND1, IDB_BOSS_STAND2, IDB_BOSS_STAND3, IDB_BOSS_STAND4, IDB_BOSS_STAND5, IDB_BOSS_STAND6, IDB_BOSS_STAND7, IDB_BOSS_STAND8 };
 		for (int i = 0; i < 8; i++)
 			bossStand.AddBitmap(boss_stand_bitmaps[i], RGB(255, 255, 255));
+		hpIcon.LoadBitmap(IDB_BOSS_ICON, RGB(255, 255, 255));
 		bossStand.SetDelayCount(2);
 		isMovingRight = isMovingLeft = false;
 		pos_x = 1550;
 		pos_y = 220;
+		hp = maxHP;
 	}
 
 	void Boss::OnMove()
@@ -59,45 +61,27 @@ namespace game_framework {
 	{
 		pos_x = nx; pos_y = ny;
 	}
-	void Boss::showHPBar(int percent)
+	void Boss::showHPBar()
 	{
-		const int bar_width = SIZE_X - 100;
+		double percent = hp / maxHP;
+		const int bar_width = SIZE_X - 300;
 		const int bar_height = 15;
 		const int x1 = SIZE_X - bar_width;
-		const int x2 = x1 + bar_width;
-		const int y1 = bar_height + 3;
+		const int y1 = bar_height + 20;
 		const int y2 = y1 + bar_height;
-		const int pen_width = bar_height / 8;
-		const int progress_x1 = x1 + pen_width;
-		const int progress_x2 = progress_x1 + percent * (bar_width - 2 * pen_width) / 100;
-		const int progress_x2_end = x2 - pen_width;
-		const int progress_y1 = y1 + pen_width;
-		const int progress_y2 = y2 - pen_width;
-		//
-		// 以下為CDC的用法
-		//
+		const double x2 = x1 + percent * bar_width;
+
 		CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
 		CPen *pp, p(PS_NULL, 0, RGB(0, 0, 0));		// 清除pen
 		pp = pDC->SelectObject(&p);
 
-		CBrush *pb, b(RGB(0, 255, 0));				// 畫綠色 progress框
-		pb = pDC->SelectObject(&b);
-		pDC->Rectangle(x1, y1, x2, y2);
-
-		CBrush b1(DEFAULT_BG_COLOR);				// 畫黑色 progrss中心
-		pDC->SelectObject(&b1);
-		pDC->Rectangle(progress_x1, progress_y1, progress_x2_end, progress_y2);
-
-		CBrush b2(RGB(255, 255, 0));					// 畫黃色 progrss進度
+		CBrush b2(RGB(255, 0, 0));					// 血條
 		pDC->SelectObject(&b2);
-		pDC->Rectangle(progress_x1, progress_y1, progress_x2, progress_y2);
+		pDC->Rectangle(x1, y1, (int)x2, y2);
 
 		pDC->SelectObject(pp);						// 釋放 pen
-		pDC->SelectObject(pb);						// 釋放 brush
 		CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
-		//
-		// 如果是別的地方用到CDC的話，不要抄以下這行，否則螢幕會閃爍
-		//
-		CDDraw::BltBackToPrimary();					// 將 Back Plain 貼到螢幕
+		hpIcon.SetTopLeft(250, 5);
+		hpIcon.ShowBitmap(0.3);
 	}
 }
