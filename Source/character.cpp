@@ -167,7 +167,7 @@ namespace game_framework {
 
 
 	void Character::addBitmap(int standR, int standL, int downR, int downL, int jumpR, int jumpL, vector<int> goR, vector<int> goL, vector<int> attackR, vector<int> attackL, vector<int> slash, vector<int> lv_up, int nR, int nG, int nB)
-	{/*
+	{
 		if (standR != 0)
 			a.standRight.AddBitmap(standR, RGB(nR, nG, nB));
 		if (standL != 0)
@@ -179,7 +179,7 @@ namespace game_framework {
 		if (jumpR != 0)
 			a.jumpRight.AddBitmap(jumpR, RGB(nR, nG, nB));
 		if (jumpL != 0)
-			a.jumpLeft.AddBitmap(jumpL, RGB(nR, nG, nB));*/
+			a.jumpLeft.AddBitmap(jumpL, RGB(nR, nG, nB));
 		a.goRight = CAnimation(3);
 		a.goLeft = CAnimation(3);
 		a.attackRight = CAnimation(2);
@@ -198,8 +198,8 @@ namespace game_framework {
 			a.slashAnimation.AddBitmap(slash[i], RGB(0,0,0));
 		for (size_t i = 0; i < lv_up.size(); i++)
 			a.lv_up.AddBitmap(lv_up[i], RGB(3, 3, 3));
-		//hp_addBitmaps();
-		//number_addBitmaps();
+		hp_addBitmaps();
+		number_addBitmaps();
 	}
 
 

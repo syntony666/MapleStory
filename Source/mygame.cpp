@@ -248,11 +248,19 @@ CGameStateRun::CGameStateRun(CGame *g)
 CGameStateRun::~CGameStateRun()
 {
 	delete hero;
+	for (auto i = monster1.begin(); i < monster1.end(); i++)
+		delete *i;
+	for (auto i = monster2.begin(); i < monster2.end(); i++)
+		delete *i;
+	for (auto i = monster3.begin(); i < monster3.end(); i++)
+		delete *i;
+	for (auto i = monster4.begin(); i < monster4.end(); i++)
+		delete *i;
 	monster1.clear();
 	monster2.clear();
 	monster3.clear();
 	monster4.clear();
-	//maps.clear();
+	maps.clear();
 }
 
 void CGameStateRun::OnBeginState()
@@ -260,8 +268,8 @@ void CGameStateRun::OnBeginState()
 	stage = 1;
 	stage_count = 1;
 	initHero(*hero);
-	//for (int i = 0; i < 5; i++)
-	//	maps[i].setInitXY(0, 0);
+	for (int i = 0; i < 5; i++)
+		maps[i].setInitXY(0, 0);
 	initMonster1(monster1);
 	initMonster2(monster2);
 	initMonster3(monster3);
@@ -274,109 +282,109 @@ void CGameStateRun::OnBeginState()
 
 void CGameStateRun::OnMove()							// 移動遊戲元素
 {
-	//checkStage();
-	//hero->OnMove();
-	//map->OnMove();
-	//map->getPortal()->OnMove();
+	checkStage();
+	hero->OnMove();
+	map->OnMove();
+	map->getPortal()->OnMove();
 
-	//hero_pos.setPosition(hero, *map);
+	hero_pos.setPosition(hero, *map);
 
-	//TRACE("-------hero-pos_xy-------(%d, %d)\n", hero_pos.getX(), hero_pos.getY());
-	//TRACE("--hero-level_Attack_HP---(%d, %d, %d)\n", hero->getLevel(), hero->getAttack(), hero->getHP());
-	//TRACE("---------Slash_CD--------(%d)\n", slash_cd / 30);
-	//TRACE("-----Monster_Skill_CD----(%d)\n", mage_skill_cd / 30);
-	//TRACE("-----------Stage---------(%d)\n", stage);
-	//TRACE("\n\n");
+	TRACE("-------hero-pos_xy-------(%d, %d)\n", hero_pos.getX(), hero_pos.getY());
+	TRACE("--hero-level_Attack_HP---(%d, %d, %d)\n", hero->getLevel(), hero->getAttack(), hero->getHP());
+	TRACE("---------Slash_CD--------(%d)\n", slash_cd / 30);
+	TRACE("-----Monster_Skill_CD----(%d)\n", mage_skill_cd / 30);
+	TRACE("-----------Stage---------(%d)\n", stage);
+	TRACE("\n\n");
 
 	//// 地圖移動相關
-	//if (hero->getX() <= 100 && hero->ifMovingLeft()) {
-	//	map->setMovingLeft(true);
-	//}
-	//else {
-	//	map->setMovingLeft(false);
-	//}
-	//if (hero->getX() >= 1164 && hero->ifMovingRight()) {
-	//		map->setMovingRight(true);
-	//}
-	//else {
-	//		map->setMovingRight(false);
-	//}
+	if (hero->getX() <= 100 && hero->ifMovingLeft()) {
+		map->setMovingLeft(true);
+	}
+	else {
+		map->setMovingLeft(false);
+	}
+	if (hero->getX() >= 1164 && hero->ifMovingRight()) {
+			map->setMovingRight(true);
+	}
+	else {
+			map->setMovingRight(false);
+	}
 
 	//// 人物移動相關
-	//TRACE("====================(%d)\n", map->getX());
-	//TRACE("====================(%d)\n", hero->getX());
-	//if (map->getX()==0) {
-	//	if(hero->getX() <= 10)
-	//		hero->setXY(10, hero->getY());
-	//}
-	//else if(hero->getX()<=100)
-	//	hero->setXY(100, hero->getY());
+	TRACE("====================(%d)\n", map->getX());
+	TRACE("====================(%d)\n", hero->getX());
+	if (map->getX()==0) {
+		if(hero->getX() <= 10)
+			hero->setXY(10, hero->getY());
+	}
+	else if(hero->getX()<=100)
+		hero->setXY(100, hero->getY());
 
-	//if (map->getX() == -1024) {
-	//	if (hero->getX() >= 1280)
-	//		hero->setXY(1280, hero->getY());
-	//}
-	//else if (hero->getX() >= 1180)
-	//	hero->setXY(1180, hero->getY());
+	if (map->getX() == -1024) {
+		if (hero->getX() >= 1280)
+			hero->setXY(1280, hero->getY());
+	}
+	else if (hero->getX() >= 1180)
+		hero->setXY(1180, hero->getY());
 
 	//// 地板判定相關
-	//int flag = 0;
-	//for (int i = 0; i < 8; i++) {
-	//	if (ON_FLOOR)
-	//		hero->setFloor(570 - map->getFloorY(i));
-	//	else
-	//		flag++;
-	//}
-	//if (flag == 8)
-	//	hero->setFloor(570);
+	int flag = 0;
+	for (int i = 0; i < 8; i++) {
+		if (ON_FLOOR)
+			hero->setFloor(570 - map->getFloorY(i));
+		else
+			flag++;
+	}
+	if (flag == 8)
+		hero->setFloor(570);
 
 	//// 玩家等級相關
-	//if (hero->getXP() >= hero->getLevel() * 50) {
-	//	hero->setXP(0);
-	//	CAudio::Instance()->Play(SFX_LEVEL_UP, false);
-	//	hero->setLevelUP();
-	//	hero->setLevel(hero->getLevel() + 1);
-	//	hero->setMaxHP(hero->getMaxHP() + hero->getLevel() * 50);
-	//	hero->setAttack(hero->getAttack() + hero->getLevel() * 5);
-	//}
+	if (hero->getXP() >= hero->getLevel() * 50) {
+		hero->setXP(0);
+		CAudio::Instance()->Play(SFX_LEVEL_UP, false);
+		hero->setLevelUP();
+		hero->setLevel(hero->getLevel() + 1);
+		hero->setMaxHP(hero->getMaxHP() + hero->getLevel() * 50);
+		hero->setAttack(hero->getAttack() + hero->getLevel() * 5);
+	}
 
 	//// 玩家技能相關
-	//if (slash_cd <= 299) {
-	//	slash_cd--;
-	//	if (slash_cd == 0)
-	//		slash_cd = 300;
-	//}
-	//if (heal_cd <= 599) {
-	//	heal_cd--;
-	//	if (heal_cd == 0)
-	//		heal_cd = 600;
-	//}
-	//if (mage_skill_cd <= 149 && mage_skill_cd>=-50) {
-	//	mage_skill_cd--;
-	//	if (mage_skill_cd >= 0) {
-	//		hero->setMovingLeft(false);
-	//		hero->setMovingRight(false);
-	//		hero->setMovingUp(false);
-	//		hero->setMovingDown(false);
-	//	}
-	//	if (mage_skill_cd == 75 || mage_skill_cd == 0) {
-	//		if (hero->getHP() * 0.1 <= 50)
-	//			hero->setHP(hero->getHP() - 50);
-	//		else
-	//			hero->setHP(int(hero->getHP() * 0.9));
-	//	}
-	//	if (mage_skill_cd == -50)
-	//		mage_skill_cd = 150;
-	//}
+	if (slash_cd <= 299) {
+		slash_cd--;
+		if (slash_cd == 0)
+			slash_cd = 300;
+	}
+	if (heal_cd <= 599) {
+		heal_cd--;
+		if (heal_cd == 0)
+			heal_cd = 600;
+	}
+	if (mage_skill_cd <= 149 && mage_skill_cd>=-50) {
+		mage_skill_cd--;
+		if (mage_skill_cd >= 0) {
+			hero->setMovingLeft(false);
+			hero->setMovingRight(false);
+			hero->setMovingUp(false);
+			hero->setMovingDown(false);
+		}
+		if (mage_skill_cd == 75 || mage_skill_cd == 0) {
+			if (hero->getHP() * 0.1 <= 50)
+				hero->setHP(hero->getHP() - 50);
+			else
+				hero->setHP(int(hero->getHP() * 0.9));
+		}
+		if (mage_skill_cd == -50)
+			mage_skill_cd = 150;
+	}
 
 
 	//// 怪物互動相關
-	//if(stage <= 4)
-	//	heroMonsterInteraction(*hero, *monster, *map);
+	if(stage <= 4)
+		heroMonsterInteraction(*hero, *monster, *map);
 
 	//// 玩家死亡相關
-	//if (hero->getHP() <= 0)
-	//	GotoGameState(GAME_STATE_OVER);
+	if (hero->getHP() <= 0)
+		GotoGameState(GAME_STATE_OVER);
 
 }
 
@@ -415,11 +423,11 @@ void CGameStateRun::OnInit() {
 	monster1.push_back(new Monster(350, 370, 40));
 	monster1.push_back(new Monster(700, 280, 40));
 	monster1.push_back(new Monster(750, 280, 40));
-	//monster1.push_back(new Monster(1000, -20, 40));
-	//monster1.push_back(new Monster(1300, 152, 40));
-	//monster1.push_back(new Monster(1500, 317, 40));
-	//monster1.push_back(new Monster(2000, 420, 40));
-	//monster1.push_back(new Monster(2100, -20, 40));
+	monster1.push_back(new Monster(1000, -20, 40));
+	monster1.push_back(new Monster(1300, 152, 40));
+	monster1.push_back(new Monster(1500, 317, 40));
+	monster1.push_back(new Monster(2000, 420, 40));
+	monster1.push_back(new Monster(2100, -20, 40));
 
 	for (auto monster=monster1.begin();monster<monster1.end();monster++) {
 		vector<int> attackRight = { IDB_MONSTER_ATTACK_RIGHT1,IDB_MONSTER_ATTACK_RIGHT2, IDB_MONSTER_ATTACK_RIGHT3 };
@@ -434,97 +442,97 @@ void CGameStateRun::OnInit() {
 		attackRight, attackLeft,slash,lv_up,255,255,255);
 	}
 
-	//ShowInitProgress(50);
+	ShowInitProgress(50);
 
-	//monster2.push_back(new Monster(500, 570, 70));
-	//monster2.push_back(new Monster(800, 570, 70));
-	//monster2.push_back(new Monster(1000, 570, 70));
-	//monster2.push_back(new Monster(1100, 570, 70));
-	//monster2.push_back(new Monster(1300, 570, 70));
-	//monster2.push_back(new Monster(2000, 570, 70));
-	//monster2.push_back(new Monster(700, 452, 70));
-	//monster2.push_back(new Monster(1600, 378, 70));
-	//monster2.push_back(new Monster(1900, 570-323, 70));
-	//monster2.push_back(new Monster(1700, 570-441, 70));
-	//monster2.push_back(new Monster(1200, 570-560, 70));
-	//monster2.push_back(new Monster(700, 570-513, 70));
-	//monster2.push_back(new Monster(400, 570-390, 70));
-	//monster2.push_back(new Monster(1900, 570-568, 70));
+	monster2.push_back(new Monster(500, 570, 70));
+	monster2.push_back(new Monster(800, 570, 70));
+	monster2.push_back(new Monster(1000, 570, 70));
+	monster2.push_back(new Monster(1100, 570, 70));
+	monster2.push_back(new Monster(1300, 570, 70));
+	monster2.push_back(new Monster(2000, 570, 70));
+	monster2.push_back(new Monster(700, 452, 70));
+	monster2.push_back(new Monster(1600, 378, 70));
+	monster2.push_back(new Monster(1900, 570-323, 70));
+	monster2.push_back(new Monster(1700, 570-441, 70));
+	monster2.push_back(new Monster(1200, 570-560, 70));
+	monster2.push_back(new Monster(700, 570-513, 70));
+	monster2.push_back(new Monster(400, 570-390, 70));
+	monster2.push_back(new Monster(1900, 570-568, 70));
 
-	//for (auto monster = monster2.begin(); monster < monster2.end(); monster++) {
-	//	vector<int> attackRight = { IDB_GUNER_ATTACK_RIGHT1,IDB_GUNER_ATTACK_RIGHT2, IDB_GUNER_ATTACK_RIGHT3 };
-	//	vector<int> attackLeft = { IDB_GUNER_ATTACK_LEFT1,IDB_GUNER_ATTACK_LEFT2, IDB_GUNER_ATTACK_LEFT3 };
-	//	vector<int> goRight;
-	//	vector<int> goLeft;
-	//	vector<int> slash;
-	//	(*monster)->addBitmap(
-	//		IDB_GUNER_STAND_RIGHT, IDB_GUNER_STAND_LEFT,
-	//		0, 0, 0, 0,
-	//		goRight, goLeft,
-	//		attackRight, attackLeft, slash, lv_up,255,255,255);
-	//}
+	for (auto monster = monster2.begin(); monster < monster2.end(); monster++) {
+		vector<int> attackRight = { IDB_GUNER_ATTACK_RIGHT1,IDB_GUNER_ATTACK_RIGHT2, IDB_GUNER_ATTACK_RIGHT3 };
+		vector<int> attackLeft = { IDB_GUNER_ATTACK_LEFT1,IDB_GUNER_ATTACK_LEFT2, IDB_GUNER_ATTACK_LEFT3 };
+		vector<int> goRight;
+		vector<int> goLeft;
+		vector<int> slash;
+		(*monster)->addBitmap(
+			IDB_GUNER_STAND_RIGHT, IDB_GUNER_STAND_LEFT,
+			0, 0, 0, 0,
+			goRight, goLeft,
+			attackRight, attackLeft, slash, lv_up,255,255,255);
+	}
 
-	//ShowInitProgress(66);
-	//
-	//monster3.push_back(new Monster(812,  570-202, 100));
-	//monster3.push_back(new Monster(500,  570-330, 100));
-	//monster3.push_back(new Monster(732,  570-488, 100));
-	//monster3.push_back(new Monster(1164, 570-606, 100));
-	//monster3.push_back(new Monster(1492, 570-441, 100));
-	//monster3.push_back(new Monster(2100, 570-320, 100));
-	//monster3.push_back(new Monster(1724, 570-320, 100));
-	//monster3.push_back(new Monster(1420, 570-194, 100));
-	//monster3.push_back(new Monster(1124, 570-124, 100));
-	//monster3.push_back(new Monster(716,	 570 ,    100));
-	//monster3.push_back(new Monster(1636, 570 ,    100));
-	//monster3.push_back(new Monster(2172, 570 ,    100));
+	ShowInitProgress(66);
+	
+	monster3.push_back(new Monster(812,  570-202, 100));
+	monster3.push_back(new Monster(500,  570-330, 100));
+	monster3.push_back(new Monster(732,  570-488, 100));
+	monster3.push_back(new Monster(1164, 570-606, 100));
+	monster3.push_back(new Monster(1492, 570-441, 100));
+	monster3.push_back(new Monster(2100, 570-320, 100));
+	monster3.push_back(new Monster(1724, 570-320, 100));
+	monster3.push_back(new Monster(1420, 570-194, 100));
+	monster3.push_back(new Monster(1124, 570-124, 100));
+	monster3.push_back(new Monster(716,	 570 ,    100));
+	monster3.push_back(new Monster(1636, 570 ,    100));
+	monster3.push_back(new Monster(2172, 570 ,    100));
 
-	//for (auto monster = monster3.begin(); monster < monster3.end(); monster++) {
-	//	vector<int> attackRight = { IDB_MAGE_ATTACK_RIGHT1, IDB_MAGE_ATTACK_RIGHT2, IDB_MAGE_ATTACK_RIGHT3,
-	//								IDB_MAGE_ATTACK_RIGHT4, IDB_MAGE_ATTACK_RIGHT5, IDB_MAGE_ATTACK_RIGHT6,
-	//								IDB_MAGE_ATTACK_RIGHT7, IDB_MAGE_ATTACK_RIGHT8};
-	//	vector<int> attackLeft = {  IDB_MAGE_ATTACK_LEFT1, IDB_MAGE_ATTACK_LEFT2, IDB_MAGE_ATTACK_LEFT3,
-	//								IDB_MAGE_ATTACK_LEFT4, IDB_MAGE_ATTACK_LEFT5, IDB_MAGE_ATTACK_LEFT6,
-	//								IDB_MAGE_ATTACK_LEFT7, IDB_MAGE_ATTACK_LEFT8 };
-	//	vector<int> goRight;
-	//	vector<int> goLeft;
-	//	vector<int> slash;
-	//	(*monster)->addBitmap(
-	//		IDB_MAGE_STAND_RIGHT, IDB_MAGE_STAND_LEFT,
-	//		0, 0, 0, 0,
-	//		goRight, goLeft,
-	//		attackRight, attackLeft, slash, lv_up, 0,0,0);
-	//}
+	for (auto monster = monster3.begin(); monster < monster3.end(); monster++) {
+		vector<int> attackRight = { IDB_MAGE_ATTACK_RIGHT1, IDB_MAGE_ATTACK_RIGHT2, IDB_MAGE_ATTACK_RIGHT3,
+									IDB_MAGE_ATTACK_RIGHT4, IDB_MAGE_ATTACK_RIGHT5, IDB_MAGE_ATTACK_RIGHT6,
+									IDB_MAGE_ATTACK_RIGHT7, IDB_MAGE_ATTACK_RIGHT8};
+		vector<int> attackLeft = {  IDB_MAGE_ATTACK_LEFT1, IDB_MAGE_ATTACK_LEFT2, IDB_MAGE_ATTACK_LEFT3,
+									IDB_MAGE_ATTACK_LEFT4, IDB_MAGE_ATTACK_LEFT5, IDB_MAGE_ATTACK_LEFT6,
+									IDB_MAGE_ATTACK_LEFT7, IDB_MAGE_ATTACK_LEFT8 };
+		vector<int> goRight;
+		vector<int> goLeft;
+		vector<int> slash;
+		(*monster)->addBitmap(
+			IDB_MAGE_STAND_RIGHT, IDB_MAGE_STAND_LEFT,
+			0, 0, 0, 0,
+			goRight, goLeft,
+			attackRight, attackLeft, slash, lv_up, 0,0,0);
+	}
 
-	//monster4.push_back(new Monster(812, 570 - 202, 100));
-	//monster4.push_back(new Monster(500, 570 - 330, 100));
-	//monster4.push_back(new Monster(732, 570 - 488, 100));
-	//monster4.push_back(new Monster(1164, 570 - 606, 100));
-	//monster4.push_back(new Monster(1492, 570 - 441, 100));
-	//monster4.push_back(new Monster(2100, 570 - 320, 100));
-	//monster4.push_back(new Monster(1724, 570 - 320, 100));
-	//monster4.push_back(new Monster(1420, 570 - 194, 100));
-	//monster4.push_back(new Monster(1124, 570 - 124, 100));
-	//monster4.push_back(new Monster(716, 570, 100));
-	//monster4.push_back(new Monster(1636, 570, 100));
-	//monster4.push_back(new Monster(2172, 570, 100));
+	monster4.push_back(new Monster(812, 570 - 202, 100));
+	monster4.push_back(new Monster(500, 570 - 330, 100));
+	monster4.push_back(new Monster(732, 570 - 488, 100));
+	monster4.push_back(new Monster(1164, 570 - 606, 100));
+	monster4.push_back(new Monster(1492, 570 - 441, 100));
+	monster4.push_back(new Monster(2100, 570 - 320, 100));
+	monster4.push_back(new Monster(1724, 570 - 320, 100));
+	monster4.push_back(new Monster(1420, 570 - 194, 100));
+	monster4.push_back(new Monster(1124, 570 - 124, 100));
+	monster4.push_back(new Monster(716, 570, 100));
+	monster4.push_back(new Monster(1636, 570, 100));
+	monster4.push_back(new Monster(2172, 570, 100));
 
-	//for (auto monster = monster4.begin(); monster < monster4.end(); monster++) {
-	//	vector<int> attackRight = { IDB_MAGE_ATTACK_RIGHT1, IDB_MAGE_ATTACK_RIGHT2, IDB_MAGE_ATTACK_RIGHT3,
-	//								IDB_MAGE_ATTACK_RIGHT4, IDB_MAGE_ATTACK_RIGHT5, IDB_MAGE_ATTACK_RIGHT6,
-	//								IDB_MAGE_ATTACK_RIGHT7, IDB_MAGE_ATTACK_RIGHT8 };
-	//	vector<int> attackLeft = { IDB_MAGE_ATTACK_LEFT1, IDB_MAGE_ATTACK_LEFT2, IDB_MAGE_ATTACK_LEFT3,
-	//								IDB_MAGE_ATTACK_LEFT4, IDB_MAGE_ATTACK_LEFT5, IDB_MAGE_ATTACK_LEFT6,
-	//								IDB_MAGE_ATTACK_LEFT7, IDB_MAGE_ATTACK_LEFT8 };
-	//	vector<int> goRight;
-	//	vector<int> goLeft;
-	//	vector<int> slash;
-	//	(*monster)->addBitmap(
-	//		IDB_MAGE_STAND_RIGHT, IDB_MAGE_STAND_LEFT,
-	//		0, 0, 0, 0,
-	//		goRight, goLeft,
-	//		attackRight, attackLeft, slash, lv_up, 0, 0, 0);
-	//}
+	for (auto monster = monster4.begin(); monster < monster4.end(); monster++) {
+		vector<int> attackRight = { IDB_MAGE_ATTACK_RIGHT1, IDB_MAGE_ATTACK_RIGHT2, IDB_MAGE_ATTACK_RIGHT3,
+									IDB_MAGE_ATTACK_RIGHT4, IDB_MAGE_ATTACK_RIGHT5, IDB_MAGE_ATTACK_RIGHT6,
+									IDB_MAGE_ATTACK_RIGHT7, IDB_MAGE_ATTACK_RIGHT8 };
+		vector<int> attackLeft = { IDB_MAGE_ATTACK_LEFT1, IDB_MAGE_ATTACK_LEFT2, IDB_MAGE_ATTACK_LEFT3,
+									IDB_MAGE_ATTACK_LEFT4, IDB_MAGE_ATTACK_LEFT5, IDB_MAGE_ATTACK_LEFT6,
+									IDB_MAGE_ATTACK_LEFT7, IDB_MAGE_ATTACK_LEFT8 };
+		vector<int> goRight;
+		vector<int> goLeft;
+		vector<int> slash;
+		(*monster)->addBitmap(
+			IDB_MAGE_STAND_RIGHT, IDB_MAGE_STAND_LEFT,
+			0, 0, 0, 0,
+			goRight, goLeft,
+			attackRight, attackLeft, slash, lv_up, 0, 0, 0);
+	}
 
 	ShowInitProgress(90);
 
@@ -533,18 +541,18 @@ void CGameStateRun::OnInit() {
 	int portal_bitmaps[] = { IDB_PORTAL_BLUE1,IDB_PORTAL_BLUE2 };
 	int portal_boss_bitmaps[] = { IDB_PORTAL_PURPLE1,IDB_PORTAL_PURPLE2 };
 
-	//maps.push_back(Map1());
-	//maps.push_back(Map2());
-	//maps.push_back(Map3());
-	//maps.push_back(Map4());
-	//maps.push_back(Map5());
-	//for (size_t i = 0; i < maps.size() ; i++) {
-	//	maps[i].LoadBitmap();
-	//	if (i < maps.size() - 1)
-	//		maps[i].getPortal()->addBitMaps(portal_bitmaps, 2);
-	//	if(i == maps.size() - 1)
-	//		maps[i].getPortal()->addBitMaps(portal_boss_bitmaps, 2);
-	//}
+	maps.push_back(Map1());
+	maps.push_back(Map2());
+	maps.push_back(Map3());
+	maps.push_back(Map4());
+	maps.push_back(Map5());
+	for (size_t i = 0; i < maps.size() ; i++) {
+		maps[i].LoadBitmap();
+		if (i < maps.size() - 1)
+			maps[i].getPortal()->addBitMaps(portal_bitmaps, 2);
+		if(i == maps.size() - 1)
+			maps[i].getPortal()->addBitMaps(portal_boss_bitmaps, 2);
+	}
 
 	int slash_cd_bitmaps[] = {
 		IDB_SLASH_CD_1,IDB_SLASH_CD_2,IDB_SLASH_CD_3,
@@ -567,97 +575,97 @@ void CGameStateRun::OnInit() {
 
 void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
-	//const char KEY_LEFT  = 0x25; // keyboard左箭頭
-	//const char KEY_UP    = 0x26; // keyboard上箭頭
-	//const char KEY_RIGHT = 0x27; // keyboard右箭頭
-	//const char KEY_DOWN  = 0x28; // keyboard下箭頭
-	//const char KEY_Z = 0x5A; // keyboard Z
-	//const char KEY_Y = 0x59; // keyboard Y
-	//const char KEY_X = 0x58; // keyboard X
-	//const char KEY_C = 0x43; // keyboard C
-	//const char KEY_T = 0x54; // keyboard T
-	//const char KEY_O = 0x4F; // keyboard O
-	//Position hero_pos(hero, *map);
+	const char KEY_LEFT  = 0x25; // keyboard左箭頭
+	const char KEY_UP    = 0x26; // keyboard上箭頭
+	const char KEY_RIGHT = 0x27; // keyboard右箭頭
+	const char KEY_DOWN  = 0x28; // keyboard下箭頭
+	const char KEY_Z = 0x5A; // keyboard Z
+	const char KEY_Y = 0x59; // keyboard Y
+	const char KEY_X = 0x58; // keyboard X
+	const char KEY_C = 0x43; // keyboard C
+	const char KEY_T = 0x54; // keyboard T
+	const char KEY_O = 0x4F; // keyboard O
+	Position hero_pos(hero, *map);
 
-	//if (nChar == KEY_Z) {
-	//	hero->setAttacking(true);
-	//	CAudio::Instance()->Play(SFX_ATTACK, true);
-	//}
+	if (nChar == KEY_Z) {
+		hero->setAttacking(true);
+		CAudio::Instance()->Play(SFX_ATTACK, true);
+	}
 
-	//if (nChar == KEY_X) {
-	//	if (slash_cd == 300) {
-	//		hero->setSlashing(true);
-	//		CAudio::Instance()->Play(SFX_SLASH, false);
-	//		slash_cd--;
-	//	}
-	//}
+	if (nChar == KEY_X) {
+		if (slash_cd == 300) {
+			hero->setSlashing(true);
+			CAudio::Instance()->Play(SFX_SLASH, false);
+			slash_cd--;
+		}
+	}
 
-	//if (nChar == KEY_C) {
-	//	if (heal_cd == 600) {
-	//		hero->setHP(hero->getMaxHP());
-	//		CAudio::Instance()->Play(SFX_HEAL, false);
-	//		heal_cd--;
-	//	}
-	//}
-	//if (nChar == KEY_Y) {		//monster all dead
-	//for (auto i = monster->begin(); i < monster->end(); i++)
-	//	(*i)->setDead(1);
-	//}
+	if (nChar == KEY_C) {
+		if (heal_cd == 600) {
+			hero->setHP(hero->getMaxHP());
+			CAudio::Instance()->Play(SFX_HEAL, false);
+			heal_cd--;
+		}
+	}
+	if (nChar == KEY_Y) {		//monster all dead
+	for (auto i = monster->begin(); i < monster->end(); i++)
+		(*i)->setDead(1);
+	}
 
-	//if (nChar == KEY_T) 
-	//	stage++;		 //作弊過關用
+	if (nChar == KEY_T) 
+		stage++;		 //作弊過關用
 
-	//if (nChar == KEY_O)
-	//	GotoGameState(GAME_STATE_OVER);		 //作弊死亡用
+	if (nChar == KEY_O)
+		GotoGameState(GAME_STATE_OVER);		 //作弊死亡用
 
-	//if (nChar == KEY_LEFT) {
-	//	hero->setMovingLeft(true);
-	//	hero->setFacing(2);
-	//}
-	//
-	//if (nChar == KEY_RIGHT) {
-	//	hero->setMovingRight(true);
-	//	hero->setFacing(1);
-	//}
+	if (nChar == KEY_LEFT) {
+		hero->setMovingLeft(true);
+		hero->setFacing(2);
+	}
+	
+	if (nChar == KEY_RIGHT) {
+		hero->setMovingRight(true);
+		hero->setFacing(1);
+	}
 
-	//if (nChar == KEY_UP) {
-	//	if (monster_num(*monster) == 0 && ON_PORTAL) {
-	//		stage++;
-	//		return;
-	//	}
-	//	if (hero->ifMovingUp() == false)
-	//		CAudio::Instance()->Play(SFX_JUMP, false);
-	//	hero->setMovingUp(true);
-	//}
-	//if (nChar == KEY_DOWN) {
-	//	hero->setMovingDown(true);
-	//}
+	if (nChar == KEY_UP) {
+		if (monster_num(*monster) == 0 && ON_PORTAL) {
+			stage++;
+			return;
+		}
+		if (hero->ifMovingUp() == false)
+			CAudio::Instance()->Play(SFX_JUMP, false);
+		hero->setMovingUp(true);
+	}
+	if (nChar == KEY_DOWN) {
+		hero->setMovingDown(true);
+	}
 }
 
 void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
-	//const char KEY_LEFT  = 0x25;	// keyboard左箭頭
-	//const char KEY_UP    = 0x26;	// keyboard上箭頭
-	//const char KEY_RIGHT = 0x27;	// keyboard右箭頭
-	//const char KEY_DOWN  = 0x28;	// keyboard下箭頭
-	//const char KEY_Z = 0x5A;		// keyboard Z
+	const char KEY_LEFT  = 0x25;	// keyboard左箭頭
+	const char KEY_UP    = 0x26;	// keyboard上箭頭
+	const char KEY_RIGHT = 0x27;	// keyboard右箭頭
+	const char KEY_DOWN  = 0x28;	// keyboard下箭頭
+	const char KEY_Z = 0x5A;		// keyboard Z
 
-	//if (nChar == KEY_Z) {
-	//	hero->setAttacking(false);
-	//	CAudio::Instance()->Stop(SFX_ATTACK);
-	//}
-	//if (nChar == KEY_LEFT) {
-	//	hero->setMovingLeft(false);
-	//	map->setMovingRight(false);
-	//}
-	//if (nChar == KEY_RIGHT) {
-	//	hero->setMovingRight(false);
-	//	map->setMovingLeft(false);
-	//}
-	//if (nChar == KEY_UP)
-	//	hero->setMovingUp(false);
-	//if (nChar == KEY_DOWN)
-	//	hero->setMovingDown(false);
+	if (nChar == KEY_Z) {
+		hero->setAttacking(false);
+		CAudio::Instance()->Stop(SFX_ATTACK);
+	}
+	if (nChar == KEY_LEFT) {
+		hero->setMovingLeft(false);
+		map->setMovingRight(false);
+	}
+	if (nChar == KEY_RIGHT) {
+		hero->setMovingRight(false);
+		map->setMovingLeft(false);
+	}
+	if (nChar == KEY_UP)
+		hero->setMovingUp(false);
+	if (nChar == KEY_DOWN)
+		hero->setMovingDown(false);
 }
 
 /*
@@ -687,23 +695,23 @@ void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)
 
 void CGameStateRun::OnShow()
 {
-	//checkStage();
-	//map->OnShow();			// 貼上背景圖
-	//if (stage <= 4) {
-	//	if (monster_num(*monster) == 0)
-	//		map->portalOnShow();
-	//	for (auto m = monster->begin(); m < monster->end(); m++)
-	//		(*m)->OnShow();
-	//}
-	//hero->OnShow();			// 貼上人物
+	checkStage();
+	map->OnShow();			// 貼上背景圖
+	if (stage <= 4) {
+		if (monster_num(*monster) == 0)
+			map->portalOnShow();
+		for (auto m = monster->begin(); m < monster->end(); m++)
+			(*m)->OnShow();
+	}
+	hero->OnShow();			// 貼上人物
 
-	//int slash_part = slash_cd / (300 / 8);
-	//slashCD[slash_part].SetTopLeft(15, 125);
-	//slashCD[slash_part].ShowBitmap();
+	int slash_part = slash_cd / (300 / 8);
+	slashCD[slash_part].SetTopLeft(15, 125);
+	slashCD[slash_part].ShowBitmap();
 
-	//int heal_part = heal_cd / (600 / 8);
-	//healCD[heal_part].SetTopLeft(60, 125);
-	//healCD[heal_part].ShowBitmap();
+	int heal_part = heal_cd / (600 / 8);
+	healCD[heal_part].SetTopLeft(60, 125);
+	healCD[heal_part].ShowBitmap();
 }
 inline int CGameStateRun::monster_num(vector<Character*>monsters) {
 	int n = 0;
@@ -714,141 +722,141 @@ inline int CGameStateRun::monster_num(vector<Character*>monsters) {
 }
 
 
-//void CGameStateRun :: heroMonsterInteraction(Character&hero, vector<Character*> & monsters, Map &map) {
-//
-//	for (auto monster = monsters.begin(); monster < monsters.end(); monster++) {
-//		if ((*monster)->ifDead())
-//			continue;
-//
-//		Position monster_pos(*monster, map);
-//		(*monster)->OnMove();
-//
-//		// 人物移動相關
-//		if (hero.getX() <= 100 && hero.ifMovingLeft()) {
-//			if (hero_pos.getX() <= 110)
-//				(*monster)->setMovingLeft(false);
-//			else
-//				(*monster)->setMovingLeft(true);
-//		}
-//		else {
-//			(*monster)->setMovingLeft(false);
-//		}
-//		if (hero.getX() >= 1164 && hero.ifMovingRight()) {
-//			if (hero_pos.getX() >= 2200)
-//				(*monster)->setMovingRight(false);
-//			else
-//				(*monster)->setMovingRight(true);
-//		}
-//		else {
-//			(*monster)->setMovingRight(false);
-//		}
-//
-//		// 怪物移動相關
-//		if (monster_pos.getX() - hero_pos.getX() >= (*monster)->getAttackRange() && monster_pos.getX() - hero_pos.getX() <= 500) {
-//			(*monster)->set_Monster_Go_Left(true);
-//			(*monster)->set_Monster_Go_Right(false);
-//		}
-//		else if (hero_pos.getX() - monster_pos.getX() >= (*monster)->getAttackRange() && hero_pos.getX() - monster_pos.getX() <= 500) {
-//			(*monster)->set_Monster_Go_Right(true);
-//			(*monster)->set_Monster_Go_Left(false);
-//		}
-//		else {
-//			(*monster)->set_Monster_Go_Right(false);
-//			(*monster)->set_Monster_Go_Left(false);
-//		}
-//
-//		(*monster)->setFloor(570);
-//		for (int j = 0; j < 8; j++)
-//			if (ON_PLATFORM_MONSTER)
-//				(*monster)->setFloor(570 - map.getFloorY(j));
-//
-//		// 攻擊互動相關
-//		if ((*monster)->getSkillRange()!=0 && MONSTER_HIT_CHARACTER((*monster)->getSkillRange()) && HEIGHT_CHECK && mage_skill_cd==150){
-//			mage_skill_cd--;
-//		}
-//		if ((*monster)->getSkillRange() >= 0) { //測試
-//			if (MONSTER_HIT_CHARACTER((*monster)->getAttackRange())) {
-//				if (HIT_CHECK_CHARACTER && HEIGHT_CHECK) {
-//					(*monster)->setAttacking(true);
-//					if (stage == 2)
-//						CAudio::Instance()->Play(SFX_GUN, false);
-//					if (stage != 3) {
-//						hero.setHP(hero.getHP() - (*monster)->getAttack());
-//						CAudio::Instance()->Play(SFX_HERO_HIT, false);
-//						if (monster_pos.getX() >= hero_pos.getX())
-//							hero.setHitLeft();
-//						else if (monster_pos.getX() < hero_pos.getX())
-//							hero.setHitRight();
-//					}
-//				}
-//				if (hero.getHP() <= 0)
-//					return;
-//			}
-//		}
-//		if (CHARACTER_HIT_MONSTER){
-//			if (HIT_CHECK_MONSTER && HEIGHT_CHECK) {
-//				(*monster)->setHP((*monster)->getHP() - hero.getAttack());
-//				CAudio::Instance()->Play(SFX_MONSTER_HIT, false);
-//				if (hero.getFacing() == 2)
-//					(*monster)->setHitLeft();
-//				else if (hero.getFacing() == 1)
-//					(*monster)->setHitRight();
-//			}
-//		}
-//		if (CHARACTER_SLASH_MONSTER) {
-//			if (HIT_CHECK_MONSTER && SLASH_HEIGHT_CHECK) {
-//				(*monster)->setHP((*monster)->getHP() - hero.getAttack() * 2);
-//				CAudio::Instance()->Play(SFX_MONSTER_HIT, false);
-//				if (monster_pos.getX() >= hero_pos.getX())
-//					(*monster)->setHitRight();
-//				else
-//					(*monster)->setHitLeft();
-//			}
-//		}
-//
-//		// 怪物死亡相關
-//		if ((*monster)->getHP() <= 0) {
-//			hero.setXP(hero.getXP() + (*monster)->getXP());
-//			(*monster)->setDead(true);
-//			(*monster)->setXY(-1, -1);
-//		}
-//	}
-//}
+void CGameStateRun :: heroMonsterInteraction(Character&hero, vector<Character*> & monsters, Map &map) {
+
+	for (auto monster = monsters.begin(); monster < monsters.end(); monster++) {
+		if ((*monster)->ifDead())
+			continue;
+
+		Position monster_pos(*monster, map);
+		(*monster)->OnMove();
+
+		// 人物移動相關
+		if (hero.getX() <= 100 && hero.ifMovingLeft()) {
+			if (hero_pos.getX() <= 110)
+				(*monster)->setMovingLeft(false);
+			else
+				(*monster)->setMovingLeft(true);
+		}
+		else {
+			(*monster)->setMovingLeft(false);
+		}
+		if (hero.getX() >= 1164 && hero.ifMovingRight()) {
+			if (hero_pos.getX() >= 2200)
+				(*monster)->setMovingRight(false);
+			else
+				(*monster)->setMovingRight(true);
+		}
+		else {
+			(*monster)->setMovingRight(false);
+		}
+
+		// 怪物移動相關
+		if (monster_pos.getX() - hero_pos.getX() >= (*monster)->getAttackRange() && monster_pos.getX() - hero_pos.getX() <= 500) {
+			(*monster)->set_Monster_Go_Left(true);
+			(*monster)->set_Monster_Go_Right(false);
+		}
+		else if (hero_pos.getX() - monster_pos.getX() >= (*monster)->getAttackRange() && hero_pos.getX() - monster_pos.getX() <= 500) {
+			(*monster)->set_Monster_Go_Right(true);
+			(*monster)->set_Monster_Go_Left(false);
+		}
+		else {
+			(*monster)->set_Monster_Go_Right(false);
+			(*monster)->set_Monster_Go_Left(false);
+		}
+
+		(*monster)->setFloor(570);
+		for (int j = 0; j < 8; j++)
+			if (ON_PLATFORM_MONSTER)
+				(*monster)->setFloor(570 - map.getFloorY(j));
+
+		// 攻擊互動相關
+		if ((*monster)->getSkillRange()!=0 && MONSTER_HIT_CHARACTER((*monster)->getSkillRange()) && HEIGHT_CHECK && mage_skill_cd==150){
+			mage_skill_cd--;
+		}
+		if ((*monster)->getSkillRange() >= 0) { //測試
+			if (MONSTER_HIT_CHARACTER((*monster)->getAttackRange())) {
+				if (HIT_CHECK_CHARACTER && HEIGHT_CHECK) {
+					(*monster)->setAttacking(true);
+					if (stage == 2)
+						CAudio::Instance()->Play(SFX_GUN, false);
+					if (stage != 3) {
+						hero.setHP(hero.getHP() - (*monster)->getAttack());
+						CAudio::Instance()->Play(SFX_HERO_HIT, false);
+						if (monster_pos.getX() >= hero_pos.getX())
+							hero.setHitLeft();
+						else if (monster_pos.getX() < hero_pos.getX())
+							hero.setHitRight();
+					}
+				}
+				if (hero.getHP() <= 0)
+					return;
+			}
+		}
+		if (CHARACTER_HIT_MONSTER){
+			if (HIT_CHECK_MONSTER && HEIGHT_CHECK) {
+				(*monster)->setHP((*monster)->getHP() - hero.getAttack());
+				CAudio::Instance()->Play(SFX_MONSTER_HIT, false);
+				if (hero.getFacing() == 2)
+					(*monster)->setHitLeft();
+				else if (hero.getFacing() == 1)
+					(*monster)->setHitRight();
+			}
+		}
+		if (CHARACTER_SLASH_MONSTER) {
+			if (HIT_CHECK_MONSTER && SLASH_HEIGHT_CHECK) {
+				(*monster)->setHP((*monster)->getHP() - hero.getAttack() * 2);
+				CAudio::Instance()->Play(SFX_MONSTER_HIT, false);
+				if (monster_pos.getX() >= hero_pos.getX())
+					(*monster)->setHitRight();
+				else
+					(*monster)->setHitLeft();
+			}
+		}
+
+		// 怪物死亡相關
+		if ((*monster)->getHP() <= 0) {
+			hero.setXP(hero.getXP() + (*monster)->getXP());
+			(*monster)->setDead(true);
+			(*monster)->setXY(-1, -1);
+		}
+	}
+}
 void CGameStateRun::checkStage() {
-	//if (stage == stage_count) {
-	//	hero->setXY(100, 570);
-	//	stage_count++;
-	//	if (stage == 1) {
-	//		monster = &monster1;
-	//		map = &maps[0];
-	//	}
-	//	if (stage == 2) {
-	//		CAudio::Instance()->Stop(BGM_STAGE1);
-	//		CAudio::Instance()->Play(BGM_STAGE2, true);
-	//		monster = &monster2;
-	//		map = &maps[1];
-	//	}
-	//	if (stage == 3) {
-	//		CAudio::Instance()->Stop(BGM_STAGE2);
-	//		CAudio::Instance()->Play(BGM_STAGE3, true);
-	//		monster = &monster3;
-	//		map = &maps[2];
-	//	}
-	//	if (stage == 4) {
-	//		CAudio::Instance()->Stop(BGM_STAGE3);
-	//		CAudio::Instance()->Play(BGM_STAGE4, true);
-	//		monster = &monster4;
-	//		map = &maps[3];
-	//	}
-	//	if (stage == 5) {
-	//		CAudio::Instance()->Stop(BGM_STAGE4);
-	//		CAudio::Instance()->Play(BGM_BOSS, true);
-	//		monster = nullptr;
-	//		map = &maps[4];
-	//	}
-	//	if (stage == 6) {
-	//		GotoGameState(GAME_STATE_INIT);
-	//	}
-	//}
+	if (stage == stage_count) {
+		hero->setXY(100, 570);
+		stage_count++;
+		if (stage == 1) {
+			monster = &monster1;
+			map = &maps[0];
+		}
+		if (stage == 2) {
+			CAudio::Instance()->Stop(BGM_STAGE1);
+			CAudio::Instance()->Play(BGM_STAGE2, true);
+			monster = &monster2;
+			map = &maps[1];
+		}
+		if (stage == 3) {
+			CAudio::Instance()->Stop(BGM_STAGE2);
+			CAudio::Instance()->Play(BGM_STAGE3, true);
+			monster = &monster3;
+			map = &maps[2];
+		}
+		if (stage == 4) {
+			CAudio::Instance()->Stop(BGM_STAGE3);
+			CAudio::Instance()->Play(BGM_STAGE4, true);
+			monster = &monster4;
+			map = &maps[3];
+		}
+		if (stage == 5) {
+			CAudio::Instance()->Stop(BGM_STAGE4);
+			CAudio::Instance()->Play(BGM_BOSS, true);
+			monster = nullptr;
+			map = &maps[4];
+		}
+		if (stage == 6) {
+			GotoGameState(GAME_STATE_INIT);
+		}
+	}
 }
 }
