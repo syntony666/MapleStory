@@ -17,8 +17,7 @@ namespace game_framework {
 	void Boss::Initialize()
 	{
 		bossStand.LoadBitmap(IDB_BOSS_STAND, RGB(50, 100, 100));
-		const int FLOOR = 570;
-		floor = FLOOR;
+		isMovingRight = isMovingLeft = false;
 		pos_x = 1700;
 		pos_y = -30;
 	}
@@ -27,6 +26,8 @@ namespace game_framework {
 	{
 		if (isDead)
 			return;
+
+		//bossStand.OnMove();
 
 		if (isMovingRight) {
 			pos_x -= HERO_STEP;
@@ -42,5 +43,17 @@ namespace game_framework {
 			bossStand.SetTopLeft(pos_x, pos_y);
 			bossStand.ShowBitmap();
 		}
+	}
+
+	void Boss::setMovingLeft(bool flag) {
+		isMovingLeft = flag;
+	}
+	void Boss::setMovingRight(bool flag) {
+		isMovingRight = flag;
+	}
+
+	void Boss::setXY(int nx, int ny)
+	{
+		pos_x = nx; pos_y = ny;
 	}
 }

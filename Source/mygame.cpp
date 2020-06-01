@@ -280,7 +280,6 @@ CGameStateRun::CGameStateRun(CGame *g)
 CGameStateRun::~CGameStateRun()
 {
 	delete hero;
-	delete boss;
 	for (auto i = monster1.begin(); i < monster1.end(); i++)
 		delete *i;
 	for (auto i = monster2.begin(); i < monster2.end(); i++)
@@ -308,7 +307,7 @@ void CGameStateRun::OnBeginState()
 	initMonster3(monster3);
 	initMonster4(monster4);
 	mage_skill_cd = 30 * 5;
-	boss->setXY(1700, -30);
+	boss.setXY(600, -30);
 
 	CAudio::Instance()->Stop(BGM_MENU);
 	CAudio::Instance()->Play(BGM_STAGE1, true);
@@ -331,13 +330,13 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	TRACE("\n\n");
 
 	//// 地圖移動相關
-	if (hero->getX() <= 100 && hero->ifMovingLeft()) {
+	if (hero->getX() <= 300 && hero->ifMovingLeft() || hero->getX() <= 300 && hero->ifHitLeft()) {
 		map->setMovingLeft(true);
 	}
 	else {
 		map->setMovingLeft(false);
 	}
-	if (hero->getX() >= 1164 && hero->ifMovingRight()) {
+	if (hero->getX() >= 964 && hero->ifMovingRight() || hero->getX() >= 964 && hero->ifHitRight()) {
 			map->setMovingRight(true);
 	}
 	else {
@@ -351,15 +350,15 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		if(hero->getX() <= 10)
 			hero->setXY(10, hero->getY());
 	}
-	else if(hero->getX()<=100)
-		hero->setXY(100, hero->getY());
+	else if(hero->getX()<=300)
+		hero->setXY(300, hero->getY());
 
 	if (map->getX() == -1024) {
 		if (hero->getX() >= 1280)
 			hero->setXY(1280, hero->getY());
 	}
-	else if (hero->getX() >= 1180)
-		hero->setXY(1180, hero->getY());
+	else if (hero->getX() >= 980)
+		hero->setXY(980, hero->getY());
 
 	//// 地板判定相關
 	int flag = 0;
@@ -417,7 +416,9 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		heroMonsterInteraction(*hero, *monster, *map);
 
 	// BOSS互動相關
-	heroBossInteraction(*hero, *boss, *map);
+	if (stage == 5)
+		heroBossInteraction(*hero, boss, *map);
+
 	// 玩家死亡相關
 	if (hero->getHP() <= 0)
 		GotoGameState(GAME_STATE_OVER);
@@ -429,7 +430,6 @@ void CGameStateRun::OnInit() {
 	// Load Hero's Bitmap
 
 	hero = new Hero;
-	boss = new Boss;
 	vector<int> hero_goLeft = { IDB_FROG_GO_LEFT1,IDB_FROG_GO_LEFT2, IDB_FROG_STAND_LEFT };
 	vector<int> hero_goRight = { IDB_FROG_GO_RIGHT1,IDB_FROG_GO_RIGHT2, IDB_FROG_STAND_RIGHT };
 	vector<int> hero_attackRight = { IDB_FROG_ATTACK_RIGHT1, IDB_FROG_ATTACK_RIGHT2, IDB_FROG_ATTACK_RIGHT3,
@@ -606,7 +606,7 @@ void CGameStateRun::OnInit() {
 	for (int i = 0; i < 9; i++)
 		healCD[i].LoadBitmap(heal_cd_bitmaps[i]);
 
-	boss->Initialize();
+	boss.Initialize();
 
 	ShowInitProgress(100);
 }
@@ -668,9 +668,11 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	}
 
 	if (nChar == KEY_UP) {
-		if (monster_num(*monster) == 0 && ON_PORTAL) {
-			stage++;
-			return;
+		if (stage <= 4) {
+			if (monster_num(*monster) == 0 && ON_PORTAL) {
+				stage++;
+				return;
+			}
 		}
 		if (hero->ifMovingUp() == false)
 			CAudio::Instance()->Play(SFX_JUMP, false);
@@ -741,8 +743,9 @@ void CGameStateRun::OnShow()
 			map->portalOnShow();
 		for (auto m = monster->begin(); m < monster->end(); m++)
 			(*m)->OnShow();
-	}else if (stage = 5)
-		boss->OnShow();
+	}
+	if (stage == 5)
+		boss.OnShow();
 	hero->OnShow();			// 貼上人物
 
 	int slash_part = slash_cd / (300 / 8);
@@ -772,8 +775,8 @@ void CGameStateRun :: heroMonsterInteraction(Character&hero, vector<Character*> 
 		(*monster)->OnMove();
 
 		// 人物移動相關
-		if (hero.getX() <= 100 && hero.ifMovingLeft()) {
-			if (hero_pos.getX() <= 110)
+		if (hero.getX() <= 300 && hero.ifMovingLeft() || hero.getX() <= 300 && hero.ifHitLeft()) {
+			if (hero_pos.getX() <= 310)
 				(*monster)->setMovingLeft(false);
 			else
 				(*monster)->setMovingLeft(true);
@@ -781,8 +784,8 @@ void CGameStateRun :: heroMonsterInteraction(Character&hero, vector<Character*> 
 		else {
 			(*monster)->setMovingLeft(false);
 		}
-		if (hero.getX() >= 1164 && hero.ifMovingRight()) {
-			if (hero_pos.getX() >= 2200)
+		if (hero.getX() >= 964 && hero.ifMovingRight() || hero.getX() >= 964 && hero.ifHitRight()) {
+			if (hero_pos.getX() >= 2000)
 				(*monster)->setMovingRight(false);
 			else
 				(*monster)->setMovingRight(true);
@@ -862,13 +865,13 @@ void CGameStateRun :: heroMonsterInteraction(Character&hero, vector<Character*> 
 		}
 	}
 }
-void CGameStateRun::heroBossInteraction(Character& hero, Character& mboss, Map &map) {
+void CGameStateRun::heroBossInteraction(Character& hero, Boss mboss, Map &map) {
 
 	mboss.OnMove();
 
 	// 人物移動相關
-	if (hero.getX() <= 100 && hero.ifMovingLeft()) {
-		if (hero_pos.getX() <= 110)
+	if (hero.getX() <= 300 && hero.ifMovingLeft() || hero.getX() <= 300 && hero.ifHitLeft()) {
+		if (hero_pos.getX() <= 310)
 			mboss.setMovingLeft(false);
 		else
 			mboss.setMovingLeft(true);
@@ -876,8 +879,8 @@ void CGameStateRun::heroBossInteraction(Character& hero, Character& mboss, Map &
 	else {
 		mboss.setMovingLeft(false);
 	}
-	if (hero.getX() >= 1164 && hero.ifMovingRight()) {
-		if (hero_pos.getX() >= 2200) {
+	if (hero.getX() >= 964 && hero.ifMovingRight() || hero.getX() >= 964 && hero.ifHitRight()) {
+		if (hero_pos.getX() >= 2000) {
 			mboss.setMovingRight(false);
 		}
 		else {
