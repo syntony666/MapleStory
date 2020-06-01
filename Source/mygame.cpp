@@ -307,7 +307,7 @@ void CGameStateRun::OnBeginState()
 	initMonster3(monster3);
 	initMonster4(monster4);
 	mage_skill_cd = 30 * 5;
-	boss.setXY(600, -30);
+	boss.setXY(1550, 220);
 
 	CAudio::Instance()->Stop(BGM_MENU);
 	CAudio::Instance()->Play(BGM_STAGE1, true);

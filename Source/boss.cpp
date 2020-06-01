@@ -19,10 +19,10 @@ namespace game_framework {
 		int boss_stand_bitmaps[] = { IDB_BOSS_STAND1, IDB_BOSS_STAND2, IDB_BOSS_STAND3, IDB_BOSS_STAND4, IDB_BOSS_STAND5, IDB_BOSS_STAND6, IDB_BOSS_STAND7, IDB_BOSS_STAND8 };
 		for (int i = 0; i < 8; i++)
 			bossStand.AddBitmap(boss_stand_bitmaps[i], RGB(255, 255, 255));
-		bossStand = CAnimation(2);
+		bossStand.SetDelayCount(2);
 		isMovingRight = isMovingLeft = false;
-		pos_x = 1700;
-		pos_y = -30;
+		pos_x = 1550;
+		pos_y = 220;
 	}
 
 	void Boss::OnMove()
