@@ -400,6 +400,9 @@
     <Image Include="RES\Icon\Slash_CD_6.bmp" />
     <Image Include="RES\Icon\Slash_CD_7.bmp" />
     <Image Include="RES\Icon\Slash_CD_8.bmp" />
+    <Image Include="RES\info.bmp" />
+    <Image Include="RES\info1.bmp" />
+    <Image Include="RES\info2.bmp" />
     <Image Include="RES\Levelup\lv_up_01.bmp" />
     <Image Include="RES\Levelup\lv_up_02.bmp" />
     <Image Include="RES\Levelup\lv_up_03.bmp" />

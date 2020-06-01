@@ -362,7 +362,7 @@ IDB_MAGE_ATTACK_LEFT2   BITMAP                  "..\\res\\Mage\\Mage_Left_Attack
 
 IDB_MAGE_ATTACK_LEFT3   BITMAP                  "..\\res\\Mage\\Mage_Left_Attack03.bmp"
 
-IDB_MAGE_ATTACK_LEFT4   BITMAP                  "..\\res\Mage\\\Mage_Left_Attack04.bmp"
+IDB_MAGE_ATTACK_LEFT4   BITMAP                  "..\\res\\Mage\\\\Mage_Left_Attack04.bmp"
 
 IDB_MAGE_ATTACK_LEFT5   BITMAP                  "..\\res\\Mage\\Mage_Left_Attack05.bmp"
 
@@ -429,6 +429,12 @@ IDB_BITMAP66            BITMAP                  "..\\res\\Mage\\Poison_18.bmp"
 IDB_BITMAP67            BITMAP                  "..\\res\\Mage\\Poison_19.bmp"
 
 IDB_BITMAP68            BITMAP                  "..\\res\\Mage\\Poison_20.bmp"
+
+IDB_INFO                BITMAP                  "..\\res\\info.bmp"
+
+IDB_INFO1               BITMAP                  "..\\res\\info1.bmp"
+
+IDB_INFO2               BITMAP                  "..\\res\\info2.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////

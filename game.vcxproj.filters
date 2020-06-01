@@ -650,6 +650,15 @@
     <Image Include="RES\Mage\Poison_20.bmp">
       <Filter>Resouces</Filter>
     </Image>
+    <Image Include="RES\info2.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\info.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\info1.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="RES\continue.bmp">
