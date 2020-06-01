@@ -868,7 +868,7 @@ void CGameStateRun :: heroMonsterInteraction(Character&hero, vector<Character*> 
 		}
 	}
 }
-void CGameStateRun::heroBossInteraction(Character& hero, Boss mboss, Map &map) {
+void CGameStateRun::heroBossInteraction(Character& hero, Boss &mboss, Map &map) {
 
 	mboss.OnMove();
 

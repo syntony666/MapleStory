@@ -28,7 +28,6 @@ namespace game_framework {
 			return;
 
 		//bossStand.OnMove();
-
 		if (isMovingRight) {
 			pos_x -= HERO_STEP;
 		}
@@ -50,6 +49,7 @@ namespace game_framework {
 	}
 	void Boss::setMovingRight(bool flag) {
 		isMovingRight = flag;
+		TRACE("--------------------{(%d)}\n", isMovingRight);
 	}
 
 	void Boss::setXY(int nx, int ny)
