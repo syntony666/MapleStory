@@ -20,30 +20,23 @@ namespace game_framework {
 	{
 		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
 		isAttacking = isHitLeft = isHitRight = isDead = false;
-		const int INITIAL_VELOCITY = 14;
-		const int FLOOR = 570;
 		rising = false;
-		floor = FLOOR;
-		initial_velocity = INITIAL_VELOCITY;
+		floor = 570;
+		initial_velocity = 14;
 	}
 
 	void Hero::OnMove()
 	{
+		STEP_SIZE = 8;			//移動速度
 
-		if (isMovingDown  && pos_y >= floor || isAttacking && pos_y >= floor || isSlashing) { //移動速度、趴下靜止
-			STEP_SIZE = 0;
-		}
-		else {
-			STEP_SIZE = 8;
-		}
+		if (isMovingDown  && pos_y >= floor || isAttacking && pos_y >= floor || isSlashing)
+			STEP_SIZE = 0;		//趴下靜止
 
-		if (isMovingLeft && !isHitLeft && !isHitRight) {
+		if (isMovingLeft && !isHitLeft && !isHitRight)
 			pos_x -= STEP_SIZE;
-		}
 
-		if (isMovingRight && !isHitLeft && !isHitRight) {
+		if (isMovingRight && !isHitLeft && !isHitRight)
 			pos_x += STEP_SIZE;
-		}
 
 		if (isMovingUp && pos_y == floor && !isHitLeft && !isHitRight) {
 			rising = true;

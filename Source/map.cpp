@@ -40,7 +40,7 @@ namespace game_framework {
 		_bitmap = bitmap;
 	}
 	void Map::setInitPortal(int x, int y) {
-		_portal =new Portal(*this, x, y);
+		_portal =new Portal(x, y);
 	}
 	void Map::setMovingLeft(bool flag) {	
 		isMovingLeft = flag;

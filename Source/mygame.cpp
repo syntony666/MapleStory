@@ -281,6 +281,15 @@ CGameStateRun::~CGameStateRun()
 {
 	delete hero;
 	delete boss;
+	for (auto i = monster3.begin(); i < monster3.end(); i++)
+		delete *i;
+	for (auto i = monster4.begin(); i < monster4.end(); i++)
+		delete *i;
+	monster1.clear();
+	monster2.clear();
+	monster3.clear();
+	monster4.clear();
+	maps.clear();
 }
 
 void CGameStateRun::OnBeginState()
@@ -317,7 +326,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	TRACE("-----------Stage---------(%d)\n", stage);
 	TRACE("\n\n");
 
-	// 地圖移動相關
+	//// 地圖移動相關
 	if (hero->getX() <= 100 && hero->ifMovingLeft()) {
 		map->setMovingLeft(true);
 	}
@@ -331,7 +340,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 			map->setMovingRight(false);
 	}
 
-	// 人物移動相關
+	//// 人物移動相關
 	TRACE("====================(%d)\n", map->getX());
 	TRACE("====================(%d)\n", hero->getX());
 	if (map->getX()==0) {
@@ -348,7 +357,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	else if (hero->getX() >= 1180)
 		hero->setXY(1180, hero->getY());
 
-	// 地板判定相關
+	//// 地板判定相關
 	int flag = 0;
 	for (int i = 0; i < 8; i++) {
 		if (ON_FLOOR)
@@ -359,7 +368,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	if (flag == 8)
 		hero->setFloor(570);
 
-	// 玩家等級相關
+	//// 玩家等級相關
 	if (hero->getXP() >= hero->getLevel() * 50) {
 		hero->setXP(0);
 		CAudio::Instance()->Play(SFX_LEVEL_UP, false);
@@ -369,7 +378,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		hero->setAttack(hero->getAttack() + hero->getLevel() * 5);
 	}
 
-	// 玩家技能相關
+	//// 玩家技能相關
 	if (slash_cd <= 299) {
 		slash_cd--;
 		if (slash_cd == 0)
@@ -400,11 +409,11 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 
 	// 怪物互動相關
-	heroMonsterInteraction(*hero, *monster, *map);
+	if(stage <= 4)
+		heroMonsterInteraction(*hero, *monster, *map);
 
 	// BOSS互動相關
 	heroBossInteraction(*hero, *boss, *map);
-
 	// 玩家死亡相關
 	if (hero->getHP() <= 0)
 		GotoGameState(GAME_STATE_OVER);
@@ -769,12 +778,10 @@ void CGameStateRun :: heroMonsterInteraction(Character&hero, vector<Character*> 
 			(*monster)->setMovingLeft(false);
 		}
 		if (hero.getX() >= 1164 && hero.ifMovingRight()) {
-			if (hero_pos.getX() >= 2200) {
+			if (hero_pos.getX() >= 2200)
 				(*monster)->setMovingRight(false);
-			}
-			else {
+			else
 				(*monster)->setMovingRight(true);
-			}
 		}
 		else {
 			(*monster)->setMovingRight(false);
@@ -794,17 +801,10 @@ void CGameStateRun :: heroMonsterInteraction(Character&hero, vector<Character*> 
 			(*monster)->set_Monster_Go_Left(false);
 		}
 
-		int flag = 0;
-		for (int j = 0; j < 8; j++) {
+		(*monster)->setFloor(570);
+		for (int j = 0; j < 8; j++)
 			if (ON_PLATFORM_MONSTER)
 				(*monster)->setFloor(570 - map.getFloorY(j));
-			else
-				flag++;
-		}
-
-		if (flag == 8) {
-			(*monster)->setFloor(570);
-		}
 
 		// 攻擊互動相關
 		if ((*monster)->getSkillRange()!=0 && MONSTER_HIT_CHARACTER((*monster)->getSkillRange()) && HEIGHT_CHECK && mage_skill_cd==150){
@@ -965,7 +965,11 @@ void CGameStateRun::checkStage() {
 		if (stage == 5) {
 			CAudio::Instance()->Stop(BGM_STAGE4);
 			CAudio::Instance()->Play(BGM_BOSS, true);
+			monster = nullptr;
 			map = &maps[4];
+		}
+		if (stage == 6) {
+			GotoGameState(GAME_STATE_INIT);
 		}
 	}
 }
