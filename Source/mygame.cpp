@@ -624,6 +624,7 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	const char KEY_C = 0x43; // keyboard C
 	const char KEY_T = 0x54; // keyboard T
 	const char KEY_O = 0x4F; // keyboard O
+	const char KEY_Q = 0x51; // keyboard Q
 	Position hero_pos(hero, *map);
 
 	if (nChar == KEY_Z) {
@@ -650,6 +651,8 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	for (auto i = monster->begin(); i < monster->end(); i++)
 		(*i)->setDead(1);
 	}
+	if (nChar == KEY_Q)
+		hero->setXP(hero->getXP()+50);		 //作弊過關用
 
 	if (nChar == KEY_T) 
 		stage++;		 //作弊過關用
