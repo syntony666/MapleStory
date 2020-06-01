@@ -281,6 +281,10 @@ CGameStateRun::~CGameStateRun()
 {
 	delete hero;
 	delete boss;
+	for (auto i = monster1.begin(); i < monster1.end(); i++)
+		delete *i;
+	for (auto i = monster2.begin(); i < monster2.end(); i++)
+		delete *i;
 	for (auto i = monster3.begin(); i < monster3.end(); i++)
 		delete *i;
 	for (auto i = monster4.begin(); i < monster4.end(); i++)
