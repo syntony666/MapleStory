@@ -60,9 +60,9 @@ namespace game_framework {
 			_x = x;
 			_y = y;
 		}
-		//~Portal() {
+		~Portal() {
 
-		//}
+		}
 		void addBitMaps(int bitmaps[],int num) {
 			_portal = CAnimation(2);
 			for (int i = 0; i < num; i++)

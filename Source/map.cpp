@@ -12,7 +12,8 @@ namespace game_framework {
 		Initialize();
 	}
 	Map::~Map() {
-		//delete _portal;
+		//if(_portal != nullptr)
+		//	delete _portal;
 	}
 	void Map::Initialize() {
 		zoom = 2;

@@ -281,14 +281,14 @@ CGameStateRun::~CGameStateRun()
 {
 	delete hero;
 	delete boss;
-	for (auto i = monster1.begin(); i < monster1.end(); i++)
-		delete *i;
-	for (auto i = monster2.begin(); i < monster2.end(); i++)
-		delete *i;
-	for (auto i = monster3.begin(); i < monster3.end(); i++)
-		delete *i;
-	for (auto i = monster4.begin(); i < monster4.end(); i++)
-		delete *i;
+	for (auto i : monster1)
+		delete i;
+	for (auto i : monster2)
+		delete i;
+	for (auto i : monster3)
+		delete i;
+	for (auto i : monster4)
+		delete i;
 	monster1.clear();
 	monster2.clear();
 	monster3.clear();
@@ -466,13 +466,13 @@ void CGameStateRun::OnInit() {
 	monster1.push_back(new Monster(2000, 420, 40));
 	monster1.push_back(new Monster(2100, -20, 40));
 
-	for (auto monster=monster1.begin();monster<monster1.end();monster++) {
+	for (auto monster : monster1) {
 		vector<int> attackRight = { IDB_MONSTER_ATTACK_RIGHT1,IDB_MONSTER_ATTACK_RIGHT2, IDB_MONSTER_ATTACK_RIGHT3 };
 		vector<int> attackLeft = { IDB_MONSTER_ATTACK_LEFT1,IDB_MONSTER_ATTACK_LEFT2, IDB_MONSTER_ATTACK_LEFT3 };
 		vector<int> goRight;
 		vector<int> goLeft;
 		vector<int> slash;
-		(*monster)->addBitmap(
+		monster->addBitmap(
 		IDB_MONSTER_STAND_RIGHT, IDB_MONSTER_STAND_LEFT,
 		0, 0, 0, 0,
 		goRight, goLeft,
@@ -646,7 +646,7 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 			heal_cd--;
 		}
 	}
-	if (nChar == KEY_Y) {		//monster all dead
+	if (nChar == KEY_Y && stage <= 4) {		//monster all dead
 	for (auto i = monster->begin(); i < monster->end(); i++)
 		(*i)->setDead(1);
 	}
@@ -739,9 +739,10 @@ void CGameStateRun::OnShow()
 	if (stage <= 4) {
 		if (monster_num(*monster) == 0)
 			map->portalOnShow();
-		for (auto m = monster->begin(); m < monster->end(); m++)
-			(*m)->OnShow();
-	}else if (stage = 5)
+		for (auto m : *monster)
+			m->OnShow();
+	}
+	else if (stage = 5)
 		boss->OnShow();
 	hero->OnShow();			// ¶K¤W¤Hª«
 
