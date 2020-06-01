@@ -37,10 +37,10 @@
     <ClCompile Include="Source\hero.cpp">
       <Filter>MapleStory</Filter>
     </ClCompile>
-    <ClCompile Include="Source\floor.cpp">
+    <ClCompile Include="Source\character.cpp">
       <Filter>MapleStory</Filter>
     </ClCompile>
-    <ClCompile Include="Source\character.cpp">
+    <ClCompile Include="Source\floor.cpp">
       <Filter>MapleStory</Filter>
     </ClCompile>
   </ItemGroup>
