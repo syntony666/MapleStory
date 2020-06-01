@@ -105,7 +105,7 @@ namespace game_framework {
 		Position hero_pos;
 		inline int monster_num(vector<Character*> monster);
 		void heroMonsterInteraction(Character&hero, vector<Character*> & monster, Map &map);
-		void heroBossInteraction(Character&hero, Boss mboss, Map &map);
+		void heroBossInteraction(Character&hero, Boss &mboss, Map &map);
 		void checkStage();
 	};
 
