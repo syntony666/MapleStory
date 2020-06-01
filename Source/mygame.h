@@ -101,11 +101,11 @@ namespace game_framework {
 		Map *map;
 		vector<Character*> monster1, monster2, monster3, monster4;// й╟кл
 		vector<Character*> *monster;
-		Character *boss;
+		Boss boss;
 		Position hero_pos;
 		inline int monster_num(vector<Character*> monster);
 		void heroMonsterInteraction(Character&hero, vector<Character*> & monster, Map &map);
-		void heroBossInteraction(Character&hero, Character&boss, Map &map);
+		void heroBossInteraction(Character&hero, Boss mboss, Map &map);
 		void checkStage();
 	};
 
