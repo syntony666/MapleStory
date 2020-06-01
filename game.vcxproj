@@ -322,6 +322,14 @@
     <Image Include="RES\bg3.bmp" />
     <Image Include="RES\bg4.bmp" />
     <Image Include="RES\bg_boss.bmp" />
+    <Image Include="RES\Boss\boss_01.bmp" />
+    <Image Include="RES\Boss\boss_02.bmp" />
+    <Image Include="RES\Boss\boss_03.bmp" />
+    <Image Include="RES\Boss\boss_04.bmp" />
+    <Image Include="RES\Boss\boss_05.bmp" />
+    <Image Include="RES\Boss\boss_06.bmp" />
+    <Image Include="RES\Boss\boss_07.bmp" />
+    <Image Include="RES\Boss\boss_08.bmp" />
     <Image Include="RES\Boss\boss_stand.bmp" />
     <Image Include="RES\exit1.bmp" />
     <Image Include="RES\exit2.bmp" />

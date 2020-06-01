@@ -232,6 +232,15 @@
 #define IDB_INFO2                       376
 #define IDB_BITMAP27                    377
 #define IDB_BOSS_STAND                  377
+#define IDB_BOSS_STAND1                 379
+#define IDB_BOSS_STAND2                 380
+#define IDB_BOSS_STAND3                 381
+#define IDB_BOSS_STAND4                 382
+#define IDB_BOSS_STAND5                 383
+#define IDB_BOSS_STAND6                 384
+#define IDB_BOSS_STAND7                 385
+#define IDB_BITMAP38                    386
+#define IDB_BOSS_STAND8                 386
 #define IDC_README                      1001
 #define ID_FILE_PAUSE                   32771
 #define ID_TOGGLE_FULLSCREEN            32772
@@ -244,7 +253,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        378
+#define _APS_NEXT_RESOURCE_VALUE        387
 #define _APS_NEXT_COMMAND_VALUE         32776
 #define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           101
