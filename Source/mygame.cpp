@@ -68,7 +68,7 @@ void CGameStateInit::OnInit()
 
 	menu = 1;
 	
-	ShowInitProgress(33);
+	ShowInitProgress(5);
 
 	logo.LoadBitmap(IDB_LOGO);
 	info.LoadBitmap(IDB_INFO);
@@ -78,6 +78,8 @@ void CGameStateInit::OnInit()
 	exit2.LoadBitmap(IDB_EXIT2, RGB(255, 255, 255));
 	info1.LoadBitmap(IDB_INFO1, RGB(255, 255, 255));
 	info2.LoadBitmap(IDB_INFO2, RGB(255, 255, 255));
+
+	ShowInitProgress(10);
 
 	//
 	// 此OnInit動作會接到CGameStaterRun::OnInit()，所以進度還沒到100%
@@ -237,7 +239,7 @@ void CGameStateOver::OnInit()
 	for (int i = 0; i < 21; i++)
 		Gameover.AddBitmap(over[i], RGB(255, 255, 255));
 
-	ShowInitProgress(80);	// 接個前一個狀態的進度，此處進度視為66%
+	ShowInitProgress(15);
 	//
 	// 開始載入資料
 	//
@@ -308,6 +310,10 @@ void CGameStateRun::OnBeginState()
 	initMonster4(monster4);
 	mage_skill_cd = 30 * 5;
 	boss.setXY(1550, 220);
+
+	slash_cd = 10 * SEC;
+	heal_cd = 20 * SEC;
+	mage_skill_cd = 5 * SEC;
 
 	CAudio::Instance()->Stop(BGM_MENU);
 	CAudio::Instance()->Play(BGM_STAGE1, true);
@@ -443,7 +449,7 @@ void CGameStateRun::OnInit() {
 		hero_goRight, hero_goLeft,
 		hero_attackRight, hero_attackLeft,slash,lv_up,255,255,255);
 
-	ShowInitProgress(33);	
+	ShowInitProgress(20);	
 
 	// Load Bitmaps of Monsters
 
@@ -470,7 +476,7 @@ void CGameStateRun::OnInit() {
 		attackRight, attackLeft,slash,lv_up,255,255,255);
 	}
 
-	ShowInitProgress(50);
+	ShowInitProgress(35);
 
 	monster2.push_back(new Monster(500, 570, 70));
 	monster2.push_back(new Monster(800, 570, 70));
@@ -500,7 +506,7 @@ void CGameStateRun::OnInit() {
 			attackRight, attackLeft, slash, lv_up,255,255,255);
 	}
 
-	ShowInitProgress(66);
+	ShowInitProgress(50);
 	
 	monster3.push_back(new Monster(812,  570-202, 100));
 	monster3.push_back(new Monster(500,  570-330, 100));
@@ -531,6 +537,7 @@ void CGameStateRun::OnInit() {
 			goRight, goLeft,
 			attackRight, attackLeft, slash, lv_up, 0,0,0);
 	}
+	ShowInitProgress(65);
 
 	monster4.push_back(new Monster(812, 570 - 202, 100));
 	monster4.push_back(new Monster(500, 570 - 330, 100));
@@ -561,6 +568,8 @@ void CGameStateRun::OnInit() {
 			goRight, goLeft,
 			attackRight, attackLeft, slash, lv_up, 0, 0, 0);
 	}
+	ShowInitProgress(80);
+	boss.addBitmap();
 
 	ShowInitProgress(90);
 
@@ -581,6 +590,8 @@ void CGameStateRun::OnInit() {
 		if (i >= 3)
 			maps[i].getPortal()->addBitMaps(portal_boss_bitmaps, 2);
 	}
+
+	ShowInitProgress(95);
 
 	int slash_cd_bitmaps[] = {
 		IDB_SLASH_CD_1,IDB_SLASH_CD_2,IDB_SLASH_CD_3,

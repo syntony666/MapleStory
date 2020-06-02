@@ -16,11 +16,7 @@ namespace game_framework {
 
 	void Boss::Initialize()
 	{
-		int boss_stand_bitmaps[] = { IDB_BOSS_STAND1, IDB_BOSS_STAND2, IDB_BOSS_STAND3, IDB_BOSS_STAND4, IDB_BOSS_STAND5, IDB_BOSS_STAND6, IDB_BOSS_STAND7, IDB_BOSS_STAND8 };
-		for (int i = 0; i < 8; i++)
-			bossStand.AddBitmap(boss_stand_bitmaps[i], RGB(255, 255, 255));
-		hpIcon.LoadBitmap(IDB_BOSS_ICON, RGB(255, 255, 255));
-		bossStand.SetDelayCount(2);
+		a.normal.SetDelayCount(2);
 		isMovingRight = isMovingLeft = false;
 		pos_x = 1550;
 		pos_y = 220;
@@ -32,7 +28,7 @@ namespace game_framework {
 		if (isDead)
 			return;
 
-		bossStand.OnMove();
+		a.normal.OnMove();
 
 		if (isMovingRight) {
 			pos_x -= HERO_STEP;
@@ -45,8 +41,8 @@ namespace game_framework {
 	void Boss::OnShow()
 	{
 		if (!isDead) {
-			bossStand.SetTopLeft(pos_x, pos_y);
-			bossStand.OnShow();
+			a.normal.SetTopLeft(pos_x, pos_y);
+			a.normal.OnShow();
 		}
 	}
 
@@ -60,6 +56,13 @@ namespace game_framework {
 	void Boss::setXY(int nx, int ny)
 	{
 		pos_x = nx; pos_y = ny;
+	}
+	void Boss::addBitmap() {
+		hpIcon.LoadBitmap(IDB_BOSS_ICON, RGB(255, 255, 255));
+		int boss_stand_bitmaps[] = { IDB_BOSS_STAND1, IDB_BOSS_STAND2, IDB_BOSS_STAND3, IDB_BOSS_STAND4, IDB_BOSS_STAND5, IDB_BOSS_STAND6, IDB_BOSS_STAND7, IDB_BOSS_STAND8 };
+		for (int i = 0; i < 8; i++)
+			a.normal.AddBitmap(boss_stand_bitmaps[i], RGB(255, 255, 255));
+
 	}
 	void Boss::showHPBar()
 	{

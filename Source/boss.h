@@ -6,12 +6,16 @@ namespace game_framework {
 	// 這個class提供可以用鍵盤或滑鼠控制的單位
 	// 看懂就可以改寫成自己的程式了
 	/////////////////////////////////////////////////////////////////////////////
-
+	struct BossAnimations
+	{
+		CAnimation normal;
+	};
 	class Boss
 	{
 	public:
 		Boss() {};
 		~Boss();
+		void addBitmap();
 		void Initialize();				// 設定monster為初始值
 		void OnMove();					// 移動monster
 		void OnShow();					// 將monster圖形貼到畫面
@@ -22,7 +26,7 @@ namespace game_framework {
 
 
 	protected:
-		CAnimation bossStand;
+		BossAnimations a;
 		CMovingBitmap hpIcon;
 		int pos_x, pos_y;
 		bool isMovingRight, isMovingLeft;
