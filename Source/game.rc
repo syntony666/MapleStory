@@ -456,6 +456,24 @@ IDB_BOSS_STAND8         BITMAP                  "..\\res\\Boss\\boss_08.bmp"
 
 IDB_BOSS_ICON           BITMAP                  "..\\res\\Boss\\boss_icon.bmp"
 
+IDB_HEAL_01             BITMAP                  "..\\res\\Skill\\heal_01.bmp"
+
+IDB_HEAL_02             BITMAP                  "..\\res\\Skill\\heal_02.bmp"
+
+IDB_HEAL_03             BITMAP                  "..\\res\\Skill\\heal_03.bmp"
+
+IDB_HEAL_04             BITMAP                  "..\\res\\Skill\\heal_04.bmp"
+
+IDB_HEAL_05             BITMAP                  "..\\res\\Skill\\heal_05.bmp"
+
+IDB_HEAL_06             BITMAP                  "..\\res\\Skill\\heal_06.bmp"
+
+IDB_HEAL_07             BITMAP                  "..\\res\\Skill\\heal_07.bmp"
+
+IDB_HEAL_08             BITMAP                  "..\\res\\Skill\\heal_08.bmp"
+
+IDB_HEAL_09             BITMAP                  "..\\res\\Skill\\heal_09.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

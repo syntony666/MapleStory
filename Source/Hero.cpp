@@ -116,6 +116,18 @@ namespace game_framework {
 			}
 		}
 		else {
+			if (isHealing) {
+				if (heal_time == 0) {
+					heal_time = 72;
+					isHealing = false;
+				}
+				else {
+					a.healAnimation.SetTopLeft(pos_x - 320, pos_y - 240);
+					a.healAnimation.OnShow();
+					a.healAnimation.OnMove();
+					heal_time--;
+				}
+			}
 			// 向右看的貼圖
 			if (facing == 1) {
 				a.standRight.SetTopLeft(pos_x, pos_y);

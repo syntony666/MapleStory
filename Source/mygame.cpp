@@ -442,12 +442,15 @@ void CGameStateRun::OnInit() {
 						, IDB_LV_UP_11, IDB_LV_UP_12, IDB_LV_UP_13, IDB_LV_UP_14, IDB_LV_UP_15
 						, IDB_LV_UP_16, IDB_LV_UP_17, IDB_LV_UP_18, IDB_LV_UP_19, IDB_LV_UP_20 };
 
+	vector<int> heal = { IDB_HEAL_01, IDB_HEAL_02, IDB_HEAL_03, IDB_HEAL_04, IDB_HEAL_05,
+						 IDB_HEAL_06, IDB_HEAL_07, IDB_HEAL_08, IDB_HEAL_09 };
+
 	hero->addBitmap(
 		IDB_FROG_STAND_RIGHT, IDB_FROG_STAND_LEFT,
 		IDB_FROG_DOWN_RIGHT, IDB_FROG_DOWN_LEFT,
 		IDB_FROG_JUMP_RIGHT, IDB_FROG_JUMP_LEFT,
 		hero_goRight, hero_goLeft,
-		hero_attackRight, hero_attackLeft,slash,lv_up,255,255,255);
+		hero_attackRight, hero_attackLeft,slash,heal,lv_up,255,255,255);
 
 	ShowInitProgress(20);	
 
@@ -473,7 +476,7 @@ void CGameStateRun::OnInit() {
 		IDB_MONSTER_STAND_RIGHT, IDB_MONSTER_STAND_LEFT,
 		0, 0, 0, 0,
 		goRight, goLeft,
-		attackRight, attackLeft,slash,lv_up,255,255,255);
+		attackRight, attackLeft,slash,heal,lv_up,255,255,255);
 	}
 
 	ShowInitProgress(35);
@@ -503,7 +506,7 @@ void CGameStateRun::OnInit() {
 			IDB_GUNER_STAND_RIGHT, IDB_GUNER_STAND_LEFT,
 			0, 0, 0, 0,
 			goRight, goLeft,
-			attackRight, attackLeft, slash, lv_up,255,255,255);
+			attackRight, attackLeft, slash,heal, lv_up,255,255,255);
 	}
 
 	ShowInitProgress(50);
@@ -535,7 +538,7 @@ void CGameStateRun::OnInit() {
 			IDB_MAGE_STAND_RIGHT, IDB_MAGE_STAND_LEFT,
 			0, 0, 0, 0,
 			goRight, goLeft,
-			attackRight, attackLeft, slash, lv_up, 0,0,0);
+			attackRight, attackLeft, slash,heal, lv_up, 0,0,0);
 	}
 	ShowInitProgress(65);
 
@@ -566,7 +569,7 @@ void CGameStateRun::OnInit() {
 			IDB_MAGE_STAND_RIGHT, IDB_MAGE_STAND_LEFT,
 			0, 0, 0, 0,
 			goRight, goLeft,
-			attackRight, attackLeft, slash, lv_up, 0, 0, 0);
+			attackRight, attackLeft, slash,heal, lv_up, 0, 0, 0);
 	}
 	ShowInitProgress(80);
 	boss.addBitmap();
@@ -644,6 +647,7 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 
 	if (nChar == KEY_C) {
 		if (heal_cd == 600) {
+			hero->setHealing(true);
 			hero->setHP(hero->getMaxHP());
 			CAudio::Instance()->Play(SFX_HEAL, false);
 			heal_cd--;

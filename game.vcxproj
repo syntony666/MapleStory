@@ -499,6 +499,15 @@
     <Image Include="RES\Portal\Portal_Blue_2.bmp" />
     <Image Include="RES\Portal\Portal_Purple_1.bmp" />
     <Image Include="RES\Portal\Portal_Purple_2.bmp" />
+    <Image Include="RES\Skill\heal_01.bmp" />
+    <Image Include="RES\Skill\heal_02.bmp" />
+    <Image Include="RES\Skill\heal_03.bmp" />
+    <Image Include="RES\Skill\heal_04.bmp" />
+    <Image Include="RES\Skill\heal_05.bmp" />
+    <Image Include="RES\Skill\heal_06.bmp" />
+    <Image Include="RES\Skill\heal_07.bmp" />
+    <Image Include="RES\Skill\heal_08.bmp" />
+    <Image Include="RES\Skill\heal_09.bmp" />
     <Image Include="RES\Skill\slash_01.bmp" />
     <Image Include="RES\Skill\slash_02.bmp" />
     <Image Include="RES\Skill\slash_03.bmp" />

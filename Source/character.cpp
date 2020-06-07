@@ -166,7 +166,7 @@ namespace game_framework {
 	
 
 
-	void Character::addBitmap(int standR, int standL, int downR, int downL, int jumpR, int jumpL, vector<int> goR, vector<int> goL, vector<int> attackR, vector<int> attackL, vector<int> slash, vector<int> lv_up, int nR, int nG, int nB)
+	void Character::addBitmap(int standR, int standL, int downR, int downL, int jumpR, int jumpL, vector<int> goR, vector<int> goL, vector<int> attackR, vector<int> attackL, vector<int> slash, vector<int> heal, vector<int> lv_up, int nR, int nG, int nB)
 	{
 		if (standR != 0)
 			a.standRight.AddBitmap(standR, RGB(nR, nG, nB));
@@ -185,6 +185,7 @@ namespace game_framework {
 		a.attackRight = CAnimation(2);
 		a.attackLeft = CAnimation(2);
 		a.slashAnimation = CAnimation(2);
+		a.healAnimation = CAnimation(4);
 		a.lv_up = CAnimation(4);
 		for (size_t i = 0; i < goR.size(); i++) 
 			a.goRight.AddBitmap(goR[i], RGB(nR, nG, nB));
@@ -196,6 +197,8 @@ namespace game_framework {
 			a.attackLeft.AddBitmap(attackL[i], RGB(nR, nG, nB));
 		for (size_t i = 0; i < slash.size(); i++)
 			a.slashAnimation.AddBitmap(slash[i], RGB(0,0,0));
+		for (size_t i = 0; i < heal.size(); i++)
+			a.healAnimation.AddBitmap(heal[i], RGB(0, 0, 0));
 		for (size_t i = 0; i < lv_up.size(); i++)
 			a.lv_up.AddBitmap(lv_up[i], RGB(3, 3, 3));
 		hp_addBitmaps();
@@ -217,5 +220,11 @@ namespace game_framework {
 	}
 	bool Character::ifSlashing() {
 		return isSlashing;
+	}
+	void Character::setHealing(bool flag) {
+		isHealing = flag;
+	}
+	bool Character::ifHealing() {
+		return isHealing;
 	}
 }
