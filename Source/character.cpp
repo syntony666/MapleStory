@@ -9,7 +9,7 @@
 namespace game_framework {
 
 	int Character::getX() {
-	return pos_x;
+		return pos_x;
 	}
 	int Character::getY() {
 		return pos_y;

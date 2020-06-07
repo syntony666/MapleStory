@@ -94,9 +94,14 @@ namespace game_framework {
 		int stage, stage_count;
 		int slash_cd = 30 * 10;							// 技能CD
 		int heal_cd = 30 * 20;							// 治癒CD
-		int mage_skill_cd = 30*5;
+		int mage_skill_cd = 150;
+		int isPoison = 150;
+		int poison_delay = 60;
+		int hero_tempX = 0;
+		int hero_tempY = 0;
 		CMovingBitmap slashCD[9], healCD[9];
 		CMovingBitmap	background;						// 背景圖
+		CAnimation Mage_Skill;
 		Character *hero;								// 角色
 		vector<Map> maps;								// 地圖
 		Map *map;

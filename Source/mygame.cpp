@@ -329,9 +329,8 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	hero_pos.setPosition(hero, *map);
 
 	TRACE("-------hero-pos_xy-------(%d, %d)\n", hero_pos.getX(), hero_pos.getY());
-	TRACE("--hero-level_Attack_HP---(%d, %d, %d)\n", hero->getLevel(), hero->getAttack(), hero->getHP());
-	TRACE("---------Slash_CD--------(%d)\n", slash_cd / 30);
-	TRACE("-----Monster_Skill_CD----(%d)\n", mage_skill_cd / 30);
+	TRACE("---------Poison Delay--------(%d)\n", poison_delay);
+	TRACE("-----Monster_Skill_CD----(%d)\n", mage_skill_cd);
 	TRACE("-----------Stage---------(%d)\n", stage);
 	TRACE("\n\n");
 
@@ -343,18 +342,18 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		map->setMovingLeft(false);
 	}
 	if (hero->getX() >= 964 && hero->ifMovingRight() || hero->getX() >= 964 && hero->ifHitRight()) {
-			map->setMovingRight(true);
+		map->setMovingRight(true);
 	}
 	else {
-			map->setMovingRight(false);
+		map->setMovingRight(false);
 	}
 
 	//// 人物移動相關
-	if (map->getX()==0) {
-		if(hero->getX() <= 10)
+	if (map->getX() == 0) {
+		if (hero->getX() <= 10)
 			hero->setXY(10, hero->getY());
 	}
-	else if(hero->getX()<=300)
+	else if (hero->getX() <= 300)
 		hero->setXY(300, hero->getY());
 
 	if (map->getX() == -1024) {
@@ -389,22 +388,26 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	countDown(slash_cd, 300);
 	countDown(heal_cd, 600);
 	countDown(mage_skill_cd, 150, -50);
-	if (mage_skill_cd <= 149 && mage_skill_cd>=-50) {
-		mage_skill_cd--;
-		if (mage_skill_cd >= 0) {
-			hero->setMovingLeft(false);
-			hero->setMovingRight(false);
-			hero->setMovingUp(false);
-			hero->setMovingDown(false);
-		}
-		if (mage_skill_cd == 75 || mage_skill_cd == 0) {
-			if (hero->getHP() * 0.1 <= 50)
-				hero->setHP(hero->getHP() - 50);
-			else
-				hero->setHP(int(hero->getHP() * 0.9));
-		}
-		if (mage_skill_cd == -50)
-			mage_skill_cd = 150;
+	countDown(poison_delay, 60, 0);
+	countDown(isPoison, 150, 0);
+
+	if (poison_delay < 60) {
+		Mage_Skill.OnMove();
+	}
+	if (poison_delay <= 10 && hero->getX() >= hero_tempX - 30) {
+		if(hero->getX() <= hero_tempX + 130)
+			isPoison--;
+	}
+	if (isPoison < 150) {
+		hero->setMovingLeft(false);
+		hero->setMovingRight(false);
+		hero->setMovingUp(false);
+		hero->setMovingDown(false);
+	} else if (isPoison == 75 || isPoison == 0) {
+		if (hero->getHP() * 0.1 <= 50)
+			hero->setHP(hero->getHP() - 50);
+		else
+			hero->setHP(int(hero->getHP() * 0.9));
 	}
 
 
@@ -572,6 +575,13 @@ void CGameStateRun::OnInit() {
 			attackRight, attackLeft, slash,heal, lv_up, 0, 0, 0);
 	}
 	ShowInitProgress(80);
+	int Poison[] = { IDB_POISON_01, IDB_POISON_02, IDB_POISON_03, IDB_POISON_04, IDB_POISON_05,
+					 IDB_POISON_06, IDB_POISON_07, IDB_POISON_08, IDB_POISON_09, IDB_POISON_10,
+					 IDB_POISON_11, IDB_POISON_12, IDB_POISON_13, IDB_POISON_14, IDB_POISON_15,
+					 IDB_POISON_16, IDB_POISON_17, IDB_POISON_18, IDB_POISON_19, IDB_POISON_20 };
+	Mage_Skill = CAnimation(3);
+	for (int i = 0; i < 20; i++)
+		Mage_Skill.AddBitmap(Poison[i], RGB(0,0,0));
 	boss.addBitmap();
 
 	ShowInitProgress(90);
@@ -759,6 +769,11 @@ void CGameStateRun::OnShow()
 	}
 	hero->OnShow();			// 貼上人物
 
+	if (poison_delay < 60) {
+		Mage_Skill.SetTopLeft(hero_tempX - 50, hero_tempY);
+		Mage_Skill.OnShow();
+	}
+
 	int slash_part = slash_cd / (300 / 8);
 	slashCD[slash_part].SetTopLeft(15, 125);
 	slashCD[slash_part].ShowBitmap();
@@ -825,8 +840,14 @@ void CGameStateRun :: heroMonsterInteraction(Character&hero, vector<Character*> 
 				(*monster)->setFloor(570 - map.getFloorY(j));
 
 		// 攻擊互動相關
-		if ((*monster)->getSkillRange()!=0 && MONSTER_HIT_CHARACTER((*monster)->getSkillRange()) && HEIGHT_CHECK && mage_skill_cd==150){
-			mage_skill_cd--;
+		if ((*monster)->getSkillRange()!=0 && MONSTER_HIT_CHARACTER((*monster)->getSkillRange())){
+			if (HEIGHT_CHECK && mage_skill_cd == 150) {
+				Mage_Skill.Reset();
+				hero_tempX = hero.getX();
+				hero_tempY = hero.getY();
+				mage_skill_cd--;
+				poison_delay--;
+			}
 		}
 		if ((*monster)->getSkillRange() >= 0) { //測試
 			if (MONSTER_HIT_CHARACTER((*monster)->getAttackRange())) {
