@@ -308,12 +308,11 @@ void CGameStateRun::OnBeginState()
 	initMonster2(monster2);
 	initMonster3(monster3);
 	initMonster4(monster4);
-	mage_skill_cd = 30 * 5;
 	boss.setXY(1550, 220);
 
 	slash_cd = 10 * SEC;
 	heal_cd = 20 * SEC;
-	mage_skill_cd = 5 * SEC;
+	mage_skill_cd = 4 * SEC;
 
 	CAudio::Instance()->Stop(BGM_MENU);
 	CAudio::Instance()->Play(BGM_STAGE1, true);
@@ -387,7 +386,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	// 技能倒數相關
 	countDown(slash_cd, 300);
 	countDown(heal_cd, 600);
-	countDown(mage_skill_cd, 150, -50);
+	countDown(mage_skill_cd, 120, 0);
 	countDown(poison_delay, 60, 0);
 	countDown(isPoison, 150, 0);
 
@@ -842,7 +841,7 @@ void CGameStateRun :: heroMonsterInteraction(Character&hero, vector<Character*> 
 
 		// 攻擊互動相關
 		if ((*monster)->getSkillRange()!=0 && MONSTER_HIT_CHARACTER((*monster)->getSkillRange())){
-			if (HEIGHT_CHECK && mage_skill_cd == 150) {
+			if (HEIGHT_CHECK && mage_skill_cd == 120) {
 				Mage_Skill.Reset();
 				hero_tempX = hero.getX();
 				hero_tempY = hero.getY();

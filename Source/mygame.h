@@ -94,7 +94,7 @@ namespace game_framework {
 		int stage, stage_count;
 		int slash_cd = 30 * 10;							// §Þ¯àCD
 		int heal_cd = 30 * 20;							// ªvÂ¡CD
-		int mage_skill_cd = 150;
+		int mage_skill_cd = 120;
 		int isPoison = 150;
 		int poison_delay = 60;
 		int hero_tempX = 0;
