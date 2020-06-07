@@ -405,10 +405,10 @@ void CGameStateRun::OnMove()							// ²¾°Ê¹CÀ¸¤¸¯À
 		hero->setMovingDown(false);
 	}
 	if (isPoison == 75 || isPoison == 0) {
-		if (hero->getHP() * 0.1 <= 50)
-			hero->setHP(hero->getHP() - 50);
+		if (hero->getHP() * 0.1 <= 100)
+			hero->setHP(hero->getHP() - 100);
 		else
-			hero->setHP(int(hero->getHP() * 0.9));
+			hero->setHP(int(hero->getHP() * 0.8));
 	}
 
 
