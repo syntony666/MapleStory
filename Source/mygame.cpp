@@ -870,22 +870,14 @@ void CGameStateRun :: heroMonsterInteraction(Character&hero, vector<Character*> 
 		}
 		if (CHARACTER_HIT_MONSTER){
 			if (HIT_CHECK_MONSTER && HEIGHT_CHECK) {
-				(*monster)->setHP((*monster)->getHP() - hero.getAttack());
+				hero.attacking(*monster);
 				CAudio::Instance()->Play(SFX_MONSTER_HIT, false);
-				if (hero.getFacing() == 2)
-					(*monster)->setHitLeft();
-				else if (hero.getFacing() == 1)
-					(*monster)->setHitRight();
 			}
 		}
 		if (CHARACTER_SLASH_MONSTER) {
 			if (HIT_CHECK_MONSTER && SLASH_HEIGHT_CHECK) {
-				(*monster)->setHP((*monster)->getHP() - hero.getAttack() * 2);
+				hero.attacking(*monster);
 				CAudio::Instance()->Play(SFX_MONSTER_HIT, false);
-				if (monster_pos.getX() >= hero_pos.getX())
-					(*monster)->setHitRight();
-				else
-					(*monster)->setHitLeft();
 			}
 		}
 

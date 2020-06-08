@@ -243,6 +243,7 @@
     <ClCompile Include="Source\audio.cpp" />
     <ClCompile Include="Source\boss.cpp" />
     <ClCompile Include="Source\character.cpp" />
+    <ClCompile Include="Source\counter.cpp" />
     <ClCompile Include="Source\floor.cpp" />
     <ClCompile Include="Source\game.cpp">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -293,6 +294,7 @@
     <ClInclude Include="Source\audio.h" />
     <ClInclude Include="Source\boss.h" />
     <ClInclude Include="Source\character.h" />
+    <ClInclude Include="Source\counter.h" />
     <ClInclude Include="Source\floor.h" />
     <ClInclude Include="Source\hero.h" />
     <ClInclude Include="Source\game.h" />

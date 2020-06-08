@@ -13,16 +13,24 @@ namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 
 	Hero::Hero() {
+		c.push_back(Counter(10));	//slash
+		c.push_back(Counter(20));	//heal
 		Initialize();
 	}
-
+	Hero::~Hero() {
+		c.clear();
+	}
 	void Hero::Initialize()
 	{
 		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
-		isAttacking = isHitLeft = isHitRight = isDead = false;
+		isAttacking = isSlashing = isHitLeft = isHitRight = isDead =isHealing = false;
 		rising = false;
 		floor = 570;
 		initial_velocity = 14;
+		exp = 0;
+		level = 1;
+		c[slash].stop();
+		c[heal].stop();
 	}
 
 	void Hero::OnMove()
@@ -97,8 +105,6 @@ namespace game_framework {
 		}
 
 	}
-
-
 
 	void Hero::OnShow()
 	{	
@@ -263,5 +269,20 @@ namespace game_framework {
 			number_OnShow(HP / 10 % 10, 133+d*2, 80);
 			number_OnShow(HP % 10, 133+d*3, 80);
 		}
+	}
+
+	void Hero::attacking(Character *monster) {
+		if(isSlashing == true)
+			monster->setHP(monster->getHP() - attack * 2);
+		if(isAttacking == true)
+			monster->setHP(monster->getHP() - attack);
+		if (facing == 2)
+			monster->setHitLeft();
+		else if (facing == 1)
+			monster->setHitRight();
+	}
+
+	Counter Hero::getCounter(int i) {
+		return c[i];
 	}
 }
