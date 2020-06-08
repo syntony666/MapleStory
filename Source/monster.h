@@ -21,6 +21,8 @@ namespace game_framework {
 		void OnShow();					// 將monster圖形貼到畫面
 		bool ifSkill();
 		void setSkill(bool flag);
+		void attacking(Character *hero);
+
 
 	protected:
 		const int HERO_STEP = 8;

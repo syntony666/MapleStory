@@ -32,7 +32,8 @@ namespace game_framework {
 		virtual void OnShow() = 0;		// 顯示角色
 		void addBitmap(int standR, int standL, int downR, int downL, int jumpR, int jumpL, vector<int> goR, vector<int> goL, vector<int> attackR, vector<int> attackL,vector<int> slash, vector<int> lv_up, int nR, int nG, int nB);
 		//加入圖形(沒有的填0)
-
+		virtual void attacking(Character *c)=0;
+		
 		//HP
 
 		void hp_addBitmaps();
@@ -79,8 +80,6 @@ namespace game_framework {
 
 		int getX();						// 左邊 x 座標
 		int getY();						// 左邊 y 座標
-		int getXr();					// 右邊 x 座標
-		int getYr();					// 右邊 y 座標
 		int getAttack();				// 擷取攻擊力
 		int getHP();					// 擷取生命值
 		int getMaxHP();
@@ -107,17 +106,16 @@ namespace game_framework {
 		int attack;
 		int floor;						//地板高度
 		int HP, maxHP;
-		int exp = 0;
-		int level = 1;
+		int exp;
+		int level;
 		int level_animation = 0;
-		int facing = 1;					// 1=面向右 2=面向左
+		int facing;					// 1=面向右 2=面向左
 		bool isMovingDown, isMovingUp,	// 是否正在移動
 			 isMovingRight, isMovingLeft;
-		bool isAttacking = false;		// 是否正在攻擊
-		bool isSlashing = false;		// 是否正在施放技能
-		bool isHitLeft = false;			// 是否受到攻擊
-		bool isHitRight = false;		// 是否受到攻擊
-		bool isDead = false;
+		bool isAttacking;		// 是否正在攻擊
+		bool isSlashing;		// 是否正在施放技能
+		bool isHitLeft, isHitRight;		// 是否受到攻擊
+		bool isDead;
 		bool rising;					// true表上升、false表下降
 		bool is_Monster_Go_Left = false;
 		bool is_Monster_Go_Right = false;

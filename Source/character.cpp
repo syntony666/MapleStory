@@ -14,12 +14,6 @@ namespace game_framework {
 	int Character::getY() {
 		return pos_y;
 	}
-	int  Character::getXr() {
-		return pos_rx;
-	}
-	int  Character::getYr() {
-		return pos_ry;
-	}
 	void Character::setXY(int nx, int ny)
 	{
 		pos_x = nx; pos_y = ny;

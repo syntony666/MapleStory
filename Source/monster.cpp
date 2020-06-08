@@ -156,4 +156,7 @@ namespace game_framework {
 	void Monster::setSkill(bool flag) {
 		isSkill = flag;
 	}
+	void Monster::attacking(Character *hero) {
+
+	}
 }

@@ -12,6 +12,7 @@ namespace game_framework {
 		void Initialize();				// 設定Hero為初始值
 		void OnMove();					// 移動Hero
 		void OnShow();					// 將Hero圖形貼到畫面
+		void attacking(Character *monster);
 
 	protected:
 		const int d = 17;				// UI文字間距

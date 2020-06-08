@@ -122,8 +122,6 @@ namespace game_framework {
 		hero.setFacing(1);	
 		hero.setMaxHP(500);
 		hero.setAttack(30);
-		hero.setXP(0);
-		hero.setLevel(1);
 	}
 	inline void initMonster1(vector<Character*> & monster) {
 		for (size_t i = 0; i < monster.size(); i++) {
@@ -146,7 +144,7 @@ namespace game_framework {
 	inline void initMonster3(vector<Character*> & monster) {
 		for (size_t i = 0; i < monster.size(); i++) {
 			monster[i]->Initialize();
-			monster[i]->setMaxHP(500);
+			monster[i]->setMaxHP(750);
 			monster[i]->setAttack(0);
 			monster[i]->setAttackRange(200);
 			monster[i]->setSkillRange(200);
@@ -155,7 +153,7 @@ namespace game_framework {
 	inline void initMonster4(vector<Character*> & monster) {
 		for (size_t i = 0; i < monster.size(); i++) {
 			monster[i]->Initialize();
-			monster[i]->setMaxHP(500);
+			monster[i]->setMaxHP(1000);
 			monster[i]->setAttack(150);
 			monster[i]->setAttackRange(100);
 			monster[i]->setSkillRange(0);
