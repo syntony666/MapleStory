@@ -106,7 +106,9 @@ namespace game_framework {
 	bool Boss::ifHit() {
 		return isHit;
 	}
-
+	int Boss::getAttack() {
+		return attack;
+	}
 	int Boss::getHP() {
 		return HP;
 	}

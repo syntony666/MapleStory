@@ -18,7 +18,7 @@ namespace game_framework {
 #define CHARACTER_HIT_MONSTER hero.ifAttacking() && hero.getFacing() == 2 && hero_pos.getX() - monster_pos.getX() <= 100 && monster_pos.getX() - hero_pos.getX() <= 0 || hero.ifAttacking() && hero.getFacing() == 1 && hero_pos.getX() - monster_pos.getX() <= 0 && monster_pos.getX() - hero_pos.getX() <= 100
 #define CHARACTER_SLASH_MONSTER hero.ifSlashing() && hero_pos.getX() - monster_pos.getX() <= 340 && monster_pos.getX() - hero_pos.getX() <= 0 || hero.ifSlashing() && hero_pos.getX() - monster_pos.getX() <= 0 && monster_pos.getX() - hero_pos.getX() <= 340
 #define CHARACTER_HIT_BOSS hero.ifAttacking() && hero.getFacing() == 1 && hero_pos.getX() >= 1500
-#define CHARACTER_SLASH_BOSS hero.ifSlashing() && hero_pos.getX() >= 1450
+#define CHARACTER_SLASH_BOSS hero.ifSlashing() && hero_pos.getX() >= 1320
 #define ON_PLATFORM_MONSTER monster_pos.getY() <= map.getFloorY(j) + 50 && monster_pos.getY() >= map.getFloorY(j) - 14 && monster_pos.getX() >= map.getFloorXBegin(j) && monster_pos.getX() <= map.getFloorXLast(j)
 #define ON_FLOOR hero_pos.getY() <= map->getFloorY(i) + 50 && hero_pos.getY() >= map->getFloorY(i) - 14 && hero_pos.getX() >= map->getFloorXBegin(i) && hero_pos.getX() <= map->getFloorXLast(i)
 #define ON_PORTAL hero_pos.getY() == 560 - map->getPortal()->getY() && hero_pos.getX() >= map->getPortal()->getX() - 20 && hero_pos.getX() <= map->getPortal()->getX() + 40

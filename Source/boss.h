@@ -26,6 +26,7 @@ namespace game_framework {
 		bool ifHit();
 		int getHP();					// 擷取生命值
 		int getMaxHP();
+		int getAttack();				// 擷取攻擊力
 		void setHit();				// 設定是否被擊中
 		void setHit(bool flag);		// 設定是否被擊中
 		void setHP(int Health);			// 設定生命值
@@ -43,6 +44,7 @@ namespace game_framework {
 		const int floor = 570;
 		int maxHP = 100000;
 		int HP;
+		int attack = 400;
 	};
 }
 #endif

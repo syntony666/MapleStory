@@ -922,41 +922,28 @@ void CGameStateRun::heroBossInteraction(Character& hero, Boss &mboss, Map &map) 
 	else {
 		mboss.setMovingRight(false);
 	}
-	/*
+	
 		// 攻擊互動相關
-		if ((*monster)->getSkillRange() != 0 && MONSTER_HIT_CHARACTER((*monster)->getSkillRange()) && HEIGHT_CHECK && mage_skill_cd == 150) {
-			mage_skill_cd--;
+
+	if (HIT_CHECK_CHARACTER && hero_pos.getX() >= 1550) {
+		hero.setHP(hero.getHP() - mboss.getAttack());
+		CAudio::Instance()->Play(SFX_HERO_HIT, false);
+		hero.setHitLeft();
+		if (hero.getHP() <= 0)
+			return;
 		}
-		if ((*monster)->getSkillRange() >= 0) { //測試
-			if (MONSTER_HIT_CHARACTER((*monster)->getAttackRange())) {
-				if (HIT_CHECK_CHARACTER && HEIGHT_CHECK) {
-					(*monster)->setAttacking(true);
-					if (stage == 2)
-						CAudio::Instance()->Play(SFX_GUN, false);
-					if (stage != 3) {
-						hero.setHP(hero.getHP() - (*monster)->getAttack());
-						CAudio::Instance()->Play(SFX_HERO_HIT, false);
-						if (monster_pos.getX() >= hero_pos.getX())
-							hero.setHitLeft();
-						else if (monster_pos.getX() < hero_pos.getX())
-							hero.setHitRight();
-					}
-				}
-				if (hero.getHP() <= 0)
-					return;
-			}
-		}*/
-		if (CHARACTER_HIT_BOSS && HIT_CHECK_BOSS) {
-			mboss.setHP(mboss.getHP() - hero.getAttack());
-			CAudio::Instance()->Play(SFX_MONSTER_HIT, false);
-			mboss.setHit();
-		}
-		if (CHARACTER_SLASH_BOSS && HIT_CHECK_BOSS) {
-			mboss.setHP(mboss.getHP() - hero.getAttack() * 2);
-			CAudio::Instance()->Play(SFX_MONSTER_HIT, false);
-			mboss.setHit();
-		}
-		TRACE("-----------Stage---------(%d)\n", mboss.getHP());
+
+	if (CHARACTER_HIT_BOSS && HIT_CHECK_BOSS) {
+		mboss.setHP(mboss.getHP() - hero.getAttack());
+		CAudio::Instance()->Play(SFX_MONSTER_HIT, false);
+		mboss.setHit();
+	}
+	if (CHARACTER_SLASH_BOSS && HIT_CHECK_BOSS) {
+		mboss.setHP(mboss.getHP() - hero.getAttack() * 2);
+		CAudio::Instance()->Play(SFX_MONSTER_HIT, false);
+		mboss.setHit();
+	}
+	TRACE("-----------BOSS_HP---------(%d)\n", mboss.getHP());
 
 		/*// 怪物死亡相關
 		if ((*monster)->getHP() <= 0) {
