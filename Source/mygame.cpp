@@ -545,18 +545,24 @@ void CGameStateRun::OnInit() {
 	}
 	ShowInitProgress(65);
 
-	monster4.push_back(new Monster(812, 570 - 202, 100));
-	monster4.push_back(new Monster(500, 570 - 330, 100));
-	monster4.push_back(new Monster(732, 570 - 488, 100));
-	monster4.push_back(new Monster(1164, 570 - 606, 100));
-	monster4.push_back(new Monster(1492, 570 - 441, 100));
-	monster4.push_back(new Monster(2100, 570 - 320, 100));
-	monster4.push_back(new Monster(1724, 570 - 320, 100));
-	monster4.push_back(new Monster(1420, 570 - 194, 100));
-	monster4.push_back(new Monster(1124, 570 - 124, 100));
-	monster4.push_back(new Monster(716, 570, 100));
-	monster4.push_back(new Monster(1636, 570, 100));
-	monster4.push_back(new Monster(2172, 570, 100));
+	monster4.push_back(new Monster(100, 570 - 166, 150));
+	monster4.push_back(new Monster(300, 570 - 166, 150));
+	monster4.push_back(new Monster(500, 570 - 166, 150));
+	monster4.push_back(new Monster(700, 570 - 166, 150));
+	monster4.push_back(new Monster(900, 570 - 166, 150));
+	monster4.push_back(new Monster(1500, 570 - 166, 150));
+	monster4.push_back(new Monster(1700, 570 - 166, 150));
+	monster4.push_back(new Monster(1900, 570 - 166, 150));
+	monster4.push_back(new Monster(2100, 570 - 166, 150));
+	monster4.push_back(new Monster(200, 570 - 496, 150));
+	monster4.push_back(new Monster(400, 570 - 496, 150));
+	monster4.push_back(new Monster(600, 570 - 496, 150));
+	monster4.push_back(new Monster(800, 570 - 496, 150));
+	monster4.push_back(new Monster(1400, 570 - 494, 150));
+	monster4.push_back(new Monster(1600, 570 - 494, 150));
+	monster4.push_back(new Monster(1800, 570 - 494, 150));
+	monster4.push_back(new Monster(2000, 570 - 494, 150));
+	monster4.push_back(new Monster(2200, 570 - 494, 150));
 
 	for (auto monster = monster4.begin(); monster < monster4.end(); monster++) {
 		vector<int> attackRight = { IDB_MAGE_ATTACK_RIGHT1, IDB_MAGE_ATTACK_RIGHT2, IDB_MAGE_ATTACK_RIGHT3,

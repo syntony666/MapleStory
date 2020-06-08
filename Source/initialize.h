@@ -156,8 +156,8 @@ namespace game_framework {
 	inline void initMonster4(vector<Character*> & monster) {
 		for (size_t i = 0; i < monster.size(); i++) {
 			monster[i]->Initialize();
-			monster[i]->setMaxHP(1000);
-			monster[i]->setAttack(150);
+			monster[i]->setMaxHP(2000);
+			monster[i]->setAttack(200);
 			monster[i]->setAttackRange(100);
 			monster[i]->setSkillRange(0);
 		}
