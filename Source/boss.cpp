@@ -20,7 +20,7 @@ namespace game_framework {
 		isMovingRight = isMovingLeft = false;
 		pos_x = 1550;
 		pos_y = 220;
-		hp = maxHP;
+		HP = maxHP;
 	}
 
 	void Boss::OnMove()
@@ -35,6 +35,14 @@ namespace game_framework {
 		}
 		else if (isMovingLeft) {
 			pos_x += HERO_STEP;
+		}
+
+		if (isHit) {
+			if (hit_time == 0) {
+				hit_time = 18;
+				isHit = false;
+			}
+			hit_time--;
 		}
 	}
 
@@ -66,7 +74,7 @@ namespace game_framework {
 	}
 	void Boss::showHPBar()
 	{
-		double percent = hp / maxHP;
+		double percent = HP / maxHP;
 		const int bar_width = SIZE_X - 300;
 		const int bar_height = 15;
 		const int x1 = SIZE_X - bar_width;
@@ -86,5 +94,26 @@ namespace game_framework {
 		CDDraw::ReleaseBackCDC();					// ©ñ±¼ Back Plain ªº CDC
 		hpIcon.SetTopLeft(250, 5);
 		hpIcon.ShowBitmap(0.3);
+	}
+
+	void Boss::setHit() {
+		isHit = true;
+	}
+	void Boss::setHit(bool flag) {
+		isHit = flag;
+	}
+
+	bool Boss::ifHit() {
+		return isHit;
+	}
+
+	int Boss::getHP() {
+		return HP;
+	}
+	int Boss::getMaxHP() {
+		return maxHP;
+	}
+	void Boss::setHP(int Health) {
+		HP = Health;
 	}
 }

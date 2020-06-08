@@ -945,35 +945,25 @@ void CGameStateRun::heroBossInteraction(Character& hero, Boss &mboss, Map &map) 
 				if (hero.getHP() <= 0)
 					return;
 			}
+		}*/
+		if (CHARACTER_HIT_BOSS && HIT_CHECK_BOSS) {
+			mboss.setHP(mboss.getHP() - hero.getAttack());
+			CAudio::Instance()->Play(SFX_MONSTER_HIT, false);
+			mboss.setHit();
 		}
-		if (CHARACTER_HIT_MONSTER) {
-			if (HIT_CHECK_MONSTER && HEIGHT_CHECK) {
-				(*monster)->setHP((*monster)->getHP() - hero.getAttack());
-				CAudio::Instance()->Play(SFX_MONSTER_HIT, false);
-				if (hero.getFacing() == 2)
-					(*monster)->setHitLeft();
-				else if (hero.getFacing() == 1)
-					(*monster)->setHitRight();
-			}
+		if (CHARACTER_SLASH_BOSS && HIT_CHECK_BOSS) {
+			mboss.setHP(mboss.getHP() - hero.getAttack() * 2);
+			CAudio::Instance()->Play(SFX_MONSTER_HIT, false);
+			mboss.setHit();
 		}
-		if (CHARACTER_SLASH_MONSTER) {
-			if (HIT_CHECK_MONSTER && SLASH_HEIGHT_CHECK) {
-				(*monster)->setHP((*monster)->getHP() - hero.getAttack() * 2);
-				CAudio::Instance()->Play(SFX_MONSTER_HIT, false);
-				if (monster_pos.getX() >= hero_pos.getX())
-					(*monster)->setHitRight();
-				else
-					(*monster)->setHitLeft();
-			}
-		}
+		TRACE("-----------Stage---------(%d)\n", mboss.getHP());
 
-		// 怪物死亡相關
+		/*// 怪物死亡相關
 		if ((*monster)->getHP() <= 0) {
 			hero.setXP(hero.getXP() + (*monster)->getXP());
 			(*monster)->setDead(true);
 			(*monster)->setXY(-1, -1);
-		}
-	*/
+		}*/
 }
 void CGameStateRun::checkStage() {
 	if (stage == stage_count) {
