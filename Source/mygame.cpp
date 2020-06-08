@@ -312,7 +312,7 @@ void CGameStateRun::OnBeginState()
 
 	slash_cd = 10 * SEC;
 	heal_cd = 20 * SEC;
-	mage_skill_cd = 4 * SEC;
+	mage_skill_cd = 3 * SEC;
 
 	CAudio::Instance()->Stop(BGM_MENU);
 	CAudio::Instance()->Play(BGM_STAGE1, true);
@@ -386,24 +386,24 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	// 技能倒數相關
 	countDown(slash_cd, 300);
 	countDown(heal_cd, 600);
-	countDown(mage_skill_cd, 120, 0);
+	countDown(mage_skill_cd, 90, 0);
 	countDown(poison_delay, 60, 0);
-	countDown(isPoison, 150, 0);
+	countDown(isPoison, 90, 0);
 
 	if (poison_delay < 60) {
 		Mage_Skill.OnMove();
 	}
-	if (poison_delay <= 10 && hero->getX() >= hero_tempX - 30) {
-		if(hero->getX() <= hero_tempX + 130)
+	if (poison_delay <= 30 && hero->getX() >= hero_tempX - 60) {
+		if(hero->getX() <= hero_tempX + 100)
 			isPoison--;
 	}
-	if (isPoison < 150) {
+	if (isPoison < 70) {
 		hero->setMovingLeft(false);
 		hero->setMovingRight(false);
 		hero->setMovingUp(false);
 		hero->setMovingDown(false);
 	}
-	if (isPoison == 75 || isPoison == 0) {
+	if (isPoison == 45 || isPoison == 0) {
 		if (hero->getHP() * 0.1 <= 100)
 			hero->setHP(hero->getHP() - 100);
 		else
@@ -776,7 +776,7 @@ void CGameStateRun::OnShow()
 	hero->OnShow();			// 貼上人物
 
 	if (poison_delay < 60) {
-		Mage_Skill.SetTopLeft(hero_tempX - 50, hero_tempY);
+		Mage_Skill.SetTopLeft(hero_tempX - 50, hero_tempY - 20);
 		Mage_Skill.OnShow();
 	}
 
@@ -847,7 +847,7 @@ void CGameStateRun :: heroMonsterInteraction(Character&hero, vector<Character*> 
 
 		// 攻擊互動相關
 		if ((*monster)->getSkillRange()!=0 && MONSTER_HIT_CHARACTER((*monster)->getSkillRange())){
-			if (HEIGHT_CHECK && mage_skill_cd == 120) {
+			if (HEIGHT_CHECK && mage_skill_cd == 90) {
 				Mage_Skill.Reset();
 				hero_tempX = hero.getX();
 				hero_tempY = hero.getY();
