@@ -5,11 +5,9 @@
 #include "character.h"
 
 namespace game_framework {
-	/////////////////////////////////////////////////////////////////////////////
-	// 這個class提供可以用鍵盤或滑鼠控制的單位
-	// 看懂就可以改寫成自己的程式了
-	/////////////////////////////////////////////////////////////////////////////
-
+	enum MonsterCounters {
+		mage_skill
+	};
 	class Monster: public Character
 	{
 	public:
@@ -22,13 +20,14 @@ namespace game_framework {
 		bool ifSkill();
 		void setSkill(bool flag);
 		void attacking(Character *hero);
-
+		Counter getCounter(int i);
 
 	protected:
 		const int HERO_STEP = 8;
 		int initX, initY;
 		int skill = 0;
 		bool isSkill = false;
+		std::vector<Counter> c;
 	};
 }
 #endif

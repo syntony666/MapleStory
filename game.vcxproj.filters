@@ -46,6 +46,9 @@
     <ClCompile Include="Source\boss.cpp">
       <Filter>MapleStory</Filter>
     </ClCompile>
+    <ClCompile Include="Source\counter.cpp">
+      <Filter>MapleStory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\audio.h">
@@ -97,6 +100,9 @@
       <Filter>MapleStory</Filter>
     </ClInclude>
     <ClInclude Include="Source\boss.h">
+      <Filter>MapleStory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\counter.h">
       <Filter>MapleStory</Filter>
     </ClInclude>
   </ItemGroup>
@@ -693,6 +699,33 @@
       <Filter>Resouces</Filter>
     </Image>
     <Image Include="RES\Boss\boss_icon.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Skill\heal_01.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Skill\heal_02.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Skill\heal_03.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Skill\heal_04.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Skill\heal_05.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Skill\heal_06.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Skill\heal_07.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Skill\heal_08.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Skill\heal_09.bmp">
       <Filter>Resouces</Filter>
     </Image>
   </ItemGroup>

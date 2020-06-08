@@ -1,6 +1,7 @@
 #ifndef CHARACTER_H
-
 #define CHARACTER_H
+
+#include"counter.h"
 
 
 namespace game_framework {
@@ -20,6 +21,7 @@ namespace game_framework {
 		CAnimation attackRight;		// 向右攻擊
 		CAnimation attackLeft;		// 向左攻擊
 		CAnimation slashAnimation;	// 技能動畫
+		CAnimation healAnimation;	// 技能動畫
 		CAnimation lv_up;			// 升級動畫
 	};
 
@@ -30,9 +32,10 @@ namespace game_framework {
 		virtual void Initialize() = 0;	// 設定初始值
 		virtual void OnMove() = 0;		// 移動
 		virtual void OnShow() = 0;		// 顯示角色
-		void addBitmap(int standR, int standL, int downR, int downL, int jumpR, int jumpL, vector<int> goR, vector<int> goL, vector<int> attackR, vector<int> attackL,vector<int> slash, vector<int> lv_up, int nR, int nG, int nB);
+		void addBitmap(int standR, int standL, int downR, int downL, int jumpR, int jumpL, vector<int> goR, vector<int> goL, vector<int> attackR, vector<int> attackL,vector<int> slash, vector<int> heal, vector<int> lv_up, int nR, int nG, int nB);
 		//加入圖形(沒有的填0)
 		virtual void attacking(Character *c)=0;
+		virtual Counter getCounter(int i){}
 		
 		//HP
 
@@ -75,6 +78,8 @@ namespace game_framework {
 		//Hero
 		void setSlashing(bool flag);
 		bool ifSlashing();
+		void setHealing(bool flag);
+		bool ifHealing();
 		
 		//GETs
 
@@ -116,6 +121,7 @@ namespace game_framework {
 		bool isSlashing;		// 是否正在施放技能
 		bool isHitLeft, isHitRight;		// 是否受到攻擊
 		bool isDead;
+		bool isHealing;
 		bool rising;					// true表上升、false表下降
 		bool is_Monster_Go_Left = false;
 		bool is_Monster_Go_Right = false;
@@ -123,6 +129,7 @@ namespace game_framework {
 		int hit_time = 18;
 		int attack_time = 15;
 		int skill_time = 26;		// 技能動畫時間
+		int heal_time = 72;		// 技能動畫時間
 		int velocity;					// 目前的速度(點/次)
 		int STEP_SIZE = 8;				// 行走速度
 		int cooldown = 30 * 10;			// 技能冷卻 10 秒

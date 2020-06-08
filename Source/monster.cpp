@@ -17,6 +17,7 @@ namespace game_framework {
 		exp = nxp;
 		initX = nx;
 		initY = ny;
+		c.push_back(Counter(120));
 	}
 
 	Monster::~Monster() {
@@ -156,7 +157,17 @@ namespace game_framework {
 	void Monster::setSkill(bool flag) {
 		isSkill = flag;
 	}
-	void Monster::attacking(Character *hero) {
 
+	Counter Monster::getCounter(int i) {
+		return c[i];
+	}
+
+	void Monster::attacking(Character *hero) {
+		if (skill == 0) {
+			hero->setHP(hero->getHP() - attack);
+		}
+		if (skill == 1) {
+
+		}
 	}
 }

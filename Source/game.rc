@@ -390,45 +390,45 @@ IDB_MAGE_ATTACK_RIGHT7  BITMAP                  "..\\res\\Mage\\Mage_Right_Attac
 
 IDB_MAGE_ATTACK_RIGHT8  BITMAP                  "..\\res\\Mage\\Mage_Right_Attack08.bmp"
 
-IDB_BITMAP49            BITMAP                  "..\\res\\Mage\\Poison_01.bmp"
+IDB_POISON_01           BITMAP                  "..\\res\\Mage\\Poison_01.bmp"
 
-IDB_BITMAP50            BITMAP                  "..\\res\\Mage\\Poison_02.bmp"
+IDB_POISON_02           BITMAP                  "..\\res\\Mage\\Poison_02.bmp"
 
-IDB_BITMAP51            BITMAP                  "..\\res\\Mage\\Poison_03.bmp"
+IDB_POISON_03           BITMAP                  "..\\res\\Mage\\Poison_03.bmp"
 
-IDB_BITMAP52            BITMAP                  "..\\res\\Mage\\Poison_04.bmp"
+IDB_POISON_04           BITMAP                  "..\\res\\Mage\\Poison_04.bmp"
 
-IDB_BITMAP53            BITMAP                  "..\\res\\Mage\\Poison_05.bmp"
+IDB_POISON_05           BITMAP                  "..\\res\\Mage\\Poison_05.bmp"
 
-IDB_BITMAP54            BITMAP                  "..\\res\\Mage\\Poison_06.bmp"
+IDB_POISON_06           BITMAP                  "..\\res\\Mage\\Poison_06.bmp"
 
-IDB_BITMAP55            BITMAP                  "..\\res\\Mage\\Poison_07.bmp"
+IDB_POISON_07           BITMAP                  "..\\res\\Mage\\Poison_07.bmp"
 
-IDB_BITMAP56            BITMAP                  "..\\res\\Mage\\Poison_08.bmp"
+IDB_POISON_08           BITMAP                  "..\\res\\Mage\\Poison_08.bmp"
 
-IDB_BITMAP57            BITMAP                  "..\\res\\Mage\\Poison_09.bmp"
+IDB_POISON_09           BITMAP                  "..\\res\\Mage\\Poison_09.bmp"
 
-IDB_BITMAP58            BITMAP                  "..\\res\\Mage\\Poison_10.bmp"
+IDB_POISON_10           BITMAP                  "..\\res\\Mage\\Poison_10.bmp"
 
-IDB_BITMAP59            BITMAP                  "..\\res\\Mage\\Poison_11.bmp"
+IDB_POISON_11           BITMAP                  "..\\res\\Mage\\Poison_11.bmp"
 
-IDB_BITMAP60            BITMAP                  "..\\res\\Mage\\Poison_12.bmp"
+IDB_POISON_12           BITMAP                  "..\\res\\Mage\\Poison_12.bmp"
 
-IDB_BITMAP61            BITMAP                  "..\\res\\Mage\\Poison_13.bmp"
+IDB_POISON_13           BITMAP                  "..\\res\\Mage\\Poison_13.bmp"
 
-IDB_BITMAP62            BITMAP                  "..\\res\\Mage\\Poison_14.bmp"
+IDB_POISON_14           BITMAP                  "..\\res\\Mage\\Poison_14.bmp"
 
-IDB_BITMAP63            BITMAP                  "..\\res\\Mage\\Poison_15.bmp"
+IDB_POISON_15           BITMAP                  "..\\res\\Mage\\Poison_15.bmp"
 
-IDB_BITMAP64            BITMAP                  "..\\res\\Mage\\Poison_16.bmp"
+IDB_POISON_16           BITMAP                  "..\\res\\Mage\\Poison_16.bmp"
 
-IDB_BITMAP65            BITMAP                  "..\\res\\Mage\\Poison_17.bmp"
+IDB_POISON_17           BITMAP                  "..\\res\\Mage\\Poison_17.bmp"
 
-IDB_BITMAP66            BITMAP                  "..\\res\\Mage\\Poison_18.bmp"
+IDB_POISON_18           BITMAP                  "..\\res\\Mage\\Poison_18.bmp"
 
-IDB_BITMAP67            BITMAP                  "..\\res\\Mage\\Poison_19.bmp"
+IDB_POISON_19           BITMAP                  "..\\res\\Mage\\Poison_19.bmp"
 
-IDB_BITMAP68            BITMAP                  "..\\res\\Mage\\Poison_20.bmp"
+IDB_POISON_20           BITMAP                  "..\\res\\Mage\\Poison_20.bmp"
 
 IDB_INFO                BITMAP                  "..\\res\\info.bmp"
 
@@ -455,6 +455,24 @@ IDB_BOSS_STAND7         BITMAP                  "..\\res\\Boss\\boss_07.bmp"
 IDB_BOSS_STAND8         BITMAP                  "..\\res\\Boss\\boss_08.bmp"
 
 IDB_BOSS_ICON           BITMAP                  "..\\res\\Boss\\boss_icon.bmp"
+
+IDB_HEAL_01             BITMAP                  "..\\res\\Skill\\heal_01.bmp"
+
+IDB_HEAL_02             BITMAP                  "..\\res\\Skill\\heal_02.bmp"
+
+IDB_HEAL_03             BITMAP                  "..\\res\\Skill\\heal_03.bmp"
+
+IDB_HEAL_04             BITMAP                  "..\\res\\Skill\\heal_04.bmp"
+
+IDB_HEAL_05             BITMAP                  "..\\res\\Skill\\heal_05.bmp"
+
+IDB_HEAL_06             BITMAP                  "..\\res\\Skill\\heal_06.bmp"
+
+IDB_HEAL_07             BITMAP                  "..\\res\\Skill\\heal_07.bmp"
+
+IDB_HEAL_08             BITMAP                  "..\\res\\Skill\\heal_08.bmp"
+
+IDB_HEAL_09             BITMAP                  "..\\res\\Skill\\heal_09.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////

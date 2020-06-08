@@ -13,18 +13,24 @@ namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 
 	Hero::Hero() {
+		c.push_back(Counter(10));	//slash
+		c.push_back(Counter(20));	//heal
 		Initialize();
 	}
-
+	Hero::~Hero() {
+		c.clear();
+	}
 	void Hero::Initialize()
 	{
 		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
-		isAttacking = isSlashing = isHitLeft = isHitRight = isDead = false;
+		isAttacking = isSlashing = isHitLeft = isHitRight = isDead =isHealing = false;
 		rising = false;
 		floor = 570;
 		initial_velocity = 14;
 		exp = 0;
 		level = 1;
+		c[slash].stop();
+		c[heal].stop();
 	}
 
 	void Hero::OnMove()
@@ -116,6 +122,18 @@ namespace game_framework {
 			}
 		}
 		else {
+			if (isHealing) {
+				if (heal_time == 0) {
+					heal_time = 72;
+					isHealing = false;
+				}
+				else {
+					a.healAnimation.SetTopLeft(pos_x - 320, pos_y - 240);
+					a.healAnimation.OnShow();
+					a.healAnimation.OnMove();
+					heal_time--;
+				}
+			}
 			// 向右看的貼圖
 			if (facing == 1) {
 				a.standRight.SetTopLeft(pos_x, pos_y);
@@ -262,5 +280,9 @@ namespace game_framework {
 			monster->setHitLeft();
 		else if (facing == 1)
 			monster->setHitRight();
+	}
+
+	Counter Hero::getCounter(int i) {
+		return c[i];
 	}
 }

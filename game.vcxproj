@@ -243,6 +243,7 @@
     <ClCompile Include="Source\audio.cpp" />
     <ClCompile Include="Source\boss.cpp" />
     <ClCompile Include="Source\character.cpp" />
+    <ClCompile Include="Source\counter.cpp" />
     <ClCompile Include="Source\floor.cpp" />
     <ClCompile Include="Source\game.cpp">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -293,6 +294,7 @@
     <ClInclude Include="Source\audio.h" />
     <ClInclude Include="Source\boss.h" />
     <ClInclude Include="Source\character.h" />
+    <ClInclude Include="Source\counter.h" />
     <ClInclude Include="Source\floor.h" />
     <ClInclude Include="Source\hero.h" />
     <ClInclude Include="Source\game.h" />
@@ -499,6 +501,15 @@
     <Image Include="RES\Portal\Portal_Blue_2.bmp" />
     <Image Include="RES\Portal\Portal_Purple_1.bmp" />
     <Image Include="RES\Portal\Portal_Purple_2.bmp" />
+    <Image Include="RES\Skill\heal_01.bmp" />
+    <Image Include="RES\Skill\heal_02.bmp" />
+    <Image Include="RES\Skill\heal_03.bmp" />
+    <Image Include="RES\Skill\heal_04.bmp" />
+    <Image Include="RES\Skill\heal_05.bmp" />
+    <Image Include="RES\Skill\heal_06.bmp" />
+    <Image Include="RES\Skill\heal_07.bmp" />
+    <Image Include="RES\Skill\heal_08.bmp" />
+    <Image Include="RES\Skill\heal_09.bmp" />
     <Image Include="RES\Skill\slash_01.bmp" />
     <Image Include="RES\Skill\slash_02.bmp" />
     <Image Include="RES\Skill\slash_03.bmp" />
