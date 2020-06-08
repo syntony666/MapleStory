@@ -23,6 +23,13 @@ namespace game_framework {
 		void setMovingLeft(bool flag);
 		void setMovingRight(bool flag);
 		void setXY(int nx, int ny);
+		bool ifHit();
+		int getHP();					// 擷取生命值
+		int getMaxHP();
+		int getAttack();				// 擷取攻擊力
+		void setHit();				// 設定是否被擊中
+		void setHit(bool flag);		// 設定是否被擊中
+		void setHP(int Health);			// 設定生命值
 
 
 	protected:
@@ -31,10 +38,13 @@ namespace game_framework {
 		int pos_x, pos_y;
 		bool isMovingRight, isMovingLeft;
 		bool isDead = false;
+		bool isHit = false;
+		int hit_time = 18;
 		const int HERO_STEP = 8;
 		const int floor = 570;
-		int maxHP = 1000;
-		int hp;
+		int maxHP = 100000;
+		int HP;
+		int attack = 400;
 	};
 }
 #endif
