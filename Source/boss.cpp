@@ -74,13 +74,13 @@ namespace game_framework {
 	}
 	void Boss::showHPBar()
 	{
-		double percent = HP / maxHP;
+		int percent = HP * 100 / maxHP;
 		const int bar_width = SIZE_X - 300;
 		const int bar_height = 15;
 		const int x1 = SIZE_X - bar_width;
 		const int y1 = bar_height + 20;
 		const int y2 = y1 + bar_height;
-		const double x2 = x1 + percent * bar_width;
+		const int x2 = x1 + (percent * bar_width / 100);
 
 		CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
 		CPen *pp, p(PS_NULL, 0, RGB(0, 0, 0));		// 清除pen
@@ -88,7 +88,7 @@ namespace game_framework {
 
 		CBrush b2(RGB(255, 0, 0));					// 血條
 		pDC->SelectObject(&b2);
-		pDC->Rectangle(x1, y1, (int)x2, y2);
+		pDC->Rectangle(x1, y1, x2, y2);
 
 		pDC->SelectObject(pp);						// 釋放 pen
 		CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
