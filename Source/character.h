@@ -35,7 +35,7 @@ namespace game_framework {
 		void addBitmap(int standR, int standL, int downR, int downL, int jumpR, int jumpL, vector<int> goR, vector<int> goL, vector<int> attackR, vector<int> attackL,vector<int> slash, vector<int> heal, vector<int> lv_up, int nR, int nG, int nB);
 		//加入圖形(沒有的填0)
 		virtual void attacking(Character *c)=0;
-		virtual Counter getCounter(int i){}
+		//virtual Counter getCounter(int i){}
 		
 		//HP
 
