@@ -140,7 +140,7 @@ namespace game_framework {
 			monster[i]->Initialize();
 			monster[i]->setMaxHP(350);
 			monster[i]->setAttack(100);
-			monster[i]->setAttackRange(150);
+			monster[i]->setAttackRange(100);
 			monster[i]->setSkillRange(0);
 		}
 	}
