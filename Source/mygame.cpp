@@ -299,7 +299,7 @@ CGameStateRun::~CGameStateRun()
 
 void CGameStateRun::OnBeginState()
 {
-	stage = 1;
+	stage = 5;
 	stage_count = stage;
 	initHero(*hero);
 	for (int i = 0; i < 5; i++)
