@@ -92,11 +92,6 @@ namespace game_framework {
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
 		int stage, stage_count;
-		int slash_cd = 30 * 10;							// 技能CD
-		int heal_cd = 30 * 20;							// 治癒CD
-		int mage_skill_cd = 90;
-		int isPoison = 90;
-		int poison_delay = 60;
 		int hero_tempX = 0;
 		int hero_tempY = 0;
 		CMovingBitmap slashCD[9], healCD[9];

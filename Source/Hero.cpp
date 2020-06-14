@@ -13,12 +13,11 @@ namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 
 	Hero::Hero() {
-		c.push_back(Counter(10));	//slash
-		c.push_back(Counter(20));	//heal
+		counter.push_back(Counter(10));	//slash
+		counter.push_back(Counter(20));	//heal
 		Initialize();
 	}
 	Hero::~Hero() {
-		c.clear();
 	}
 	void Hero::Initialize()
 	{
@@ -29,8 +28,8 @@ namespace game_framework {
 		initial_velocity = 14;
 		exp = 0;
 		level = 1;
-		c[slash].stop();
-		c[heal].stop();
+		counter[slash].stop();
+		counter[heal].stop();
 	}
 
 	void Hero::OnMove()
@@ -216,6 +215,9 @@ namespace game_framework {
 				}
 			}
 		}
+		for (auto count : counter) {
+			count.countdown();
+		}
 		hp_OnShow();
 
 		if (level_animation > 0) {
@@ -282,9 +284,5 @@ namespace game_framework {
 			monster->setHitLeft();
 		else if (facing == 1)
 			monster->setHitRight();
-	}
-
-	Counter Hero::getCounter(int i) {
-		return c[i];
 	}
 }

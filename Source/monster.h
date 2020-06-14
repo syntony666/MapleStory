@@ -6,7 +6,7 @@
 
 namespace game_framework {
 	enum MonsterCounters {
-		mage_skill
+		mage_skill, is_poison, poison_delay
 	};
 	class Monster: public Character
 	{
@@ -20,14 +20,12 @@ namespace game_framework {
 		bool ifSkill();
 		void setSkill(bool flag);
 		void attacking(Character *hero);
-		Counter getCounter(int i);
 
 	protected:
 		const int HERO_STEP = 8;
 		int initX, initY;
 		int skill = 0;
 		bool isSkill = false;
-		std::vector<Counter> c;
 	};
 }
 #endif

@@ -6,7 +6,7 @@ namespace game_framework {
 		_min = min * 30;
 	}
 	void Counter::start() {
-		_count-=1;
+		_count--;
 	}
 	void Counter::stop() {
 		_count = _max;

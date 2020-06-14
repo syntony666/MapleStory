@@ -17,11 +17,9 @@ namespace game_framework {
 		void OnMove();					// 移動Hero
 		void OnShow();					// 將Hero圖形貼到畫面
 		void attacking(Character *monster);
-		Counter getCounter(int i);
 
 	protected:
 		const int d = 17;				// UI文字間距
-		std::vector<Counter> c;
 	};
 }
 #endif

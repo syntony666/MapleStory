@@ -8,6 +8,10 @@
 
 namespace game_framework {
 
+	Character::~Character() {
+		counter.clear();
+	}
+
 	int Character::getX() {
 		return pos_x;
 	}
@@ -197,6 +201,10 @@ namespace game_framework {
 			a.lv_up.AddBitmap(lv_up[i], RGB(3, 3, 3));
 		hp_addBitmaps();
 		number_addBitmaps();
+	}
+
+	Counter& Character::getCounter(int i) {
+		return counter[i];
 	}
 
 

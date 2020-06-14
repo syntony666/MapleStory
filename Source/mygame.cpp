@@ -1,26 +1,3 @@
-/*
- * mygame.cpp: 本檔案儲遊戲本身的class的implementation
- * Copyright (C) 2002-2008 Woei-Kae Chen <wkc@csie.ntut.edu.tw>
- *
- * This file is part of game, a free game development framework for windows.
- *
- * game is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * game is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- *
- *
-*/
-
 #include "stdafx.h"
 #include "Resource.h"
 #include <mmsystem.h>
@@ -170,24 +147,6 @@ void CGameStateInit::OnShow()
 			exit2.ShowBitmap();
 		}
 	}
-	//
-	// Demo螢幕字型的使用，不過開發時請盡量避免直接使用字型，改用CMovingBitmap比較好
-	//
-	/*
-	CDC *pDC = CDDraw::getBackCDC();			// 取得 Back Plain 的 CDC 
-	CFont f,*fp;
-	f.CreatePointFont(300,"Times New Roman");	// 產生 font f; 160表示16 point的字
-	fp=pDC->SelectObject(&f);					// 選用 font f
-	pDC->setBkColor(RGB(0,0,0));
-	pDC->setTextColor(RGB(255,255,0));
-	pDC->TextOut(450,200,"按下任意鍵開始遊戲");
-	pDC->TextOut(5,395,"Press Ctrl-F to switch in between window mode and full screen mode.");
-	if (ENABLE_GAME_PAUSE)
-		pDC->TextOut(5,455,"Press Ctrl-Q to pause the Game.");
-	pDC->TextOut(5,515,"按下 Alt-F4 離開遊戲");
-	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
-	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
-	*/
 }								
 
 /////////////////////////////////////////////////////////////////////////////
@@ -223,10 +182,6 @@ void CGameStateOver::OnBeginState()
 
 void CGameStateOver::OnInit()
 {
-	//
-	// 當圖很多時，OnInit載入所有的圖要花很多時間。為避免玩遊戲的人
-	//     等的不耐煩，遊戲會出現「Loading ...」，顯示Loading的進度。
-	//
 	
 	int over[] = { IDB_GAME_OVER_0 ,IDB_GAME_OVER_1 ,IDB_GAME_OVER_2 ,IDB_GAME_OVER_3,
 					IDB_GAME_OVER_4 ,IDB_GAME_OVER_5 ,IDB_GAME_OVER_6 ,IDB_GAME_OVER_7,
@@ -240,12 +195,6 @@ void CGameStateOver::OnInit()
 		Gameover.AddBitmap(over[i], RGB(255, 255, 255));
 
 	ShowInitProgress(15);
-	//
-	// 開始載入資料
-	//
-	//
-	// 最終進度為100%
-	//
 	ShowInitProgress(100);
 }
 
@@ -253,19 +202,6 @@ void CGameStateOver::OnShow()
 {
 	Gameover.SetTopLeft(233, 234);
 	Gameover.OnShow();
-	/*
-	CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
-	CFont f, *fp;
-	f.CreatePointFont(160, "Times New Roman");	// 產生 font f; 160表示16 point的字
-	fp = pDC->SelectObject(&f);					// 選用 font f
-	pDC->SetBkColor(RGB(0, 0, 0));
-	pDC->SetTextColor(RGB(255, 255, 0));
-	char str[80];								// Demo 數字對字串的轉換
-	sprintf(str, "Game Over ! (%d)", counter / 30);
-	pDC->TextOut(240, 210, str);
-	pDC->SelectObject(fp);						// 放掉 font f (千萬不要漏了放掉)
-	CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
-	*/
 }
 
 
@@ -310,10 +246,6 @@ void CGameStateRun::OnBeginState()
 	initMonster4(monster4);
 	boss.setXY(1550, 220);
 
-	slash_cd = 10 * SEC;
-	heal_cd = 20 * SEC;
-	mage_skill_cd = 3 * SEC;
-
 	CAudio::Instance()->Stop(BGM_MENU);
 	CAudio::Instance()->Play(BGM_STAGE1, true);
 }
@@ -328,8 +260,13 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	hero_pos.setPosition(hero, *map);
 
 	TRACE("-------hero-pos_xy-------(%d, %d)\n", hero_pos.getX(), hero_pos.getY());
-	TRACE("---------Poison Delay--------(%d)\n", poison_delay);
-	TRACE("-----Monster_Skill_CD----(%d)\n", mage_skill_cd);
+	if (stage != 5) {
+		TRACE("---------Poison Delay--------(%d)\n", (*monster).at(0)->getCounter(poison_delay).getCount());
+		TRACE("-----Monster_Skill_CD----(%d)\n", (*monster).at(0)->getCounter(mage_skill).getCount());
+	}
+	TRACE("---------HEAL--------(%d)\n", hero->getCounter(heal).getCount());
+	TRACE("-----skill----(%d)\n", hero->getCounter(slash).getCount());
+
 	TRACE("-----------Stage---------(%d)\n", stage);
 	TRACE("\n\n");
 
@@ -384,30 +321,29 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	}
 
 	// 技能倒數相關
-	countDown(slash_cd, 300);
-	countDown(heal_cd, 600);
-	countDown(mage_skill_cd, 90, 0);
-	countDown(poison_delay, 60, 0);
-	countDown(isPoison, 90, 0);
+	hero->getCounter(slash).countdown();
+	hero->getCounter(heal).countdown();
 
-	if (poison_delay < 60) {
-		Mage_Skill.OnMove();
-	}
-	if (poison_delay <= 30 && hero->getX() >= hero_tempX - 60) {
-		if(hero->getX() <= hero_tempX + 100)
-			isPoison--;
-	}
-	if (isPoison < 70) {
-		hero->setMovingLeft(false);
-		hero->setMovingRight(false);
-		hero->setMovingUp(false);
-		hero->setMovingDown(false);
-	}
-	if (isPoison == 45 || isPoison == 0) {
-		if (hero->getHP() * 0.1 <= 100)
-			hero->setHP(hero->getHP() - 100);
-		else
-			hero->setHP(int(hero->getHP() * 0.8));
+	if(stage == 3)	{
+		if (poison_delay < 60) {
+			Mage_Skill.OnMove();
+		}
+		if (poison_delay <= 30 && hero->getX() >= hero_tempX - 60) {
+			if (hero->getX() <= hero_tempX + 100)
+				(*monster).at(0)->getCounter(is_poison).start();
+		}
+		if ((*monster).at(0)->getCounter(is_poison).getCount() < 70) {
+			hero->setMovingLeft(false);
+			hero->setMovingRight(false);
+			hero->setMovingUp(false);
+			hero->setMovingDown(false);
+		}
+		if ((*monster).at(0)->getCounter(is_poison).getCount() || (*monster).at(0)->getCounter(is_poison).getCount() == 0) {
+			if (hero->getHP() * 0.1 <= 100)
+				hero->setHP(hero->getHP() - 100);
+			else
+				hero->setHP(int(hero->getHP() * 0.8));
+		}
 	}
 
 
@@ -536,7 +472,10 @@ void CGameStateRun::OnInit() {
 									IDB_MAGE_ATTACK_LEFT7, IDB_MAGE_ATTACK_LEFT8 };
 		vector<int> goRight;
 		vector<int> goLeft;
-		vector<int> slash;
+		vector<int> slash = { IDB_POISON_01, IDB_POISON_02, IDB_POISON_03, IDB_POISON_04, IDB_POISON_05,
+					 IDB_POISON_06, IDB_POISON_07, IDB_POISON_08, IDB_POISON_09, IDB_POISON_10,
+					 IDB_POISON_11, IDB_POISON_12, IDB_POISON_13, IDB_POISON_14, IDB_POISON_15,
+					 IDB_POISON_16, IDB_POISON_17, IDB_POISON_18, IDB_POISON_19, IDB_POISON_20 };;
 		(*monster)->addBitmap(
 			IDB_MAGE_STAND_RIGHT, IDB_MAGE_STAND_LEFT,
 			0, 0, 0, 0,
@@ -654,19 +593,19 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	}
 
 	if (nChar == KEY_X) {
-		if (slash_cd == 300) {
+		if (hero->getCounter(slash).getCount() == 300) {
 			hero->setSlashing(true);
 			CAudio::Instance()->Play(SFX_SLASH, false);
-			slash_cd--;
+			hero->getCounter(slash).start();
 		}
 	}
 
 	if (nChar == KEY_C) {
-		if (heal_cd == 600) {
+		if (hero->getCounter(heal).getCount() == 600) {
 			hero->setHealing(true);
 			hero->setHP(hero->getMaxHP());
 			CAudio::Instance()->Play(SFX_HEAL, false);
-			heal_cd--;
+			hero->getCounter(heal).start();
 		}
 	}
 	if (nChar == KEY_Y && stage <= 4) {		//monster all dead
@@ -780,11 +719,11 @@ void CGameStateRun::OnShow()
 		Mage_Skill.OnShow();
 	}
 
-	int slash_part = slash_cd / (300 / 8);
+	int slash_part = hero->getCounter(slash).getCount() / (300 / 8);
 	slashCD[slash_part].SetTopLeft(15, 125);
 	slashCD[slash_part].ShowBitmap();
 
-	int heal_part = heal_cd / (600 / 8);
+	int heal_part = hero->getCounter(heal).getCount() / (600 / 8);
 	healCD[heal_part].SetTopLeft(60, 125);
 	healCD[heal_part].ShowBitmap();
 }
@@ -847,12 +786,12 @@ void CGameStateRun :: heroMonsterInteraction(Character&hero, vector<Character*> 
 
 		// 攻擊互動相關
 		if ((*monster)->getSkillRange()!=0 && MONSTER_HIT_CHARACTER((*monster)->getSkillRange())){
-			if (HEIGHT_CHECK && mage_skill_cd == 90) {
+			if (HEIGHT_CHECK && (*monster)->getCounter(mage_skill).getCount() == 90) {
 				Mage_Skill.Reset();
 				hero_tempX = hero.getX();
 				hero_tempY = hero.getY();
-				mage_skill_cd--;
-				poison_delay--;
+				(*monster)->getCounter(mage_skill).start();
+				(*monster)->getCounter(poison_delay).start();
 			}
 		}
 		if ((*monster)->getSkillRange() >= 0) { //測試

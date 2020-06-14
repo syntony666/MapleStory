@@ -17,7 +17,10 @@ namespace game_framework {
 		exp = nxp;
 		initX = nx;
 		initY = ny;
-		c.push_back(Counter(120));
+		counter.push_back(Counter(120));	// mage skill
+		counter.push_back(Counter(120));	// is_poison
+		counter.push_back(Counter(120));	// poison_delay
+
 	}
 
 	Monster::~Monster() {
@@ -148,6 +151,11 @@ namespace game_framework {
 					a.standLeft.OnMove();
 				}
 			}
+
+			for (auto count : counter) {
+				count.countdown();
+			}
+
 			hp_OnShow();
 		}
 	}
@@ -158,9 +166,6 @@ namespace game_framework {
 		isSkill = flag;
 	}
 
-	Counter Monster::getCounter(int i) {
-		return c[i];
-	}
 
 	void Monster::attacking(Character *hero) {
 		if (skill == 0) {

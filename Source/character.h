@@ -29,13 +29,14 @@ namespace game_framework {
 	{
 	public:
 		Character() {}
+		~Character();
 		virtual void Initialize() = 0;	// 設定初始值
 		virtual void OnMove() = 0;		// 移動
 		virtual void OnShow() = 0;		// 顯示角色
 		void addBitmap(int standR, int standL, int downR, int downL, int jumpR, int jumpL, vector<int> goR, vector<int> goL, vector<int> attackR, vector<int> attackL,vector<int> slash, vector<int> heal, vector<int> lv_up, int nR, int nG, int nB);
 		//加入圖形(沒有的填0)
 		virtual void attacking(Character *c)=0;
-		//virtual Counter getCounter(int i){}
+		Counter& getCounter(int i);
 		
 		//HP
 
@@ -136,6 +137,7 @@ namespace game_framework {
 		int attackRange;
 		int skillRange;
 		Animations a;
+		std::vector<Counter> counter;
 	};
 }
 #endif
