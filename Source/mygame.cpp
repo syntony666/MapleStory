@@ -260,10 +260,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	hero_pos.setPosition(hero, *map);
 
 	TRACE("-------hero-pos_xy-------(%d, %d)\n", hero_pos.getX(), hero_pos.getY());
-	for (auto m:*monster) {
-		TRACE("---------Poison Delay--------(%d)\n", m->getCounter(poison_delay).getCount());
-		TRACE("-----Monster_Skill_CD----(%d)\n", m->getCounter(mage_skill).getCount());
-	}
+
 	TRACE("---------HEAL--------(%d)\n", hero->getCounter(heal).getCount());
 	TRACE("-----skill----(%d)\n", hero->getCounter(slash).getCount());
 
@@ -311,19 +308,23 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		hero->setFloor(570);
 
 	//// 玩家等級相關
-	if (hero->getXP() >= hero->getLevel() * 50) {
-		hero->setXP(0);
-		CAudio::Instance()->Play(SFX_LEVEL_UP, false);
-		hero->setLevelUP();
-		hero->setLevel(hero->getLevel() + 1);
-		hero->setMaxHP(hero->getMaxHP() + hero->getLevel() * 50);
-		hero->setAttack(hero->getAttack() + hero->getLevel() * 5);
+	if (hero->getLevel() < 20) {
+		if (hero->getXP() >= hero->getLevel() * 50) {
+			hero->setXP(0);
+			CAudio::Instance()->Play(SFX_LEVEL_UP, false);
+			hero->setLevelUP();
+			hero->setLevel(hero->getLevel() + 1);
+			hero->setMaxHP(hero->getMaxHP() + hero->getLevel() * 50);
+			hero->setAttack(hero->getAttack() + hero->getLevel() * 5);
+		}
 	}
 
 	// 技能倒數相關
 	hero->countdown();
-	for (auto m : *monster) {
-		m->countdown();
+	if (stage != 5) {
+		for (auto m : *monster) {
+			m->countdown();
+		}
 	}
 
 
@@ -600,7 +601,7 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 		(*i)->setDead(1);
 	}
 	if (nChar == KEY_Q)
-		hero->setXP(hero->getXP()+50);		 //作弊過關用
+		hero->setXP(hero->getXP() + 100);		 //作弊過關用
 
 	if (nChar == KEY_T) 
 		stage++;		 //作弊過關用
