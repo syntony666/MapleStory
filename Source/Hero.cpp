@@ -241,12 +241,18 @@ namespace game_framework {
 		// ATK 顯示
 		if (attack < 100) {
 			number_OnShow(attack / 10, 133, 45);
-			number_OnShow(attack % 10, 133+d, 45);
+			number_OnShow(attack % 10, 133 + d, 45);
+		}
+		if (attack < 1000) {
+			number_OnShow(attack / 100, 133, 45);
+			number_OnShow(attack / 10 % 10, 133 + d, 45);
+			number_OnShow(attack % 10, 133 + d * 2, 45);
 		}
 		else {
-			number_OnShow(attack / 100, 133, 45);
-			number_OnShow(attack / 10 % 10, 133+d, 45);
-			number_OnShow(attack % 10, 133+d*2, 45);
+			number_OnShow(attack / 1000, 133, 45);
+			number_OnShow(attack / 100 % 10, 133 + d, 45);
+			number_OnShow(attack / 10 % 10, 133 + d * 2, 45);
+			number_OnShow(attack % 10, 133 + d * 3, 45);
 		}
 
 		// HP 顯示

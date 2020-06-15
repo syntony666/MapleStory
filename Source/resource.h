@@ -275,6 +275,29 @@
 #define IDB_HEAL_09                     396
 #define IDB_BITMAP30                    397
 #define IDB_POISON_ROOT                 397
+#define IDB_PNG1                        398
+#define IDB_PNG2                        399
+#define IDB_PNG3                        400
+#define IDB_PNG4                        401
+#define IDB_PNG5                        402
+#define IDB_PNG6                        403
+#define IDB_LASER_07                    404
+#define IDB_LASER_08                    405
+#define IDB_LASER_09                    406
+#define IDB_LASER_10                    407
+#define IDB_LASER_11                    408
+#define IDB_LASER_12                    409
+#define IDB_LASER_13                    410
+#define IDB_LASER_14                    411
+#define IDB_LASER_15                    412
+#define IDB_LASER_16                    413
+#define IDB_LASER_01                    414
+#define IDB_LASER_02                    415
+#define IDB_LASER_03                    416
+#define IDB_LASER_04                    417
+#define IDB_LASER_05                    418
+#define IDB_BITMAP39                    419
+#define IDB_LASER_06                    419
 #define IDC_README                      1001
 #define ID_FILE_PAUSE                   32771
 #define ID_TOGGLE_FULLSCREEN            32772
@@ -287,7 +310,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        398
+#define _APS_NEXT_RESOURCE_VALUE        420
 #define _APS_NEXT_COMMAND_VALUE         32776
 #define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           101
