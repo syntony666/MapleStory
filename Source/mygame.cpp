@@ -260,9 +260,9 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	hero_pos.setPosition(hero, *map);
 
 	TRACE("-------hero-pos_xy-------(%d, %d)\n", hero_pos.getX(), hero_pos.getY());
-	if (stage != 5) {
-		TRACE("---------Poison Delay--------(%d)\n", (*monster).at(0)->getCounter(poison_delay).getCount());
-		TRACE("-----Monster_Skill_CD----(%d)\n", (*monster).at(0)->getCounter(mage_skill).getCount());
+	for (auto m:*monster) {
+		TRACE("---------Poison Delay--------(%d)\n", m->getCounter(poison_delay).getCount());
+		TRACE("-----Monster_Skill_CD----(%d)\n", m->getCounter(mage_skill).getCount());
 	}
 	TRACE("---------HEAL--------(%d)\n", hero->getCounter(heal).getCount());
 	TRACE("-----skill----(%d)\n", hero->getCounter(slash).getCount());
@@ -328,14 +328,9 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 
 	if(stage == 3)	{
-		if ((*monster).at(0)->getCounter(poison_delay).getCount() < 60) {
+		if ((*monster).at(0)->getCounter(poison_delay).getCount() < 50) {
 			Mage_Skill.OnMove();
 		}
-		if ((*monster).at(0)->getCounter(poison_delay).getCount() <= 30 && hero->getX() >= hero_tempX - 60) {
-			if (hero->getX() <= hero_tempX + 100)
-				(*monster).at(0)->getCounter(is_poison).start();
-		}
-
 	}
 
 
@@ -585,7 +580,7 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	}
 
 	if (nChar == KEY_X) {
-		if (hero->getCounter(slash).getCount() == 300) {
+		if (hero->getCounter(slash).getCount() == 10) {
 			hero->setSlashing(true);
 			CAudio::Instance()->Play(SFX_SLASH, false);
 			hero->getCounter(slash).start();
@@ -593,7 +588,7 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	}
 
 	if (nChar == KEY_C) {
-		if (hero->getCounter(heal).getCount() == 600) {
+		if (hero->getCounter(heal).getCount() == 20) {
 			hero->setHealing(true);
 			hero->setHP(hero->getMaxHP());
 			CAudio::Instance()->Play(SFX_HEAL, false);
@@ -706,16 +701,12 @@ void CGameStateRun::OnShow()
 	}
 	hero->OnShow();			// 貼上人物
 
-	if (monster->at(0)->getCounter(poison_delay).getCount() < 50) {
-		Mage_Skill.SetTopLeft(hero_tempX - 50, hero_tempY - 20);
-		Mage_Skill.OnShow();
-	}
 
-	int slash_part = hero->getCounter(slash).getCount() / (300 / 8);
+	int slash_part = hero->getCounter(slash).getCount()*SEC / (300 / 8);
 	slashCD[slash_part].SetTopLeft(15, 125);
 	slashCD[slash_part].ShowBitmap();
 
-	int heal_part = hero->getCounter(heal).getCount() / (600 / 8);
+	int heal_part = hero->getCounter(heal).getCount()*SEC / (600 / 8);
 	healCD[heal_part].SetTopLeft(60, 125);
 	healCD[heal_part].ShowBitmap();
 }
@@ -777,21 +768,14 @@ void CGameStateRun :: heroMonsterInteraction(Character&hero, vector<Character*> 
 				(*monster)->setFloor(570 - map.getFloorY(j));
 
 		// 攻擊互動相關
-		if (HEIGHT_CHECK && (*monster)->getCounter(mage_skill).getCount() == 90) {
-				Mage_Skill.Reset();
-				hero_tempX = hero.getX();
-				hero_tempY = hero.getY();
-				(*monster)->getCounter(mage_skill).start();
-				(*monster)->getCounter(poison_delay).start();
-		}
 		if (MONSTER_HIT_CHARACTER((*monster)->getAttackRange())) {
+			bool a = HIT_CHECK_CHARACTER;
 				if (HIT_CHECK_CHARACTER && HEIGHT_CHECK) {
 					(*monster)->attacking(&hero);
 					(*monster)->setAttacking(true);
 					if (stage == 2)
 						CAudio::Instance()->Play(SFX_GUN, false);
 					if (stage != 3) {
-						hero.setHP(hero.getHP() - (*monster)->getAttack());
 						CAudio::Instance()->Play(SFX_HERO_HIT, false);
 						if (monster_pos.getX() >= hero_pos.getX())
 							hero.setHitLeft();
@@ -801,7 +785,6 @@ void CGameStateRun :: heroMonsterInteraction(Character&hero, vector<Character*> 
 				}
 				if (hero.getHP() <= 0)
 					return;
-			}
 		}
 		if (CHARACTER_HIT_MONSTER){
 			if (HIT_CHECK_MONSTER && HEIGHT_CHECK) {

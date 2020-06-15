@@ -111,12 +111,6 @@ namespace game_framework {
 	int Character::getAttackRange() {
 		return attackRange;
 	}
-	void Character::setSkillRange(int x) {
-		skillRange = x;
-	}
-	int Character::getSkillRange() {
-		return skillRange;
-	}
 
 	
 	void Character::hp_addBitmaps() {

@@ -25,6 +25,7 @@ namespace game_framework {
 		int initX, initY;
 		int skill = 0;
 		bool isSkill = false;
+		int hero_tempX, hero_tempY;
 	};
 }
 #endif

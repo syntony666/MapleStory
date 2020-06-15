@@ -164,12 +164,25 @@ namespace game_framework {
 			hero->setHP(hero->getHP() - attack);
 		}
 		if (skill == 1) {
-			counter[is_poison]->start();
-			if (counter[is_poison]->getCount() < 70) {
+			TRACE("-------------------- - (%d)", counter[mage_skill]->getCount());
+			if (counter[mage_skill]->getCount() == 90) {
+				a.slashAnimation.Reset();
+				hero_tempX = hero->getX();
+				hero_tempY = hero->getY();
+				counter[mage_skill]->start();
+				counter[poison_delay]->start();
+			}
+			if (counter[poison_delay]->getCount() == 0 && hero->getX()>=hero_tempX - 60 && hero->getX() >= hero_tempX + 100) {
+				counter[is_poison]->start();
+			}
+			if (counter[is_poison]->getCount() < 70 ) {
 				hero->setMovingLeft(false);
 				hero->setMovingRight(false);
 				hero->setMovingUp(false);
-				hero->setMovingDown(false);
+				hero->setMovingDown(false);	
+				a.slashAnimation.SetTopLeft(hero_tempX - 50, hero_tempY - 20);
+				a.slashAnimation.OnShow();
+				a.slashAnimation.OnMove();
 			}
 			if (counter[is_poison]->getCount() ==75 || counter[is_poison]->getCount() == 0) {
 				if (hero->getHP() * 0.1 <= 100)
