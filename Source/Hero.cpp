@@ -269,6 +269,13 @@ namespace game_framework {
 				number_OnShow(HP / 10 % 10, 133 + d * 2, 80);
 				number_OnShow(HP % 10, 133 + d * 3, 80);
 			}
+			else if (HP < 100000) {
+				number_OnShow(HP / 10000, 133, 80);
+				number_OnShow(HP / 1000 % 10, 133 + d, 80);
+				number_OnShow(HP / 100 % 10, 133 + d * 2, 80);
+				number_OnShow(HP / 10 % 10, 133 + d * 3, 80);
+				number_OnShow(HP % 10, 133 + d * 4, 80);
+			}
 		}
 	}
 

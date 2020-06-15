@@ -476,6 +476,7 @@
     <Image Include="RES\Mage\Poison_18.bmp" />
     <Image Include="RES\Mage\Poison_19.bmp" />
     <Image Include="RES\Mage\Poison_20.bmp" />
+    <Image Include="RES\Mage\Poison_root.bmp" />
     <Image Include="RES\monster_attack_left1.bmp" />
     <Image Include="RES\monster_attack_left2.bmp" />
     <Image Include="RES\monster_attack_left3.bmp" />
@@ -527,8 +528,22 @@
     <Image Include="RES\start2.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <Media Include="Sounds\bgm_boss.mp3" />
+    <Media Include="Sounds\bgm_gameover.mp3" />
     <Media Include="Sounds\bgm_menu.mp3" />
     <Media Include="Sounds\bgm_stage1.mp3" />
+    <Media Include="Sounds\bgm_stage2.mp3" />
+    <Media Include="Sounds\bgm_stage3.mp3" />
+    <Media Include="Sounds\bgm_stage4.mp3" />
+    <Media Include="Sounds\sfx_attack.mp3" />
+    <Media Include="Sounds\sfx_gun.mp3" />
+    <Media Include="Sounds\sfx_heal.mp3" />
+    <Media Include="Sounds\sfx_hero_hit.mp3" />
+    <Media Include="Sounds\sfx_jump.mp3" />
+    <Media Include="Sounds\sfx_laser.mp3" />
+    <Media Include="Sounds\sfx_levelup.mp3" />
+    <Media Include="Sounds\sfx_monster_hit.mp3" />
+    <Media Include="Sounds\sfx_slash.mp3" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
