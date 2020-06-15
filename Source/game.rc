@@ -476,6 +476,38 @@ IDB_HEAL_09             BITMAP                  "..\\res\\Skill\\heal_09.bmp"
 
 IDB_POISON_ROOT         BITMAP                  "..\\res\\Mage\\Poison_root.bmp"
 
+IDB_LASER_07            BITMAP                  "..\\res\\Laser\\laser_07.bmp"
+
+IDB_LASER_08            BITMAP                  "..\\res\\Laser\\laser_08.bmp"
+
+IDB_LASER_09            BITMAP                  "..\\res\\Laser\\laser_09.bmp"
+
+IDB_LASER_10            BITMAP                  "..\\res\\Laser\\laser_10.bmp"
+
+IDB_LASER_11            BITMAP                  "..\\res\\Laser\\laser_11.bmp"
+
+IDB_LASER_12            BITMAP                  "..\\res\\Laser\\laser_12.bmp"
+
+IDB_LASER_13            BITMAP                  "..\\res\\Laser\\laser_13.bmp"
+
+IDB_LASER_14            BITMAP                  "..\\res\\Laser\\laser_14.bmp"
+
+IDB_LASER_15            BITMAP                  "..\\res\\Laser\\laser_15.bmp"
+
+IDB_LASER_16            BITMAP                  "..\\res\\Laser\\laser_16.bmp"
+
+IDB_LASER_01            BITMAP                  "..\\res\\Laser\\laser_01.bmp"
+
+IDB_LASER_02            BITMAP                  "..\\res\\Laser\\laser_02.bmp"
+
+IDB_LASER_03            BITMAP                  "..\\res\\Laser\\laser_03.bmp"
+
+IDB_LASER_04            BITMAP                  "..\\res\\Laser\\laser_04.bmp"
+
+IDB_LASER_05            BITMAP                  "..\\res\\Laser\\laser_05.bmp"
+
+IDB_LASER_06            BITMAP                  "..\\res\\Laser\\laser_06.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
