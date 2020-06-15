@@ -235,7 +235,7 @@ CGameStateRun::~CGameStateRun()
 
 void CGameStateRun::OnBeginState()
 {
-	stage = 3;
+	stage = 1;
 	stage_count = stage;
 	initHero(*hero);
 	for (int i = 0; i < 5; i++)
@@ -468,7 +468,7 @@ void CGameStateRun::OnInit() {
 			IDB_MAGE_STAND_RIGHT, IDB_MAGE_STAND_LEFT,
 			0, 0, 0, 0,
 			goRight, goLeft,
-			attackRight, attackLeft, slash, heal, lv_up, 0,0,0);
+			attackRight, attackLeft, slash, heal, lv_up, 0,0,0,3);
 	}
 	ShowInitProgress(65);
 

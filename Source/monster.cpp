@@ -19,7 +19,7 @@ namespace game_framework {
 		initY = ny;
 		counter.push_back(new Counter(3));	// mage skill
 		counter.push_back(new Counter(2));	// is_poison
-		counter.push_back(new Counter(2));	// poison_delay
+		counter.push_back(new Counter(3));	// poison_delay
 
 	}
 
@@ -118,6 +118,8 @@ namespace game_framework {
 			}
 			attack_time--;
 		}
+		if (counter[poison_delay]->getCount() < 90)
+			a.slashAnimation.OnMove();
 	}
 
 
@@ -150,6 +152,9 @@ namespace game_framework {
 					a.standLeft.OnShow();
 					a.standLeft.OnMove();
 				}
+			}	
+			if (skill == 1 && isAttacking && counter[poison_delay]->getCount()) {
+				a.slashAnimation.OnShow();
 			}
 			hp_OnShow();
 		}
@@ -174,7 +179,7 @@ namespace game_framework {
 				a.slashAnimation.SetTopLeft(hero_tempX - 50, hero_tempY - 20);
 
 			}
-			if (counter[poison_delay]->getCount() == 0 && hero->getX()>=hero_tempX - 60 && hero->getX() >= hero_tempX + 100) {
+			if (counter[poison_delay]->getCount() <= 0 && hero->getX()>=hero_tempX - 60 && hero->getX() >= hero_tempX + 100) {
 				counter[is_poison]->start();
 			}
 			if (counter[is_poison]->getCount() < 60 ) {
@@ -189,8 +194,6 @@ namespace game_framework {
 				else
 					hero->setHP(int(hero->getHP() * 0.8));
 			}
-			a.slashAnimation.OnShow();
-			a.slashAnimation.OnMove();
 		}
 	}
 }
