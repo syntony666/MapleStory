@@ -204,9 +204,13 @@ namespace game_framework {
 	}
 
 	Counter& Character::getCounter(int i) {
-		return counter[i];
+		return *counter[i];
 	}
 
+	void Character::countdown() {
+		for (auto count : counter)
+			count->countdown();
+	}
 
 	// Monsters
 	void Character::set_Monster_Go_Left(bool flag) {
@@ -214,6 +218,9 @@ namespace game_framework {
 	}
 	void Character::set_Monster_Go_Right(bool flag) {
 		is_Monster_Go_Right = flag;
+	}
+	void Character::setSkill(int i) {
+		isSkill = i;
 	}
 
 	// Hero

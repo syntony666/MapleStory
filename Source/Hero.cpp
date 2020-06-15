@@ -13,8 +13,8 @@ namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 
 	Hero::Hero() {
-		counter.push_back(Counter(10));	//slash
-		counter.push_back(Counter(20));	//heal
+		counter.push_back(new Counter(10));	//slash
+		counter.push_back(new Counter(20));	//heal
 		Initialize();
 	}
 	Hero::~Hero() {
@@ -28,8 +28,8 @@ namespace game_framework {
 		initial_velocity = 14;
 		exp = 0;
 		level = 1;
-		counter[slash].stop();
-		counter[heal].stop();
+		counter[slash]->stop();
+		counter[heal]->stop();
 	}
 
 	void Hero::OnMove()
@@ -214,9 +214,6 @@ namespace game_framework {
 					a.standLeft.OnShow();
 				}
 			}
-		}
-		for (auto count : counter) {
-			count.countdown();
 		}
 		hp_OnShow();
 

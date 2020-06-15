@@ -235,7 +235,7 @@ CGameStateRun::~CGameStateRun()
 
 void CGameStateRun::OnBeginState()
 {
-	stage = 5;
+	stage = 3;
 	stage_count = stage;
 	initHero(*hero);
 	for (int i = 0; i < 5; i++)
@@ -321,29 +321,21 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	}
 
 	// 技能倒數相關
-	hero->getCounter(slash).countdown();
-	hero->getCounter(heal).countdown();
+	hero->countdown();
+	for (auto m : *monster) {
+		m->countdown();
+	}
+
 
 	if(stage == 3)	{
-		if (poison_delay < 60) {
+		if ((*monster).at(0)->getCounter(poison_delay).getCount() < 60) {
 			Mage_Skill.OnMove();
 		}
-		if (poison_delay <= 30 && hero->getX() >= hero_tempX - 60) {
+		if ((*monster).at(0)->getCounter(poison_delay).getCount() <= 30 && hero->getX() >= hero_tempX - 60) {
 			if (hero->getX() <= hero_tempX + 100)
 				(*monster).at(0)->getCounter(is_poison).start();
 		}
-		if ((*monster).at(0)->getCounter(is_poison).getCount() < 70) {
-			hero->setMovingLeft(false);
-			hero->setMovingRight(false);
-			hero->setMovingUp(false);
-			hero->setMovingDown(false);
-		}
-		if ((*monster).at(0)->getCounter(is_poison).getCount() || (*monster).at(0)->getCounter(is_poison).getCount() == 0) {
-			if (hero->getHP() * 0.1 <= 100)
-				hero->setHP(hero->getHP() - 100);
-			else
-				hero->setHP(int(hero->getHP() * 0.8));
-		}
+
 	}
 
 
@@ -714,7 +706,7 @@ void CGameStateRun::OnShow()
 	}
 	hero->OnShow();			// 貼上人物
 
-	if (poison_delay < 60) {
+	if (monster->at(0)->getCounter(poison_delay).getCount() < 50) {
 		Mage_Skill.SetTopLeft(hero_tempX - 50, hero_tempY - 20);
 		Mage_Skill.OnShow();
 	}
@@ -785,18 +777,16 @@ void CGameStateRun :: heroMonsterInteraction(Character&hero, vector<Character*> 
 				(*monster)->setFloor(570 - map.getFloorY(j));
 
 		// 攻擊互動相關
-		if ((*monster)->getSkillRange()!=0 && MONSTER_HIT_CHARACTER((*monster)->getSkillRange())){
-			if (HEIGHT_CHECK && (*monster)->getCounter(mage_skill).getCount() == 90) {
+		if (HEIGHT_CHECK && (*monster)->getCounter(mage_skill).getCount() == 90) {
 				Mage_Skill.Reset();
 				hero_tempX = hero.getX();
 				hero_tempY = hero.getY();
 				(*monster)->getCounter(mage_skill).start();
 				(*monster)->getCounter(poison_delay).start();
-			}
 		}
-		if ((*monster)->getSkillRange() >= 0) { //測試
-			if (MONSTER_HIT_CHARACTER((*monster)->getAttackRange())) {
+		if (MONSTER_HIT_CHARACTER((*monster)->getAttackRange())) {
 				if (HIT_CHECK_CHARACTER && HEIGHT_CHECK) {
+					(*monster)->attacking(&hero);
 					(*monster)->setAttacking(true);
 					if (stage == 2)
 						CAudio::Instance()->Play(SFX_GUN, false);
@@ -924,13 +914,6 @@ void CGameStateRun::checkStage() {
 		if (stage == 6) {
 			GotoGameState(GAME_STATE_INIT);
 		}
-	}
-}
-void CGameStateRun::countDown(int &cd, int max, int min) {
-	if (cd < max) {
-		cd--;
-		if (cd == min)
-			cd = max;
 	}
 }
 }

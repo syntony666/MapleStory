@@ -6,13 +6,14 @@ namespace game_framework {
 		_min = min * 30;
 	}
 	void Counter::start() {
-		_count--;
+		if(_count ==_max)
+			_count--;
 	}
 	void Counter::stop() {
 		_count = _max;
 	}
 	int Counter::getCount() {
-		return _count;
+		return _count/30;
 	}
 	void Counter::countdown() {
 		if (_count == _max)

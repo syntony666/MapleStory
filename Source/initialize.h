@@ -132,7 +132,7 @@ namespace game_framework {
 			monster[i]->setMaxHP(100);
 			monster[i]->setAttack(50);
 			monster[i]->setAttackRange(50);
-			monster[i]->setSkillRange(0);
+			monster[i]->setSkill(0);
 		}
 	}
 	inline void initMonster2(vector<Character*> & monster) {
@@ -141,7 +141,7 @@ namespace game_framework {
 			monster[i]->setMaxHP(350);
 			monster[i]->setAttack(100);
 			monster[i]->setAttackRange(100);
-			monster[i]->setSkillRange(0);
+			monster[i]->setSkill(0);
 		}
 	}
 	inline void initMonster3(vector<Character*> & monster) {
@@ -150,7 +150,7 @@ namespace game_framework {
 			monster[i]->setMaxHP(750);
 			monster[i]->setAttack(0);
 			monster[i]->setAttackRange(200);
-			monster[i]->setSkillRange(200);
+			monster[i]->setSkill(1);
 		}
 	}
 	inline void initMonster4(vector<Character*> & monster) {
@@ -159,7 +159,7 @@ namespace game_framework {
 			monster[i]->setMaxHP(2000);
 			monster[i]->setAttack(200);
 			monster[i]->setAttackRange(100);
-			monster[i]->setSkillRange(0);
+			monster[i]->setSkill(0);
 		}
 	}
 }

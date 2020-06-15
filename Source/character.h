@@ -37,6 +37,7 @@ namespace game_framework {
 		//加入圖形(沒有的填0)
 		virtual void attacking(Character *c)=0;
 		Counter& getCounter(int i);
+		void countdown();
 		
 		//HP
 
@@ -70,12 +71,11 @@ namespace game_framework {
 		void setHitRight(bool flag);	// 設定是否被擊中
 		void setDead(bool flag);		// 設定是否死亡
 		void setAttackRange(int n); 
-		void setSkillRange(int n);
 
 		//Monsters
 		void set_Monster_Go_Left(bool flag);
 		void set_Monster_Go_Right(bool flag);
-
+		void setSkill(int i);
 		//Hero
 		void setSlashing(bool flag);
 		bool ifSlashing();
@@ -94,7 +94,6 @@ namespace game_framework {
 		int getFloor();					// 擷取地板
 		int getFacing();
 		int getAttackRange();
-		int getSkillRange();
 
 		bool ifAttacking();
 		bool ifHitLeft();
@@ -136,8 +135,9 @@ namespace game_framework {
 		int cooldown = 30 * 10;			// 技能冷卻 10 秒
 		int attackRange;
 		int skillRange;
+		int isSkill;
 		Animations a;
-		std::vector<Counter> counter;
+		std::vector<Counter*> counter;
 	};
 }
 #endif

@@ -17,9 +17,9 @@ namespace game_framework {
 		exp = nxp;
 		initX = nx;
 		initY = ny;
-		counter.push_back(Counter(120));	// mage skill
-		counter.push_back(Counter(120));	// is_poison
-		counter.push_back(Counter(120));	// poison_delay
+		counter.push_back(new Counter(90));	// mage skill
+		counter.push_back(new Counter(60));	// is_poison
+		counter.push_back(new Counter(50));	// poison_delay
 
 	}
 
@@ -151,19 +151,11 @@ namespace game_framework {
 					a.standLeft.OnMove();
 				}
 			}
-
-			for (auto count : counter) {
-				count.countdown();
-			}
-
 			hp_OnShow();
 		}
 	}
 	bool Monster::ifSkill() {
 		return isSkill;
-	}
-	void Monster::setSkill(bool flag) {
-		isSkill = flag;
 	}
 
 
@@ -172,7 +164,19 @@ namespace game_framework {
 			hero->setHP(hero->getHP() - attack);
 		}
 		if (skill == 1) {
-
+			counter[is_poison]->start();
+			if (counter[is_poison]->getCount() < 70) {
+				hero->setMovingLeft(false);
+				hero->setMovingRight(false);
+				hero->setMovingUp(false);
+				hero->setMovingDown(false);
+			}
+			if (counter[is_poison]->getCount() ==75 || counter[is_poison]->getCount() == 0) {
+				if (hero->getHP() * 0.1 <= 100)
+					hero->setHP(hero->getHP() - 100);
+				else
+					hero->setHP(int(hero->getHP() * 0.8));
+			}
 		}
 	}
 }

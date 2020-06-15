@@ -18,7 +18,6 @@ namespace game_framework {
 		void OnMove();					// 移動monster
 		void OnShow();					// 將monster圖形貼到畫面
 		bool ifSkill();
-		void setSkill(bool flag);
 		void attacking(Character *hero);
 
 	protected:
