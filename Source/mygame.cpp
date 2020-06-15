@@ -260,10 +260,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	hero_pos.setPosition(hero, *map);
 
 	TRACE("-------hero-pos_xy-------(%d, %d)\n", hero_pos.getX(), hero_pos.getY());
-	for (auto m:*monster) {
-		TRACE("---------Poison Delay--------(%d)\n", m->getCounter(poison_delay).getCount());
-		TRACE("-----Monster_Skill_CD----(%d)\n", m->getCounter(mage_skill).getCount());
-	}
+
 	TRACE("---------HEAL--------(%d)\n", hero->getCounter(heal).getCount());
 	TRACE("-----skill----(%d)\n", hero->getCounter(slash).getCount());
 
@@ -467,7 +464,7 @@ void CGameStateRun::OnInit() {
 			IDB_MAGE_STAND_RIGHT, IDB_MAGE_STAND_LEFT,
 			0, 0, 0, 0,
 			goRight, goLeft,
-			attackRight, attackLeft, slash,heal, lv_up, 0,0,0);
+			attackRight, attackLeft, slash, heal, lv_up, 0,0,0);
 	}
 	ShowInitProgress(65);
 
@@ -702,11 +699,12 @@ void CGameStateRun::OnShow()
 	hero->OnShow();			// 貼上人物
 
 
-	int slash_part = hero->getCounter(slash).getCount()*SEC / (300 / 8);
+
+	int slash_part = hero->getCounter(slash).getCount() / (300 / 8);
 	slashCD[slash_part].SetTopLeft(15, 125);
 	slashCD[slash_part].ShowBitmap();
 
-	int heal_part = hero->getCounter(heal).getCount()*SEC / (600 / 8);
+	int heal_part = hero->getCounter(heal).getCount() / (600 / 8);
 	healCD[heal_part].SetTopLeft(60, 125);
 	healCD[heal_part].ShowBitmap();
 }
@@ -769,7 +767,7 @@ void CGameStateRun :: heroMonsterInteraction(Character&hero, vector<Character*> 
 
 		// 攻擊互動相關
 		if (MONSTER_HIT_CHARACTER((*monster)->getAttackRange())) {
-			bool a = HIT_CHECK_CHARACTER;
+			bool a = HEIGHT_CHECK;
 				if (HIT_CHECK_CHARACTER && HEIGHT_CHECK) {
 					(*monster)->attacking(&hero);
 					(*monster)->setAttacking(true);

@@ -17,9 +17,9 @@ namespace game_framework {
 		exp = nxp;
 		initX = nx;
 		initY = ny;
-		counter.push_back(new Counter(90));	// mage skill
-		counter.push_back(new Counter(60));	// is_poison
-		counter.push_back(new Counter(50));	// poison_delay
+		counter.push_back(new Counter(3));	// mage skill
+		counter.push_back(new Counter(2));	// is_poison
+		counter.push_back(new Counter(2));	// poison_delay
 
 	}
 
@@ -171,25 +171,26 @@ namespace game_framework {
 				hero_tempY = hero->getY();
 				counter[mage_skill]->start();
 				counter[poison_delay]->start();
+				a.slashAnimation.SetTopLeft(hero_tempX - 50, hero_tempY - 20);
+
 			}
 			if (counter[poison_delay]->getCount() == 0 && hero->getX()>=hero_tempX - 60 && hero->getX() >= hero_tempX + 100) {
 				counter[is_poison]->start();
 			}
-			if (counter[is_poison]->getCount() < 70 ) {
+			if (counter[is_poison]->getCount() < 60 ) {
 				hero->setMovingLeft(false);
 				hero->setMovingRight(false);
 				hero->setMovingUp(false);
 				hero->setMovingDown(false);	
-				a.slashAnimation.SetTopLeft(hero_tempX - 50, hero_tempY - 20);
-				a.slashAnimation.OnShow();
-				a.slashAnimation.OnMove();
 			}
-			if (counter[is_poison]->getCount() ==75 || counter[is_poison]->getCount() == 0) {
+			if (counter[is_poison]->getCount() ==30 || counter[is_poison]->getCount() == 0) {
 				if (hero->getHP() * 0.1 <= 100)
 					hero->setHP(hero->getHP() - 100);
 				else
 					hero->setHP(int(hero->getHP() * 0.8));
 			}
+			a.slashAnimation.OnShow();
+			a.slashAnimation.OnMove();
 		}
 	}
 }

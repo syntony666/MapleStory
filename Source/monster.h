@@ -23,7 +23,6 @@ namespace game_framework {
 	protected:
 		const int HERO_STEP = 8;
 		int initX, initY;
-		int skill = 0;
 		bool isSkill = false;
 		int hero_tempX, hero_tempY;
 	};

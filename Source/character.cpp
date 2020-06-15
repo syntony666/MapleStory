@@ -214,7 +214,7 @@ namespace game_framework {
 		is_Monster_Go_Right = flag;
 	}
 	void Character::setSkill(int i) {
-		isSkill = i;
+		skill = i;
 	}
 
 	// Hero

@@ -136,6 +136,7 @@ namespace game_framework {
 		int attackRange;
 		int skillRange;
 		int isSkill;
+		int skill = 0;
 		Animations a;
 		std::vector<Counter*> counter;
 	};

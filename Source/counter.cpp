@@ -13,7 +13,7 @@ namespace game_framework {
 		_count = _max;
 	}
 	int Counter::getCount() {
-		return _count/30;
+		return _count;
 	}
 	void Counter::countdown() {
 		if (_count == _max)
