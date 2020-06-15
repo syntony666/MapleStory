@@ -474,6 +474,8 @@ IDB_HEAL_08             BITMAP                  "..\\res\\Skill\\heal_08.bmp"
 
 IDB_HEAL_09             BITMAP                  "..\\res\\Skill\\heal_09.bmp"
 
+IDB_POISON_ROOT         BITMAP                  "..\\res\\Mage\\Poison_root.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
