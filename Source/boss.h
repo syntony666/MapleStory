@@ -1,6 +1,9 @@
 #ifndef BOSS_H
 #define BOSS_H
 
+#include "character.h"
+#include "counter.h"
+
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 	// 這個class提供可以用鍵盤或滑鼠控制的單位
@@ -9,6 +12,9 @@ namespace game_framework {
 	struct BossAnimations
 	{
 		CAnimation normal;
+	};
+	enum BossCounter {
+		skills
 	};
 	class Boss
 	{
@@ -27,10 +33,11 @@ namespace game_framework {
 		int getHP();					// 擷取生命值
 		int getMaxHP();
 		int getAttack();				// 擷取攻擊力
+		Counter& getCounter(int i);
 		void setHit();				// 設定是否被擊中
 		void setHit(bool flag);		// 設定是否被擊中
 		void setHP(int Health);			// 設定生命值
-
+		int getSkill();
 
 	protected:
 		BossAnimations a;
@@ -45,6 +52,8 @@ namespace game_framework {
 		int maxHP = 100000;
 		int HP;
 		int attack = 400;
+		std::vector<Counter*> counter;
+		int skill;
 	};
 }
 #endif

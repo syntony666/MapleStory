@@ -21,6 +21,7 @@ namespace game_framework {
 		pos_x = 1550;
 		pos_y = 220;
 		HP = maxHP;
+		counter.push_back(new Counter(150));
 	}
 
 	void Boss::OnMove()
@@ -94,6 +95,18 @@ namespace game_framework {
 		CDDraw::ReleaseBackCDC();					// ©ñ±¼ Back Plain ªº CDC
 		hpIcon.SetTopLeft(250, 5);
 		hpIcon.ShowBitmap(0.3);
+	}
+
+	int Boss::getSkill() {
+		if (counter[skills]->getCount() == 150) {
+			srand((unsigned int)time(NULL));
+			skill = rand() % 4 + 1;
+		}
+		return skill;
+	}
+
+	Counter& Boss::getCounter(int i) {
+		return *counter[i];
 	}
 
 	void Boss::setHit() {

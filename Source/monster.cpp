@@ -169,9 +169,7 @@ namespace game_framework {
 			hero->setHP(hero->getHP() - attack);
 		}
 		if (skill == 1) {
-			TRACE("-------------------- - (%d)", counter[mage_skill]->getCount());
 			if (counter[mage_skill]->getCount() == 90) {
-				
 				hero_tempX = hero->getX();
 				hero_tempY = hero->getY();
 				counter[mage_skill]->start();

@@ -828,7 +828,22 @@ void CGameStateRun::heroBossInteraction(Character& hero, Boss &mboss, Map &map) 
 		mboss.setMovingRight(false);
 	}
 	
-		// 攻擊互動相關
+	// 攻擊互動相關
+	int skill = mboss.getSkill();
+
+	if (skill == 1) {
+
+	}
+	if (skill == 2) {
+
+	}
+	if (skill == 3) {
+
+	}
+	if (skill == 4) {
+
+	}
+
 
 	if (HIT_CHECK_CHARACTER && hero_pos.getX() >= 1550) {
 		hero.setHP(hero.getHP() - mboss.getAttack());
@@ -836,7 +851,7 @@ void CGameStateRun::heroBossInteraction(Character& hero, Boss &mboss, Map &map) 
 		hero.setHitLeft();
 		if (hero.getHP() <= 0)
 			return;
-		}
+	}
 
 	if (CHARACTER_HIT_BOSS && HIT_CHECK_BOSS) {
 		mboss.setHP(mboss.getHP() - hero.getAttack());
@@ -848,14 +863,14 @@ void CGameStateRun::heroBossInteraction(Character& hero, Boss &mboss, Map &map) 
 		CAudio::Instance()->Play(SFX_MONSTER_HIT, false);
 		mboss.setHit();
 	}
-	TRACE("-----------BOSS_HP---------(%d)\n", mboss.getHP());
+	TRACE("-----------BOSS_HP---------(%d)\n", skill);
 
-		/*// 怪物死亡相關
-		if ((*monster)->getHP() <= 0) {
-			hero.setXP(hero.getXP() + (*monster)->getXP());
-			(*monster)->setDead(true);
-			(*monster)->setXY(-1, -1);
-		}*/
+	/*// 怪物死亡相關
+	if ((*monster)->getHP() <= 0) {
+		hero.setXP(hero.getXP() + (*monster)->getXP());
+		(*monster)->setDead(true);
+		(*monster)->setXY(-1, -1);
+	}*/
 }
 void CGameStateRun::checkStage() {
 	if (stage == stage_count) {
