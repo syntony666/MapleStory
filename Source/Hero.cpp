@@ -13,8 +13,8 @@ namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 
 	Hero::Hero() {
-		counter.push_back(new Counter(10));	//slash
-		counter.push_back(new Counter(20));	//heal
+		counter.push_back(new Counter(300));	//slash
+		counter.push_back(new Counter(600));	//heal
 		Initialize();
 	}
 	Hero::~Hero() {

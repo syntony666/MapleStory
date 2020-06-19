@@ -328,13 +328,6 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	}
 
 
-	if(stage == 3)	{
-		if ((*monster).at(0)->getCounter(poison_delay).getCount() < 50) {
-			Mage_Skill.OnMove();
-		}
-	}
-
-
 	// 怪物互動相關
 	if(stage <= 4)
 		heroMonsterInteraction(*hero, *monster, *map);
@@ -468,7 +461,7 @@ void CGameStateRun::OnInit() {
 			IDB_MAGE_STAND_RIGHT, IDB_MAGE_STAND_LEFT,
 			0, 0, 0, 0,
 			goRight, goLeft,
-			attackRight, attackLeft, slash, heal, lv_up, 0,0,0,3);
+			attackRight, attackLeft, slash, heal, lv_up, 0,0,0,5);
 	}
 	ShowInitProgress(65);
 
@@ -581,7 +574,7 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	}
 
 	if (nChar == KEY_X) {
-		if (hero->getCounter(slash).getCount() == 10) {
+		if (hero->getCounter(slash).getCount() == 300) {
 			hero->setSlashing(true);
 			CAudio::Instance()->Play(SFX_SLASH, false);
 			hero->getCounter(slash).start();
@@ -589,7 +582,7 @@ void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	}
 
 	if (nChar == KEY_C) {
-		if (hero->getCounter(heal).getCount() == 20) {
+		if (hero->getCounter(heal).getCount() == 600) {
 			hero->setHealing(true);
 			hero->setHP(hero->getMaxHP());
 			CAudio::Instance()->Play(SFX_HEAL, false);

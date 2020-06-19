@@ -123,10 +123,10 @@ void CAudio::ExecuteMciCommand(char *command)
 		//
 		// Report MCI command problems, if the command is not successful.
 		//
-		if (!success) {
-			string error("MCI command error: the following command does not work\n\n\"");
-			GAME_ASSERT(false, error.append(command).append("\"").c_str());
-		}
+		//if (!success) {
+		//	string error("MCI command error: the following command does not work\n\n\"");
+		//	GAME_ASSERT(false, error.append(command).append("\"").c_str());
+		//}
 	}
 }
 

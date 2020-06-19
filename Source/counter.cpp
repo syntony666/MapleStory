@@ -1,9 +1,9 @@
 #include "counter.h"
 namespace game_framework {
 	Counter::Counter(int max, int min) {
-		_max = max * 30;
-		_count = max * 30;
-		_min = min * 30;
+		_max = max;
+		_count = max;
+		_min = min;
 	}
 	void Counter::start() {
 		if(_count ==_max)

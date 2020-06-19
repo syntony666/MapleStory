@@ -17,9 +17,9 @@ namespace game_framework {
 		exp = nxp;
 		initX = nx;
 		initY = ny;
-		counter.push_back(new Counter(3));	// mage skill
-		counter.push_back(new Counter(2));	// is_poison
-		counter.push_back(new Counter(3));	// poison_delay
+		counter.push_back(new Counter(90));	// mage skill
+		counter.push_back(new Counter(90));	// is_poison
+		counter.push_back(new Counter(60));	// poison_delay
 
 	}
 
@@ -118,7 +118,7 @@ namespace game_framework {
 			}
 			attack_time--;
 		}
-		if (counter[poison_delay]->getCount() < 90)
+		if (counter[poison_delay]->getCount() < 60)
 			a.slashAnimation.OnMove();
 	}
 
@@ -153,7 +153,7 @@ namespace game_framework {
 					a.standLeft.OnMove();
 				}
 			}	
-			if (skill == 1 && isAttacking && counter[poison_delay]->getCount()) {
+			if (skill == 1 && isAttacking && counter[poison_delay]->getCount()<60) {
 				a.slashAnimation.OnShow();
 			}
 			hp_OnShow();
@@ -171,7 +171,7 @@ namespace game_framework {
 		if (skill == 1) {
 			TRACE("-------------------- - (%d)", counter[mage_skill]->getCount());
 			if (counter[mage_skill]->getCount() == 90) {
-				a.slashAnimation.Reset();
+				
 				hero_tempX = hero->getX();
 				hero_tempY = hero->getY();
 				counter[mage_skill]->start();
@@ -179,21 +179,23 @@ namespace game_framework {
 				a.slashAnimation.SetTopLeft(hero_tempX - 50, hero_tempY - 20);
 
 			}
-			if (counter[poison_delay]->getCount() <= 0 && hero->getX()>=hero_tempX - 60 && hero->getX() >= hero_tempX + 100) {
+			if (counter[poison_delay]->getCount() <= 30 && hero->getX()>=hero_tempX - 60 && hero->getX() >= hero_tempX + 100) {
 				counter[is_poison]->start();
 			}
-			if (counter[is_poison]->getCount() < 60 ) {
+			if (counter[is_poison]->getCount() < 70 ) {
 				hero->setMovingLeft(false);
 				hero->setMovingRight(false);
 				hero->setMovingUp(false);
 				hero->setMovingDown(false);	
 			}
-			if (counter[is_poison]->getCount() ==30 || counter[is_poison]->getCount() == 0) {
+			if (counter[is_poison]->getCount() ==45 || counter[is_poison]->getCount() == 0) {
 				if (hero->getHP() * 0.1 <= 100)
 					hero->setHP(hero->getHP() - 100);
 				else
 					hero->setHP(int(hero->getHP() * 0.8));
 			}
+			if (counter[is_poison]->getCount() == 0) 
+				a.slashAnimation.Reset();
 		}
 	}
 }
