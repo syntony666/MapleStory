@@ -29,17 +29,16 @@ namespace game_framework {
 		BGM_STAGE1,				// 1
 		BGM_STAGE2,				// 2
 		BGM_STAGE3,				// 3
-		BGM_STAGE4,				// 4
-		BGM_BOSS,				// 5
-		BGM_GAMEOVER,			// 6
-		SFX_JUMP,				// 7
-		SFX_ATTACK,				// 8
-		SFX_SLASH,				// 9
-		SFX_HERO_HIT,			// 10
-		SFX_MONSTER_HIT,		// 11
-		SFX_GUN,				// 12
-		SFX_LEVEL_UP,			// 13
-		SFX_HEAL,				// 14
+		BGM_BOSS,				// 4
+		BGM_GAMEOVER,			// 5
+		SFX_JUMP,				// 6
+		SFX_ATTACK,				// 7
+		SFX_SLASH,				// 8
+		SFX_HERO_HIT,			// 9
+		SFX_MONSTER_HIT,		// 10
+		SFX_GUN,				// 11
+		SFX_LEVEL_UP,			// 12
+		SFX_HEAL,				// 13
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -100,7 +99,7 @@ namespace game_framework {
 		Character *hero;								// 角色
 		vector<Map> maps;								// 地圖
 		Map *map;
-		vector<Character*> monster1, monster2, monster3, monster4;// 怪物
+		vector<Character*> monster1, monster2, monster3;// 怪物
 		vector<Character*> *monster;
 		Boss boss;
 		Position hero_pos;

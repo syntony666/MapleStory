@@ -176,7 +176,7 @@ namespace game_framework {
 		a.goLeft = CAnimation(3);
 		a.attackRight = CAnimation(2);
 		a.attackLeft = CAnimation(2);
-		a.slashAnimation = CAnimation(2);
+		a.slashAnimation = CAnimation(slash_ani);
 		a.healAnimation = CAnimation(4);
 		a.lv_up = CAnimation(4);
 		for (size_t i = 0; i < goR.size(); i++) 
