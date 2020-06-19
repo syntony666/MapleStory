@@ -461,18 +461,12 @@ void CGameStateRun::OnInit() {
 			IDB_MAGE_STAND_RIGHT, IDB_MAGE_STAND_LEFT,
 			0, 0, 0, 0,
 			goRight, goLeft,
-			attackRight, attackLeft, slash, heal, lv_up, 0,0,0,5);
+			attackRight, attackLeft, slash, heal, lv_up, 0,0,0,4);
 	}
 	ShowInitProgress(65);
 
 	ShowInitProgress(80);
-	int Poison[] = { IDB_POISON_01, IDB_POISON_02, IDB_POISON_03, IDB_POISON_04, IDB_POISON_05,
-					 IDB_POISON_06, IDB_POISON_07, IDB_POISON_08, IDB_POISON_09, IDB_POISON_10,
-					 IDB_POISON_11, IDB_POISON_12, IDB_POISON_13, IDB_POISON_14, IDB_POISON_15,
-					 IDB_POISON_16, IDB_POISON_17, IDB_POISON_18, IDB_POISON_19, IDB_POISON_20 };
-	Mage_Skill = CAnimation(3);
-	for (int i = 0; i < 20; i++)
-		Mage_Skill.AddBitmap(Poison[i], RGB(0,0,0));
+
 	boss.addBitmap();
 
 	ShowInitProgress(90);
@@ -728,22 +722,21 @@ void CGameStateRun :: heroMonsterInteraction(Character&hero, vector<Character*> 
 
 		// §ðÀ»¤¬°Ê¬ÛÃö
 		if (MONSTER_HIT_CHARACTER((*monster)->getAttackRange())) {
-			bool a = HEIGHT_CHECK;
-				if (HIT_CHECK_CHARACTER && HEIGHT_CHECK) {
-					(*monster)->attacking(&hero);
-					(*monster)->setAttacking(true);
-					if (stage == 2)
-						CAudio::Instance()->Play(SFX_GUN, false);
-					if (stage != 3) {
-						CAudio::Instance()->Play(SFX_HERO_HIT, false);
-						if (monster_pos.getX() >= hero_pos.getX())
-							hero.setHitLeft();
-						else if (monster_pos.getX() < hero_pos.getX())
-							hero.setHitRight();
-					}
+			if (HIT_CHECK_CHARACTER && HEIGHT_CHECK) {
+				(*monster)->attacking(&hero);
+				(*monster)->setAttacking(true);
+				if (stage == 2)
+					CAudio::Instance()->Play(SFX_GUN, false);
+				if (stage != 3) {
+					CAudio::Instance()->Play(SFX_HERO_HIT, false);
+					if (monster_pos.getX() >= hero_pos.getX())
+						hero.setHitLeft();
+					else if (monster_pos.getX() < hero_pos.getX())
+						hero.setHitRight();
 				}
-				if (hero.getHP() <= 0)
-					return;
+			}
+			if (hero.getHP() <= 0)
+				return;
 		}
 		if (CHARACTER_HIT_MONSTER){
 			if (HIT_CHECK_MONSTER && HEIGHT_CHECK) {
