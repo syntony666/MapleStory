@@ -315,7 +315,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 	// 技能倒數相關
 	hero->countdown();
-	if (stage != 4) {
+	if (stage < 4) {
 		for (auto m : *monster) {
 			m->countdown();
 		}
@@ -848,7 +848,7 @@ void CGameStateRun::checkStage() {
 			map = &maps[3];
 		}
 		if (stage == 5) {
-			GotoGameState(GAME_STATE_INIT);
+			GotoGameState(GAME_STATE_OVER);
 		}
 	}
 }
