@@ -350,8 +350,6 @@ IDB_HEAL_CD_8           BITMAP                  "..\\res\\Icon\\Heal_CD_8.bmp"
 
 IDB_SLASH_CD_8          BITMAP                  "..\\res\\Icon\\Slash_CD_8.bmp"
 
-IDB_BACKGROUND5         BITMAP                  "..\\res\\bg_boss.bmp"
-
 IDB_BACKGROUND4         BITMAP                  "..\\res\\bg4.bmp"
 
 IDB_MAGE_STAND_LEFT     BITMAP                  "..\\res\\Mage\\Mage_Left.bmp"

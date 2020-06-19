@@ -185,7 +185,6 @@
 #define IDB_BITMAP23                    332
 #define IDB_SLASH_CD_8                  332
 #define IDB_BITMAP22                    333
-#define IDB_BACKGROUND5                 333
 #define IDB_BACKGROUND4                 334
 #define IDB_MAGE_STAND_LEFT             335
 #define IDB_MAGE_ATTACK_LEFT1           336
