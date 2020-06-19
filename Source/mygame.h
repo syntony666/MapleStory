@@ -108,7 +108,6 @@ namespace game_framework {
 		void heroMonsterInteraction(Character&hero, vector<Character*> & monster, Map &map);
 		void heroBossInteraction(Character&hero, Boss &mboss, Map &map);
 		void checkStage();
-		void countDown(int &cd, int max, int min = 0);
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -124,9 +123,12 @@ namespace game_framework {
 	protected:
 		void OnMove();									// 移動遊戲元素
 		void OnShow();									// 顯示這個狀態的遊戲畫面
+		void number_OnShow(int nx, int pos_nx, int pos_ny);
 	private:
-		int counter;	// 倒數之計數器
+		int counter = 210;	// 倒數之計數器
+		int *clearTime = 0;
 		CAnimation Gameover;
+		CAnimation num[10];
 	};
 
 }

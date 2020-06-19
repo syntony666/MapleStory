@@ -64,6 +64,8 @@ void CGameStateInit::OnInit()
 
 void CGameStateInit::OnBeginState()
 {
+	gameClear = false;
+	timeCounter = 0;
 }
 
 void CGameStateInit::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -159,23 +161,36 @@ CGameStateOver::CGameStateOver(CGame *g)
 
 void CGameStateOver::OnMove()
 {
-	Gameover.OnMove();
-	counter--;
-	if (counter < 0) {
-		CAudio::Instance()->Play(BGM_MENU, true);
-		GotoGameState(GAME_STATE_INIT);
+	if (gameClear) {
+		counter--;
+		if (counter < 0) {
+			CAudio::Instance()->Play(BGM_MENU, true);
+			GotoGameState(GAME_STATE_INIT);
+		}
+	}
+	else {
+		Gameover.OnMove();
+		counter--;
+		if (counter < 0) {
+			CAudio::Instance()->Play(BGM_MENU, true);
+			GotoGameState(GAME_STATE_INIT);
+		}
 	}
 }
 
 void CGameStateOver::OnBeginState()
 {
+	gameClear = true;
 	counter = 30 * 7; // 7 seconds
+	clearTime = new int(0);
+	*clearTime = timeCounter / 30;
 	CAudio::Instance()->Stop(BGM_STAGE1);
 	CAudio::Instance()->Stop(BGM_STAGE2);
 	CAudio::Instance()->Stop(BGM_STAGE3);
 	CAudio::Instance()->Stop(BGM_BOSS);
 	CAudio::Instance()->Stop(SFX_ATTACK);
-	CAudio::Instance()->Play(BGM_GAMEOVER, false);
+	if(!gameClear)
+		CAudio::Instance()->Play(BGM_GAMEOVER, false);
 }
 
 void CGameStateOver::OnInit()
@@ -188,18 +203,42 @@ void CGameStateOver::OnInit()
 					IDB_GAME_OVER_0 ,IDB_GAME_OVER_0 ,IDB_GAME_OVER_0 ,IDB_GAME_OVER_0,
 					IDB_GAME_OVER_0 };
 
+	int number_bitmaps[] = { IDB_0,IDB_1,IDB_2,IDB_3,IDB_4,IDB_5,IDB_6,IDB_7,IDB_8,IDB_9 };
+	for (int i = 0; i < 10; i++)
+		num[i].AddBitmap(number_bitmaps[i], RGB(230, 212, 132));
+
 	Gameover = CAnimation(10);
 	for (int i = 0; i < 21; i++)
 		Gameover.AddBitmap(over[i], RGB(255, 255, 255));
 
 	ShowInitProgress(15);
-	ShowInitProgress(100);
 }
 
 void CGameStateOver::OnShow()
 {
-	Gameover.SetTopLeft(233, 234);
-	Gameover.OnShow();
+	if (gameClear) {
+		if (*clearTime < 60) {
+			number_OnShow(0, 133, 45);
+			number_OnShow(0, 133 + 17, 45);
+			number_OnShow(*clearTime / 10, 133 + 17 * 2, 45);
+			number_OnShow(*clearTime % 10, 133 + 17 * 3, 45);
+		}
+		else {
+			number_OnShow(*clearTime / 60 / 10, 133, 45);
+			number_OnShow(*clearTime / 60 % 10, 133 + 17, 45);
+			number_OnShow(*clearTime % 60 / 10, 133 + 17 * 2, 45);
+			number_OnShow(*clearTime % 60 % 10, 133 + 17 * 3, 45);
+		}
+	}
+	else {
+		Gameover.SetTopLeft(233, 234);
+		Gameover.OnShow();
+	}
+}
+
+void CGameStateOver::number_OnShow(int nx, int pos_nx, int pos_ny) {
+	num[nx].SetTopLeft(pos_nx, pos_ny);
+	num[nx].OnShow();
 }
 
 
@@ -239,6 +278,7 @@ void CGameStateRun::OnBeginState()
 	initMonster2(monster2);
 	initMonster3(monster3);
 	boss.setXY(1550, 220);
+	boss.setHP(boss.getHP());
 
 	CAudio::Instance()->Stop(BGM_MENU);
 	CAudio::Instance()->Play(BGM_STAGE1, true);
@@ -250,6 +290,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	hero->OnMove();
 	map->OnMove();
 	map->getPortal()->OnMove();
+	timeCounter++;
 
 	hero_pos.setPosition(hero, *map);
 
@@ -258,7 +299,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	TRACE("---------HEAL--------(%d)\n", hero->getCounter(heal).getCount());
 	TRACE("-----skill----(%d)\n", hero->getCounter(slash).getCount());
 
-	TRACE("-----------Stage---------(%d)\n", stage);
+	TRACE("-----------time---------(%d)\n", timeCounter / 30);
 	TRACE("\n\n");
 
 	//// 地圖移動相關
@@ -822,12 +863,10 @@ void CGameStateRun::heroBossInteraction(Character& hero, Boss &mboss, Map &map) 
 	}
 	TRACE("-----------BOSS_HP---------(%d)\n", skill);
 
-	/*// 怪物死亡相關
-	if ((*monster)->getHP() <= 0) {
-		hero.setXP(hero.getXP() + (*monster)->getXP());
-		(*monster)->setDead(true);
-		(*monster)->setXY(-1, -1);
-	}*/
+	// 怪物死亡相關
+	if (mboss.getHP() <= 0) {
+		stage++;
+	}
 }
 void CGameStateRun::checkStage() {
 	if (stage == stage_count) {
@@ -856,6 +895,7 @@ void CGameStateRun::checkStage() {
 			map = &maps[3];
 		}
 		if (stage == 5) {
+			gameClear = true;
 			GotoGameState(GAME_STATE_OVER);
 		}
 	}

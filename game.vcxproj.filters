@@ -779,12 +779,6 @@
     <Image Include="RES\Laser\laser_05.bmp">
       <Filter>Resouces</Filter>
     </Image>
-    <Image Include="RES\Laser\laser_01.png" />
-    <Image Include="RES\Laser\laser_02.png" />
-    <Image Include="RES\Laser\laser_03.png" />
-    <Image Include="RES\Laser\laser_04.png" />
-    <Image Include="RES\Laser\laser_05.png" />
-    <Image Include="RES\Laser\laser_06.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="RES\continue.bmp">

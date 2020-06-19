@@ -243,7 +243,7 @@ namespace game_framework {
 			number_OnShow(attack / 10, 133, 45);
 			number_OnShow(attack % 10, 133 + d, 45);
 		}
-		if (attack < 1000) {
+		else if (attack < 1000) {
 			number_OnShow(attack / 100, 133, 45);
 			number_OnShow(attack / 10 % 10, 133 + d, 45);
 			number_OnShow(attack % 10, 133 + d * 2, 45);
