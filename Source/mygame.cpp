@@ -278,7 +278,7 @@ void CGameStateRun::OnBeginState()
 	initMonster2(monster2);
 	initMonster3(monster3);
 	boss.setXY(1550, 220);
-	boss.setHP(boss.getHP());
+	boss.setHP(boss.getMaxHP());
 
 	CAudio::Instance()->Stop(BGM_MENU);
 	CAudio::Instance()->Play(BGM_STAGE1, true);
@@ -830,7 +830,35 @@ void CGameStateRun::heroBossInteraction(Character& hero, Boss &mboss, Map &map) 
 	int skill = mboss.getSkill();
 
 	if (skill == 1) {
+		/*if (counter[mage_skill]->getCount() == 180) {
 
+			hero_tempX = hero->getX();
+			hero_tempY = hero->getY();
+			counter[mage_skill]->start();
+			counter[poison_delay]->start();
+			a.slashAnimation.SetTopLeft(hero_tempX - 50, hero_tempY - 20);
+
+		}
+		if (counter[poison_delay]->getCount() <= 40) {
+			if (hero->getX() >= hero_tempX - 60 && hero->getX() <= hero_tempX + 100) {
+				if (counter[is_poison]->getCount() == 40)
+					counter[is_poison]->start();
+			}
+		}
+		if (counter[is_poison]->getCount() < 40) {
+			hero->setMovingLeft(false);
+			hero->setMovingRight(false);
+			hero->setMovingUp(false);
+			hero->setMovingDown(false);
+		}
+		if (counter[is_poison]->getCount() == 20 || counter[is_poison]->getCount() == 0) {
+			if (hero->getHP() * 0.1 <= 50)
+				hero->setHP(hero->getHP() - 50);
+			else
+				hero->setHP(int(hero->getHP() * 0.9));
+		}
+		if (counter[poison_delay]->getCount() == 0)
+			a.slashAnimation.Reset();*/
 	}
 	if (skill == 2) {
 

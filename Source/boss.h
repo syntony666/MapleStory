@@ -14,7 +14,9 @@ namespace game_framework {
 		CAnimation normal;
 	};
 	enum BossCounter {
-		skills
+		skills,
+		laser_delay,
+		laser_time
 	};
 	class Boss
 	{

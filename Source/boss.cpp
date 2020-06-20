@@ -21,7 +21,9 @@ namespace game_framework {
 		pos_x = 1550;
 		pos_y = 220;
 		HP = maxHP;
-		counter.push_back(new Counter(150));
+		counter.push_back(new Counter(150));	// 技能冷卻時間計時
+		counter.push_back(new Counter(30));		// 技能一：光束 - 延遲
+		counter.push_back(new Counter(50));		// 技能一：光束 - 傷害
 	}
 
 	void Boss::OnMove()
@@ -98,7 +100,7 @@ namespace game_framework {
 	}
 
 	int Boss::getSkill() {
-		if (counter[skills]->getCount() == 150) {
+		if (counter[skills]->getCount() == 300) {
 			srand((unsigned int)time(NULL));
 			skill = rand() % 4 + 1;
 		}
