@@ -64,8 +64,6 @@ void CGameStateInit::OnInit()
 
 void CGameStateInit::OnBeginState()
 {
-	gameClear = false;
-	timeCounter = 0;
 }
 
 void CGameStateInit::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -182,8 +180,8 @@ void CGameStateOver::OnBeginState()
 {
 	gameClear = true;
 	counter = 30 * 7; // 7 seconds
-	clearTime = new int(0);
-	*clearTime = timeCounter / 30;
+	clearTime = timeCounter / 30;
+	TRACE("-----------clearTime---------(%d)\n", clearTime);
 	CAudio::Instance()->Stop(BGM_STAGE1);
 	CAudio::Instance()->Stop(BGM_STAGE2);
 	CAudio::Instance()->Stop(BGM_STAGE3);
@@ -217,17 +215,17 @@ void CGameStateOver::OnInit()
 void CGameStateOver::OnShow()
 {
 	if (gameClear) {
-		if (*clearTime < 60) {
+		if (clearTime < 60) {
 			number_OnShow(0, 133, 45);
 			number_OnShow(0, 133 + 17, 45);
-			number_OnShow(*clearTime / 10, 133 + 17 * 2, 45);
-			number_OnShow(*clearTime % 10, 133 + 17 * 3, 45);
+			number_OnShow(clearTime / 10, 133 + 17 * 2, 45);
+			number_OnShow(clearTime % 10, 133 + 17 * 3, 45);
 		}
 		else {
-			number_OnShow(*clearTime / 60 / 10, 133, 45);
-			number_OnShow(*clearTime / 60 % 10, 133 + 17, 45);
-			number_OnShow(*clearTime % 60 / 10, 133 + 17 * 2, 45);
-			number_OnShow(*clearTime % 60 % 10, 133 + 17 * 3, 45);
+			number_OnShow(clearTime / 60 / 10, 133, 45);
+			number_OnShow(clearTime / 60 % 10, 133 + 17, 45);
+			number_OnShow(clearTime % 60 / 10, 133 + 17 * 2, 45);
+			number_OnShow(clearTime % 60 % 10, 133 + 17 * 3, 45);
 		}
 	}
 	else {
@@ -269,7 +267,9 @@ CGameStateRun::~CGameStateRun()
 
 void CGameStateRun::OnBeginState()
 {
+	gameClear = false;
 	stage = 1;
+	timeCounter = 0;
 	stage_count = stage;
 	initHero(*hero);
 	for (int i = 0; i < 4; i++)

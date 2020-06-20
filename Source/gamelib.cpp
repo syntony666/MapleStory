@@ -359,6 +359,7 @@ void CMovingBitmap::LoadBitmap(char *filename, COLORREF color)
 	location.bottom = ny+bitmapSize.bmHeight;
 	SurfaceID = CDDraw::RegisterBitmap(filename, color);
 	isBitmapLoaded = true;
+	bmp->DeleteObject();
 }
 
 void CMovingBitmap::SetTopLeft(int x, int y)
@@ -477,6 +478,8 @@ void CGameState::OnCycle() // Template Method
 	OnMove();
 	OnShow();
 }
+
+int CGameState::timeCounter = 0;
 
 /////////////////////////////////////////////////////////////////////////////
 // CGame: Game Class

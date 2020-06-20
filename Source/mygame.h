@@ -126,7 +126,7 @@ namespace game_framework {
 		void number_OnShow(int nx, int pos_nx, int pos_ny);
 	private:
 		int counter = 210;	// 倒數之計數器
-		int *clearTime = 0;
+		int clearTime = 0;
 		CAnimation Gameover;
 		CAnimation num[10];
 	};

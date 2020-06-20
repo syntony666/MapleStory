@@ -8,6 +8,7 @@ namespace game_framework {
 		void stop();
 		void countdown();
 		int getCount();
+
 	private:
 		int _count;
 		int _max;
