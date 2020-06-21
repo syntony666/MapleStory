@@ -41,6 +41,7 @@ void CGameStateInit::OnInit()
 	CAudio::Instance()->Load(SFX_MONSTER_HIT, "sounds\\sfx_monster_hit.mp3");
 	CAudio::Instance()->Load(SFX_GUN, "sounds\\sfx_gun.mp3");
 	CAudio::Instance()->Load(SFX_LEVEL_UP, "sounds\\sfx_levelup.mp3");
+	CAudio::Instance()->Load(SFX_ROOT, "sounds\\sfx_root.mp3");
 
 	menu = 1;
 	
@@ -178,7 +179,6 @@ void CGameStateOver::OnMove()
 
 void CGameStateOver::OnBeginState()
 {
-	gameClear = true;
 	counter = 30 * 7; // 7 seconds
 	clearTime = timeCounter / 30;
 	TRACE("-----------clearTime---------(%d)\n", clearTime);
@@ -356,20 +356,20 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 	// 技能倒數相關
 	hero->countdown();
-	if (stage < 4) {
+
+	// 怪物互動相關
+	if (stage <= 3) {
 		for (auto m : *monster) {
 			m->countdown();
 		}
+		heroMonsterInteraction(*hero, *monster, *map);
 	}
 
-
-	// 怪物互動相關
-	if(stage <= 3)
-		heroMonsterInteraction(*hero, *monster, *map);
-
 	// BOSS互動相關
-	if (stage == 4)
+	if (stage == 4) {
+		boss.countdown();
 		heroBossInteraction(*hero, boss, *map);
+	}
 
 	// 玩家死亡相關
 	if (hero->getHP() <= 0)
@@ -510,6 +510,8 @@ void CGameStateRun::OnInit() {
 
 	boss.addBitmap();
 
+	PoisonRoot.LoadBitmap(IDB_POISON_ROOT, RGB(255, 255, 255));
+
 	ShowInitProgress(90);
 
 	// Load Bitmaps of Maps
@@ -547,6 +549,19 @@ void CGameStateRun::OnInit() {
 		healCD[i].LoadBitmap(heal_cd_bitmaps[i]);
 
 	boss.Initialize();
+
+	Boss_laser_delay = CAnimation(5);
+	Boss_laser = CAnimation(5);
+
+	int laser_delay_bitmaps[] = { IDB_LASER_01, IDB_LASER_02, IDB_LASER_03,
+								  IDB_LASER_04, IDB_LASER_05, IDB_LASER_06 };
+	for (int i = 0; i < 6; i++)
+		Boss_laser_delay.AddBitmap(laser_delay_bitmaps[i], RGB(255, 255, 255));
+
+	int laser_bitmaps[] = { IDB_LASER_07, IDB_LASER_08, IDB_LASER_09, IDB_LASER_10, IDB_LASER_11,
+							IDB_LASER_12, IDB_LASER_13, IDB_LASER_14, IDB_LASER_15, IDB_LASER_16 };
+	for (int i = 0; i < 10; i++)
+		Boss_laser.AddBitmap(laser_bitmaps[i], RGB(255, 255, 255));
 
 	ShowInitProgress(100);
 }
@@ -685,15 +700,27 @@ void CGameStateRun::OnShow()
 	if (stage <= 3) {
 		if (monster_num(*monster) == 0)
 			map->portalOnShow();
-		for (auto m : *monster)
+		for (auto m : *monster) {
 			m->OnShow();
+			if ((m)->getCounter(is_poison).getCount() < 40) {
+				PoisonRoot.SetTopLeft(hero->getX()-30, hero->getY()-10);
+				PoisonRoot.ShowBitmap();
+			}
+		}
 	}
 	else if (stage == 4) {
 		boss.OnShow();
 		boss.showHPBar();
+		if (boss.getCounter(laser_delay).getCount() < 30) {
+			Boss_laser_delay.SetTopLeft(0, 580);
+			Boss_laser_delay.OnShow();
+		}
+		if (boss.getCounter(laser_skill).getCount() < 50) {
+			Boss_laser.SetTopLeft(0, 580);
+			Boss_laser.OnShow();
+		}
 	}
 	hero->OnShow();			// 貼上人物
-
 
 
 	int slash_part = hero->getCounter(slash).getCount() / (300 / 8);
@@ -830,35 +857,20 @@ void CGameStateRun::heroBossInteraction(Character& hero, Boss &mboss, Map &map) 
 	int skill = mboss.getSkill();
 
 	if (skill == 1) {
-		/*if (counter[mage_skill]->getCount() == 180) {
-
-			hero_tempX = hero->getX();
-			hero_tempY = hero->getY();
-			counter[mage_skill]->start();
-			counter[poison_delay]->start();
-			a.slashAnimation.SetTopLeft(hero_tempX - 50, hero_tempY - 20);
-
+		if (mboss.getCounter(skills).getCount() == 150 && mboss.getCounter(laser_delay).getCount() == 30) {
+			mboss.getCounter(skills).start();
+			mboss.getCounter(laser_delay).start();
 		}
-		if (counter[poison_delay]->getCount() <= 40) {
-			if (hero->getX() >= hero_tempX - 60 && hero->getX() <= hero_tempX + 100) {
-				if (counter[is_poison]->getCount() == 40)
-					counter[is_poison]->start();
-			}
+		if (mboss.getCounter(laser_delay).getCount() < 30) {
+			Boss_laser_delay.OnMove();
 		}
-		if (counter[is_poison]->getCount() < 40) {
-			hero->setMovingLeft(false);
-			hero->setMovingRight(false);
-			hero->setMovingUp(false);
-			hero->setMovingDown(false);
+		if (mboss.getCounter(laser_delay).getCount() == 0)
+			mboss.getCounter(laser_skill).start();
+		if (mboss.getCounter(laser_skill).getCount() < 50) {
+			Boss_laser.OnMove();
+			if (hero.ifMovingDown() == false)
+				hero.setHP(hero.getHP() - 10);
 		}
-		if (counter[is_poison]->getCount() == 20 || counter[is_poison]->getCount() == 0) {
-			if (hero->getHP() * 0.1 <= 50)
-				hero->setHP(hero->getHP() - 50);
-			else
-				hero->setHP(int(hero->getHP() * 0.9));
-		}
-		if (counter[poison_delay]->getCount() == 0)
-			a.slashAnimation.Reset();*/
 	}
 	if (skill == 2) {
 
@@ -889,7 +901,8 @@ void CGameStateRun::heroBossInteraction(Character& hero, Boss &mboss, Map &map) 
 		CAudio::Instance()->Play(SFX_MONSTER_HIT, false);
 		mboss.setHit();
 	}
-	TRACE("-----------BOSS_HP---------(%d)\n", skill);
+	TRACE("-----------BOSS_SKILL---------(%d)\n", skill);
+	TRACE("-----------BOSS_DELAY---------(%d)\n", mboss.getCounter(laser_delay).getCount());
 
 	// 怪物死亡相關
 	if (mboss.getHP() <= 0) {

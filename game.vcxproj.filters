@@ -871,5 +871,8 @@
     <Media Include="Sounds\sfx_slash.mp3">
       <Filter>Sounds</Filter>
     </Media>
+    <Media Include="Sounds\sfx_root.mp3">
+      <Filter>Sounds</Filter>
+    </Media>
   </ItemGroup>
 </Project>

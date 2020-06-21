@@ -75,6 +75,12 @@ namespace game_framework {
 	void Character::setAttacking(bool flag) { 
 		isAttacking = flag; 
 	}
+	void Character::setPoison(bool flag) {
+		isPoison = flag;
+	}
+	bool Character::ifPoison() {
+		return isPoison;
+	}
 	void Character::setDead(bool flag) {
 		isDead = flag;
 	}

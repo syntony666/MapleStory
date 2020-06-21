@@ -480,6 +480,7 @@ void CGameState::OnCycle() // Template Method
 }
 
 int CGameState::timeCounter = 0;
+bool CGameState::gameClear = false;
 
 /////////////////////////////////////////////////////////////////////////////
 // CGame: Game Class

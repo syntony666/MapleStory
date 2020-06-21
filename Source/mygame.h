@@ -39,6 +39,7 @@ namespace game_framework {
 		SFX_GUN,				// 11
 		SFX_LEVEL_UP,			// 12
 		SFX_HEAL,				// 13
+		SFX_ROOT,				// 14
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -91,11 +92,10 @@ namespace game_framework {
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
 		int stage, stage_count;
-		int hero_tempX = 0;
-		int hero_tempY = 0;
 		CMovingBitmap slashCD[9], healCD[9];
-		CMovingBitmap	background;						// 背景圖
-		CAnimation Mage_Skill;
+		CMovingBitmap background;						// 背景圖
+		CMovingBitmap PoisonRoot;
+		CAnimation Boss_laser_delay, Boss_laser;
 		Character *hero;								// 角色
 		vector<Map> maps;								// 地圖
 		Map *map;

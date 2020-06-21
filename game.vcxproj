@@ -559,6 +559,7 @@
     <Media Include="Sounds\sfx_laser.mp3" />
     <Media Include="Sounds\sfx_levelup.mp3" />
     <Media Include="Sounds\sfx_monster_hit.mp3" />
+    <Media Include="Sounds\sfx_root.mp3" />
     <Media Include="Sounds\sfx_slash.mp3" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -70,6 +70,7 @@ namespace game_framework {
 		void setHitLeft(bool flag);		// 設定是否被擊中
 		void setHitRight(bool flag);	// 設定是否被擊中
 		void setDead(bool flag);		// 設定是否死亡
+		void setPoison(bool flag);		// 設定是否中毒
 		void setAttackRange(int n); 
 
 		//Monsters
@@ -102,6 +103,7 @@ namespace game_framework {
 		bool ifMovingRight();
 		bool ifMovingUp();
 		bool ifMovingDown();
+		bool ifPoison();
 		bool ifDead();
 	protected:
 		CAnimation hp[11];
@@ -121,6 +123,7 @@ namespace game_framework {
 		bool isSlashing;		// 是否正在施放技能
 		bool isHitLeft, isHitRight;		// 是否受到攻擊
 		bool isDead;
+		bool isPoison = false;
 		bool isHealing;
 		bool rising;					// true表上升、false表下降
 		bool is_Monster_Go_Left = false;

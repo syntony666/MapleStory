@@ -100,15 +100,21 @@ namespace game_framework {
 	}
 
 	int Boss::getSkill() {
-		if (counter[skills]->getCount() == 300) {
+		if (counter[skills]->getCount() == 150) {
 			srand((unsigned int)time(NULL));
-			skill = rand() % 4 + 1;
+			skill = ( rand() % 4 ) + 1;
 		}
+		TRACE("-----------BOSS_CD---------(%d)\n", counter[skills]->getCount());
 		return skill;
 	}
 
 	Counter& Boss::getCounter(int i) {
 		return *counter[i];
+	}
+
+	void Boss::countdown() {
+		for (auto count : counter)
+			count->countdown();
 	}
 
 	void Boss::setHit() {

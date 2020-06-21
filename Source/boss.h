@@ -16,7 +16,7 @@ namespace game_framework {
 	enum BossCounter {
 		skills,
 		laser_delay,
-		laser_time
+		laser_skill
 	};
 	class Boss
 	{
@@ -36,6 +36,7 @@ namespace game_framework {
 		int getMaxHP();
 		int getAttack();				// 擷取攻擊力
 		Counter& getCounter(int i);
+		void countdown();
 		void setHit();				// 設定是否被擊中
 		void setHit(bool flag);		// 設定是否被擊中
 		void setHP(int Health);			// 設定生命值
