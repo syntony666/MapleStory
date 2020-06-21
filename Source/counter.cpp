@@ -1,4 +1,5 @@
 #include "counter.h"
+
 namespace game_framework {
 	Counter::Counter(int max, int min) {
 		_max = max;
