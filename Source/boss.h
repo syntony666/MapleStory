@@ -36,7 +36,7 @@ namespace game_framework
 		int getAttack();					// 擷取攻擊力
 		int getSkill();						// 擷取技能組代號
 		Counter& getCounter(int i);			// 取得倒數器
-	protected:
+	private:
 		const int HERO_STEP = 8;			// 挑戰者步伐大小
 		const int floor = 570;				// 地板高度
 		BossAnimations a;					// 動畫
@@ -48,8 +48,8 @@ namespace game_framework
 		int attack;							// 攻擊力
 		int maxHP, HP;						// 最高血量, 目前血量
 		int skill;							// 技能組代號
-		int attack;					// 攻擊力
 		std::vector<Counter*> counter;		// 倒數器
+		int hit_time;
 	};
 }
 #endif

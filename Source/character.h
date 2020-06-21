@@ -28,7 +28,7 @@ namespace game_framework {
 	class Character
 	{
 	public:
-		Character() {}
+		Character();
 		~Character();
 		virtual void Initialize() = 0;	// 設定初始值
 		virtual void OnMove() = 0;		// 移動
@@ -107,13 +107,10 @@ namespace game_framework {
 		CAnimation hp[11];
 		CAnimation num[13];
 		int pos_x,	pos_y;				//左邊座標
-		int pos_rx, pos_ry;				//右邊座標
-		int attack;
 		int floor;						//地板高度
 		int HP, maxHP;
 		int exp;
 		int level;
-		int level_animation = 0;
 		int facing;					// 1=面向右 2=面向左
 		bool isMovingDown, isMovingUp,	// 是否正在移動
 			 isMovingRight, isMovingLeft;
@@ -123,22 +120,18 @@ namespace game_framework {
 		bool isDead;
 		bool isHealing;
 		bool rising;					// true表上升、false表下降
-		bool is_Monster_Go_Left = false;
-		bool is_Monster_Go_Right = false;
+		bool is_Monster_Go_Left, is_Monster_Go_Right;
 		int initial_velocity;			// 初始速度
-		int hit_time = 18;
-		int attack_time = 15;
-		int skill_time = 26;		// 技能動畫時間
-		int heal_time = 72;		// 技能動畫時間
 		int velocity;					// 目前的速度(點/次)
-		int STEP_SIZE = 8;				// 行走速度
-		int cooldown = 30 * 10;			// 技能冷卻 10 秒
+		int STEP_SIZE;				// 行走速度
 		int attackRange;
 		int skillRange;
-		int isSkill;
-		int skill = 0;
+		int skill;
 		Animations a;
 		std::vector<Counter*> counter;
+		int hit_time;
+		int attack;
+		int level_animation;
 	};
 }
 #endif

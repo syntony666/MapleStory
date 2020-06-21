@@ -10,7 +10,6 @@ namespace game_framework {
 	{
 	public:
 		Map();
-		~Map();
 		void Initialize();
 		void LoadBitmap();
 		void OnShow();

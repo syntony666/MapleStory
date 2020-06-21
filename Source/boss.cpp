@@ -87,16 +87,16 @@ namespace game_framework {
 		const int y2 = y1 + bar_height;
 		const int x2 = x1 + (percent * bar_width / 100);
 
-		CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
-		CPen *pp, p(PS_NULL, 0, RGB(0, 0, 0));		// 清除pen
+		CDC *pDC = CDDraw::GetBackCDC();
+		CPen *pp, p(PS_NULL, 0, RGB(0, 0, 0));
 		pp = pDC->SelectObject(&p);
 
-		CBrush b2(RGB(255, 0, 0));					// 血條
+		CBrush b2(RGB(255, 0, 0));
 		pDC->SelectObject(&b2);
 		pDC->Rectangle(x1, y1, x2, y2);
 
-		pDC->SelectObject(pp);						// 釋放 pen
-		CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
+		pDC->SelectObject(pp);
+		CDDraw::ReleaseBackCDC();
 		hpIcon.SetTopLeft(250, 5);
 		hpIcon.ShowBitmap(0.3);
 	}

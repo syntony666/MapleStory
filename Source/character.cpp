@@ -7,6 +7,13 @@
 #include "character.h"
 
 namespace game_framework {
+	Character::Character() {
+		level_animation = 0;
+		is_Monster_Go_Left = is_Monster_Go_Right = false;
+		hit_time = 18;
+		STEP_SIZE = 8;
+		skill = 0;
+	}
 
 	Character::~Character() {
 		for(auto c : counter)
