@@ -12,7 +12,15 @@ namespace game_framework
 	};
 	enum BossCounter 
 	{		// 倒數器名稱
-		skills
+		skills,
+		laser_delay,
+		laser_skill,
+		knockback_delay,
+		knockback_skill,
+		lighting_delay1,
+		lighting_skill1,
+		lighting_delay2,
+		lighting_skill2
 	};
 	class Boss
 	{
@@ -31,11 +39,13 @@ namespace game_framework
 		void setHit(bool flag);				// 設定是否被擊中
 		void setHP(int Health);				// 設定生命值
 		bool ifHit();						// 擷取是否被擊中
+		int getX();							// 擷取X座標
 		int getHP();						// 擷取生命值
 		int getMaxHP();						// 擷取最大生命值
 		int getAttack();					// 擷取攻擊力
 		int getSkill();						// 擷取技能組代號
 		Counter& getCounter(int i);			// 取得倒數器
+		void countdown();					// 倒數器倒數
 	private:
 		const int HERO_STEP = 8;			// 挑戰者步伐大小
 		const int floor = 570;				// 地板高度

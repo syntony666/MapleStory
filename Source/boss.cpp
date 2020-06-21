@@ -7,11 +7,12 @@
 #include "boss.h"
 
 namespace game_framework {
-	/////////////////////////////////////////////////////////////////////////////
-	// Boss: class
-	/////////////////////////////////////////////////////////////////////////////
 
-	Boss::~Boss() {
+	Boss::~Boss() 
+	{
+		for (auto c : counter)
+			delete c;
+		counter.clear();
 	}
 
 	void Boss::Initialize()
@@ -21,7 +22,15 @@ namespace game_framework {
 		pos_x = 1550;
 		pos_y = 220;
 		HP = maxHP;
-		counter.push_back(new Counter(150));
+		counter.push_back(new Counter(150));	// 技能冷卻時間計時
+		counter.push_back(new Counter(30));		// 技能一：光束 - 延遲
+		counter.push_back(new Counter(50));		// 技能一：光束 - 傷害
+		counter.push_back(new Counter(60));		// 技能二：擊退 - 延遲
+		counter.push_back(new Counter(8));		// 技能二：擊退 - 傷害
+		counter.push_back(new Counter(60));		// 技能三：閃電 - 延遲1
+		counter.push_back(new Counter(30));		// 技能三：閃電 - 傷害1
+		counter.push_back(new Counter(60));		// 技能三：閃電 - 延遲2
+		counter.push_back(new Counter(30));		// 技能三：閃電 - 傷害2
 		isDead = isHit = false;
 		maxHP = 100000;
 		hit_time = 18;
@@ -87,44 +96,62 @@ namespace game_framework {
 		const int y2 = y1 + bar_height;
 		const int x2 = x1 + (percent * bar_width / 100);
 
-		CDC *pDC = CDDraw::GetBackCDC();
-		CPen *pp, p(PS_NULL, 0, RGB(0, 0, 0));
+		CDC *pDC = CDDraw::GetBackCDC();			// 取得 Back Plain 的 CDC 
+		CPen *pp, p(PS_NULL, 0, RGB(0, 0, 0));		// 清除pen
 		pp = pDC->SelectObject(&p);
 
-		CBrush b2(RGB(255, 0, 0));
+		CBrush b2(RGB(255, 0, 0));					// 血條
 		pDC->SelectObject(&b2);
 		pDC->Rectangle(x1, y1, x2, y2);
 
-		pDC->SelectObject(pp);
-		CDDraw::ReleaseBackCDC();
+		pDC->SelectObject(pp);						// 釋放 pen
+		CDDraw::ReleaseBackCDC();					// 放掉 Back Plain 的 CDC
 		hpIcon.SetTopLeft(250, 5);
 		hpIcon.ShowBitmap(0.3);
 	}
 
-	int Boss::getSkill() {
+	int Boss::getSkill() 
+	{
 		if (counter[skills]->getCount() == 150) {
 			srand((unsigned int)time(NULL));
-			skill = rand() % 4 + 1;
+			skill = (rand() % 3) + 1;
+			counter[skills]->start();
 		}
+		TRACE("-----------BOSS_CD---------(%d)\n", counter[skills]->getCount() / 30);
 		return skill;
 	}
 
-	Counter& Boss::getCounter(int i) {
+	Counter& Boss::getCounter(int i) 
+	{
 		return *counter[i];
 	}
 
-	void Boss::setHit() {
+	void Boss::countdown() 
+	{
+		for (auto count : counter)
+			count->countdown();
+	}
+
+	void Boss::setHit() 
+	{
 		isHit = true;
 	}
-	void Boss::setHit(bool flag) {
+	void Boss::setHit(bool flag) 
+	{
 		isHit = flag;
 	}
 
-	bool Boss::ifHit() {
+	bool Boss::ifHit() 
+	{
 		return isHit;
 	}
-	int Boss::getAttack() {
+	int Boss::getAttack() 
+	{
 		return attack;
+	}
+	int Boss::getX() 
+	{
+		return pos_x;
 	}
 	int Boss::getHP() {
 		return HP;
@@ -132,7 +159,8 @@ namespace game_framework {
 	int Boss::getMaxHP() {
 		return maxHP;
 	}
-	void Boss::setHP(int Health) {
+	void Boss::setHP(int Health) 
+	{
 		HP = Health;
 	}
 }

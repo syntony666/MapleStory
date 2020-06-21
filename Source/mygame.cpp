@@ -754,49 +754,49 @@ void CGameStateRun::OnShow()
 	{
 		boss.OnShow();
 
-		if (boss.getCounter(laser_delay).getCount() < 30) 
+		if (boss.getCounter(laser_delay).getCount() < 30)
 		{
 			Boss_laser_delay.SetTopLeft(0, 580);
 			Boss_laser_delay.OnShow();
 		}
 
-		if (boss.getCounter(laser_skill).getCount() < 50) 
+		if (boss.getCounter(laser_skill).getCount() < 50)
 		{
 			Boss_laser.SetTopLeft(0, 580);
 			Boss_laser.OnShow();
 		}
 
-		if (boss.getCounter(knockback_delay).getCount() < 60) 
+		if (boss.getCounter(knockback_delay).getCount() < 60)
 		{
 			Boss_knockback_delay.SetTopLeft(boss.getX() - 200, 0);
 			Boss_knockback_delay.OnShow();
 		}
 
-		if (boss.getCounter(knockback_skill).getCount() < 8) 
+		if (boss.getCounter(knockback_skill).getCount() < 8)
 		{
 			Boss_knockback.SetTopLeft(boss.getX() - 200, 0);
 			Boss_knockback.OnShow();
 		}
 
-		if (boss.getCounter(lighting_delay1).getCount() < 60) 
+		if (boss.getCounter(lighting_delay1).getCount() < 60)
 		{
 			Boss_lighting_delay1.SetTopLeft(boss.getX() - 1000, -20);
 			Boss_lighting_delay1.OnShow();
 		}
 
-		if (boss.getCounter(lighting_skill1).getCount() < 30) 
+		if (boss.getCounter(lighting_skill1).getCount() < 30)
 		{
 			Boss_lighting1.SetTopLeft(boss.getX() - 1000, -20);
 			Boss_lighting1.OnShow();
 		}
 
-		if (boss.getCounter(lighting_delay2).getCount() < 60) 
+		if (boss.getCounter(lighting_delay2).getCount() < 60)
 		{
 			Boss_lighting_delay2.SetTopLeft(boss.getX() - 1000, -20);
 			Boss_lighting_delay2.OnShow();
 		}
 
-		if (boss.getCounter(lighting_skill2).getCount() < 30) 
+		if (boss.getCounter(lighting_skill2).getCount() < 30)
 		{
 			Boss_lighting2.SetTopLeft(boss.getX() - 1000, -20);
 			Boss_lighting2.OnShow();
