@@ -40,6 +40,7 @@ namespace game_framework {
 		SFX_LEVEL_UP,			// 12
 		SFX_HEAL,				// 13
 		SFX_ROOT,				// 14
+		BGM_CLEAR,				// 15
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -128,6 +129,7 @@ namespace game_framework {
 		int counter = 210;	// 倒數之計數器
 		int clearTime = 0;
 		CAnimation Gameover;
+		CMovingBitmap clear_info;
 		CAnimation num[10];
 	};
 

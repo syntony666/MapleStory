@@ -334,6 +334,7 @@
     <Image Include="RES\Boss\boss_08.bmp" />
     <Image Include="RES\Boss\boss_icon.bmp" />
     <Image Include="RES\Boss\boss_stand.bmp" />
+    <Image Include="RES\clear_info.bmp" />
     <Image Include="RES\exit1.bmp" />
     <Image Include="RES\exit2.bmp" />
     <Image Include="RES\frog_attack_left1.bmp" />
@@ -545,6 +546,7 @@
   </ItemGroup>
   <ItemGroup>
     <Media Include="Sounds\bgm_boss.mp3" />
+    <Media Include="Sounds\bgm_clear.mp3" />
     <Media Include="Sounds\bgm_gameover.mp3" />
     <Media Include="Sounds\bgm_menu.mp3" />
     <Media Include="Sounds\bgm_stage1.mp3" />

@@ -506,6 +506,8 @@ IDB_LASER_05            BITMAP                  "..\\res\\Laser\\laser_05.bmp"
 
 IDB_LASER_06            BITMAP                  "..\\res\\Laser\\laser_06.bmp"
 
+IDB_CLEAR_INFO          BITMAP                  "C:\\Users\\nelso\\Desktop\\School\\108_2_GameProject\\MapleStory\\RES\\clear_info.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

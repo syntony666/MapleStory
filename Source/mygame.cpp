@@ -33,6 +33,7 @@ void CGameStateInit::OnInit()
 	CAudio::Instance()->Load(BGM_STAGE3, "sounds\\bgm_stage3.mp3");
 	CAudio::Instance()->Load(BGM_BOSS, "sounds\\bgm_boss.mp3");
 	CAudio::Instance()->Load(BGM_GAMEOVER, "sounds\\bgm_gameover.mp3");
+	CAudio::Instance()->Load(BGM_CLEAR, "sounds\\bgm_clear.mp3");
 	CAudio::Instance()->Load(SFX_JUMP, "sounds\\sfx_jump.mp3");
 	CAudio::Instance()->Load(SFX_ATTACK, "sounds\\sfx_attack.mp3");
 	CAudio::Instance()->Load(SFX_SLASH, "sounds\\sfx_slash.mp3");
@@ -189,6 +190,10 @@ void CGameStateOver::OnBeginState()
 	CAudio::Instance()->Stop(SFX_ATTACK);
 	if(!gameClear)
 		CAudio::Instance()->Play(BGM_GAMEOVER, false);
+	else {
+		counter = 30 * 13; // 7 seconds
+		CAudio::Instance()->Play(BGM_CLEAR, false);
+	}
 }
 
 void CGameStateOver::OnInit()
@@ -209,24 +214,20 @@ void CGameStateOver::OnInit()
 	for (int i = 0; i < 21; i++)
 		Gameover.AddBitmap(over[i], RGB(255, 255, 255));
 
+	clear_info.LoadBitmap(IDB_CLEAR_INFO);
+
 	ShowInitProgress(15);
 }
 
 void CGameStateOver::OnShow()
 {
 	if (gameClear) {
-		if (clearTime < 60) {
-			number_OnShow(0, 133, 45);
-			number_OnShow(0, 133 + 17, 45);
-			number_OnShow(clearTime / 10, 133 + 17 * 2, 45);
-			number_OnShow(clearTime % 10, 133 + 17 * 3, 45);
-		}
-		else {
-			number_OnShow(clearTime / 60 / 10, 133, 45);
-			number_OnShow(clearTime / 60 % 10, 133 + 17, 45);
-			number_OnShow(clearTime % 60 / 10, 133 + 17 * 2, 45);
-			number_OnShow(clearTime % 60 % 10, 133 + 17 * 3, 45);
-		}
+		clear_info.SetTopLeft(0, 0);
+		clear_info.ShowBitmap();
+		number_OnShow(clearTime / 60 / 10, 678, 215);
+		number_OnShow(clearTime / 60 % 10, 678 + 20, 215);
+		number_OnShow(clearTime % 60 / 10, 778, 215);
+		number_OnShow(clearTime % 60 % 10, 778 + 20, 215);
 	}
 	else {
 		Gameover.SetTopLeft(233, 234);
