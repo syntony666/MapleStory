@@ -108,7 +108,6 @@ namespace game_framework {
 		void heroMonsterInteraction(Character&hero, vector<Character*> & monster, Map &map);
 		void heroBossInteraction(Character&hero, Boss &mboss, Map &map);
 		void checkStage();
-		void countDown(int &cd, int max, int min = 0);
 	};
 
 	/////////////////////////////////////////////////////////////////////////////

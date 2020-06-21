@@ -482,6 +482,7 @@ void CGameStateRun::OnInit() {
 	maps.push_back(Map4());
 	for (size_t i = 0; i < maps.size() ; i++) {
 		maps[i].LoadBitmap();
+		map[i].deleteObject();
 		if (i < 2)
 			maps[i].getPortal()->addBitMaps(portal_bitmaps, 2);
 		if (i >= 2)

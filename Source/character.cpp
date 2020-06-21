@@ -9,6 +9,8 @@
 namespace game_framework {
 
 	Character::~Character() {
+		for(auto c : counter)
+			delete c;
 		counter.clear();
 	}
 
@@ -20,16 +22,20 @@ namespace game_framework {
 	}
 	void Character::setXY(int nx, int ny)
 	{
-		pos_x = nx; pos_y = ny;
+		pos_x = nx; 
+		pos_y = ny;
 	}
 
-	int Character::getAttack() {
+	int Character::getAttack() 
+	{
 		return attack; 
 	}
-	void Character::setAttack(int Atk) {
+	void Character::setAttack(int Atk) 
+	{
 		attack = Atk;
 	}
-	int Character::getHP() {
+	int Character::getHP() 
+	{
 		return HP;
 	}
 	int Character::getMaxHP() {

@@ -22,6 +22,10 @@ namespace game_framework {
 		pos_y = 220;
 		HP = maxHP;
 		counter.push_back(new Counter(150));
+		isDead = isHit = false;
+		maxHP = 100000;
+		hit_time = 18;
+		attack = 400;
 	}
 
 	void Boss::OnMove()
