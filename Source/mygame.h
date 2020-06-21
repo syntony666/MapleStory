@@ -41,6 +41,9 @@ namespace game_framework {
 		SFX_HEAL,				// 13
 		SFX_ROOT,				// 14
 		BGM_CLEAR,				// 15
+		SFX_LASER,				// 16
+		SFX_LIGHTING,			// 17
+		SFX_KNOCKBACK			// 18
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -97,6 +100,7 @@ namespace game_framework {
 		CMovingBitmap background;						// 背景圖
 		CMovingBitmap PoisonRoot;
 		CAnimation Boss_laser_delay, Boss_laser;
+		CAnimation Boss_knockback_delay, Boss_knockback;
 		Character *hero;								// 角色
 		vector<Map> maps;								// 地圖
 		Map *map;

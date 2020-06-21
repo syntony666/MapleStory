@@ -508,6 +508,26 @@ IDB_LASER_06            BITMAP                  "..\\res\\Laser\\laser_06.bmp"
 
 IDB_CLEAR_INFO          BITMAP                  "..\\res\\clear_info.bmp"
 
+IDB_KNOCK_00            BITMAP                  "..\\res\\Knockback\\knock_00.bmp"
+
+IDB_KNOCK_01            BITMAP                  "..\\res\\Knockback\\knock_01.bmp"
+
+IDB_KNOCK_02            BITMAP                  "..\\res\\Knockback\\knock_02.bmp"
+
+IDB_KNOCK_03            BITMAP                  "..\\res\\Knockback\\knock_03.bmp"
+
+IDB_KNOCK_04            BITMAP                  "..\\res\\Knockback\\knock_04.bmp"
+
+IDB_KNOCK_05            BITMAP                  "..\\res\\Knockback\\knock_05.bmp"
+
+IDB_KNOCK_06            BITMAP                  "..\\res\\Knockback\\knock_06.bmp"
+
+IDB_KNOCK_07            BITMAP                  "..\\res\\Knockback\\knock_07.bmp"
+
+IDB_KNOCK_08            BITMAP                  "..\\res\\Knockback\\knock_08.bmp"
+
+IDB_KNOCK_09            BITMAP                  "..\\res\\Knockback\\knock_09.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

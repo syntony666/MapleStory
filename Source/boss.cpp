@@ -24,6 +24,8 @@ namespace game_framework {
 		counter.push_back(new Counter(150));	// 技能冷卻時間計時
 		counter.push_back(new Counter(30));		// 技能一：光束 - 延遲
 		counter.push_back(new Counter(50));		// 技能一：光束 - 傷害
+		counter.push_back(new Counter(60));		// 技能二：擊退 - 延遲
+		counter.push_back(new Counter(8));		// 技能二：擊退 - 傷害
 	}
 
 	void Boss::OnMove()
@@ -103,8 +105,9 @@ namespace game_framework {
 		if (counter[skills]->getCount() == 150) {
 			srand((unsigned int)time(NULL));
 			skill = ( rand() % 4 ) + 1;
+			counter[skills]->start();
 		}
-		TRACE("-----------BOSS_CD---------(%d)\n", counter[skills]->getCount());
+		TRACE("-----------BOSS_CD---------(%d)\n", counter[skills]->getCount() / 30);
 		return skill;
 	}
 
@@ -129,6 +132,9 @@ namespace game_framework {
 	}
 	int Boss::getAttack() {
 		return attack;
+	}
+	int Boss::getX() {
+		return pos_x;
 	}
 	int Boss::getHP() {
 		return HP;

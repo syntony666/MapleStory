@@ -43,6 +43,9 @@ void CGameStateInit::OnInit()
 	CAudio::Instance()->Load(SFX_GUN, "sounds\\sfx_gun.mp3");
 	CAudio::Instance()->Load(SFX_LEVEL_UP, "sounds\\sfx_levelup.mp3");
 	CAudio::Instance()->Load(SFX_ROOT, "sounds\\sfx_root.mp3");
+	CAudio::Instance()->Load(SFX_LASER, "sounds\\sfx_laser.mp3");
+	CAudio::Instance()->Load(SFX_LIGHTING, "sounds\\sfx_lighting.mp3");
+	CAudio::Instance()->Load(SFX_KNOCKBACK, "sounds\\sfx_knockback.mp3");
 
 	menu = 1;
 	
@@ -564,6 +567,18 @@ void CGameStateRun::OnInit() {
 	for (int i = 0; i < 10; i++)
 		Boss_laser.AddBitmap(laser_bitmaps[i], RGB(255, 255, 255));
 
+	Boss_knockback_delay = CAnimation(5);
+	Boss_knockback = CAnimation(2);
+
+	int knockback_delay_bitmaps[] = { IDB_KNOCK_00, IDB_KNOCK_01, IDB_KNOCK_02,
+									  IDB_KNOCK_03, IDB_KNOCK_04, IDB_KNOCK_05 };
+	for (int i = 0; i < 6; i++)
+		Boss_knockback_delay.AddBitmap(knockback_delay_bitmaps[i], RGB(255, 255, 255));
+
+	int knockback_bitmaps[] = { IDB_KNOCK_06, IDB_KNOCK_07, IDB_KNOCK_08, IDB_KNOCK_09 };
+	for (int i = 0; i < 4; i++)
+		Boss_knockback.AddBitmap(knockback_bitmaps[i], RGB(255, 255, 255));
+
 	ShowInitProgress(100);
 }
 
@@ -711,7 +726,6 @@ void CGameStateRun::OnShow()
 	}
 	else if (stage == 4) {
 		boss.OnShow();
-		boss.showHPBar();
 		if (boss.getCounter(laser_delay).getCount() < 30) {
 			Boss_laser_delay.SetTopLeft(0, 580);
 			Boss_laser_delay.OnShow();
@@ -720,6 +734,15 @@ void CGameStateRun::OnShow()
 			Boss_laser.SetTopLeft(0, 580);
 			Boss_laser.OnShow();
 		}
+		if (boss.getCounter(knockback_delay).getCount() < 60) {
+			Boss_knockback_delay.SetTopLeft(boss.getX() - 200, 0);
+			Boss_knockback_delay.OnShow();
+		}
+		if (boss.getCounter(knockback_skill).getCount() < 8) {
+			Boss_knockback.SetTopLeft(boss.getX() - 200, 0);
+			Boss_knockback.OnShow();
+		}
+		boss.showHPBar();
 	}
 	hero->OnShow();			// 貼上人物
 
@@ -858,15 +881,16 @@ void CGameStateRun::heroBossInteraction(Character& hero, Boss &mboss, Map &map) 
 	int skill = mboss.getSkill();
 
 	if (skill == 1) {
-		if (mboss.getCounter(skills).getCount() == 150 && mboss.getCounter(laser_delay).getCount() == 30) {
-			mboss.getCounter(skills).start();
+		if (mboss.getCounter(skills).getCount() == 149 && mboss.getCounter(laser_delay).getCount() == 30) {
 			mboss.getCounter(laser_delay).start();
 		}
 		if (mboss.getCounter(laser_delay).getCount() < 30) {
 			Boss_laser_delay.OnMove();
 		}
-		if (mboss.getCounter(laser_delay).getCount() == 0)
+		if (mboss.getCounter(laser_delay).getCount() == 0) {
 			mboss.getCounter(laser_skill).start();
+			CAudio::Instance()->Play(SFX_LASER, false);
+		}
 		if (mboss.getCounter(laser_skill).getCount() < 50) {
 			Boss_laser.OnMove();
 			if (hero.ifMovingDown() == false)
@@ -874,7 +898,23 @@ void CGameStateRun::heroBossInteraction(Character& hero, Boss &mboss, Map &map) 
 		}
 	}
 	if (skill == 2) {
-
+		if (mboss.getCounter(skills).getCount() == 149 && mboss.getCounter(knockback_delay).getCount() == 60) {
+			mboss.getCounter(knockback_delay).start();
+		}
+		if (mboss.getCounter(knockback_delay).getCount() < 60) {
+			Boss_knockback_delay.OnMove();
+		}
+		if (mboss.getCounter(knockback_delay).getCount() == 0) {
+			mboss.getCounter(knockback_skill).start();
+			CAudio::Instance()->Play(SFX_KNOCKBACK, false);
+		}
+		if (mboss.getCounter(knockback_skill).getCount() < 8) {
+			Boss_knockback.OnMove();
+			if (HIT_CHECK_CHARACTER && hero_pos.getX() >= 1300) {
+				hero.setHitLeft();
+				hero.setHP(hero.getHP() - 2000);
+			}
+		}
 	}
 	if (skill == 3) {
 
@@ -903,7 +943,6 @@ void CGameStateRun::heroBossInteraction(Character& hero, Boss &mboss, Map &map) 
 		mboss.setHit();
 	}
 	TRACE("-----------BOSS_SKILL---------(%d)\n", skill);
-	TRACE("-----------BOSS_DELAY---------(%d)\n", mboss.getCounter(laser_delay).getCount());
 
 	// 怪物死亡相關
 	if (mboss.getHP() <= 0) {

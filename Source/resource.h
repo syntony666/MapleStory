@@ -299,6 +299,17 @@
 #define IDB_LASER_06                    419
 #define IDB_BITMAP31                    420
 #define IDB_CLEAR_INFO                  420
+#define IDB_KNOCK_00                    421
+#define IDB_KNOCK_01                    422
+#define IDB_KNOCK_02                    423
+#define IDB_KNOCK_03                    424
+#define IDB_KNOCK_04                    425
+#define IDB_KNOCK_05                    426
+#define IDB_KNOCK_06                    427
+#define IDB_KNOCK_07                    428
+#define IDB_KNOCK_08                    429
+#define IDB_BITMAP69                    430
+#define IDB_KNOCK_09                    430
 #define IDC_README                      1001
 #define ID_FILE_PAUSE                   32771
 #define ID_TOGGLE_FULLSCREEN            32772
@@ -311,7 +322,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        421
+#define _APS_NEXT_RESOURCE_VALUE        431
 #define _APS_NEXT_COMMAND_VALUE         32776
 #define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           101
