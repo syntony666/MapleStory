@@ -26,6 +26,10 @@ namespace game_framework {
 		counter.push_back(new Counter(50));		// 技能一：光束 - 傷害
 		counter.push_back(new Counter(60));		// 技能二：擊退 - 延遲
 		counter.push_back(new Counter(8));		// 技能二：擊退 - 傷害
+		counter.push_back(new Counter(60));		// 技能三：閃電 - 延遲1
+		counter.push_back(new Counter(30));		// 技能三：閃電 - 傷害1
+		counter.push_back(new Counter(60));		// 技能三：閃電 - 延遲2
+		counter.push_back(new Counter(30));		// 技能三：閃電 - 傷害2
 	}
 
 	void Boss::OnMove()
@@ -104,7 +108,7 @@ namespace game_framework {
 	int Boss::getSkill() {
 		if (counter[skills]->getCount() == 150) {
 			srand((unsigned int)time(NULL));
-			skill = ( rand() % 4 ) + 1;
+			skill = ( rand() % 3 ) + 1;
 			counter[skills]->start();
 		}
 		TRACE("-----------BOSS_CD---------(%d)\n", counter[skills]->getCount() / 30);

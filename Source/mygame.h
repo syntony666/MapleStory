@@ -101,6 +101,7 @@ namespace game_framework {
 		CMovingBitmap PoisonRoot;
 		CAnimation Boss_laser_delay, Boss_laser;
 		CAnimation Boss_knockback_delay, Boss_knockback;
+		CAnimation Boss_lighting_delay1, Boss_lighting_delay2, Boss_lighting1, Boss_lighting2;
 		Character *hero;								// ¨¤¦â
 		vector<Map> maps;								// ¦a¹Ï
 		Map *map;

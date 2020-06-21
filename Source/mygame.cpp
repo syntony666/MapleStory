@@ -579,6 +579,29 @@ void CGameStateRun::OnInit() {
 	for (int i = 0; i < 4; i++)
 		Boss_knockback.AddBitmap(knockback_bitmaps[i], RGB(255, 255, 255));
 
+	Boss_lighting_delay1 = CAnimation(5);
+	Boss_lighting_delay2 = CAnimation(5);
+	Boss_lighting1 = CAnimation(6);
+	Boss_lighting2 = CAnimation(6);
+
+	int lighting_delay1_bitmaps[] = { IDB_LIGHTING_01, IDB_LIGHTING_02, IDB_LIGHTING_03,
+									  IDB_LIGHTING_04, IDB_LIGHTING_05, IDB_LIGHTING_06 };
+	for (int i = 0; i < 6; i++)
+		Boss_lighting_delay1.AddBitmap(lighting_delay1_bitmaps[i], RGB(255, 255, 255));
+
+	int lighting_delay2_bitmaps[] = { IDB_LIGHTING_07, IDB_LIGHTING_08, IDB_LIGHTING_09,
+								  	  IDB_LIGHTING_10, IDB_LIGHTING_11, IDB_LIGHTING_12 };
+	for (int i = 0; i < 6; i++)
+		Boss_lighting_delay2.AddBitmap(lighting_delay2_bitmaps[i], RGB(255, 255, 255));
+
+	int lighting1_bitmaps[] = { IDB_LIGHTING_13, IDB_LIGHTING_14, IDB_LIGHTING_15, IDB_LIGHTING_16, IDB_LIGHTING_17 };
+	for (int i = 0; i < 5; i++)
+		Boss_lighting1.AddBitmap(lighting1_bitmaps[i], RGB(255, 255, 255));
+
+	int lighting2_bitmaps[] = { IDB_LIGHTING_18, IDB_LIGHTING_19, IDB_LIGHTING_20, IDB_LIGHTING_21, IDB_LIGHTING_22 };
+	for (int i = 0; i < 5; i++)
+		Boss_lighting2.AddBitmap(lighting2_bitmaps[i], RGB(255, 255, 255));
+
 	ShowInitProgress(100);
 }
 
@@ -741,6 +764,22 @@ void CGameStateRun::OnShow()
 		if (boss.getCounter(knockback_skill).getCount() < 8) {
 			Boss_knockback.SetTopLeft(boss.getX() - 200, 0);
 			Boss_knockback.OnShow();
+		}
+		if (boss.getCounter(lighting_delay1).getCount() < 60) {
+			Boss_lighting_delay1.SetTopLeft(boss.getX() - 1000, -20);
+			Boss_lighting_delay1.OnShow();
+		}
+		if (boss.getCounter(lighting_skill1).getCount() < 30) {
+			Boss_lighting1.SetTopLeft(boss.getX() - 1000, -20);
+			Boss_lighting1.OnShow();
+		}
+		if (boss.getCounter(lighting_delay2).getCount() < 60) {
+			Boss_lighting_delay2.SetTopLeft(boss.getX() - 1000, -20);
+			Boss_lighting_delay2.OnShow();
+		}
+		if (boss.getCounter(lighting_skill2).getCount() < 30) {
+			Boss_lighting2.SetTopLeft(boss.getX() - 1000, -20);
+			Boss_lighting2.OnShow();
 		}
 		boss.showHPBar();
 	}
@@ -917,7 +956,42 @@ void CGameStateRun::heroBossInteraction(Character& hero, Boss &mboss, Map &map) 
 		}
 	}
 	if (skill == 3) {
-
+		if (mboss.getCounter(skills).getCount() == 149 && mboss.getCounter(lighting_delay1).getCount() == 60) {
+			mboss.getCounter(lighting_delay1).start();
+		}
+		if (mboss.getCounter(lighting_delay1).getCount() < 60) {
+			Boss_lighting_delay1.OnMove();
+		}
+		if (mboss.getCounter(lighting_delay1).getCount() == 0) {
+			mboss.getCounter(lighting_skill1).start();
+			mboss.getCounter(lighting_delay2).start();
+			CAudio::Instance()->Play(SFX_LIGHTING, false);
+		}
+		if (mboss.getCounter(lighting_delay2).getCount() < 60) {
+			Boss_lighting_delay2.OnMove();
+		}
+		if (mboss.getCounter(lighting_skill1).getCount() < 30) {
+			Boss_lighting1.OnMove();
+			for (int i = 0; i < 5; i++) {
+				if (HIT_CHECK_CHARACTER && LIGHTING1_CHECK) {
+					hero.setHitLeft();
+					hero.setHP(hero.getHP() - 1000);
+				}
+			}
+		}
+		if (mboss.getCounter(lighting_delay2).getCount() == 0) {
+			mboss.getCounter(lighting_skill2).start();
+			CAudio::Instance()->Play(SFX_LIGHTING, false);
+		}
+		if (mboss.getCounter(lighting_skill2).getCount() < 30) {
+			Boss_lighting2.OnMove();
+			for (int i = 0; i < 5; i++) {
+				if (HIT_CHECK_CHARACTER && LIGHTING2_CHECK) {
+					hero.setHitLeft();
+					hero.setHP(hero.getHP() - 1000);
+				}
+			}
+		}
 	}
 	if (skill == 4) {
 

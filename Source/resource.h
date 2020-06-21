@@ -310,6 +310,29 @@
 #define IDB_KNOCK_08                    429
 #define IDB_BITMAP69                    430
 #define IDB_KNOCK_09                    430
+#define IDB_LIGHTING_01                 431
+#define IDB_LIGHTING_02                 432
+#define IDB_LIGHTING_03                 433
+#define IDB_LIGHTING_04                 434
+#define IDB_LIGHTING_05                 435
+#define IDB_LIGHTING_06                 436
+#define IDB_LIGHTING_07                 437
+#define IDB_LIGHTING_08                 438
+#define IDB_LIGHTING_09                 439
+#define IDB_LIGHTING_10                 440
+#define IDB_LIGHTING_11                 441
+#define IDB_LIGHTING_12                 442
+#define IDB_LIGHTING_13                 443
+#define IDB_LIGHTING_14                 444
+#define IDB_LIGHTING_15                 445
+#define IDB_LIGHTING_16                 446
+#define IDB_LIGHTING_17                 447
+#define IDB_LIGHTING_18                 448
+#define IDB_LIGHTING_19                 449
+#define IDB_LIGHTING_20                 450
+#define IDB_LIGHTING_21                 451
+#define IDB_BITMAP82                    452
+#define IDB_LIGHTING_22                 452
 #define IDC_README                      1001
 #define ID_FILE_PAUSE                   32771
 #define ID_TOGGLE_FULLSCREEN            32772
@@ -322,7 +345,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        431
+#define _APS_NEXT_RESOURCE_VALUE        453
 #define _APS_NEXT_COMMAND_VALUE         32776
 #define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           101

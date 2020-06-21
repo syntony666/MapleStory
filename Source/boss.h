@@ -18,7 +18,11 @@ namespace game_framework {
 		laser_delay,
 		laser_skill,
 		knockback_delay,
-		knockback_skill
+		knockback_skill,
+		lighting_delay1,
+		lighting_skill1,
+		lighting_delay2,
+		lighting_skill2
 	};
 	class Boss
 	{

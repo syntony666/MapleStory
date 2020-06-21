@@ -812,6 +812,72 @@
     <Image Include="RES\Knockback\knock_09.bmp">
       <Filter>Resouces</Filter>
     </Image>
+    <Image Include="RES\Lighting\lighting_01.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_02.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_03.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_04.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_05.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_06.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_07.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_08.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_09.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_10.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_11.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_12.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_13.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_14.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_15.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_16.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_17.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_18.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_19.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_20.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_21.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_22.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="RES\continue.bmp">
