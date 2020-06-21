@@ -434,8 +434,6 @@ IDB_INFO1               BITMAP                  "..\\res\\info1.bmp"
 
 IDB_INFO2               BITMAP                  "..\\res\\info2.bmp"
 
-IDB_BOSS_STAND          BITMAP                  "..\\res\\Boss\\boss_stand.bmp"
-
 IDB_BOSS_STAND1         BITMAP                  "..\\res\\Boss\\boss_01.bmp"
 
 IDB_BOSS_STAND2         BITMAP                  "..\\res\\Boss\\boss_02.bmp"
@@ -505,6 +503,72 @@ IDB_LASER_04            BITMAP                  "..\\res\\Laser\\laser_04.bmp"
 IDB_LASER_05            BITMAP                  "..\\res\\Laser\\laser_05.bmp"
 
 IDB_LASER_06            BITMAP                  "..\\res\\Laser\\laser_06.bmp"
+
+IDB_CLEAR_INFO          BITMAP                  "..\\res\\clear_info.bmp"
+
+IDB_KNOCK_00            BITMAP                  "..\\res\\Knockback\\knock_00.bmp"
+
+IDB_KNOCK_01            BITMAP                  "..\\res\\Knockback\\knock_01.bmp"
+
+IDB_KNOCK_02            BITMAP                  "..\\res\\Knockback\\knock_02.bmp"
+
+IDB_KNOCK_03            BITMAP                  "..\\res\\Knockback\\knock_03.bmp"
+
+IDB_KNOCK_04            BITMAP                  "..\\res\\Knockback\\knock_04.bmp"
+
+IDB_KNOCK_05            BITMAP                  "..\\res\\Knockback\\knock_05.bmp"
+
+IDB_KNOCK_06            BITMAP                  "..\\res\\Knockback\\knock_06.bmp"
+
+IDB_KNOCK_07            BITMAP                  "..\\res\\Knockback\\knock_07.bmp"
+
+IDB_KNOCK_08            BITMAP                  "..\\res\\Knockback\\knock_08.bmp"
+
+IDB_KNOCK_09            BITMAP                  "..\\res\\Knockback\\knock_09.bmp"
+
+IDB_LIGHTING_01         BITMAP                  "..\\res\\Lighting\\lighting_01.bmp"
+
+IDB_LIGHTING_02         BITMAP                  "..\\res\\Lighting\\lighting_02.bmp"
+
+IDB_LIGHTING_03         BITMAP                  "..\\res\\Lighting\\lighting_03.bmp"
+
+IDB_LIGHTING_04         BITMAP                  "..\\res\\Lighting\\lighting_04.bmp"
+
+IDB_LIGHTING_05         BITMAP                  "..\\res\\Lighting\\lighting_05.bmp"
+
+IDB_LIGHTING_06         BITMAP                  "..\\res\\Lighting\\lighting_06.bmp"
+
+IDB_LIGHTING_07         BITMAP                  "..\\res\\Lighting\\lighting_07.bmp"
+
+IDB_LIGHTING_08         BITMAP                  "..\\res\\Lighting\\lighting_08.bmp"
+
+IDB_LIGHTING_09         BITMAP                  "..\\res\\Lighting\\lighting_09.bmp"
+
+IDB_LIGHTING_10         BITMAP                  "..\\res\\Lighting\\lighting_10.bmp"
+
+IDB_LIGHTING_11         BITMAP                  "..\\res\\Lighting\\lighting_11.bmp"
+
+IDB_LIGHTING_12         BITMAP                  "..\\res\\Lighting\\lighting_12.bmp"
+
+IDB_LIGHTING_13         BITMAP                  "..\\res\\Lighting\\lighting_13.bmp"
+
+IDB_LIGHTING_14         BITMAP                  "..\\res\\Lighting\\lighting_14.bmp"
+
+IDB_LIGHTING_15         BITMAP                  "..\\res\\Lighting\\lighting_15.bmp"
+
+IDB_LIGHTING_16         BITMAP                  "..\\res\\Lighting\\lighting_16.bmp"
+
+IDB_LIGHTING_17         BITMAP                  "..\\res\\Lighting\\lighting_17.bmp"
+
+IDB_LIGHTING_18         BITMAP                  "..\\res\\Lighting\\lighting_18.bmp"
+
+IDB_LIGHTING_19         BITMAP                  "..\\res\\Lighting\\lighting_19.bmp"
+
+IDB_LIGHTING_20         BITMAP                  "..\\res\\Lighting\\lighting_20.bmp"
+
+IDB_LIGHTING_21         BITMAP                  "..\\res\\Lighting\\lighting_21.bmp"
+
+IDB_LIGHTING_22         BITMAP                  "..\\res\\Lighting\\lighting_22.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////

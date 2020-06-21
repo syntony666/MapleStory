@@ -21,7 +21,9 @@ namespace game_framework {
 #define CHARACTER_SLASH_BOSS hero.ifSlashing() && hero_pos.getX() >= 1320
 #define ON_PLATFORM_MONSTER monster_pos.getY() <= map.getFloorY(j) + 50 && monster_pos.getY() >= map.getFloorY(j) - 14 && monster_pos.getX() >= map.getFloorXBegin(j) && monster_pos.getX() <= map.getFloorXLast(j)
 #define ON_FLOOR hero_pos.getY() <= map->getFloorY(i) + 50 && hero_pos.getY() >= map->getFloorY(i) - 14 && hero_pos.getX() >= map->getFloorXBegin(i) && hero_pos.getX() <= map->getFloorXLast(i)
-#define ON_PORTAL hero_pos.getY() == 560 - map->getPortal()->getY() && hero_pos.getX() >= map->getPortal()->getX() - 20 && hero_pos.getX() <= map->getPortal()->getX() + 40
+#define ON_PORTAL hero_pos.getY() == 560 - map->getPortal().getY() && hero_pos.getX() >= map->getPortal().getX() - 20 && hero_pos.getX() <= map->getPortal().getX() + 40
+#define LIGHTING1_CHECK hero_pos.getX() >= 620 + 200*i && hero_pos.getX() <= 720 + 200*i
+#define LIGHTING2_CHECK hero_pos.getX() >= 520 + 200*i && hero_pos.getX() <= 620 + 200*i
 
 
 	// Map 直接回傳物件

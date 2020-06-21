@@ -305,6 +305,8 @@ protected:
 	//
 	virtual void OnMove() {}								// 移動這個狀態的遊戲元素
 	virtual void OnShow() = 0;								// 顯示這個狀態的遊戲畫面
+	static bool gameClear;
+	static int timeCounter;									// 通關計時 static 變數 >> gamelib.cpp::482 定義
 	CGame *game;
 };
 

@@ -49,6 +49,9 @@
     <ClCompile Include="Source\counter.cpp">
       <Filter>MapleStory</Filter>
     </ClCompile>
+    <ClCompile Include="Source\portal.cpp">
+      <Filter>MapleStory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\audio.h">
@@ -103,6 +106,9 @@
       <Filter>MapleStory</Filter>
     </ClInclude>
     <ClInclude Include="Source\counter.h">
+      <Filter>MapleStory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\portal.h">
       <Filter>MapleStory</Filter>
     </ClInclude>
   </ItemGroup>
@@ -671,9 +677,6 @@
     <Image Include="RES\info1.bmp">
       <Filter>Resouces</Filter>
     </Image>
-    <Image Include="RES\Boss\boss_stand.bmp">
-      <Filter>Resouces</Filter>
-    </Image>
     <Image Include="RES\Boss\boss_08.bmp">
       <Filter>Resouces</Filter>
     </Image>
@@ -779,12 +782,105 @@
     <Image Include="RES\Laser\laser_05.bmp">
       <Filter>Resouces</Filter>
     </Image>
-    <Image Include="RES\Laser\laser_01.png" />
-    <Image Include="RES\Laser\laser_02.png" />
-    <Image Include="RES\Laser\laser_03.png" />
-    <Image Include="RES\Laser\laser_04.png" />
-    <Image Include="RES\Laser\laser_05.png" />
-    <Image Include="RES\Laser\laser_06.png" />
+    <Image Include="RES\clear_info.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Knockback\knock_00.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Knockback\knock_01.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Knockback\knock_02.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Knockback\knock_03.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Knockback\knock_04.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Knockback\knock_05.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Knockback\knock_06.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Knockback\knock_07.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Knockback\knock_08.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Knockback\knock_09.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_01.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_02.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_03.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_04.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_05.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_06.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_07.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_08.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_09.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_10.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_11.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_12.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_13.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_14.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_15.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_16.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_17.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_18.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_19.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_20.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_21.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
+    <Image Include="RES\Lighting\lighting_22.bmp">
+      <Filter>Resouces</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="RES\continue.bmp">
@@ -875,6 +971,12 @@
       <Filter>Sounds</Filter>
     </Media>
     <Media Include="Sounds\sfx_slash.mp3">
+      <Filter>Sounds</Filter>
+    </Media>
+    <Media Include="Sounds\sfx_root.mp3">
+      <Filter>Sounds</Filter>
+    </Media>
+    <Media Include="Sounds\bgm_clear.mp3">
       <Filter>Sounds</Filter>
     </Media>
   </ItemGroup>

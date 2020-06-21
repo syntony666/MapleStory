@@ -39,6 +39,11 @@ namespace game_framework {
 		SFX_GUN,				// 11
 		SFX_LEVEL_UP,			// 12
 		SFX_HEAL,				// 13
+		SFX_ROOT,				// 14
+		BGM_CLEAR,				// 15
+		SFX_LASER,				// 16
+		SFX_LIGHTING,			// 17
+		SFX_KNOCKBACK			// 18
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -91,11 +96,12 @@ namespace game_framework {
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
 		int stage, stage_count;
-		int hero_tempX = 0;
-		int hero_tempY = 0;
 		CMovingBitmap slashCD[9], healCD[9];
-		CMovingBitmap	background;						// 背景圖
-		CAnimation Mage_Skill;
+		CMovingBitmap background;						// 背景圖
+		CMovingBitmap PoisonRoot;
+		CAnimation Boss_laser_delay, Boss_laser;
+		CAnimation Boss_knockback_delay, Boss_knockback;
+		CAnimation Boss_lighting_delay1, Boss_lighting_delay2, Boss_lighting1, Boss_lighting2;
 		Character *hero;								// 角色
 		vector<Map> maps;								// 地圖
 		Map *map;
@@ -118,14 +124,19 @@ namespace game_framework {
 	class CGameStateOver : public CGameState {
 	public:
 		CGameStateOver(CGame *g);
+		//~CGameStateOver();
 		void OnBeginState();							// 設定每次重玩所需的變數
 		void OnInit();
 	protected:
 		void OnMove();									// 移動遊戲元素
 		void OnShow();									// 顯示這個狀態的遊戲畫面
+		void number_OnShow(int nx, int pos_nx, int pos_ny);
 	private:
-		int counter;	// 倒數之計數器
+		int counter = 210;	// 倒數之計數器
+		int clearTime = 0;
 		CAnimation Gameover;
+		CMovingBitmap clear_info;
+		CAnimation num[10];
 	};
 
 }

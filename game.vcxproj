@@ -268,6 +268,7 @@
     </ClCompile>
     <ClCompile Include="Source\map.cpp" />
     <ClCompile Include="Source\monster.cpp" />
+    <ClCompile Include="Source\portal.cpp" />
     <ClCompile Include="Source\position.cpp" />
     <ClCompile Include="Source\StdAfx.cpp">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -304,6 +305,7 @@
     <ClInclude Include="Source\MainFrm.h" />
     <ClInclude Include="Source\map.h" />
     <ClInclude Include="Source\monster.h" />
+    <ClInclude Include="Source\portal.h" />
     <ClInclude Include="Source\position.h" />
     <ClInclude Include="Source\Resource.h" />
     <ClInclude Include="Source\StdAfx.h" />
@@ -333,7 +335,7 @@
     <Image Include="RES\Boss\boss_07.bmp" />
     <Image Include="RES\Boss\boss_08.bmp" />
     <Image Include="RES\Boss\boss_icon.bmp" />
-    <Image Include="RES\Boss\boss_stand.bmp" />
+    <Image Include="RES\clear_info.bmp" />
     <Image Include="RES\exit1.bmp" />
     <Image Include="RES\exit2.bmp" />
     <Image Include="RES\frog_attack_left1.bmp" />
@@ -417,18 +419,22 @@
     <Image Include="RES\info.bmp" />
     <Image Include="RES\info1.bmp" />
     <Image Include="RES\info2.bmp" />
+    <Image Include="RES\Knockback\knock_00.bmp" />
+    <Image Include="RES\Knockback\knock_01.bmp" />
+    <Image Include="RES\Knockback\knock_02.bmp" />
+    <Image Include="RES\Knockback\knock_03.bmp" />
+    <Image Include="RES\Knockback\knock_04.bmp" />
+    <Image Include="RES\Knockback\knock_05.bmp" />
+    <Image Include="RES\Knockback\knock_06.bmp" />
+    <Image Include="RES\Knockback\knock_07.bmp" />
+    <Image Include="RES\Knockback\knock_08.bmp" />
+    <Image Include="RES\Knockback\knock_09.bmp" />
     <Image Include="RES\Laser\laser_01.bmp" />
-    <Image Include="RES\Laser\laser_01.png" />
     <Image Include="RES\Laser\laser_02.bmp" />
-    <Image Include="RES\Laser\laser_02.png" />
     <Image Include="RES\Laser\laser_03.bmp" />
-    <Image Include="RES\Laser\laser_03.png" />
     <Image Include="RES\Laser\laser_04.bmp" />
-    <Image Include="RES\Laser\laser_04.png" />
     <Image Include="RES\Laser\laser_05.bmp" />
-    <Image Include="RES\Laser\laser_05.png" />
     <Image Include="RES\Laser\laser_06.bmp" />
-    <Image Include="RES\Laser\laser_06.png" />
     <Image Include="RES\Laser\laser_07.bmp" />
     <Image Include="RES\Laser\laser_08.bmp" />
     <Image Include="RES\Laser\laser_09.bmp" />
@@ -459,6 +465,28 @@
     <Image Include="RES\Levelup\lv_up_18.bmp" />
     <Image Include="RES\Levelup\lv_up_19.bmp" />
     <Image Include="RES\Levelup\lv_up_20.bmp" />
+    <Image Include="RES\Lighting\lighting_01.bmp" />
+    <Image Include="RES\Lighting\lighting_02.bmp" />
+    <Image Include="RES\Lighting\lighting_03.bmp" />
+    <Image Include="RES\Lighting\lighting_04.bmp" />
+    <Image Include="RES\Lighting\lighting_05.bmp" />
+    <Image Include="RES\Lighting\lighting_06.bmp" />
+    <Image Include="RES\Lighting\lighting_07.bmp" />
+    <Image Include="RES\Lighting\lighting_08.bmp" />
+    <Image Include="RES\Lighting\lighting_09.bmp" />
+    <Image Include="RES\Lighting\lighting_10.bmp" />
+    <Image Include="RES\Lighting\lighting_11.bmp" />
+    <Image Include="RES\Lighting\lighting_12.bmp" />
+    <Image Include="RES\Lighting\lighting_13.bmp" />
+    <Image Include="RES\Lighting\lighting_14.bmp" />
+    <Image Include="RES\Lighting\lighting_15.bmp" />
+    <Image Include="RES\Lighting\lighting_16.bmp" />
+    <Image Include="RES\Lighting\lighting_17.bmp" />
+    <Image Include="RES\Lighting\lighting_18.bmp" />
+    <Image Include="RES\Lighting\lighting_19.bmp" />
+    <Image Include="RES\Lighting\lighting_20.bmp" />
+    <Image Include="RES\Lighting\lighting_21.bmp" />
+    <Image Include="RES\Lighting\lighting_22.bmp" />
     <Image Include="res\logo.bmp" />
     <Image Include="RES\Mage\Mage_Left.bmp" />
     <Image Include="RES\Mage\Mage_Left_Attack01.bmp" />
@@ -551,6 +579,7 @@
   </ItemGroup>
   <ItemGroup>
     <Media Include="Sounds\bgm_boss.mp3" />
+    <Media Include="Sounds\bgm_clear.mp3" />
     <Media Include="Sounds\bgm_gameover.mp3" />
     <Media Include="Sounds\bgm_menu.mp3" />
     <Media Include="Sounds\bgm_stage1.mp3" />
@@ -565,6 +594,7 @@
     <Media Include="Sounds\sfx_laser.mp3" />
     <Media Include="Sounds\sfx_levelup.mp3" />
     <Media Include="Sounds\sfx_monster_hit.mp3" />
+    <Media Include="Sounds\sfx_root.mp3" />
     <Media Include="Sounds\sfx_slash.mp3" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

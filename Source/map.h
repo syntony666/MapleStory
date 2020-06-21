@@ -2,6 +2,7 @@
 #define MAP_H
 
 #include "floor.h"
+#include "portal.h"
 
 
 namespace game_framework {
@@ -12,8 +13,7 @@ namespace game_framework {
 		Map();
 		void Initialize();
 		void LoadBitmap();
-		void OnShow();
-		void OnMove(); 
+		void OnShow();		void OnMove(); 
 		void portalOnShow();
 
 		//SETs Init
@@ -39,11 +39,11 @@ namespace game_framework {
 		int getY() const;
 		bool ifMovingLeft() const;
 		bool ifMovingRight() const;
-		Portal* getPortal();
+		Portal& getPortal();
 
 	protected:
 		CMovingBitmap map;
-		Portal *_portal;
+		Portal _portal;
 		int _x, _y, floor;
 		double zoom;
 		bool rising;			// true表上升、false表下降
@@ -51,38 +51,6 @@ namespace game_framework {
 		int _bitmap;
 		bool isMovingRight, isMovingLeft;
 		Floor floors;
-	};
-	class Portal {
-	public:
-		Portal(){}
-		Portal(int x, int y) {
-			_x = x;
-			_y = y;
-		}
-		~Portal() {
-
-		}
-		void addBitMaps(int bitmaps[],int num) {
-			_portal = CAnimation(2);
-			for (int i = 0; i < num; i++)
-				_portal.AddBitmap(bitmaps[i], RGB(255, 255, 255));
-		}
-		void OnMove() {
-			_portal.OnMove();
-		}
-		void OnShow(int x,int y) {
-			_portal.SetTopLeft(x, y);
-			_portal.OnShow();
-		}
-		int getX() {
-			return _x;
-		}
-		int getY() {
-			return _y;
-		}
-	private:
-		int _x, _y;
-		CAnimation _portal;
 	};
 }
 #endif

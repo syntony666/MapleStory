@@ -6,6 +6,7 @@
 #include "gamelib.h"
 #include "monster.h"
 #include "hero.h"
+#include "mygame.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -149,8 +150,8 @@ namespace game_framework {
 					a.standLeft.OnShow();
 					a.standLeft.OnMove();
 				}
-			}	
-			if (counter[poison_delay] -> getCount() < 80) {
+			}
+			if (counter[poison_delay]->getCount() < 80) {
 				a.slashAnimation.OnShow();
 				a.slashAnimation.OnMove();
 			}
@@ -167,9 +168,11 @@ namespace game_framework {
 			hero->setHP(hero->getHP() - attack);
 		}
 		if (skill == 1) {
-			TRACE("-------------------- - (%d)", counter[mage_skill]->getCount());
+			TRACE("--------------CD---------- (%d)\n", counter[mage_skill]->getCount());
+			TRACE("-------------delay-------- (%d)\n", counter[poison_delay]->getCount());
+			TRACE("------------poison-------- (%d)\n", counter[is_poison]->getCount());
 			if (counter[mage_skill]->getCount() == 180) {
-				
+
 				hero_tempX = hero->getX();
 				hero_tempY = hero->getY();
 				counter[mage_skill]->start();
@@ -177,26 +180,31 @@ namespace game_framework {
 				a.slashAnimation.SetTopLeft(hero_tempX - 50, hero_tempY - 20);
 
 			}
-			if (counter[poison_delay]->getCount() <= 40) {
-				if (hero->getX() >= hero_tempX - 60 && hero->getX() <= hero_tempX + 100) {
-					if (counter[is_poison]->getCount() == 40)
+			if (counter[poison_delay]->getCount() <= 40 && hero->ifPoison() == false) {
+				if (hero->getX() >= hero_tempX - 80 && hero->getX() <= hero_tempX + 80) {
+					if (counter[is_poison]->getCount() == 40) {
 						counter[is_poison]->start();
+						CAudio::Instance()->Play(SFX_ROOT, false);
+					}
 				}
 			}
-			if (counter[is_poison]->getCount() < 40 ) {
+			if (counter[is_poison]->getCount() < 40) {
 				hero->setMovingLeft(false);
 				hero->setMovingRight(false);
 				hero->setMovingUp(false);
-				hero->setMovingDown(false);	
-			}
+				hero->setMovingDown(false);
+				hero->setPoison(true);
+			} else
+				hero->setPoison(false);
 			if (counter[is_poison]->getCount() == 20 || counter[is_poison]->getCount() == 0) {
 				if (hero->getHP() * 0.1 <= 50)
 					hero->setHP(hero->getHP() - 50);
 				else
-					hero->setHP(int(hero->getHP() * 0.9));
+					hero->setHP(int(hero->getHP() * 0.90));
 			}
-			if (counter[poison_delay]->getCount() == 0)
+			if (counter[poison_delay]->getCount() == 0) {
 				a.slashAnimation.Reset();
+			}
 		}
 	}
 }
