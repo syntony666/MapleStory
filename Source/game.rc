@@ -434,8 +434,6 @@ IDB_INFO1               BITMAP                  "..\\res\\info1.bmp"
 
 IDB_INFO2               BITMAP                  "..\\res\\info2.bmp"
 
-IDB_BOSS_STAND          BITMAP                  "..\\res\\Boss\\boss_stand.bmp"
-
 IDB_BOSS_STAND1         BITMAP                  "..\\res\\Boss\\boss_01.bmp"
 
 IDB_BOSS_STAND2         BITMAP                  "..\\res\\Boss\\boss_02.bmp"

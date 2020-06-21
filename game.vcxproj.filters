@@ -671,9 +671,6 @@
     <Image Include="RES\info1.bmp">
       <Filter>Resouces</Filter>
     </Image>
-    <Image Include="RES\Boss\boss_stand.bmp">
-      <Filter>Resouces</Filter>
-    </Image>
     <Image Include="RES\Boss\boss_08.bmp">
       <Filter>Resouces</Filter>
     </Image>
