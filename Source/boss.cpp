@@ -117,7 +117,6 @@ namespace game_framework {
 			skill = (rand() % 3) + 1;
 			counter[skills]->start();
 		}
-		TRACE("-----------BOSS_CD---------(%d)\n", counter[skills]->getCount() / 30);
 		return skill;
 	}
 

@@ -987,7 +987,7 @@ void CGameStateRun::heroBossInteraction(Character& hero, Boss &mboss, Map &map)
 		{
 			Boss_laser.OnMove();
 			if (hero.ifMovingDown() == false)
-				hero.setHP(hero.getHP() - 10);
+				hero.setHP(hero.getHP() - 30);
 		}
 	}
 
@@ -1010,7 +1010,7 @@ void CGameStateRun::heroBossInteraction(Character& hero, Boss &mboss, Map &map)
 			Boss_knockback.OnMove();
 			if (HIT_CHECK_CHARACTER && hero_pos.getX() >= 1300) {
 				hero.setHitLeft();
-				hero.setHP(hero.getHP() - 2000);
+				hero.setHP(hero.getHP() - 3000);
 			}
 		}
 	}

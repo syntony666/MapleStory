@@ -168,9 +168,6 @@ namespace game_framework {
 			hero->setHP(hero->getHP() - attack);
 		}
 		if (skill == 1) {
-			TRACE("--------------CD---------- (%d)\n", counter[mage_skill]->getCount());
-			TRACE("-------------delay-------- (%d)\n", counter[poison_delay]->getCount());
-			TRACE("------------poison-------- (%d)\n", counter[is_poison]->getCount());
 			if (counter[mage_skill]->getCount() == 180) {
 
 				hero_tempX = hero->getX();
