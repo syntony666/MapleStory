@@ -1,4 +1,4 @@
-ï»¿#include "stdafx.h"
+#include "stdafx.h"
 #include "Resource.h"
 #include <mmsystem.h>
 #include <ddraw.h>
@@ -8,9 +8,6 @@
 #include "position.h"
 
 namespace game_framework {
-	/////////////////////////////////////////////////////////////////////////////
-	// Hero: Eraser class
-	/////////////////////////////////////////////////////////////////////////////
 
 	Hero::Hero() {
 		counter.push_back(new Counter(300));	//slash
@@ -30,14 +27,17 @@ namespace game_framework {
 		level = 1;
 		counter[slash]->stop();
 		counter[heal]->stop();
+		skill_time =26;
+		heal_time =72;
+		level_animation = 0;
 	}
 
 	void Hero::OnMove()
 	{
-		STEP_SIZE = 8;			//ç§»å‹•é€Ÿåº¦
+		STEP_SIZE = 8;			//²¾°Ê³t«×
 
 		if (isMovingDown  && pos_y >= floor || isAttacking && pos_y >= floor || isSlashing)
-			STEP_SIZE = 0;		//è¶´ä¸‹éœæ­¢
+			STEP_SIZE = 0;		//­w¤UÀR¤î
 
 		if (isMovingLeft && !isHitLeft && !isHitRight)
 			pos_x -= STEP_SIZE;
@@ -81,24 +81,24 @@ namespace game_framework {
 			hit_time--;
 		}
 
-		if (rising) {			// ä¸Šå‡ç‹€æ…‹
+		if (rising) {			// ¤W¤Éª¬ºA
 			if (velocity > 0) {
-				pos_y -= velocity*2;	// ç•¶é€Ÿåº¦ > 0æ™‚ï¼Œyè»¸ä¸Šå‡(ç§»å‹•velocityå€‹é»žï¼Œvelocityçš„å–®ä½ç‚º é»ž/æ¬¡)
-				velocity--;		// å—é‡åŠ›å½±éŸ¿ï¼Œä¸‹æ¬¡çš„ä¸Šå‡é€Ÿåº¦é™ä½Ž
+				pos_y -= velocity*2;	// ·í³t«× > 0®É¡Ay¶b¤W¤É(²¾°Êvelocity­ÓÂI¡Avelocityªº³æ¦ì¬° ÂI/¦¸)
+				velocity--;		// ¨ü­«¤O¼vÅT¡A¤U¦¸ªº¤W¤É³t«×­°§C
 			}
 			else {
-				rising = false; // ç•¶é€Ÿåº¦ <= 0ï¼Œä¸Šå‡çµ‚æ­¢ï¼Œä¸‹æ¬¡æ”¹ç‚ºä¸‹é™
-				velocity = 1;	// ä¸‹é™çš„åˆé€Ÿ(velocity)ç‚º1
+				rising = false; // ·í³t«× <= 0¡A¤W¤É²×¤î¡A¤U¦¸§ï¬°¤U­°
+				velocity = 1;	// ¤U­°ªºªì³t(velocity)¬°1
 			}
 		}
-		else {				// ä¸‹é™ç‹€æ…‹
-			if (pos_y < floor) {  // ç•¶yåº§æ¨™é‚„æ²’ç¢°åˆ°åœ°æ¿
-				pos_y += velocity*2;	// yè»¸ä¸‹é™(ç§»å‹•velocityå€‹é»žï¼Œvelocityçš„å–®ä½ç‚º é»ž/æ¬¡)
+		else {				// ¤U­°ª¬ºA
+			if (pos_y < floor) {  // ·íy®y¼ÐÁÙ¨S¸I¨ì¦aªO
+				pos_y += velocity*2;	// y¶b¤U­°(²¾°Êvelocity­ÓÂI¡Avelocityªº³æ¦ì¬° ÂI/¦¸)
 				if (velocity < 7) 
 					velocity++;
 			}
 			else {
-				pos_y = floor;  // ç•¶yåº§æ¨™ä½Žæ–¼åœ°æ¿ï¼Œæ›´æ­£ç‚ºåœ°æ¿ä¸Š
+				pos_y = floor;  // ·íy®y¼Ð§C©ó¦aªO¡A§ó¥¿¬°¦aªO¤W
 				velocity = 0;
 			}
 		}
@@ -107,7 +107,7 @@ namespace game_framework {
 
 	void Hero::OnShow()
 	{	
-		// æ–½æ”¾æŠ€èƒ½æ™‚çš„è²¼åœ–
+		// ¬I©ñ§Þ¯à®Éªº¶K¹Ï
 		if (isSlashing) {
 			if (skill_time == 0) {
 				skill_time = 26;
@@ -133,7 +133,7 @@ namespace game_framework {
 					heal_time--;
 				}
 			}
-			// å‘å³çœ‹çš„è²¼åœ–
+			// ¦V¥k¬Ýªº¶K¹Ï
 			if (facing == 1) {
 				a.standRight.SetTopLeft(pos_x, pos_y);
 				if (isAttacking) {
@@ -174,7 +174,7 @@ namespace game_framework {
 				}
 			}
 
-			// å‘å·¦çœ‹çš„è²¼åœ–
+			// ¦V¥ª¬Ýªº¶K¹Ï
 			if (facing == 2) {
 				a.standLeft.SetTopLeft(pos_x, pos_y);
 				if (isAttacking) {
@@ -225,12 +225,12 @@ namespace game_framework {
 		}
 
 		//10 = Lv, 11 = HP, 12 = ATK
-		// UI ä»‹é¢
+		// UI ¤¶­±
 		number_OnShow(10, 10, 10);
 		number_OnShow(12, 10, 45);
 		number_OnShow(11, 10, 80);
 
-		// LV é¡¯ç¤º
+		// LV Åã¥Ü
 		if(level < 10)
 			number_OnShow(level, 165, 10);
 		else {
@@ -238,7 +238,7 @@ namespace game_framework {
 			number_OnShow(level % 10, 165+d, 10);
 		}
 
-		// ATK é¡¯ç¤º
+		// ATK Åã¥Ü
 		if (attack < 100) {
 			number_OnShow(attack / 10, 133, 45);
 			number_OnShow(attack % 10, 133 + d, 45);
@@ -255,7 +255,7 @@ namespace game_framework {
 			number_OnShow(attack % 10, 133 + d * 3, 45);
 		}
 
-		// HP é¡¯ç¤º
+		// HP Åã¥Ü
 		if (HP > 0) {
 			if (HP < 10) {
 				number_OnShow(HP, 133, 80);

@@ -7,9 +7,16 @@
 #include "character.h"
 
 namespace game_framework {
+	Character::Character() {
+		level_animation = 0;
+		is_Monster_Go_Left = is_Monster_Go_Right = false;
+		hit_time = 18;
+		STEP_SIZE = 8;
+		skill = 0;
+	}
 
 	Character::~Character() {
-		for (auto c : counter)
+		for(auto c : counter)
 			delete c;
 		counter.clear();
 	}
@@ -22,16 +29,20 @@ namespace game_framework {
 	}
 	void Character::setXY(int nx, int ny)
 	{
-		pos_x = nx; pos_y = ny;
+		pos_x = nx; 
+		pos_y = ny;
 	}
 
-	int Character::getAttack() {
+	int Character::getAttack() 
+	{
 		return attack; 
 	}
-	void Character::setAttack(int Atk) {
+	void Character::setAttack(int Atk) 
+	{
 		attack = Atk;
 	}
-	int Character::getHP() {
+	int Character::getHP() 
+	{
 		return HP;
 	}
 	int Character::getMaxHP() {

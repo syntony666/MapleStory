@@ -32,11 +32,10 @@ namespace game_framework {
 		isMovingLeft = isMovingRight = false;
 		isAttacking = isHitLeft = isHitRight = isDead = false;
 		STEP_SIZE = 3;
-		const int FLOOR = 570;
-		floor = FLOOR;
-		const int INITIAL_VELOCITY = 14;
+		floor = 570;
 		rising = true;
-		initial_velocity = INITIAL_VELOCITY;
+		initial_velocity = 14;
+		attack_time = 15;
 		setXY(initX, initY);
 	}
 

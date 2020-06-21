@@ -20,6 +20,9 @@ namespace game_framework {
 
 	protected:
 		const int d = 17;				// UI文字間距
+		int skill_time;		// 技能動畫時間
+		int heal_time;		// 技能動畫時間
+		int level_animation;
 	};
 }
 #endif

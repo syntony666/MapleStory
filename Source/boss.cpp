@@ -7,11 +7,9 @@
 #include "boss.h"
 
 namespace game_framework {
-	/////////////////////////////////////////////////////////////////////////////
-	// Boss: class
-	/////////////////////////////////////////////////////////////////////////////
 
-	Boss::~Boss() {
+	Boss::~Boss() 
+	{
 		for (auto c : counter)
 			delete c;
 		counter.clear();
@@ -33,6 +31,10 @@ namespace game_framework {
 		counter.push_back(new Counter(30));		// 技能三：閃電 - 傷害1
 		counter.push_back(new Counter(60));		// 技能三：閃電 - 延遲2
 		counter.push_back(new Counter(30));		// 技能三：閃電 - 傷害2
+		isDead = isHit = false;
+		maxHP = 100000;
+		hit_time = 18;
+		attack = 400;
 	}
 
 	void Boss::OnMove()
@@ -108,39 +110,47 @@ namespace game_framework {
 		hpIcon.ShowBitmap(0.3);
 	}
 
-	int Boss::getSkill() {
+	int Boss::getSkill() 
+	{
 		if (counter[skills]->getCount() == 150) {
 			srand((unsigned int)time(NULL));
-			skill = ( rand() % 3 ) + 1;
+			skill = (rand() % 3) + 1;
 			counter[skills]->start();
 		}
 		TRACE("-----------BOSS_CD---------(%d)\n", counter[skills]->getCount() / 30);
 		return skill;
 	}
 
-	Counter& Boss::getCounter(int i) {
+	Counter& Boss::getCounter(int i) 
+	{
 		return *counter[i];
 	}
 
-	void Boss::countdown() {
+	void Boss::countdown() 
+	{
 		for (auto count : counter)
 			count->countdown();
 	}
 
-	void Boss::setHit() {
+	void Boss::setHit() 
+	{
 		isHit = true;
 	}
-	void Boss::setHit(bool flag) {
+	void Boss::setHit(bool flag) 
+	{
 		isHit = flag;
 	}
 
-	bool Boss::ifHit() {
+	bool Boss::ifHit() 
+	{
 		return isHit;
 	}
-	int Boss::getAttack() {
+	int Boss::getAttack() 
+	{
 		return attack;
 	}
-	int Boss::getX() {
+	int Boss::getX() 
+	{
 		return pos_x;
 	}
 	int Boss::getHP() {
@@ -149,7 +159,8 @@ namespace game_framework {
 	int Boss::getMaxHP() {
 		return maxHP;
 	}
-	void Boss::setHP(int Health) {
+	void Boss::setHP(int Health) 
+	{
 		HP = Health;
 	}
 }
