@@ -9,6 +9,8 @@
 namespace game_framework {
 
 	Character::~Character() {
+		for (auto c : counter)
+			delete c;
 		counter.clear();
 	}
 

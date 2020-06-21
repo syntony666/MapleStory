@@ -268,6 +268,7 @@
     </ClCompile>
     <ClCompile Include="Source\map.cpp" />
     <ClCompile Include="Source\monster.cpp" />
+    <ClCompile Include="Source\portal.cpp" />
     <ClCompile Include="Source\position.cpp" />
     <ClCompile Include="Source\StdAfx.cpp">
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -304,6 +305,7 @@
     <ClInclude Include="Source\MainFrm.h" />
     <ClInclude Include="Source\map.h" />
     <ClInclude Include="Source\monster.h" />
+    <ClInclude Include="Source\portal.h" />
     <ClInclude Include="Source\position.h" />
     <ClInclude Include="Source\Resource.h" />
     <ClInclude Include="Source\StdAfx.h" />

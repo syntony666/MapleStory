@@ -12,8 +12,6 @@ namespace game_framework {
 		for (int i = 0; i < count; ++i)
 			_plat.push_back(plats[i]);
 	}
-	Floor::~Floor() {
-	}
 	int Floor::getXBegin(int i) const{
 		return _plat[i].xBegin;
 	}

@@ -49,6 +49,9 @@
     <ClCompile Include="Source\counter.cpp">
       <Filter>MapleStory</Filter>
     </ClCompile>
+    <ClCompile Include="Source\portal.cpp">
+      <Filter>MapleStory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\audio.h">
@@ -103,6 +106,9 @@
       <Filter>MapleStory</Filter>
     </ClInclude>
     <ClInclude Include="Source\counter.h">
+      <Filter>MapleStory</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\portal.h">
       <Filter>MapleStory</Filter>
     </ClInclude>
   </ItemGroup>

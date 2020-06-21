@@ -12,6 +12,9 @@ namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 
 	Boss::~Boss() {
+		for (auto c : counter)
+			delete c;
+		counter.clear();
 	}
 
 	void Boss::Initialize()

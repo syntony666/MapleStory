@@ -1,8 +1,6 @@
 #ifndef FLOOR_H
 #define FLOOR_H
 
-//#include "position.h"
-
 namespace game_framework {
 	struct Platform
 	{
@@ -13,7 +11,6 @@ namespace game_framework {
 	public:
 		Floor() :_count(0) {}
 		Floor(Platform plats[], int count);
-		~Floor();
 		int getXBegin(int i) const;
 		int getXLast(int i)const;
 		int getY(int i) const;

@@ -5,6 +5,7 @@
 #include "audio.h"
 #include "gamelib.h"
 #include "map.h"
+#include "portal.h"
 
 namespace game_framework {
 
@@ -12,8 +13,7 @@ namespace game_framework {
 		Initialize();
 	}
 	Map::~Map() {
-		//if(_portal != nullptr)
-		//	delete _portal;
+		//delete _portal;
 	}
 	void Map::Initialize() {
 		zoom = 2;
@@ -41,7 +41,7 @@ namespace game_framework {
 		_bitmap = bitmap;
 	}
 	void Map::setInitPortal(int x, int y) {
-		_portal =new Portal(x, y);
+		_portal = Portal(x, y);
 	}
 	void Map::setMovingLeft(bool flag) {	
 		isMovingLeft = flag;
@@ -64,7 +64,7 @@ namespace game_framework {
 		map.ShowBitmap(zoom);
 	}
 	void Map::portalOnShow() {
-		_portal->OnShow(_portal->getX() + _x, _portal->getY());
+		_portal.OnShow(_portal.getX() + _x, _portal.getY());
 	}
 	int Map::getFloorXBegin(int i) const{
 		return floors.getXBegin(i);
@@ -81,7 +81,7 @@ namespace game_framework {
 	int Map::getY()const {
 		return _y;
 	}
-	Portal* Map::getPortal() {
+	Portal& Map::getPortal() {
 		return _portal;
 	}
 	bool Map::ifMovingLeft()const {	

@@ -158,7 +158,7 @@ void CGameStateInit::OnShow()
 /////////////////////////////////////////////////////////////////////////////
 
 CGameStateOver::CGameStateOver(CGame *g)
-: CGameState(g)
+	: CGameState(g)
 {
 }
 
@@ -293,7 +293,7 @@ void CGameStateRun::OnMove()							// ²¾°Ê¹CÀ¸¤¸¯À
 	checkStage();
 	hero->OnMove();
 	map->OnMove();
-	map->getPortal()->OnMove();
+	map->getPortal().OnMove();
 	timeCounter++;
 
 	hero_pos.setPosition(hero, *map);
@@ -530,9 +530,9 @@ void CGameStateRun::OnInit() {
 	for (size_t i = 0; i < maps.size() ; i++) {
 		maps[i].LoadBitmap();
 		if (i < 2)
-			maps[i].getPortal()->addBitMaps(portal_bitmaps, 2);
+			maps[i].getPortal().addBitMaps(portal_bitmaps, 2);
 		if (i >= 2)
-			maps[i].getPortal()->addBitMaps(portal_boss_bitmaps, 2);
+			maps[i].getPortal().addBitMaps(portal_boss_bitmaps, 2);
 	}
 
 	ShowInitProgress(95);
