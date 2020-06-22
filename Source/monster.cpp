@@ -13,9 +13,9 @@ namespace game_framework
 
 	Monster::Monster(int nx, int ny, int nxp)
 	{
-		exp = nxp;
-		initX = nx;
-		initY = ny;
+		exp = nxp;							 // 怪物經驗值
+		initX = nx;							 // 初始 x 座標
+		initY = ny;							 // 初始 y 座標
 		counter.push_back(new Counter(180)); // mage skill
 		counter.push_back(new Counter(40));	 // is_poison
 		counter.push_back(new Counter(80));	 // poison_delay
@@ -25,7 +25,7 @@ namespace game_framework
 	{
 	}
 
-	void Monster::Initialize()
+	void Monster::Initialize()				// 初始化 Monster
 	{
 		isMovingLeft = isMovingRight = false;
 		isAttacking = isHitLeft = isHitRight = isDead = false;
@@ -41,26 +41,26 @@ namespace game_framework
 	{
 		if (isDead)
 			return;
-		if (is_Monster_Go_Left)
-		{ //若碰壁就動地圖直到地圖的邊緣
+		if (is_Monster_Go_Left)				// 若怪物往左移動
+		{ 
 			STEP_SIZE = -3;
 			pos_x += STEP_SIZE;
 		}
-		else if (is_Monster_Go_Right)
-		{ //若碰壁就動地圖直到地圖的邊緣
+		else if (is_Monster_Go_Right)		// 若怪物往右移動
+		{
 			STEP_SIZE = 3;
 			pos_x += STEP_SIZE;
 		}
-		if (isMovingRight)
+		if (isMovingRight)					// 若玩家移動視角則怪物對應移動
 		{
 			pos_x -= HERO_STEP;
 		}
-		else if (isMovingLeft)
+		else if (isMovingLeft)				// 若玩家移動視角則怪物對應移動
 		{
 			pos_x += HERO_STEP;
 		}
 
-		if (isHitLeft)
+		if (isHitLeft)						// 受到向左攻擊的對應動作
 		{
 			if (hit_time == 0)
 			{
@@ -78,7 +78,7 @@ namespace game_framework
 			}
 			hit_time--;
 		}
-		if (isHitRight)
+		if (isHitRight)						// 受到向右攻擊的對應動作
 		{
 			if (hit_time == 0)
 			{
@@ -98,34 +98,34 @@ namespace game_framework
 		}
 
 		if (rising)
-		{ // 上升狀態
+		{									// 上升狀態
 			if (velocity > 0)
 			{
-				pos_y -= velocity * 2; // 當速度 > 0時，y軸上升(移動velocity個點，velocity的單位為 點/次)
-				velocity--;			   // 受重力影響，下次的上升速度降低
+				pos_y -= velocity * 2;		// 當速度 > 0時，y軸上升(移動velocity個點，velocity的單位為 點/次)
+				velocity--;					// 受重力影響，下次的上升速度降低
 			}
 			else
 			{
-				rising = false; // 當速度 <= 0，上升終止，下次改為下降
-				velocity = 1;	// 下降的初速(velocity)為1
+				rising = false;				// 當速度 <= 0，上升終止，下次改為下降
+				velocity = 1;				// 下降的初速(velocity)為1
 			}
 		}
 		else
-		{ // 下降狀態
+		{									// 下降狀態
 			if (pos_y < floor)
-			{						   // 當y座標還沒碰到地板
-				pos_y += velocity * 2; // y軸下降(移動velocity個點，velocity的單位為 點/次)
+			{								// 當y座標還沒碰到地板
+				pos_y += velocity * 2;		// y軸下降(移動velocity個點，velocity的單位為 點/次)
 				if (velocity < 7)
 					velocity++;
 			}
 			else
 			{
-				pos_y = floor; // 當y座標低於地板，更正為地板上
+				pos_y = floor;				// 當y座標低於地板，更正為地板上
 				velocity = 0;
 			}
 		}
 
-		if (isAttacking)
+		if (isAttacking)					// 攻擊時間判定
 		{
 			if (attack_time == 0)
 			{
@@ -140,13 +140,13 @@ namespace game_framework
 	{
 		if (!isDead)
 		{
-
+			// 站立時的貼圖
 			a.standRight.SetTopLeft(pos_x, pos_y);
 			a.standLeft.SetTopLeft(pos_x, pos_y);
 
 			if (STEP_SIZE >= 0)
-			{
-				if (isAttacking)
+			{		
+				if (isAttacking)		// 攻擊時的貼圖
 				{
 					a.attackRight.SetTopLeft(a.standRight.Left(), a.standRight.Top());
 					a.attackRight.OnShow();
@@ -172,12 +172,12 @@ namespace game_framework
 					a.standLeft.OnMove();
 				}
 			}
-			if (counter[poison_delay]->getCount() < 80)
+			if (counter[poison_delay]->getCount() < 80)		// 施放技能時的貼圖
 			{
 				a.slashAnimation.OnShow();
 				a.slashAnimation.OnMove();
 			}
-			hp_OnShow();
+			hp_OnShow();			// 生命值的貼圖
 		}
 	}
 	bool Monster::ifSkill()
@@ -185,7 +185,7 @@ namespace game_framework
 		return isSkill;
 	}
 
-	void Monster::attacking(Character *hero)
+	void Monster::attacking(Character *hero)		// 怪物攻擊角色時產生的效果與技能判定
 	{
 		if (skill == 0)
 		{
@@ -234,4 +234,4 @@ namespace game_framework
 			}
 		}
 	}
-} // namespace game_framework
+} 

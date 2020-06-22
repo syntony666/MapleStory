@@ -19,6 +19,5 @@ namespace game_framework
 	private:
 		int pos_x, pos_y;						// 內部 X Y 參數
 	};
-} // namespace game_framework
-
+}
 #endif

@@ -10,51 +10,51 @@
 namespace game_framework
 {
 
-	Hero::Hero()
+	Hero::Hero()								// 設定基本冷卻時間
 	{
-		counter.push_back(new Counter(300)); //slash
-		counter.push_back(new Counter(600)); //heal
+		counter.push_back(new Counter(300));	// slash
+		counter.push_back(new Counter(600));	// heal
 		Initialize();
 	}
 	Hero::~Hero()
 	{
 	}
-	void Hero::Initialize()
+	void Hero::Initialize()						// 初始化設定
 	{
 		isMovingLeft = isMovingRight = isMovingUp = isMovingDown = false;
 		isAttacking = isSlashing = isHitLeft = isHitRight = isDead = isHealing = false;
 		rising = false;
-		floor = 570;
-		initial_velocity = 14;
-		exp = 0;
-		level = 1;
-		counter[slash]->stop();
-		counter[heal]->stop();
-		skill_time = 26;
-		heal_time = 72;
-		level_animation = 0;
+		floor = 570;							// 地板高度
+		initial_velocity = 14;					// 重力初始值
+		exp = 0;								// 經驗值
+		level = 1;								// 等級
+		counter[slash]->stop();					// 冷卻重置
+		counter[heal]->stop();					// 冷卻重置
+		skill_time = 26;						// 冷卻重置
+		heal_time = 72;							// 冷卻重置
+		level_animation = 0;					// 升級動畫重置
 	}
 
 	void Hero::OnMove()
 	{
-		STEP_SIZE = 8; //移動速度
+		STEP_SIZE = 8;							// 移動速度
 
 		if (isMovingDown && pos_y >= floor || isAttacking && pos_y >= floor || isSlashing)
-			STEP_SIZE = 0; //趴下靜止
+			STEP_SIZE = 0;						// 趴下靜止
 
 		if (isMovingLeft && !isHitLeft && !isHitRight)
-			pos_x -= STEP_SIZE;
+			pos_x -= STEP_SIZE;					// 向左移動
 
 		if (isMovingRight && !isHitLeft && !isHitRight)
-			pos_x += STEP_SIZE;
+			pos_x += STEP_SIZE;					// 向右移動
 
 		if (isMovingUp && pos_y == floor && !isHitLeft && !isHitRight)
 		{
-			rising = true;
+			rising = true;						// 跳躍條件
 			velocity = initial_velocity;
 		}
 
-		if (isHitLeft)
+		if (isHitLeft)							// 受到向左攻擊的對應動作
 		{
 			if (hit_time == 0)
 			{
@@ -72,7 +72,7 @@ namespace game_framework
 			}
 			hit_time--;
 		}
-		if (isHitRight)
+		if (isHitRight)							// 受到向右攻擊的對應動作
 		{
 			if (hit_time == 0)
 			{
@@ -92,29 +92,29 @@ namespace game_framework
 		}
 
 		if (rising)
-		{ // 上升狀態
+		{										// 上升狀態
 			if (velocity > 0)
 			{
-				pos_y -= velocity * 2; // 當速度 > 0時，y軸上升(移動velocity個點，velocity的單位為 點/次)
-				velocity--;			   // 受重力影響，下次的上升速度降低
+				pos_y -= velocity * 2;			// 當速度 > 0時，y軸上升(移動velocity個點，velocity的單位為 點/次)
+				velocity--;						// 受重力影響，下次的上升速度降低
 			}
 			else
 			{
-				rising = false; // 當速度 <= 0，上升終止，下次改為下降
-				velocity = 1;	// 下降的初速(velocity)為1
+				rising = false;					// 當速度 <= 0，上升終止，下次改為下降
+				velocity = 1;					// 下降的初速(velocity)為1
 			}
 		}
 		else
-		{ // 下降狀態
+		{										// 下降狀態
 			if (pos_y < floor)
-			{						   // 當y座標還沒碰到地板
-				pos_y += velocity * 2; // y軸下降(移動velocity個點，velocity的單位為 點/次)
+			{									// 當y座標還沒碰到地板
+				pos_y += velocity * 2;			// y軸下降(移動velocity個點，velocity的單位為 點/次)
 				if (velocity < 7)
 					velocity++;
 			}
 			else
 			{
-				pos_y = floor; // 當y座標低於地板，更正為地板上
+				pos_y = floor;					// 當y座標低於地板，更正為地板上
 				velocity = 0;
 			}
 		}
@@ -259,6 +259,7 @@ namespace game_framework
 		}
 		hp_OnShow();
 
+		// 升等動畫
 		if (level_animation > 0)
 		{
 			a.lv_up.SetTopLeft(pos_x - 500, pos_y - 650);
@@ -338,7 +339,7 @@ namespace game_framework
 		}
 	}
 
-	void Hero::attacking(Character *monster)
+	void Hero::attacking(Character *monster)		// 攻擊怪物時產生的效果
 	{
 		if (isSlashing == true)
 			monster->setHP(monster->getHP() - attack * 2);

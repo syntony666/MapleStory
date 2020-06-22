@@ -7,7 +7,7 @@
 #include "portal.h"
 
 namespace game_framework
-{
+{	// 參考標頭檔定義說明
 	Portal::~Portal() {}
 	Portal::Portal(int x, int y)
 	{
@@ -37,4 +37,4 @@ namespace game_framework
 	{
 		return _y;
 	}
-} // namespace game_framework
+}

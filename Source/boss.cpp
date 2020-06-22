@@ -10,11 +10,11 @@ namespace game_framework
 {
 	Boss::~Boss()
 	{
-		for (auto c : counter)
+		for (auto c : counter)				// Counter 釋放記憶體
 			delete c;
 		counter.clear();
 	}
-	void Boss::Initialize()
+	void Boss::Initialize()					// 初始化內容設定
 	{
 		a.normal.SetDelayCount(2);
 		isMovingRight = isMovingLeft = false;
@@ -42,12 +42,12 @@ namespace game_framework
 
 		a.normal.OnMove();
 
-		if (isMovingRight)
+		if (isMovingRight)					// 隨角色移動相對改變視覺位置
 			pos_x -= HERO_STEP;
 		else if (isMovingLeft)
 			pos_x += HERO_STEP;
 
-		if (isHit)
+		if (isHit)							// 受傷後無敵時間
 		{
 			if (hit_time == 0)
 			{
@@ -57,7 +57,7 @@ namespace game_framework
 			hit_time--;
 		}
 	}
-	void Boss::OnShow()
+	void Boss::OnShow()						// 顯示條件
 	{
 		if (!isDead)
 		{
@@ -85,7 +85,7 @@ namespace game_framework
 		for (int i = 0; i < 8; i++)
 			a.normal.AddBitmap(boss_stand_bitmaps[i], RGB(255, 255, 255));
 	}
-	void Boss::showHPBar()
+	void Boss::showHPBar()					// 血量顯示相關設定
 	{
 		int percent = HP * 100 / maxHP;
 		const int bar_width = SIZE_X - 300;
@@ -106,7 +106,7 @@ namespace game_framework
 		hpIcon.SetTopLeft(250, 5);
 		hpIcon.ShowBitmap(0.3);
 	}
-	int Boss::getSkill()
+	int Boss::getSkill()					// 隨機技能施放功能
 	{
 		if (counter[skills]->getCount() == 150) // 5秒換一次技能
 		{
@@ -116,11 +116,11 @@ namespace game_framework
 		}
 		return skill;
 	}
-	Counter &Boss::getCounter(int i)
+	Counter &Boss::getCounter(int i)		// Boss 計時器取用
 	{
 		return *counter[i];
 	}
-	void Boss::countdown()
+	void Boss::countdown()					// Boss 計時器倒數
 	{
 		for (auto count : counter)
 			count->countdown();

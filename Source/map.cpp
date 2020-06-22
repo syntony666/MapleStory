@@ -14,13 +14,14 @@ namespace game_framework
 	{
 		Initialize();
 	}
-	void Map::Initialize()
+	void Map::Initialize()						// 地圖初始設定
 	{
 		zoom = 2;
 		isMovingLeft = isMovingRight = false;
 		rising = false;
 	}
 
+	// 以下皆參照標頭檔功能說明
 	void Map::LoadBitmap()
 	{
 		map.LoadBitmap(_bitmap);

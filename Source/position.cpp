@@ -8,7 +8,7 @@
 
 namespace game_framework
 {
-
+	// 參考標頭檔定義說明
 	Position::Position()
 	{
 		pos_x = 0;
@@ -32,4 +32,4 @@ namespace game_framework
 	{
 		return pos_y;
 	}
-} // namespace game_framework
+}

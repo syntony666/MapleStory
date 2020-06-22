@@ -8,7 +8,7 @@
 
 namespace game_framework
 {
-	Character::Character()
+	Character::Character()						// 宣告基本參數
 	{
 		level_animation = 0;
 		is_Monster_Go_Left = is_Monster_Go_Right = false;
@@ -16,7 +16,7 @@ namespace game_framework
 		STEP_SIZE = 8;
 		skill = 0;
 	}
-	Character::~Character()
+	Character::~Character()						// 解構釋放記憶體
 	{
 		for (auto c : counter)
 			delete c;
@@ -161,7 +161,7 @@ namespace game_framework
 		return attackRange;
 	}
 	void Character::hp_addBitmaps()
-	{
+	{									// 10% 一格一張圖
 		int hp_bitmaps[] = {IDB_HP_0, IDB_HP_10, IDB_HP_20, IDB_HP_30, IDB_HP_40, IDB_HP_50, IDB_HP_60, IDB_HP_70, IDB_HP_80, IDB_HP_90, IDB_HP_100};
 		for (int i = 0; i < 11; i++)
 			hp[i].AddBitmap(hp_bitmaps[i]);
@@ -179,13 +179,13 @@ namespace game_framework
 		}
 	}
 	void Character::number_addBitmaps()
-	{
+	{									// 0 ~ 9 各一張圖 + 等級、生命、攻擊
 		int number_bitmaps[] = {IDB_0, IDB_1, IDB_2, IDB_3, IDB_4, IDB_5, IDB_6, IDB_7, IDB_8, IDB_9, IDB_LV, IDB_HP, IDB_ATK};
 		for (int i = 0; i < 13; i++)
 			num[i].AddBitmap(number_bitmaps[i], RGB(230, 212, 132));
 	}
 	void Character::number_OnShow(int nx, int pos_nx, int pos_ny)
-	{ //10 = Lv, 11 = HP, 12 = ATK
+	{									//10 = Lv, 11 = HP, 12 = ATK
 		num[nx].SetTopLeft(pos_nx, pos_ny);
 		num[nx].OnShow();
 	}
@@ -216,7 +216,7 @@ namespace game_framework
 	}
 	void Character::addBitmap(int standR, int standL, int downR, int downL, int jumpR, int jumpL, vector<int> goR, vector<int> goL, vector<int> attackR, vector<int> attackL, vector<int> slash, vector<int> heal, vector<int> lv_up, int nR, int nG, int nB, int slash_ani)
 	{
-		if (standR != 0)
+		if (standR != 0)											// 這個函式將所有一個 Character 需要的圖檔全部合併導入
 			a.standRight.AddBitmap(standR, RGB(nR, nG, nB));
 		if (standL != 0)
 			a.standLeft.AddBitmap(standL, RGB(nR, nG, nB));
