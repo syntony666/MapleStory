@@ -26,7 +26,7 @@
  *     Fix CAnimation::Move().
  */
 
-#define	 INITGUID
+#define INITGUID
 #include "stdafx.h"
 #include "game.h"
 #include "MainFrm.h"
@@ -48,34 +48,43 @@
 
 using namespace game_framework;
 
-class CMovingBitmapTest : public CppUnit::TestFixture  {
-	CPPUNIT_TEST_SUITE( CMovingBitmapTest );
-		CPPUNIT_TEST( testLoadBitmap );
+class CMovingBitmapTest : public CppUnit::TestFixture
+{
+	CPPUNIT_TEST_SUITE(CMovingBitmapTest);
+	CPPUNIT_TEST(testLoadBitmap);
 	CPPUNIT_TEST_SUITE_END();
+
 public:
-	void setUp()  {
+	void setUp()
+	{
 		b = new CMovingBitmap;
 	}
-	void tearDown() {
+	void tearDown()
+	{
 		delete b;
 	}
-	void testLoadBitmap() {
+	void testLoadBitmap()
+	{
 		b->LoadBitmap(IDB_0);
 		b->ShowBitmap();
 	}
+
 private:
 	CMovingBitmap *b;
 };
 
-class CAnimationTest : public CppUnit::TestFixture  {
-	CPPUNIT_TEST_SUITE( CAnimationTest );
-		CPPUNIT_TEST( testShow );
-		CPPUNIT_TEST( testMove );
-		CPPUNIT_TEST( testReset );
-		CPPUNIT_TEST( testIsFinalBitmap );
+class CAnimationTest : public CppUnit::TestFixture
+{
+	CPPUNIT_TEST_SUITE(CAnimationTest);
+	CPPUNIT_TEST(testShow);
+	CPPUNIT_TEST(testMove);
+	CPPUNIT_TEST(testReset);
+	CPPUNIT_TEST(testIsFinalBitmap);
 	CPPUNIT_TEST_SUITE_END();
+
 public:
-	void testMove() {
+	void testMove()
+	{
 		const int COUNT = 3;
 		CAnimation a(COUNT);
 		a.AddBitmap(IDB_0);
@@ -87,18 +96,21 @@ public:
 		//   necessary) whenever delay count is reached.
 		//
 		for (int k = 0; k < 2; k++) // test for two times (to test reset)
-			for (int i=0; i < 4; i++) { // for all 4 bitmaps
-				for (int j = 0; j < COUNT-1; j++) { // for delay count
+			for (int i = 0; i < 4; i++)
+			{ // for all 4 bitmaps
+				for (int j = 0; j < COUNT - 1; j++)
+				{ // for delay count
 					a.OnMove();
 					// count does not change after COUNT-1 moves
 					CPPUNIT_ASSERT(a.GetCurrentBitmapNumber() == i);
 				}
 				a.OnMove();
 				// count change after COUNT moves
-				CPPUNIT_ASSERT(a.GetCurrentBitmapNumber() == ((i+1)%4)); // 4 bitmaps
+				CPPUNIT_ASSERT(a.GetCurrentBitmapNumber() == ((i + 1) % 4)); // 4 bitmaps
 			}
 	}
-	void testShow() {
+	void testShow()
+	{
 		const int COUNT = 3;
 		CAnimation a(COUNT);
 		a.AddBitmap(IDB_0);
@@ -108,29 +120,32 @@ public:
 		// Show() should never change the "current" bitmap so that
 		//   onDraw() does not change the appearence of the animation.
 		//
-		for (int i=0; i < COUNT*3; i++) {
+		for (int i = 0; i < COUNT * 3; i++)
+		{
 			a.OnShow();
 			//TRACE("i=%d CBN=%d\n",i, a.GetCurrentBitmapNumber());
 			CPPUNIT_ASSERT(a.GetCurrentBitmapNumber() == 0);
 		}
 	}
-	void testReset() {
+	void testReset()
+	{
 		const int COUNT = 7;
 		CAnimation a(COUNT);
 		a.AddBitmap(IDB_0);
 		a.AddBitmap(IDB_1);
-		int count[]={0, 1, 17, 31, 51};
-		for (int i=0; i < sizeof(count)/sizeof(int); i++) {
+		int count[] = {0, 1, 17, 31, 51};
+		for (int i = 0; i < sizeof(count) / sizeof(int); i++)
+		{
 			int j;
 			a.Reset();
 			// count is 0 after reset
 			CPPUNIT_ASSERT(a.GetCurrentBitmapNumber() == 0);
-			for (j=0; j < count[i]; j++)
+			for (j = 0; j < count[i]; j++)
 				a.OnMove();
 			a.Reset();
 			// count is 0 after reset
 			CPPUNIT_ASSERT(a.GetCurrentBitmapNumber() == 0);
-			for (j=0; j < COUNT-1; j++)
+			for (j = 0; j < COUNT - 1; j++)
 				a.OnMove();
 			// count is 0 after COUNT-1 moves
 			CPPUNIT_ASSERT(a.GetCurrentBitmapNumber() == 0);
@@ -141,26 +156,31 @@ public:
 			a.AddBitmap(IDB_2);
 		}
 	}
-	void testIsFinalBitmap() {
+	void testIsFinalBitmap()
+	{
 		const int COUNT = 5;
 		int i;
 		CAnimation a(COUNT);
 		a.AddBitmap(IDB_0);
-		for (i = 0; i < COUNT+3; i++) {
+		for (i = 0; i < COUNT + 3; i++)
+		{
 			// There is only one bitmap, it is always the last bitmap
 			CPPUNIT_ASSERT(a.IsFinalBitmap());
 			a.OnMove();
 		}
 		a.AddBitmap(IDB_1);
 		a.AddBitmap(IDB_2);
-		for (i = 0; i < 2; i++) { // do it twice
+		for (i = 0; i < 2; i++)
+		{ // do it twice
 			int j;
-			for (j=0; j < COUNT*2-1; j++) {
+			for (j = 0; j < COUNT * 2 - 1; j++)
+			{
 				a.OnMove();
 				// There are 3 bitmaps, the first COUNT*2-1 moves does not reach the last bitmap
 				CPPUNIT_ASSERT(!a.IsFinalBitmap());
 			}
-			for (j=0; j < COUNT; j++) {
+			for (j = 0; j < COUNT; j++)
+			{
 				a.OnMove();
 				// The next COUNT moves stay in the last bitmap
 				CPPUNIT_ASSERT(a.IsFinalBitmap());
@@ -172,5 +192,5 @@ public:
 	}
 };
 
-CPPUNIT_TEST_SUITE_REGISTRATION( CMovingBitmapTest );
-CPPUNIT_TEST_SUITE_REGISTRATION( CAnimationTest );
+CPPUNIT_TEST_SUITE_REGISTRATION(CMovingBitmapTest);
+CPPUNIT_TEST_SUITE_REGISTRATION(CAnimationTest);

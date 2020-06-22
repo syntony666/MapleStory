@@ -32,40 +32,41 @@ protected: // create from serialization only
 	CMainFrame();
 	DECLARE_DYNCREATE(CMainFrame)
 
-// Attributes
+	// Attributes
 public:
 private:
 	bool isFullScreen;
-	int  isToolBarVisible;
-	int  isStatusBarVisible;
+	int isToolBarVisible;
+	int isStatusBarVisible;
 	CMenu *pMenu;
 	//CRect WindowRect;
-// Operations
+	// Operations
 public:
 	void SetFullScreen(bool);
 
-// Overrides
+	// Overrides
 	// ClassWizard generated virtual function overrides
 	//{{AFX_VIRTUAL(CMainFrame)
-	public:
-	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
-	protected:
+public:
+	virtual BOOL PreCreateWindow(CREATESTRUCT &cs);
+
+protected:
 	virtual LRESULT WindowProc(UINT message, WPARAM wParam, LPARAM lParam);
 	//}}AFX_VIRTUAL
 
-// Implementation
+	// Implementation
 public:
 	virtual ~CMainFrame();
 #ifdef _DEBUG
 	virtual void AssertValid() const;
-	virtual void Dump(CDumpContext& dc) const;
+	virtual void Dump(CDumpContext &dc) const;
 #endif
 
-protected:  // control bar embedded members
-	CStatusBar  m_wndStatusBar;
-	CToolBar    m_wndToolBar;
+protected: // control bar embedded members
+	CStatusBar m_wndStatusBar;
+	CToolBar m_wndToolBar;
 
-// Generated message map functions
+	// Generated message map functions
 protected:
 	//{{AFX_MSG(CMainFrame)
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);

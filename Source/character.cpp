@@ -6,178 +6,215 @@
 #include "gamelib.h"
 #include "character.h"
 
-namespace game_framework {
-	Character::Character() {
+namespace game_framework
+{
+	Character::Character()
+	{
 		level_animation = 0;
 		is_Monster_Go_Left = is_Monster_Go_Right = false;
 		hit_time = 18;
 		STEP_SIZE = 8;
 		skill = 0;
 	}
-
-	Character::~Character() {
-		for(auto c : counter)
+	Character::~Character()
+	{
+		for (auto c : counter)
 			delete c;
 		counter.clear();
 	}
-
-	int Character::getX() {
+	int Character::getX()
+	{
 		return pos_x;
 	}
-	int Character::getY() {
+	int Character::getY()
+	{
 		return pos_y;
 	}
 	void Character::setXY(int nx, int ny)
 	{
-		pos_x = nx; 
+		pos_x = nx;
 		pos_y = ny;
 	}
-
-	int Character::getAttack() 
+	int Character::getAttack()
 	{
-		return attack; 
+		return attack;
 	}
-	void Character::setAttack(int Atk) 
+	void Character::setAttack(int Atk)
 	{
 		attack = Atk;
 	}
-	int Character::getHP() 
+	int Character::getHP()
 	{
 		return HP;
 	}
-	int Character::getMaxHP() {
+	int Character::getMaxHP()
+	{
 		return maxHP;
 	}
-	void Character::setHP(int Health){
+	void Character::setHP(int Health)
+	{
 		HP = Health;
 	}
-	void Character::setMaxHP(int Health) {
+	void Character::setMaxHP(int Health)
+	{
 		maxHP = Health;
 		HP = Health;
 	}
-	void Character::setFloor(int Floor) {
+	void Character::setFloor(int Floor)
+	{
 		floor = Floor;
 	}
-	int Character::getFloor() {
+	int Character::getFloor()
+	{
 		return floor;
 	}
-	void Character::setXP(int nxp) {
+	void Character::setXP(int nxp)
+	{
 		exp = nxp;
 	}
-	int Character::getXP() {
+	int Character::getXP()
+	{
 		return exp;
 	}
-	void Character::setLevel(int nlv) {
+	void Character::setLevel(int nlv)
+	{
 		level = nlv;
 	}
-	int Character::getLevel() {
+	int Character::getLevel()
+	{
 		return level;
 	}
-	void Character::setMovingDown(bool flag) {
-		isMovingDown = flag; 
+	void Character::setMovingDown(bool flag)
+	{
+		isMovingDown = flag;
 	}
-	void Character::setMovingLeft(bool flag) {
+	void Character::setMovingLeft(bool flag)
+	{
 		isMovingLeft = flag;
 	}
-	void Character::setMovingRight(bool flag) {
-		isMovingRight = flag; 
-	}	
-	void Character::setMovingUp(bool flag) { 
-		isMovingUp = flag; 
+	void Character::setMovingRight(bool flag)
+	{
+		isMovingRight = flag;
 	}
-	void Character::setAttacking(bool flag) { 
-		isAttacking = flag; 
+	void Character::setMovingUp(bool flag)
+	{
+		isMovingUp = flag;
 	}
-	void Character::setPoison(bool flag) {
+	void Character::setAttacking(bool flag)
+	{
+		isAttacking = flag;
+	}
+	void Character::setPoison(bool flag)
+	{
 		isPoison = flag;
 	}
-	bool Character::ifPoison() {
+	bool Character::ifPoison()
+	{
 		return isPoison;
 	}
-	void Character::setDead(bool flag) {
+	void Character::setDead(bool flag)
+	{
 		isDead = flag;
 	}
-	bool Character::ifAttacking() { 
-		return isAttacking; 
+	bool Character::ifAttacking()
+	{
+		return isAttacking;
 	}
-	void Character::setHitLeft() {
+	void Character::setHitLeft()
+	{
 		isHitLeft = true;
 	}
-	void Character::setHitLeft(bool flag) {
+	void Character::setHitLeft(bool flag)
+	{
 		isHitLeft = flag;
 	}
-	bool Character::ifHitLeft() {
+	bool Character::ifHitLeft()
+	{
 		return isHitLeft;
 	}
-	void Character::setHitRight() {
+	void Character::setHitRight()
+	{
 		isHitRight = true;
 	}
-	void Character::setHitRight(bool flag) {
+	void Character::setHitRight(bool flag)
+	{
 		isHitRight = flag;
 	}
-	bool Character::ifHitRight() {
+	bool Character::ifHitRight()
+	{
 		return isHitRight;
 	}
-	void Character::setFacing(int face) {
-		facing = face; 
+	void Character::setFacing(int face)
+	{
+		facing = face;
 	}
-	int Character::getFacing() {
+	int Character::getFacing()
+	{
 		return facing;
 	}
-	void Character::setAttackRange(int x) {
+	void Character::setAttackRange(int x)
+	{
 		attackRange = x;
 	}
-	int Character::getAttackRange() {
+	int Character::getAttackRange()
+	{
 		return attackRange;
 	}
-
-	
-	void Character::hp_addBitmaps() {
-		int hp_bitmaps[] = { IDB_HP_0,IDB_HP_10,IDB_HP_20,IDB_HP_30,IDB_HP_40,IDB_HP_50,IDB_HP_60,IDB_HP_70,IDB_HP_80,IDB_HP_90,IDB_HP_100 };
+	void Character::hp_addBitmaps()
+	{
+		int hp_bitmaps[] = {IDB_HP_0, IDB_HP_10, IDB_HP_20, IDB_HP_30, IDB_HP_40, IDB_HP_50, IDB_HP_60, IDB_HP_70, IDB_HP_80, IDB_HP_90, IDB_HP_100};
 		for (int i = 0; i < 11; i++)
 			hp[i].AddBitmap(hp_bitmaps[i]);
 	}
-	void Character::hp_OnShow() {
-		for (int i = 10; i > 0; i--) {
-			if (HP_PERCENT > 10 * (i - 1) && HP_PERCENT <= 10 * i) {
+	void Character::hp_OnShow()
+	{
+		for (int i = 10; i > 0; i--)
+		{
+			if (HP_PERCENT > 10 * (i - 1) && HP_PERCENT <= 10 * i)
+			{
 				hp[i].SetTopLeft(pos_x, pos_y - 20);
 				hp[i].OnShow();
 				break;
 			}
 		}
 	}
-	void Character::number_addBitmaps() {
-		int number_bitmaps[] = { IDB_0,IDB_1,IDB_2,IDB_3,IDB_4,IDB_5,IDB_6,IDB_7,IDB_8,IDB_9,IDB_LV,IDB_HP,IDB_ATK };
+	void Character::number_addBitmaps()
+	{
+		int number_bitmaps[] = {IDB_0, IDB_1, IDB_2, IDB_3, IDB_4, IDB_5, IDB_6, IDB_7, IDB_8, IDB_9, IDB_LV, IDB_HP, IDB_ATK};
 		for (int i = 0; i < 13; i++)
 			num[i].AddBitmap(number_bitmaps[i], RGB(230, 212, 132));
 	}
-	void Character::number_OnShow(int nx, int pos_nx, int pos_ny) {		//10 = Lv, 11 = HP, 12 = ATK
+	void Character::number_OnShow(int nx, int pos_nx, int pos_ny)
+	{ //10 = Lv, 11 = HP, 12 = ATK
 		num[nx].SetTopLeft(pos_nx, pos_ny);
 		num[nx].OnShow();
 	}
-	void Character::setLevelUP() {
-		if(level_animation == 0)
+	void Character::setLevelUP()
+	{
+		if (level_animation == 0)
 			level_animation = 80;
 	}
-	bool Character::ifMovingLeft() {
+	bool Character::ifMovingLeft()
+	{
 		return isMovingLeft;
 	}
-	bool Character::ifMovingRight() {
-		return isMovingRight; 
+	bool Character::ifMovingRight()
+	{
+		return isMovingRight;
 	}
-	bool Character::ifMovingUp() { 
+	bool Character::ifMovingUp()
+	{
 		return isMovingUp;
 	}
-	bool Character::ifMovingDown() { 
+	bool Character::ifMovingDown()
+	{
 		return isMovingDown;
 	}
-	bool Character::ifDead() {
+	bool Character::ifDead()
+	{
 		return isDead;
 	}
-	
-
-
-	void Character::addBitmap(int standR, int standL, int downR, int downL, int jumpR, int jumpL, vector<int> goR, vector<int> goL, vector<int> attackR, vector<int> attackL, vector<int> slash, vector<int> heal, vector<int> lv_up, int nR, int nG, int nB,int slash_ani)
+	void Character::addBitmap(int standR, int standL, int downR, int downL, int jumpR, int jumpL, vector<int> goR, vector<int> goL, vector<int> attackR, vector<int> attackL, vector<int> slash, vector<int> heal, vector<int> lv_up, int nR, int nG, int nB, int slash_ani)
 	{
 		if (standR != 0)
 			a.standRight.AddBitmap(standR, RGB(nR, nG, nB));
@@ -198,16 +235,16 @@ namespace game_framework {
 		a.slashAnimation = CAnimation(slash_ani);
 		a.healAnimation = CAnimation(4);
 		a.lv_up = CAnimation(4);
-		for (size_t i = 0; i < goR.size(); i++) 
+		for (size_t i = 0; i < goR.size(); i++)
 			a.goRight.AddBitmap(goR[i], RGB(nR, nG, nB));
-		for (size_t i = 0; i < goL.size(); i++) 
+		for (size_t i = 0; i < goL.size(); i++)
 			a.goLeft.AddBitmap(goL[i], RGB(nR, nG, nB));
-		for (size_t i = 0; i < attackR.size(); i++) 
+		for (size_t i = 0; i < attackR.size(); i++)
 			a.attackRight.AddBitmap(attackR[i], RGB(nR, nG, nB));
-		for (size_t i = 0; i < attackL.size(); i++) 
+		for (size_t i = 0; i < attackL.size(); i++)
 			a.attackLeft.AddBitmap(attackL[i], RGB(nR, nG, nB));
 		for (size_t i = 0; i < slash.size(); i++)
-			a.slashAnimation.AddBitmap(slash[i], RGB(0,0,0));
+			a.slashAnimation.AddBitmap(slash[i], RGB(0, 0, 0));
 		for (size_t i = 0; i < heal.size(); i++)
 			a.healAnimation.AddBitmap(heal[i], RGB(0, 0, 0));
 		for (size_t i = 0; i < lv_up.size(); i++)
@@ -216,37 +253,46 @@ namespace game_framework {
 		number_addBitmaps();
 	}
 
-	Counter& Character::getCounter(int i) {
+	Counter &Character::getCounter(int i)
+	{
 		return *counter[i];
 	}
 
-	void Character::countdown() {
+	void Character::countdown()
+	{
 		for (auto count : counter)
 			count->countdown();
 	}
 
 	// Monsters
-	void Character::set_Monster_Go_Left(bool flag) {
+	void Character::set_Monster_Go_Left(bool flag)
+	{
 		is_Monster_Go_Left = flag;
 	}
-	void Character::set_Monster_Go_Right(bool flag) {
+	void Character::set_Monster_Go_Right(bool flag)
+	{
 		is_Monster_Go_Right = flag;
 	}
-	void Character::setSkill(int i) {
+	void Character::setSkill(int i)
+	{
 		skill = i;
 	}
 
 	// Hero
-	void Character::setSlashing(bool flag) {
+	void Character::setSlashing(bool flag)
+	{
 		isSlashing = flag;
 	}
-	bool Character::ifSlashing() {
+	bool Character::ifSlashing()
+	{
 		return isSlashing;
 	}
-	void Character::setHealing(bool flag) {
+	void Character::setHealing(bool flag)
+	{
 		isHealing = flag;
 	}
-	bool Character::ifHealing() {
+	bool Character::ifHealing()
+	{
 		return isHealing;
 	}
-}
+} // namespace game_framework
