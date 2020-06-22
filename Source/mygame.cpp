@@ -828,105 +828,11 @@ namespace game_framework
 			if ((*monster)->ifDead())
 				continue;
 
-			Position monster_pos(*monster, map); // 擷取怪物座標
-			(*monster)->OnMove();				 // 各個怪物移動
-
-			// 人物移動使怪物對應移動相關
-			if (hero.getX() <= 300 && hero.ifMovingLeft() || hero.getX() <= 300 && hero.ifHitLeft())
-			{
-				if (hero_pos.getX() <= 310)
-					(*monster)->setMovingLeft(false);
-				else
-					(*monster)->setMovingLeft(true);
-			}
-			else
-				(*monster)->setMovingLeft(false);
-
-			if (hero.getX() >= 964 && hero.ifMovingRight() || hero.getX() >= 964 && hero.ifHitRight())
-			{
-				if (hero_pos.getX() >= 2000)
-					(*monster)->setMovingRight(false);
-				else
-					(*monster)->setMovingRight(true);
-			}
-			else
-				(*monster)->setMovingRight(false);
-
-			// 怪物追逐玩家條件與設定相關
-			if (monster_pos.getX() - hero_pos.getX() >= (*monster)->getAttackRange() && monster_pos.getX() - hero_pos.getX() <= 500)
-			{
-				(*monster)->set_Monster_Go_Left(true);
-				(*monster)->set_Monster_Go_Right(false);
-			}
-			else if (hero_pos.getX() - monster_pos.getX() >= (*monster)->getAttackRange() && hero_pos.getX() - monster_pos.getX() <= 500)
-			{
-				(*monster)->set_Monster_Go_Right(true);
-				(*monster)->set_Monster_Go_Left(false);
-			}
-			else
-			{
-				(*monster)->set_Monster_Go_Right(false);
-				(*monster)->set_Monster_Go_Left(false);
-			}
-
-			// 怪物對於地板判定相關
-			(*monster)->setFloor(570);
-
-			for (int j = 0; j < 8; j++)
-				if (ON_PLATFORM_MONSTER)
-					(*monster)->setFloor(570 - map.getFloorY(j));
-
-			// 玩家與怪物攻擊互動相關
-			if (MONSTER_HIT_CHARACTER((*monster)->getAttackRange())) // 玩家是否在怪物攻擊範圍內
-			{
-				if (HIT_CHECK_CHARACTER && HEIGHT_CHECK) // 玩家是否在受傷無敵狀態與高度判定
-				{
-					(*monster)->attacking(&hero);
-					(*monster)->setAttacking(true);
-
-					if (stage == 2) // 第二關怪物攻擊有槍聲
-						CAudio::Instance()->Play(SFX_GUN, false);
-
-					if (stage != 3) // 第三關怪物不會攻擊故不會有效果音與擊退判定
-					{
-						CAudio::Instance()->Play(SFX_HERO_HIT, false);
-
-						if (monster_pos.getX() >= hero_pos.getX())
-							hero.setHitLeft();
-
-						else if (monster_pos.getX() < hero_pos.getX())
-							hero.setHitRight();
-					}
-				}
-				if (hero.getHP() <= 0)
-					return;
-			}
-
-			if (CHARACTER_HIT_MONSTER) // 怪物是否在玩家攻擊範圍內
-			{
-				if (HIT_CHECK_MONSTER && HEIGHT_CHECK) // 怪物是否在受傷無敵狀態與高度判定
-				{
-					hero.attacking(*monster);
-					CAudio::Instance()->Play(SFX_MONSTER_HIT, false);
-				}
-			}
-
-			if (CHARACTER_SLASH_MONSTER) // 怪物是否在玩家破空斬技能範圍內
-			{
-				if (HIT_CHECK_MONSTER && SLASH_HEIGHT_CHECK) // 怪物是否在受傷無敵狀態與高度判定
-				{
-					hero.attacking(*monster);
-					CAudio::Instance()->Play(SFX_MONSTER_HIT, false);
-				}
-			}
-
-			// 怪物死亡相關
-			if ((*monster)->getHP() <= 0)
-			{
-				hero.setXP(hero.getXP() + (*monster)->getXP());
-				(*monster)->setDead(true);
-				(*monster)->setXY(-1, -1);
-			}
+		if (mboss.getCounter(laser_skill).getCount() < 50)			// 施放技能後的動畫與命中角色造成傷害
+		{
+			Boss_laser.OnMove();
+			if (hero.ifMovingDown() == false)
+				hero.setHP(hero.getHP() - 30);
 		}
 	}
 
@@ -948,10 +854,11 @@ namespace game_framework
 
 		if (hero.getX() >= 964 && hero.ifMovingRight() || hero.getX() >= 964 && hero.ifHitRight())
 		{
-			if (hero_pos.getX() >= 2000)
-				mboss.setMovingRight(false);
-			else
-				mboss.setMovingRight(true);
+			Boss_knockback.OnMove();
+			if (HIT_CHECK_CHARACTER && hero_pos.getX() >= 1300) {
+				hero.setHitLeft();
+				hero.setHP(hero.getHP() - 3000);
+			}
 		}
 		else
 			mboss.setMovingRight(false);
