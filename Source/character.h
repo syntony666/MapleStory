@@ -36,9 +36,9 @@ namespace game_framework
 		virtual void OnShow() = 0;	   // 顯示角色
 		void addBitmap(int standR, int standL, int downR, int downL, int jumpR, int jumpL, vector<int> goR, vector<int> goL, vector<int> attackR, vector<int> attackL, vector<int> slash, vector<int> heal, vector<int> lv_up, int nR, int nG, int nB, int slash_ani = 2);
 		//加入圖形(沒有的填0)
-		virtual void attacking(Character *c) = 0;
-		Counter &getCounter(int i);
-		void countdown();
+		virtual void attacking(Character *c) = 0;	// 攻擊的 virtual 函式
+		Counter &getCounter(int i);					// 取得指定 Counter 的值
+		void countdown();							// 同時啟動同個 class 內的所有計時器
 
 		//HP
 
@@ -72,71 +72,72 @@ namespace game_framework
 		void setHitRight(bool flag);	// 設定是否被擊中
 		void setDead(bool flag);		// 設定是否死亡
 		void setPoison(bool flag);		// 設定是否中毒
-		void setAttackRange(int n);
+		void setAttackRange(int n);		// 設定攻擊距離
 
 		//Monsters
-		void set_Monster_Go_Left(bool flag);
-		void set_Monster_Go_Right(bool flag);
-		void setSkill(int i);
+		void set_Monster_Go_Left(bool flag);	// 設定怪物往左移動
+		void set_Monster_Go_Right(bool flag);	// 設定怪物往右移動
+		void setSkill(int i);					// 設定怪物施放技能
+
 		//Hero
-		void setSlashing(bool flag);
-		bool ifSlashing();
-		void setHealing(bool flag);
-		bool ifHealing();
+		void setSlashing(bool flag);			// 設定角色施放技能
+		bool ifSlashing();						// 判定角色施放技能
+		void setHealing(bool flag);				// 設定角色施放技能
+		bool ifHealing();						// 判定角色施放技能
 
 		//GETs
 
-		int getX();		 // 左邊 x 座標
-		int getY();		 // 左邊 y 座標
-		int getAttack(); // 擷取攻擊力
-		int getHP();	 // 擷取生命值
-		int getMaxHP();
-		int getXP();
-		int getLevel();
-		int getFloor(); // 擷取地板
-		int getFacing();
-		int getAttackRange();
+		int getX();				// 左邊 x 座標
+		int getY();				// 左邊 y 座標
+		int getAttack();		// 擷取攻擊力
+		int getHP();			// 擷取生命值
+		int getMaxHP();			// 擷取最大生命值
+		int getXP();			// 擷取經驗值
+		int getLevel();			// 擷取等級
+		int getFloor();			// 擷取地板
+		int getFacing();		// 擷取面相方向
+		int getAttackRange();	// 擷取攻擊範圍
 
-		bool ifAttacking();
-		bool ifHitLeft();
-		bool ifHitRight();
-		bool ifMovingLeft();
-		bool ifMovingRight();
-		bool ifMovingUp();
-		bool ifMovingDown();
-		bool ifPoison();
-		bool ifDead();
+		bool ifAttacking();		// 判定是否正在攻擊
+		bool ifHitLeft();		// 判定是否受到往左攻擊
+		bool ifHitRight();		// 判定是否受到往右攻擊
+		bool ifMovingLeft();	// 判定是否正在往左移動
+		bool ifMovingRight();	// 判定是否正在往右移動
+		bool ifMovingUp();		// 判定是否正在跳躍
+		bool ifMovingDown();	// 判定是否正在趴下
+		bool ifPoison();		// 判定是否中毒
+		bool ifDead();			// 判定是否死亡
 
 	protected:
-		CAnimation hp[11];
-		CAnimation num[13];
-		int pos_x, pos_y; //左邊座標
-		int floor;		  //地板高度
-		int HP, maxHP;
-		int exp;
-		int level;
-		int facing;					   // 1=面向右 2=面向左
-		bool isMovingDown, isMovingUp, // 是否正在移動
+		CAnimation hp[11];				// 生命條
+		CAnimation num[13];				// UI 與數字貼圖
+		int pos_x, pos_y;				// 左邊座標
+		int floor;						// 地板高度
+		int HP, maxHP;					// 生命、最大生命
+		int exp;						// 經驗值
+		int level;						// 等級
+		int facing;						// 1=面向右 2=面向左
+		bool isMovingDown, isMovingUp,	// 是否正在移動
 			isMovingRight, isMovingLeft;
-		bool isAttacking;			// 是否正在攻擊
-		bool isSlashing;			// 是否正在施放技能
-		bool isHitLeft, isHitRight; // 是否受到攻擊
-		bool isDead;
-		bool isPoison = false;
-		bool isHealing;
-		bool rising; // true表上升、false表下降
+		bool isAttacking;				// 是否正在攻擊
+		bool isSlashing;				// 是否正在施放技能
+		bool isHitLeft, isHitRight;		// 是否受到攻擊
+		bool isDead;					// 是否死亡
+		bool isPoison = false;			// 是否中毒
+		bool isHealing;					// 是否治療中
+		bool rising;					// true表上升、false表下降
 		bool is_Monster_Go_Left, is_Monster_Go_Right;
-		int initial_velocity; // 初始速度
-		int velocity;		  // 目前的速度(點/次)
-		int STEP_SIZE;		  // 行走速度
-		int attackRange;
-		int skillRange;
-		int skill;
-		Animations a;
-		std::vector<Counter *> counter;
-		int hit_time;
-		int attack;
-		int level_animation;
+		int initial_velocity;			// 初始速度
+		int velocity;					// 目前的速度(點/次)
+		int STEP_SIZE;					// 行走速度
+		int attackRange;				// 攻擊範圍
+		int skillRange;					// 技能範圍
+		int skill;						// 技能指定
+		Animations a;					// 所有 Character 使用之 Animation
+		std::vector<Counter *> counter; // 計數器 Vector
+		int hit_time;					// 受傷無敵時間
+		int attack;						// 攻擊力
+		int level_animation;			// 升等動畫時間
 	};
 } // namespace game_framework
 #endif
