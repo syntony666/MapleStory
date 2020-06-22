@@ -8,23 +8,21 @@
 #include "hero.h"
 #include "mygame.h"
 
-namespace game_framework {
-	/////////////////////////////////////////////////////////////////////////////
-	// Monster: class
-	/////////////////////////////////////////////////////////////////////////////
+namespace game_framework
+{
 
 	Monster::Monster(int nx, int ny, int nxp)
 	{
 		exp = nxp;
 		initX = nx;
 		initY = ny;
-		counter.push_back(new Counter(180));	// mage skill
-		counter.push_back(new Counter(40));	// is_poison
-		counter.push_back(new Counter(80));	// poison_delay
-
+		counter.push_back(new Counter(180)); // mage skill
+		counter.push_back(new Counter(40));	 // is_poison
+		counter.push_back(new Counter(80));	 // poison_delay
 	}
 
-	Monster::~Monster() {
+	Monster::~Monster()
+	{
 	}
 
 	void Monster::Initialize()
@@ -43,27 +41,34 @@ namespace game_framework {
 	{
 		if (isDead)
 			return;
-		if (is_Monster_Go_Left) {	//若碰壁就動地圖直到地圖的邊緣
+		if (is_Monster_Go_Left)
+		{ //若碰壁就動地圖直到地圖的邊緣
 			STEP_SIZE = -3;
 			pos_x += STEP_SIZE;
 		}
-		else if (is_Monster_Go_Right) {		//若碰壁就動地圖直到地圖的邊緣
+		else if (is_Monster_Go_Right)
+		{ //若碰壁就動地圖直到地圖的邊緣
 			STEP_SIZE = 3;
 			pos_x += STEP_SIZE;
 		}
-		if (isMovingRight) {
+		if (isMovingRight)
+		{
 			pos_x -= HERO_STEP;
 		}
-		else if (isMovingLeft) {
+		else if (isMovingLeft)
+		{
 			pos_x += HERO_STEP;
 		}
 
-		if (isHitLeft) {
-			if (hit_time == 0) {
+		if (isHitLeft)
+		{
+			if (hit_time == 0)
+			{
 				hit_time = 18;
 				isHitLeft = false;
 			}
-			else if (hit_time >= 17) {
+			else if (hit_time >= 17)
+			{
 				rising = true;
 				velocity = initial_velocity - 7;
 			}
@@ -73,12 +78,15 @@ namespace game_framework {
 			}
 			hit_time--;
 		}
-		if (isHitRight) {
-			if (hit_time == 0) {
+		if (isHitRight)
+		{
+			if (hit_time == 0)
+			{
 				hit_time = 18;
 				isHitRight = false;
 			}
-			else if (hit_time >= 17) {
+			else if (hit_time >= 17)
+			{
 				rising = true;
 				velocity = initial_velocity - 7;
 			}
@@ -89,30 +97,38 @@ namespace game_framework {
 			hit_time--;
 		}
 
-		if (rising) {			// 上升狀態
-			if (velocity > 0) {
-				pos_y -= velocity * 2;	// 當速度 > 0時，y軸上升(移動velocity個點，velocity的單位為 點/次)
-				velocity--;		// 受重力影響，下次的上升速度降低
+		if (rising)
+		{ // 上升狀態
+			if (velocity > 0)
+			{
+				pos_y -= velocity * 2; // 當速度 > 0時，y軸上升(移動velocity個點，velocity的單位為 點/次)
+				velocity--;			   // 受重力影響，下次的上升速度降低
 			}
-			else {
+			else
+			{
 				rising = false; // 當速度 <= 0，上升終止，下次改為下降
 				velocity = 1;	// 下降的初速(velocity)為1
 			}
 		}
-		else {				// 下降狀態
-			if (pos_y < floor) {  // 當y座標還沒碰到地板
-				pos_y += velocity * 2;	// y軸下降(移動velocity個點，velocity的單位為 點/次)
+		else
+		{ // 下降狀態
+			if (pos_y < floor)
+			{						   // 當y座標還沒碰到地板
+				pos_y += velocity * 2; // y軸下降(移動velocity個點，velocity的單位為 點/次)
 				if (velocity < 7)
 					velocity++;
 			}
-			else {
-				pos_y = floor;  // 當y座標低於地板，更正為地板上
+			else
+			{
+				pos_y = floor; // 當y座標低於地板，更正為地板上
 				velocity = 0;
 			}
 		}
 
-		if (isAttacking) {
-			if (attack_time == 0) {
+		if (isAttacking)
+		{
+			if (attack_time == 0)
+			{
 				attack_time = 15;
 				isAttacking = false;
 			}
@@ -120,91 +136,107 @@ namespace game_framework {
 		}
 	}
 
-
-
 	void Monster::OnShow()
 	{
-		if (!isDead) {
+		if (!isDead)
+		{
 
 			a.standRight.SetTopLeft(pos_x, pos_y);
 			a.standLeft.SetTopLeft(pos_x, pos_y);
 
-			if (STEP_SIZE >= 0) {
-				if (isAttacking) {
+			if (STEP_SIZE >= 0)
+			{
+				if (isAttacking)
+				{
 					a.attackRight.SetTopLeft(a.standRight.Left(), a.standRight.Top());
 					a.attackRight.OnShow();
 					a.attackRight.OnMove();
 				}
-				else {
+				else
+				{
 					a.standRight.OnShow();
 					a.standRight.OnMove();
 				}
 			}
-			else {
-				if (isAttacking) {
+			else
+			{
+				if (isAttacking)
+				{
 					a.attackLeft.SetTopLeft(a.standLeft.Left(), a.standLeft.Top());
 					a.attackLeft.OnShow();
 					a.attackLeft.OnMove();
 				}
-				else {
+				else
+				{
 					a.standLeft.OnShow();
 					a.standLeft.OnMove();
 				}
 			}
-			if (counter[poison_delay]->getCount() < 80) {
+			if (counter[poison_delay]->getCount() < 80)
+			{
 				a.slashAnimation.OnShow();
 				a.slashAnimation.OnMove();
 			}
 			hp_OnShow();
 		}
 	}
-	bool Monster::ifSkill() {
+	bool Monster::ifSkill()
+	{
 		return isSkill;
 	}
 
-
-	void Monster::attacking(Character *hero) {
-		if (skill == 0) {
+	void Monster::attacking(Character *hero)
+	{
+		if (skill == 0)
+		{
 			hero->setHP(hero->getHP() - attack);
 		}
-		if (skill == 1) {
+		if (skill == 1)
+		{
 			TRACE("--------------CD---------- (%d)\n", counter[mage_skill]->getCount());
 			TRACE("-------------delay-------- (%d)\n", counter[poison_delay]->getCount());
 			TRACE("------------poison-------- (%d)\n", counter[is_poison]->getCount());
-			if (counter[mage_skill]->getCount() == 180) {
+			if (counter[mage_skill]->getCount() == 180)
+			{
 
 				hero_tempX = hero->getX();
 				hero_tempY = hero->getY();
 				counter[mage_skill]->start();
 				counter[poison_delay]->start();
 				a.slashAnimation.SetTopLeft(hero_tempX - 50, hero_tempY - 20);
-
 			}
-			if (counter[poison_delay]->getCount() <= 40 && hero->ifPoison() == false) {
-				if (hero->getX() >= hero_tempX - 80 && hero->getX() <= hero_tempX + 80) {
-					if (counter[is_poison]->getCount() == 40) {
+			if (counter[poison_delay]->getCount() <= 40 && hero->ifPoison() == false)
+			{
+				if (hero->getX() >= hero_tempX - 80 && hero->getX() <= hero_tempX + 80)
+				{
+					if (counter[is_poison]->getCount() == 40)
+					{
 						counter[is_poison]->start();
 						CAudio::Instance()->Play(SFX_ROOT, false);
 					}
 				}
 			}
-			if (counter[is_poison]->getCount() < 40) {
+			if (counter[is_poison]->getCount() < 40)
+			{
 				hero->setMovingLeft(false);
 				hero->setMovingRight(false);
 				hero->setMovingUp(false);
 				hero->setMovingDown(false);
 				hero->setPoison(true);
-			} else
+			}
+			else
 				hero->setPoison(false);
-			if (counter[is_poison]->getCount() == 20 || counter[is_poison]->getCount() == 0) {
+			if (counter[is_poison]->getCount() == 20 || counter[is_poison]->getCount() == 0)
+			{
 				if (hero->getHP() * 0.1 <= 50)
 					hero->setHP(hero->getHP() - 50);
 				else
 					hero->setHP(int(hero->getHP() * 0.90));
 			}
-			if (counter[poison_delay]->getCount() == 0) {
+			if (counter[poison_delay]->getCount() == 0)
+			{
 				a.slashAnimation.Reset();
 			}
 		}
 	}
-}
+} // namespace game_framework

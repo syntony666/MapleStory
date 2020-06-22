@@ -4,8 +4,8 @@
 #include "floor.h"
 #include "portal.h"
 
-
-namespace game_framework {
+namespace game_framework
+{
 	class Portal;
 	class Map
 	{
@@ -13,7 +13,8 @@ namespace game_framework {
 		Map();
 		void Initialize();
 		void LoadBitmap();
-		void OnShow();		void OnMove(); 
+		void OnShow();
+		void OnMove();
 		void portalOnShow();
 
 		//SETs Init
@@ -21,7 +22,7 @@ namespace game_framework {
 		void setInitFloor(int i);
 		void setInitXY(int x, int y);
 		void setInitZoom(double i);
-		void setInitPlatform(Platform *plats,int i);
+		void setInitPlatform(Platform *plats, int i);
 		void setInitBitmap(int bitmap);
 		void setInitPortal(int x, int y);
 
@@ -39,18 +40,18 @@ namespace game_framework {
 		int getY() const;
 		bool ifMovingLeft() const;
 		bool ifMovingRight() const;
-		Portal& getPortal();
+		Portal &getPortal();
 
 	protected:
 		CMovingBitmap map;
 		Portal _portal;
 		int _x, _y, floor;
 		double zoom;
-		bool rising;			// true表上升、false表下降
-		int velocity;			// 目前的速度(點/次)
+		bool rising;  // true表上升、false表下降
+		int velocity; // 目前的速度(點/次)
 		int _bitmap;
 		bool isMovingRight, isMovingLeft;
 		Floor floors;
 	};
-}
+} // namespace game_framework
 #endif

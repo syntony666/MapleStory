@@ -49,20 +49,20 @@ static char THIS_FILE[] = __FILE__;
 IMPLEMENT_DYNCREATE(CMainFrame, CFrameWnd)
 
 BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
-	//{{AFX_MSG_MAP(CMainFrame)
-	ON_WM_CREATE()
-	ON_COMMAND(ID_TOGGLE_FULLSCREEN, OnToggleFullscreen)
-	ON_WM_PAINT()
-	ON_COMMAND(ID_BUTTON_FULLSCREEN, OnButtonFullscreen)
-	//}}AFX_MSG_MAP
+//{{AFX_MSG_MAP(CMainFrame)
+ON_WM_CREATE()
+ON_COMMAND(ID_TOGGLE_FULLSCREEN, OnToggleFullscreen)
+ON_WM_PAINT()
+ON_COMMAND(ID_BUTTON_FULLSCREEN, OnButtonFullscreen)
+//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
-{
-	ID_SEPARATOR,           // status line indicator
-	ID_INDICATOR_CAPS,
-	ID_INDICATOR_NUM,
-	ID_INDICATOR_SCRL,
+	{
+		ID_SEPARATOR, // status line indicator
+		ID_INDICATOR_CAPS,
+		ID_INDICATOR_NUM,
+		ID_INDICATOR_SCRL,
 };
 
 /////////////////////////////////////////////////////////////////////////////
@@ -71,7 +71,7 @@ static UINT indicators[] =
 CMainFrame::CMainFrame()
 {
 	// TODO: add member initialization code here
-	isFullScreen = OPEN_AS_FULLSCREEN;	
+	isFullScreen = OPEN_AS_FULLSCREEN;
 	isToolBarVisible = true;
 	isStatusBarVisible = true;
 }
@@ -84,25 +84,25 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
 	if (CFrameWnd::OnCreate(lpCreateStruct) == -1)
 		return -1;
-	
+
 	if (!m_wndToolBar.Create(this) ||
 		!m_wndToolBar.LoadToolBar(IDR_MAINFRAME))
 	{
 		TRACE0("Failed to create toolbar\n");
-		return -1;      // fail to create
+		return -1; // fail to create
 	}
 
 	if (!m_wndStatusBar.Create(this) ||
 		!m_wndStatusBar.SetIndicators(indicators,
-		  sizeof(indicators)/sizeof(UINT)))
+									  sizeof(indicators) / sizeof(UINT)))
 	{
 		TRACE0("Failed to create status bar\n");
-		return -1;      // fail to create
+		return -1; // fail to create
 	}
 
 	// TODO: Remove this if you don't want tool tips or a resizeable toolbar
 	m_wndToolBar.SetBarStyle(m_wndToolBar.GetBarStyle() |
-		CBRS_TOOLTIPS | CBRS_FLYBY | CBRS_SIZE_DYNAMIC);
+							 CBRS_TOOLTIPS | CBRS_FLYBY | CBRS_SIZE_DYNAMIC);
 
 	// TODO: Delete these three lines if you don't want the toolbar to
 	//  be dockable
@@ -121,7 +121,8 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	//
 	// 如果是Full Screen的話，隱藏ToolBar, StatusBar, Menu
 	//
-	if (isFullScreen) {
+	if (isFullScreen)
+	{
 		m_wndToolBar.ShowWindow(SW_HIDE);
 		m_wndStatusBar.ShowWindow(SW_HIDE);
 		ModifyStyle(WS_DLGFRAME, 0);
@@ -130,7 +131,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	return 0;
 }
 
-BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
+BOOL CMainFrame::PreCreateWindow(CREATESTRUCT &cs)
 {
 	// TODO: Modify the Window class or styles here by modifying
 	//  the CREATESTRUCT cs
@@ -138,10 +139,11 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 	//	cs.style = WS_OVERLAPPED | WS_CAPTION | FWS_ADDTOTITLE
 	//		| WS_THICKFRAME | WS_SYSMENU | WS_MINIMIZEBOX;
 
-	cs.cx = 640; cs.cy = 480;
+	cs.cx = 640;
+	cs.cy = 480;
 	cs.style = WS_BORDER | WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX;
-    cs.x = (::GetSystemMetrics(SM_CXSCREEN) - cs.cx) / 2; 
-	cs.y = (::GetSystemMetrics(SM_CYSCREEN) - cs.cy) / 2; 
+	cs.x = (::GetSystemMetrics(SM_CXSCREEN) - cs.cx) / 2;
+	cs.y = (::GetSystemMetrics(SM_CYSCREEN) - cs.cy) / 2;
 	//  Set priority level
 	AfxGetApp()->SetThreadPriority(THREAD_PRIORITY_HIGHEST);
 	return CFrameWnd::PreCreateWindow(cs);
@@ -156,7 +158,7 @@ void CMainFrame::AssertValid() const
 	CFrameWnd::AssertValid();
 }
 
-void CMainFrame::Dump(CDumpContext& dc) const
+void CMainFrame::Dump(CDumpContext &dc) const
 {
 	CFrameWnd::Dump(dc);
 }
@@ -170,7 +172,8 @@ void CMainFrame::SetFullScreen(bool isFull)
 {
 	static CRect WindowRect;
 	bool FullScreenError = false;
-	if (isFull) {
+	if (isFull)
+	{
 		isFullScreen = true;
 		//
 		// Store window position
@@ -191,7 +194,8 @@ void CMainFrame::SetFullScreen(bool isFull)
 		ModifyStyle(WS_DLGFRAME, 0);
 		SetMenu(NULL);
 	}
-	if (!isFull || FullScreenError) {
+	if (!isFull || FullScreenError)
+	{
 		isFullScreen = false;
 		ShowWindow(SW_NORMAL);
 		game_framework::CDDraw::SetFullScreen(false);
@@ -213,31 +217,33 @@ void CMainFrame::SetFullScreen(bool isFull)
 		MessageBox("Fullscreen Error (Incorrect Resolution?)");
 }
 
-void CMainFrame::OnToggleFullscreen() 
+void CMainFrame::OnToggleFullscreen()
 {
 	// TODO: Add your command handler code here
 	SetFullScreen(!isFullScreen);
 }
 
-void CMainFrame::OnPaint() 
+void CMainFrame::OnPaint()
 {
 	CPaintDC dc(this); // device context for painting
-	
+
 	// TODO: Add your message handler code here
 
 	// Do not call CFrameWnd::OnPaint() for painting messages
 	if (isFullScreen)
 		return;
-	int extra_height=0;
+	int extra_height = 0;
 	CRect ClientRect;
 	game_framework::CDDraw::GetClientRect(ClientRect);
 	CalcWindowRect(&ClientRect, CWnd::adjustBorder);
 	CRect ControlRect;
-	if(m_wndToolBar.IsWindowVisible()) {
+	if (m_wndToolBar.IsWindowVisible())
+	{
 		m_wndToolBar.GetWindowRect(ControlRect);
 		extra_height = ControlRect.bottom - ControlRect.top;
 	}
-	if(m_wndStatusBar.IsWindowVisible()) {
+	if (m_wndStatusBar.IsWindowVisible())
+	{
 		m_wndStatusBar.GetWindowRect(ControlRect);
 		extra_height += ControlRect.bottom - ControlRect.top;
 	}
@@ -247,30 +253,33 @@ void CMainFrame::OnPaint()
 	MoveWindow(WindowRect.left, WindowRect.top, ClientRect.Width(), ClientRect.Height() + extra_height);
 }
 
-void CMainFrame::OnButtonFullscreen() 
+void CMainFrame::OnButtonFullscreen()
 {
 	// TODO: Add your command handler code here
 	SetFullScreen(!isFullScreen);
 }
 
-
-LRESULT CMainFrame::WindowProc(UINT message, WPARAM wParam, LPARAM lParam) 
+LRESULT CMainFrame::WindowProc(UINT message, WPARAM wParam, LPARAM lParam)
 {
 	// TODO: Add your specialized code here and/or call the base class
 	if (message == WM_SYSCOMMAND)
 	{
 		wParam &= 0xFFF0;
-		if (!IsIconic()) {
+		if (!IsIconic())
+		{
 			//
 			// non-iconic
 			//
-			if (isFullScreen) {
+			if (isFullScreen)
+			{
 				//
 				// If fullscreen, disable all SYSCOMMANDs except for SC_CLOSE
 				//
 				if (wParam != SC_CLOSE)
 					return 0;
-			} else {
+			}
+			else
+			{
 				//
 				// If non-fullscreen, process SC_MAXIMIZE and leave the
 				//		other SYSCOMMANDs to base class.
@@ -281,14 +290,18 @@ LRESULT CMainFrame::WindowProc(UINT message, WPARAM wParam, LPARAM lParam)
 					return 0;
 				}
 			}
-		} else {
+		}
+		else
+		{
 			//
 			// If Iconic, disable SC_MAXIMIZE.
 			//
 			if (wParam == SC_MAXIMIZE)
 				return 0;
 		}
-	} else if (message == WM_POWERBROADCAST) {
+	}
+	else if (message == WM_POWERBROADCAST)
+	{
 		if (wParam == PBT_APMSUSPEND)
 			game_framework::CGame::Instance()->OnSuspend();
 		else if (wParam == PBT_APMRESUMECRITICAL || wParam == PBT_APMRESUMESUSPEND)

@@ -1,5 +1,6 @@
 #pragma once
-namespace game_framework {
+namespace game_framework
+{
 	class Counter
 	{
 	public:
@@ -14,5 +15,4 @@ namespace game_framework {
 		int _max;
 		int _min;
 	};
-}
-
+} // namespace game_framework

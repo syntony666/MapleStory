@@ -6,24 +6,30 @@
 #include "gamelib.h"
 #include "position.h"
 
-namespace game_framework {
+namespace game_framework
+{
 
-	Position::Position() {
+	Position::Position()
+	{
 		pos_x = 0;
 		pos_y = 0;
 	}
-	Position::Position(Character* c, Map m) {
+	Position::Position(Character *c, Map m)
+	{
 		pos_x = c->getX() - m.getX();
 		pos_y = 570 - c->getY();
 	}
-	void Position::setPosition(Character* c, Map m) {
+	void Position::setPosition(Character *c, Map m)
+	{
 		pos_x = c->getX() - m.getX();
 		pos_y = 570 - c->getY();
 	}
-	int Position::getX() {
+	int Position::getX()
+	{
 		return pos_x;
 	}
-	int Position::getY() {
+	int Position::getY()
+	{
 		return pos_y;
 	}
-}
+} // namespace game_framework

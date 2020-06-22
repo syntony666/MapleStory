@@ -1,22 +1,25 @@
 #ifndef MONSTER_H
 #define MONSTER_H
 
-
 #include "character.h"
 
-namespace game_framework {
-	enum MonsterCounters {
-		mage_skill, is_poison, poison_delay
+namespace game_framework
+{
+	enum MonsterCounters
+	{
+		mage_skill,
+		is_poison,
+		poison_delay
 	};
-	class Monster: public Character
+	class Monster : public Character
 	{
 	public:
-		Monster(){}
+		Monster() {}
 		Monster(int nx, int ny, int nxp);
 		~Monster();
-		void Initialize();				// 設定monster為初始值
-		void OnMove();					// 移動monster
-		void OnShow();					// 將monster圖形貼到畫面
+		void Initialize(); // 設定monster為初始值
+		void OnMove();	   // 移動monster
+		void OnShow();	   // 將monster圖形貼到畫面
 		bool ifSkill();
 		void attacking(Character *hero);
 
@@ -27,5 +30,5 @@ namespace game_framework {
 		int hero_tempX, hero_tempY;
 		int attack_time;
 	};
-}
+} // namespace game_framework
 #endif

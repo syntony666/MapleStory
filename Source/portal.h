@@ -1,5 +1,6 @@
 #pragma once
-namespace game_framework {
+namespace game_framework
+{
 	class Portal
 	{
 	public:
@@ -11,9 +12,9 @@ namespace game_framework {
 		void OnShow(int x, int y);
 		int getX();
 		int getY();
+
 	private:
 		int _x, _y;
 		CAnimation _portal;
 	};
-}
-
+} // namespace game_framework
