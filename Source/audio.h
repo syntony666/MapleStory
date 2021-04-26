@@ -65,6 +65,7 @@
 #include <list>
 #include <vector>
 #include <map>
+#include <string>
 using namespace std;
 
 /////////////////////////////////////////////////////////////////////////////
@@ -97,7 +98,7 @@ private:
 			repeat = isGood = false;
 		}
 		bool repeat, isGood;
-		string fileName;
+		std::string fileName;
 	};
 	static void MCIThread(HANDLE);	// MCI thread method
 	static void ExecuteMciCommand(char *); // 
